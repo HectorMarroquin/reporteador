@@ -12,16 +12,17 @@
     <!-- Bootstrap core CSS -->
   <link rel="stylesheet" type="text/css" href="<?=base_url?>assets/bootstrap/css/bootstrap.min.css">
 
-  <link rel="stylesheet" type="text/css" href="<?=base_url?>assets/bootstrap/js/bootstrap.min.js">
-
   <link rel="stylesheet" type="text/css" href="<?=base_url?>assets/css/estilos_header.css">
+
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&family=Raleway:wght@300&display=swap" rel="stylesheet">
 
 </head>
 
-<body id="header_style">
-<nav class="navbar navbar-expand-lg" style="background-color: #0D94F7;">
+<body>
+
+<nav class="navbar navbar-expand-lg" id="navcolor">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#"><img src="<?=base_url?>assets/img/logoLcc.png" alt="" width="30" height="24" class="d-inline-block align-text-top"></a>
+    <a class="navbar-brand" href="#"><img src="<?=base_url?>assets/img/logoBlanco.png" alt="" width="40" height="28" class="d-inline-block align-text-top"></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHome" aria-controls="navbarHome" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
