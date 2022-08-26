@@ -14,6 +14,8 @@
 
   <link rel="stylesheet" type="text/css" href="<?=base_url?>assets/css/estilos_header.css">
 
+  <link rel="stylesheet" type="text/css" href="<?=base_url?>assets/sweetalert/sweetalert2.min.css">
+
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&family=Raleway:wght@300&display=swap" rel="stylesheet">
 
 </head>
@@ -57,17 +59,26 @@
         <li class="nav-item">
           <a class="nav-link" href="<?=base_url?>VentasAltasUsuarios/index" tabindex="-1" aria-disabled="true">Altas</a>
         </li>
-
-      <?php endif; ?>
-
-        <li class="nav-item">
-          <a class="nav-link" href="<?=base_url?>UsuarioReporte/logout" tabindex="-1" aria-disabled="true">Cerrar Sesión</a>
-        </li>
+        <?php endif; ?>
       </ul>
 
       <?php if (isset($_SESSION['identity'])): ?>
-      <span class="navbar-text"><?=$_SESSION['identity']->Usuario;?></span>
+       <span class="navbar-text"><?=$_SESSION['identity']->Usuario;?></span>
       <?php endif ?>
+
+      <a class="nav-link" href="<?=base_url?>UsuarioReporte/logout" tabindex="-1" aria-disabled="true">Cerrar Sesión</a>
+
+       <a id="prueba" class="nav-link" href="#" tabindex="-1" aria-disabled="true">Alert</a>
+
     </div>
   </div>
 </nav>
+
+
+<script type="text/javascript">
+  
+$( "#prueba" ).click(function() {
+  alert( "Handler for .click() called." );
+});
+
+</script>
