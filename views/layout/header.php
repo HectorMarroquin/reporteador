@@ -35,7 +35,7 @@
           <a class="nav-link" href="<?=base_url?>Home/index">Inicio</a>
         </li>
 
-        <?php if(isset($_SESSION['identity']) && $_SESSION['identity']->Permisos == "TODO") : ?>    
+        <?php if(isset($_SESSION['identity']) && $_SESSION['identity']->rol == "admin") : ?>    
         <li class="nav-item">
           <a class="nav-link" href="<?=base_url?>VentasAltasUsuarios/index">Altas</a>
         </li>
@@ -48,13 +48,13 @@
           <a class="nav-link" href="<?=base_url?>Reclutamiento/index" tabindex="-1" aria-disabled="true">Reclutamiento</a>
         </li>
 
-      <?php elseif(isset($_SESSION['identity']) && $_SESSION['identity']->Permisos == "COORDINADOR OPERATIVO"): ?>
+      <?php elseif(isset($_SESSION['identity']) && $_SESSION['identity']->rol == "coordinador"): ?>
 
         <li class="nav-item">
           <a class="nav-link" href="<?=base_url?>Historico/index" tabindex="-1" aria-disabled="true">Historico</a>
         </li>
 
-      <?php elseif(isset($_SESSION['identity']) && $_SESSION['identity']->Permisos == "COACH"): ?>
+      <?php elseif(isset($_SESSION['identity']) && $_SESSION['identity']->rol == "coach"): ?>
 
         <li class="nav-item">
           <a class="nav-link" href="<?=base_url?>VentasAltasUsuarios/index" tabindex="-1" aria-disabled="true">Altas</a>
@@ -63,7 +63,7 @@
       </ul>
 
       <?php if (isset($_SESSION['identity'])): ?>
-       <span class="navbar-text"><?=$_SESSION['identity']->Usuario;?></span>
+       <span class="navbar-text"><?=$_SESSION['identity']->nombre." ".$_SESSION['identity']->apellidos;?></span>
       <?php endif ?>
 
       <a class="nav-link" href="<?=base_url?>UsuarioReporte/logout" tabindex="-1" aria-disabled="true">Cerrar Sesión</a>

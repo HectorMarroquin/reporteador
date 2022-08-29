@@ -19,7 +19,7 @@ class Utils
 
 		$rol = $_SESSION['identity']->Permisos;
 
-		if ($rol != "TODO") {
+		if ($rol != "admin") {
 			header("Location:".base_url);
 
 		}else{

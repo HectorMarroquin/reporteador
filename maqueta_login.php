@@ -50,8 +50,8 @@
   <?php endif; ?>
 
     <h1 class="h3 mb-3 fw-normal">Iniciar sesión LCC</h1>
-    <label for="email" class="visually-hidden">Usuario</label>
-    <input type="text" id="nomina" class="form-control" placeholder="Usuario" required autofocus name="email" autocomplete="off">
+    <label for="usuario" class="visually-hidden">Usuario</label>
+    <input type="text" id="nomina" class="form-control" placeholder="Usuario" required autofocus name="usuario" autocomplete="off">
     <label for="contrasena" class="visually-hidden">Contraseña</label>
     <input type="password" id="contrasena" class="form-control" placeholder="Contraseña" name="password" autocomplete="off" required>
     <div class="checkbox mb-3">

@@ -4,9 +4,12 @@ class UsuarioReporte
 {
 	private $id;
 	private $usuario;
+	private $nombre;
+	private $apellidos;
 	private $password;
+	private $rol;
+	private $imagen;
 	private $ultimologin;
-	private $permisos;
 	private $estado;
 	private $db;
 
@@ -24,62 +27,88 @@ class UsuarioReporte
 		return $this->usuario;
 	}
 
+	function getNombre(){
+		return $this->nombre;
+	}
+
+	function getApellidos(){
+		return $this->apellidos;
+	}
+
 	function getPassword(){
 		return $this->db->real_escape_string($this->password);
 	}
 
-	function getUltimoLogin(){
-		return $this->Ultimo_login;
+	function getRol(){
+		return $this->rol;
 	}
-	
-	function getPermisos(){
-		return $this->Permisos;
+
+	function getImagen(){
+		return $this->imagen;
+	}
+
+	function getUltimoLogin(){
+		return $this->ultimologin;
 	}
 
 	function getEstado(){
-		return $this->Estado;
+		return $this->estado;
 	}
+	
 
 	function setId(){
-		$this->Id = $this->db->real_escape_string($id);
+		$this->id = $this->db->real_escape_string($id);
 	}
 
 	function setUsuario($usuario){
 		$this->usuario = $this->db->real_escape_string($usuario);
 	}
 
+	function setNombre($nombre){
+		$this->nombre = $this->db->real_escape_string($nombre);
+	}
+
+	function setApellidos($apellidos){
+		$this->apellidos = $this->db->real_escape_string($apellidos);
+	}
+
 	function setPassword($password){
 		$this->password = $password;
 	}
 
-	function setUltimoLogin(){
-		$this->Ultimo_login = $this->db->real_escape_string($ultimologin);
+	function setRol($rol){
+		$this->rol = $rol;
 	}
 
-	function setPermisos(){
-		$this->Permisos = $this->db->real_escape_string($permisos);
+	function setImagen($imagen){
+		$this->imagen = $imagen;
 	}
 
-	function setEstado(){
-		$this->Estado = $this->db->real_escape_string($estado);
+	function setUltimoLogin($ultimologin){
+		$this->ultimologin = $this->db->real_escape_string($ultimologin);
+	}
+
+
+	function setEstado($estado){
+		$this->estado = $this->db->real_escape_string($estado);
 	}
 	
 	
 	public function login(){
 		
 		$result = false;
-		$email = $this->usuario;
+		$usuario = $this->usuario;
 		$pass  = $this->password;
 		$password = md5($pass);
 
-		$sql   = "SELECT * FROM USUARIOS_REPORTEADOR WHERE Usuario = '$email'";
+		$sql   = "SELECT * FROM USUARIOS_REPORTE WHERE usuario = '$usuario'";
 		$login = $this->db->query($sql);
 
 		if ($login && $login->num_rows == 1) {
 			
 			$usuario = $login->fetch_object();
 
-			if ($password == $usuario->Password) {
+			if ($password == $usuario->password) {
 				$result = $usuario;
 			}
 		}

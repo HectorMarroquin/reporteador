@@ -13,22 +13,24 @@ class UsuarioReporteController{
 
 		if ($_POST) {
 
-			$email = $_POST['email'];
+			$usuario = $_POST['usuario'];
 			$pass  = $_POST['password'];
 
-			$email    = isset($email) ? $email : false;
+			$usuario    = isset($usuario) ? $usuario : false;
 			$password = isset($pass) ? $pass: false;
 
-			$usuario = new UsuarioReporte();
-			$usuario->setUsuario($email);
-			$usuario->setPassword($password);
-			$identity = $usuario->login();
+
+
+			$usuarioReporte = new UsuarioReporte();
+			$usuarioReporte->setUsuario($usuario);
+			$usuarioReporte->setPassword($password);
+			$identity = $usuarioReporte->login();
 
 			if ($identity && is_object($identity)) {
 				
 				   $_SESSION['identity'] = $identity;
 
-				if ($identity->Permisos == "TODO") {
+				if ($identity->rol == "admin") {
 					
 					$_SESSION['admin'] = true;
 				}
