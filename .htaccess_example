@@ -1,3 +1,5 @@
+#Archivo para no reescribir ciertos archivos
+#Dentro del proyecto Git Lab 
 <IfModule mod_rewrite.c>
     RewriteEngine On
 
