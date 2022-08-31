@@ -16,7 +16,7 @@ require_once 'views/layout/header.php';
 
   <div class="row">
       <div class="col-sm">
-           Ultima hora de actualización: <span style="font-weight: bold"><?=$reg->Hora?></span>
+           Ultima hora de actualización: <span style="font-weight: bold"><?= $reg ?></span>
       </div>
   </div>
 </div>
@@ -29,26 +29,35 @@ require_once 'views/layout/header.php';
 <div class="container">
   <div class="row align-items-center">
     
-    <div class="col-sm">
-      <h1>REPORTE POR CENTROS</h1>
-
-      <table class="table">
+    <div class="col-sm table-responsive-sm">
+      <table class="table caption-top">
+         <caption>Reporte por centros</caption>
         <thead>
           <tr>
-            <th scope="col">Centro</th>
-            <th scope="col">Ventas</th>
+            <th scope="col-sm">Centro</th>
+            <th scope="col-sm">Prepago</th>
+            <th scope="col-sm">Pospago</th>
+            <th scope="col-sm">Pos/pre</th>
+            <th scope="col-sm">% Pos</th>
+            <th scope="col-sm">Asistencia</th>
+            <th scope="col-sm">Factor</th>
           </tr>
         </thead>
         <tbody>
 
-          <?php while ($centro = $centros->fetch_object()) : ?>
+          <?php foreach ($desglose as $key => $centro) : ?>
 
             <tr>
-                <td><?= $centro->nombre ?></td>
-                <td><?= $centro->ventas ?></td>
+                <td><?= $centro['nombre']?></td>
+                <td><?= $centro['prepago']?></td>
+                <td><?= $centro['pospago']?></td>
+                <td><?= $centro['totales']?></td>
+                <td><?= $centro['porcentaje']?>%</td>
+                <td><?= $centro['asistencia']?></td>
+                <td><?= $centro['factor']?>%</td>
               
             </tr>
-          <?php endwhile;?>
+          <?php endforeach;?>
 
         </tbody>
       </table>
