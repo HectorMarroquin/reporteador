@@ -1,5 +1,6 @@
 <?php
 require_once 'models/BitacoraValidacion.php';
+require_once 'models/VentasPospago.php';
 
 class HomeController 
 {
@@ -8,8 +9,8 @@ class HomeController
 		$fecha_i = date('Y-m-d'); 
 		$fecha_f = date('Y-m-d');
 
-		// $fecha_i = "2022-09-30";
-		// $fecha_f = "2022-09-30";
+		// $fecha_i = "2022-07-31";
+		// $fecha_f = "2022-08-30";
 
 		Utils::checkSession();
 
@@ -33,19 +34,19 @@ class HomeController
 
 		$contadorv = 0;
 		$arreglo = array();
+		$ventasp = new VentasPospago();
 
 		while ($centro = $centros->fetch_object()) {
 		
 			$name_c      = $centro->nombre;
 			$id_cen      = $centro->id;
 			$ventas_pre  = $centro->ventas;
-			$ventas_pos  = Utils::getVentasPos($id_cen,$fecha_i,$fecha_f);
+			$ventas_pos  = $ventasp->getVentasPos($id_cen,$fecha_i,$fecha_f);
 			$ventas_t    = intval($ventas_pre) + intval($ventas_pos);
 			$user_group  = $centro->ugroup;
 			$asistencia  = Utils::getAsistenciaCentro($user_group,$fecha_i,$fecha_f);
-			$factor      = Utils::getFactor($ventas_t,$asistencia);
-			$porc_venpos = Utils::getFactor($ventas_pos,$ventas_t);
-
+			$factor      = Utils::getPromedio($ventas_t,$asistencia);
+			$porc_venpos = Utils::getPromedio($ventas_pos,$ventas_t);
 
 			$arreglo[$name_c] = array(
                             'nombre'    =>$name_c,
@@ -79,8 +80,8 @@ class HomeController
 				$asiste  += $dato['asistencia'];
 
 		}
-			$factor      = Utils::getFactor($pospre,$asiste);
-			$por_pos = Utils::getFactor($pospago,$pospre);
+			$factor  = Utils::getPromedio($pospre,$asiste);
+			$por_pos = Utils::getPromedio($pospago,$pospre);
 
 			$arreglo["TOTAL"] = array(
                 'nombre'    =>"TOTAL",
@@ -94,6 +95,9 @@ class HomeController
 
 			return $arreglo;
 	}
+
+
+
 
 }// fin de la clase HomeController
 

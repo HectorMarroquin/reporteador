@@ -66,7 +66,7 @@ class Utils
 		return $asistencia;
 	}
 
-	public static function getFactor($ventas,$asistencias){
+	public static function getPromedio($ventas,$asistencias){
 
 		  $factor = 0;
 
@@ -78,25 +78,6 @@ class Utils
 
 		  return $factor;
 		}
-
-	public static function getVentasPos($id_centro,$fecha_i,$fecha_f){
-
-		$db = Database::connect();
-		$venta = 0;
-
-		$sql = "SELECT COUNT(*) AS ventas FROM VENTAS_POSPAGO_VAL WHERE Fecha_capturo = '".$fecha_i."' AND Fecha_capturo <= '".$fecha_f."' AND IdEstatusPospago =2 AND Estado =1 AND IdCentro= '".$id_centro."'";
-
-		$result = $db->query($sql);
-
-		if (!empty($result)) {
-			
-			$datos = $result->fetch_object();
-			$venta = $datos->ventas;
-		}
-
-		return $venta;
-
-	}
 
 }//fin de la clase utils
 

@@ -89,6 +89,58 @@ require_once 'views/layout/header.php';
 
 </section>
 
+<section class="info-section bg-light text-muted" id="info-section">
+
+<div class="container">
+  <div class="row align-items-center">
+    
+    <div class="col-sm table-responsive-sm">
+      <table class="table caption-top">
+         <caption>Reporte Pospago</caption>
+        <thead>
+          <tr>
+            <th scope="col-sm">Coach</th>
+            <th scope="col-sm">Exitosas</th>
+            <th scope="col-sm">Ingresadas</th>
+            <th scope="col-sm">Asistencia</th>
+            <th scope="col-sm">Factor</th>
+          </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+      </table>
+
+
+    </div>
+
+    <div class="col-sm table-responsive-sm">
+      <table class="table caption-top">
+         <caption>Reporte Por Coach</caption>
+        <thead>
+          <tr>
+            <th scope="col-sm">Centro</th>
+            <th scope="col-sm">Prepago</th>
+            <th scope="col-sm">Pospago</th>
+            <th scope="col-sm">Pos/pre</th>
+            <th scope="col-sm">% Pos</th>
+            <th scope="col-sm">Asistencia</th>
+            <th scope="col-sm">Factor</th>
+          </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+      </table>
+
+
+    </div>
+
+  </div>
+</div>
+
+
+</section>
 
 
 <?php
