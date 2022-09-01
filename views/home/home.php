@@ -59,6 +59,20 @@ require_once 'views/layout/header.php';
             </tr>
           <?php endforeach;?>
 
+          <?php foreach ($total_acum as $key => $total) : ?>
+
+            <tr class="table-active fw-bold">
+                <td><?= $total['nombre']?></td>
+                <td><?= $total['prepago']?></td>
+                <td><?= $total['pospago']?></td>
+                <td><?= $total['totales']?></td>
+                <td><?= $total['porcentaje']?>%</td>
+                <td><?= $total['asistencia']?></td>
+                <td><?= $total['factor']?>%</td>
+              
+            </tr>
+          <?php endforeach;?>
+
         </tbody>
       </table>
 

@@ -8,8 +8,8 @@ class HomeController
 		$fecha_i = date('Y-m-d'); 
 		$fecha_f = date('Y-m-d');
 
-		// $fecha_i = "2022-08-30";
-		// $fecha_f = "2022-08-30";
+		// $fecha_i = "2022-09-30";
+		// $fecha_f = "2022-09-30";
 
 		Utils::checkSession();
 
@@ -21,6 +21,9 @@ class HomeController
 		$centros = $ventasCentros->getAll($fecha_i,$fecha_f);
 
 		$desglose = $this->getDesgloseCentros($centros,$fecha_i,$fecha_f);
+
+		$total_acum = $this->getTotalAcumulado($desglose);
+		
 
 		require_once 'views/home/home.php';
 	
@@ -59,6 +62,39 @@ class HomeController
 		return $arreglo;
 
 	}
-}
+
+	public function getTotalAcumulado($datos){
+
+		$prepago = 0;
+		$pospago = 0;
+		$pospre  = 0;
+		$asiste  = 0;
+		$arreglo = array();
+
+		foreach ($datos as $key => $dato) {
+				
+				$prepago += $dato['prepago'];
+				$pospago += $dato['pospago'];
+				$pospre  += $dato['totales'];
+				$asiste  += $dato['asistencia'];
+
+		}
+			$factor      = Utils::getFactor($pospre,$asiste);
+			$por_pos = Utils::getFactor($pospago,$pospre);
+
+			$arreglo["TOTAL"] = array(
+                'nombre'    =>"TOTAL",
+                'prepago'   =>$prepago,
+                'pospago'   =>$pospago,
+                'totales'   =>$pospre,
+                'porcentaje'=>$por_pos,
+                'asistencia'=>$asiste,
+                'factor'    =>$factor,
+              );
+
+			return $arreglo;
+	}
+
+}// fin de la clase HomeController
 
 ?>
