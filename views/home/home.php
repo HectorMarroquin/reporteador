@@ -48,7 +48,7 @@ require_once 'views/layout/header.php';
           <?php foreach ($desglose as $key => $centro) : ?>
 
             <tr>
-                <td><?= $centro['nombre']?></td>
+                <td><?= $centro['prefijo']?></td>
                 <td><?= $centro['prepago']?></td>
                 <td><?= $centro['pospago']?></td>
                 <td><?= $centro['totales']?></td>
@@ -107,6 +107,18 @@ require_once 'views/layout/header.php';
           </tr>
         </thead>
         <tbody>
+
+          <?php foreach ($desglosePos as $key => $centro) : ?>
+
+            <tr>
+                <td><?= $centro['coach']?></td>
+                <td><?= $centro['exitosa']?></td>
+                <td><?= $centro['ingresada']?></td>
+                <td><?= $centro['asistencia']?></td>
+                <td><?= $centro['factor']?>%</td>
+              
+            </tr>
+          <?php endforeach;?>
 
         </tbody>
       </table>

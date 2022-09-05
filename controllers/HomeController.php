@@ -9,22 +9,28 @@ class HomeController
 		$fecha_i = date('Y-m-d'); 
 		$fecha_f = date('Y-m-d');
 
-		// $fecha_i = "2022-07-31";
-		// $fecha_f = "2022-08-30";
+		$fecha_i = "2022-08-31";
+		$fecha_f = "2022-08-31";
 
 		Utils::checkSession();
 
+		//extrae la hora de la ultima venta ingresada
 		$ultRegistro = new BitacoraValidacion();
 		$registro = $ultRegistro->ultimoRegistro($fecha_i);
 		$reg = $registro ? $registro->Hora : 'S/N';
 
+		//extraer todas las ventas prepago
 		$ventasCentros  = new BitacoraValidacion();
 		$centros = $ventasCentros->getAll($fecha_i,$fecha_f);
 
-		$desglose = $this->getDesgloseCentros($centros,$fecha_i,$fecha_f);
-
+		//extraer centro,prepago,pospago,pos/pre,%pos,asistencia,factor
+		$desglose   = $this->getDesgloseCentros($centros,$fecha_i,$fecha_f);
 		$total_acum = $this->getTotalAcumulado($desglose);
 		
+		$ventasPospago = new VentasPospago();
+		$pospago       = $ventasPospago->getAll($fecha_i,$fecha_f);
+
+		$desglosePos   = $this->getDesglosePospago($pospago,$fecha_i,$fecha_f);
 
 		require_once 'views/home/home.php';
 	
@@ -37,23 +43,25 @@ class HomeController
 		$ventasp = new VentasPospago();
 
 		while ($centro = $centros->fetch_object()) {
-		
-			$name_c      = $centro->nombre;
-			$id_cen      = $centro->id;
-			$ventas_pre  = $centro->ventas;
-			$ventas_pos  = $ventasp->getVentasPos($id_cen,$fecha_i,$fecha_f);
-			$ventas_t    = intval($ventas_pre) + intval($ventas_pos);
-			$user_group  = $centro->ugroup;
-			$asistencia  = Utils::getAsistenciaCentro($user_group,$fecha_i,$fecha_f);
-			$factor      = Utils::getPromedio($ventas_t,$asistencia);
-			$porc_venpos = Utils::getPromedio($ventas_pos,$ventas_t);
+			
+			$nameCentro = $centro->centro;
+			$prefijo    = $centro->prefijo;
+			$id_cen     = $centro->id;
+			$ventasPre  = $centro->ventas;
+			$ventasPos  = $ventasp->getVentasPosCentro($id_cen,$fecha_i,$fecha_f);
+			$ventasT    = intval($ventasPre) + intval($ventasPos);
+			$userGroup  = $centro->ugroup;
+			$asistencia = Utils::getAsistenciaCentro($userGroup,$fecha_i,$fecha_f);
+			$factor     = Utils::getPromedio($ventasT,$asistencia);
+			$porcentaje = Utils::getPromedio($ventasPos,$ventasT);
 
-			$arreglo[$name_c] = array(
-                            'nombre'    =>$name_c,
-                            'prepago'   =>$ventas_pre,
-                            'pospago'   =>$ventas_pos,
-                            'totales'   =>$ventas_t,
-                            'porcentaje'=>$porc_venpos,
+			$arreglo[] = array(
+							'centro'    =>$nameCentro,
+                            'prefijo'   =>$prefijo,
+                            'prepago'   =>$ventasPre,
+                            'pospago'   =>$ventasPos,
+                            'totales'   =>$ventasT,
+                            'porcentaje'=>$porcentaje,
                             'asistencia'=>$asistencia,
                             'factor'    =>$factor,
                           );
@@ -83,7 +91,7 @@ class HomeController
 			$factor  = Utils::getPromedio($pospre,$asiste);
 			$por_pos = Utils::getPromedio($pospago,$pospre);
 
-			$arreglo["TOTAL"] = array(
+			$arreglo[] = array(
                 'nombre'    =>"TOTAL",
                 'prepago'   =>$prepago,
                 'pospago'   =>$pospago,
@@ -94,6 +102,40 @@ class HomeController
               );
 
 			return $arreglo;
+	}
+
+
+	public function getDesglosePospago($datos,$fecha_i,$fecha_f){
+
+		// hay que insertar los centros externos en tabla alcancemeta para poder optimizar esta parte
+		$arreglo = array();
+
+		while ($dato = $datos->fetch_object()) {
+				
+			$coach = $dato->coach;
+			$group = $dato->usergroup;
+			$asistencia = Utils::getAsistencia($coach,$fecha_i,$fecha_f);
+
+		      if (!empty($group)) {
+
+		        $asistencia = Utils::getAsistenciaCentro($group,$fecha_i,$fecha_f);
+		      }
+
+			$exitosa    = $dato->ventas;
+			$ingresada  = "3";
+			$factor     = Utils::getPromedio($exitosa,$asistencia);
+
+			$arreglo[] = array(
+                'coach'     =>$coach,
+                'exitosa'   =>$exitosa,
+                'ingresada' =>$ingresada,
+                'asistencia'=>$asistencia,
+                'factor'    =>$factor,
+              );
+		}
+
+		return $arreglo;
+		
 	}
 
 

@@ -79,6 +79,21 @@ class Utils
 		  return $factor;
 		}
 
+	public static function getAsistencia($coach,$fecha_i,$fecha_f){
+
+		$db = Database::connect();
+
+		$asistencia = 0;
+
+		$sql = "SELECT SUM(Asistencias) as asistencia FROM REPORTES_ALCANCE_META WHERE Fecha >= '$fecha_i' and Fecha <= '$fecha_f' AND Coach = '$coach' AND Estado = 1";
+
+		$resul = $db->query($sql);
+		$dato = $resul->fetch_object();
+		$asistencia = $dato->asistencia;
+
+		return $asistencia;
+	}
+
 }//fin de la clase utils
 
 
