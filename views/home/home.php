@@ -47,7 +47,9 @@ require_once 'views/layout/header.php';
 
           <?php foreach ($desglose as $key => $centro) : ?>
 
-            <tr>
+            <?php $res = $centro['prefijo'] == 'TOTAL' ? 'table-active fw-bold' : '' ?>
+
+            <tr class="<?=$res?>">
                 <td><?= $centro['prefijo']?></td>
                 <td><?= $centro['prepago']?></td>
                 <td><?= $centro['pospago']?></td>
@@ -58,21 +60,6 @@ require_once 'views/layout/header.php';
               
             </tr>
           <?php endforeach;?>
-
-          <?php foreach ($total_acum as $key => $total) : ?>
-
-            <tr class="table-active fw-bold">
-                <td><?= $total['nombre']?></td>
-                <td><?= $total['prepago']?></td>
-                <td><?= $total['pospago']?></td>
-                <td><?= $total['totales']?></td>
-                <td><?= $total['porcentaje']?>%</td>
-                <td><?= $total['asistencia']?></td>
-                <td><?= $total['factor']?>%</td>
-              
-            </tr>
-          <?php endforeach;?>
-
         </tbody>
       </table>
 
@@ -110,7 +97,9 @@ require_once 'views/layout/header.php';
 
           <?php foreach ($desglosePos as $key => $centro) : ?>
 
-            <tr>
+            <?php $res = $centro['coach'] == 'TOTAL' ? 'table-active fw-bold' : '' ?>
+
+            <tr class="<?=$res?>">
                 <td><?= $centro['coach']?></td>
                 <td><?= $centro['exitosa']?></td>
                 <td><?= $centro['ingresada']?></td>

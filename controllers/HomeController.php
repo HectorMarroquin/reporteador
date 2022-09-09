@@ -25,10 +25,12 @@ class HomeController
 
 		//extraer centro,prepago,pospago,pos/pre,%pos,asistencia,factor
 		$desglose   = $this->getDesgloseCentros($centros,$fecha_i,$fecha_f);
-		$total_acum = $this->getTotalAcumulado($desglose);
-		
+
 		$ventasPospago = new VentasPospago();
 		$pospago       = $ventasPospago->getAll($fecha_i,$fecha_f);
+
+		$ventasCoach = new BitacoraValidacion();
+		$coachPrepago       = $ventasCoach->getVentasCoach($fecha_i,$fecha_f);
 
 		$desglosePos   = $this->getDesglosePospago($pospago,$fecha_i,$fecha_f);
 
@@ -42,18 +44,31 @@ class HomeController
 		$arreglo = array();
 		$ventasp = new VentasPospago();
 
+		$ventasPreT  = 0;
+		$ventasPosT  = 0;
+		$ventasAcum  = 0;
+		$porcentajeT = 0;
+		$asistenciaT = 0;
+		$factorT     = 0;
+
 		while ($centro = $centros->fetch_object()) {
 			
-			$nameCentro = $centro->centro;
-			$prefijo    = $centro->prefijo;
-			$id_cen     = $centro->id;
-			$ventasPre  = $centro->ventas;
-			$ventasPos  = $ventasp->getVentasPosCentro($id_cen,$fecha_i,$fecha_f);
-			$ventasT    = intval($ventasPre) + intval($ventasPos);
-			$userGroup  = $centro->ugroup;
-			$asistencia = Utils::getAsistenciaCentro($userGroup,$fecha_i,$fecha_f);
-			$factor     = Utils::getPromedio($ventasT,$asistencia);
-			$porcentaje = Utils::getPromedio($ventasPos,$ventasT);
+			$nameCentro  = $centro->centro;
+			$prefijo     = $centro->prefijo;
+			$id_cen      = $centro->id;
+			$ventasPre   = $centro->ventas;
+			$ventasPreT  += $ventasPre;
+			$ventasPos   = $ventasp->getVentasPosCentro($id_cen,$fecha_i,$fecha_f);
+			$ventasPosT  += $ventasPos;
+			$ventasT     = intval($ventasPre) + intval($ventasPos);
+			$ventasAcum  += $ventasT;
+			$userGroup   = $centro->ugroup;
+			$asistencia  = Utils::getAsistenciaCentro($userGroup,$fecha_i,$fecha_f);
+			$asistenciaT += $asistencia;
+			$factor      = Utils::getPromedio($ventasT,$asistencia);
+			$factorT     = Utils::getPromedio($ventasAcum,$asistenciaT);
+			$porcentaje  = Utils::getPromedio($ventasPos,$ventasT);
+			$porcentajeT = Utils::getPromedio($ventasPosT,$ventasAcum);
 
 			$arreglo[] = array(
 							'centro'    =>$nameCentro,
@@ -68,62 +83,64 @@ class HomeController
 
 		}
 
+		$arreglo[] = array(
+							'centro'    =>"TOTAL",
+                            'prefijo'   =>"TOTAL",
+                            'prepago'   =>$ventasPreT,
+                            'pospago'   =>$ventasPosT,
+                            'totales'   =>$ventasAcum,
+                            'porcentaje'=>$porcentajeT,
+                            'asistencia'=>$asistenciaT,
+                            'factor'    =>$factorT,
+                          );
+
 		return $arreglo;
 
-	}
-
-	public function getTotalAcumulado($datos){
-
-		$prepago = 0;
-		$pospago = 0;
-		$pospre  = 0;
-		$asiste  = 0;
-		$arreglo = array();
-
-		foreach ($datos as $key => $dato) {
-				
-				$prepago += $dato['prepago'];
-				$pospago += $dato['pospago'];
-				$pospre  += $dato['totales'];
-				$asiste  += $dato['asistencia'];
-
-		}
-			$factor  = Utils::getPromedio($pospre,$asiste);
-			$por_pos = Utils::getPromedio($pospago,$pospre);
-
-			$arreglo[] = array(
-                'nombre'    =>"TOTAL",
-                'prepago'   =>$prepago,
-                'pospago'   =>$pospago,
-                'totales'   =>$pospre,
-                'porcentaje'=>$por_pos,
-                'asistencia'=>$asiste,
-                'factor'    =>$factor,
-              );
-
-			return $arreglo;
 	}
 
 
 	public function getDesglosePospago($datos,$fecha_i,$fecha_f){
 
-		// hay que insertar los centros externos en tabla alcancemeta para poder optimizar esta parte
+		// hay que insertar los centros externos en tabla alcance meta para poder optimizar esta parte
 		$arreglo = array();
+		$ventasPos = new VentasPospago();
+
+		$exitosaT    = 0;
+		$ingresadaT  = 0;
+		$asistenciaT = 0;
+		$factorT     = 0;
+		$existe      = false; 
 
 		while ($dato = $datos->fetch_object()) {
-				
-			$coach = $dato->coach;
-			$group = $dato->usergroup;
+						
+		    $migradas   = 0;
+			$idcoach    = $dato->idSuper;
+			$coach      = $dato->coach;
+			$group      = $dato->usergroup;
 			$asistencia = Utils::getAsistencia($coach,$fecha_i,$fecha_f);
+			$ingresada  = $ventasPos->getIngresadas($coach,$fecha_i,$fecha_f);
+
+
+		     if ($idcoach == "24897") {
+		      	$existe = true;
+		        $migradas   = $ventasPos->getMigradasCoach($idcoach,$fecha_i,$fecha_f);
+		        $ingresa  = $ventasPos->getIngresadasVal($fecha_i,$fecha_f);
+		        $ingresada  = $ventasPos->getIngresadas($coach,$fecha_i,$fecha_f);
+		        $ingresada += $ingresa;
+		  
+		      }
 
 		      if (!empty($group)) {
-
 		        $asistencia = Utils::getAsistenciaCentro($group,$fecha_i,$fecha_f);
 		      }
 
-			$exitosa    = $dato->ventas;
-			$ingresada  = "3";
-			$factor     = Utils::getPromedio($exitosa,$asistencia);
+		    $asistenciaT += $asistencia; 
+			$exitosa     = $dato->ventas;
+			$exitosa     += $migradas;
+			$exitosaT    += $exitosa;
+			$ingresadaT  += $ingresada;
+			$factor      = Utils::getPromedio($exitosa,$asistencia);
+			$factorT     = Utils::getPromedio($exitosaT,$asistenciaT);
 
 			$arreglo[] = array(
                 'coach'     =>$coach,
@@ -132,14 +149,44 @@ class HomeController
                 'asistencia'=>$asistencia,
                 'factor'    =>$factor,
               );
+
 		}
+
+		if (!$existe && !empty($arreglo)) {
+
+			$coach      = "MELENDEZ SERRANO CECILIA MICHEL";
+			$migradas   = $ventasPos->getMigradasCoach("24897",$fecha_i,$fecha_f);
+			$ingresada  = $ventasPos->getIngresadasVal($fecha_i,$fecha_f);
+			$asistencia = Utils::getAsistencia($coach,$fecha_i,$fecha_f);
+			$factor     = Utils::getPromedio($migradas,$asistencia);
+
+		    $arreglo[] = array(
+                'coach'     =>$coach,
+                'exitosa'   =>$migradas,
+                'ingresada' =>$ingresada,
+                'asistencia'=>$asistencia,
+                'factor'    =>$factor,
+              );
+
+			
+			$exitosaT    += $migradas; 
+			$ingresadaT  += $ingresada;
+			$asistenciaT += $asistencia;
+			$factorT     = Utils::getPromedio($exitosaT,$asistenciaT);
+		}
+
+
+		    $arreglo[] = array(
+                'coach'     =>"TOTAL",
+                'exitosa'   =>$exitosaT,
+                'ingresada' =>$ingresadaT,
+                'asistencia'=>$asistenciaT,
+                'factor'    =>$factorT,
+              );
 
 		return $arreglo;
 		
 	}
-
-
-
 
 }// fin de la clase HomeController
 

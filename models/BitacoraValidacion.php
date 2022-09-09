@@ -64,6 +64,17 @@ class BitacoraValidacion
 
 
 	}
+
+	public function getVentasCoach($fecha_i,$fecha_f){
+
+		$sql = "SELECT UC.Nombre, COUNT( BV.Id ) AS ventas FROM BITACORA_VALIDACION AS BV INNER JOIN USUARIO_CLIENTE AS UC ON UC.Id = BV.IdUsuario_supervisor WHERE (BV.Fecha >= '$fecha_i' AND BV.Fecha <= '$fecha_f') AND BV.Estado =1 GROUP BY BV.IdUsuario_supervisor";
+
+		$registros = $this->db->query($sql);
+
+		$result = $registros->fetch_object();
+
+
+	}
 }
 
 
