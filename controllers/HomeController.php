@@ -43,6 +43,7 @@ class HomeController
 		$contadorv = 0;
 		$arreglo = array();
 		$ventasp = new VentasPospago();
+		$utils = new Utils();
 
 		$ventasPreT  = 0;
 		$ventasPosT  = 0;
@@ -63,7 +64,7 @@ class HomeController
 			$ventasT     = intval($ventasPre) + intval($ventasPos);
 			$ventasAcum  += $ventasT;
 			$userGroup   = $centro->ugroup;
-			$asistencia  = Utils::getAsistenciaCentro($userGroup,$fecha_i,$fecha_f);
+			$asistencia  = $utils->getAsistenciaCentro($userGroup,$fecha_i,$fecha_f);
 			$asistenciaT += $asistencia;
 			$factor      = Utils::getPromedio($ventasT,$asistencia);
 			$factorT     = Utils::getPromedio($ventasAcum,$asistenciaT);
@@ -104,6 +105,7 @@ class HomeController
 		// hay que insertar los centros externos en tabla alcance meta para poder optimizar esta parte
 		$arreglo = array();
 		$ventasPos = new VentasPospago();
+        $utils = new Utils();
 
 		$exitosaT    = 0;
 		$ingresadaT  = 0;
@@ -117,7 +119,7 @@ class HomeController
 			$idcoach    = $dato->idSuper;
 			$coach      = $dato->coach;
 			$group      = $dato->usergroup;
-			$asistencia = Utils::getAsistencia($coach,$fecha_i,$fecha_f);
+			$asistencia = $utils->getAsistencia($coach,$fecha_i,$fecha_f);
 			$ingresada  = $ventasPos->getIngresadas($coach,$fecha_i,$fecha_f);
 
 
@@ -131,7 +133,7 @@ class HomeController
 		      }
 
 		      if (!empty($group)) {
-		        $asistencia = Utils::getAsistenciaCentro($group,$fecha_i,$fecha_f);
+		        $asistencia = $utils->getAsistenciaCentro($group,$fecha_i,$fecha_f);
 		      }
 
 		    $asistenciaT += $asistencia; 
@@ -157,8 +159,8 @@ class HomeController
 			$coach      = "MELENDEZ SERRANO CECILIA MICHEL";
 			$migradas   = $ventasPos->getMigradasCoach("24897",$fecha_i,$fecha_f);
 			$ingresada  = $ventasPos->getIngresadasVal($fecha_i,$fecha_f);
-			$asistencia = Utils::getAsistencia($coach,$fecha_i,$fecha_f);
-			$factor     = Utils::getPromedio($migradas,$asistencia);
+			$asistencia = $utils->getAsistencia($coach,$fecha_i,$fecha_f);
+			$factor     = $utils->getPromedio($migradas,$asistencia);
 
 		    $arreglo[] = array(
                 'coach'     =>$coach,
