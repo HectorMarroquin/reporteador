@@ -38,7 +38,7 @@ class HomeController
 	
 	}
 
-	public function getDesgloseCentros($centros,$fecha_i,$fecha_f){
+	public static function getDesgloseCentros($centros,$fecha_i,$fecha_f){
 
 		$contadorv = 0;
 		$arreglo = array();
@@ -100,7 +100,7 @@ class HomeController
 	}
 
 
-	public function getDesglosePospago($datos,$fecha_i,$fecha_f){
+	public static function getDesglosePospago($datos,$fecha_i,$fecha_f){
 
 		// hay que insertar los centros externos en tabla alcance meta para poder optimizar esta parte
 		$arreglo = array();
