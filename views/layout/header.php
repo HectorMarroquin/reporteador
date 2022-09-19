@@ -74,11 +74,3 @@
   </div>
 </nav>
 
-
-<script type="text/javascript">
-  
-$( "#prueba" ).click(function() {
-  alert( "Handler for .click() called." );
-});
-
-</script>
