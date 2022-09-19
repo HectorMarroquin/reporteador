@@ -79,7 +79,7 @@ require_once 'views/layout/header.php';
 <section class="info-section bg-light text-muted" id="info-section">
 
 <div class="container">
-  <div class="row align-items-center">
+  <div class="row">
     
     <div class="col-sm table-responsive-sm">
       <table class="table caption-top">
@@ -122,15 +122,29 @@ require_once 'views/layout/header.php';
           <tr>
             <th scope="col-sm">Centro</th>
             <th scope="col-sm">Prepago</th>
-            <th scope="col-sm">Pospago</th>
-            <th scope="col-sm">Pos/pre</th>
-            <th scope="col-sm">% Pos</th>
+            <th scope="col-sm">Migradas</th>
+            <th scope="col-sm">Pos/Base</th>
+            <th scope="col-sm">Total</th>
             <th scope="col-sm">Asistencia</th>
             <th scope="col-sm">Factor</th>
           </tr>
         </thead>
         <tbody>
+          <?php foreach ($desgloseCoach as $key => $coach) : ?>
 
+            <?php $res = $coach['coach'] == 'TOTAL' ? 'table-active fw-bold' : '' ?>
+
+            <tr class="<?=$res?>">
+                <td><?= $coach['coach']?></td>
+                <td><?= $coach['prepago']?></td>
+                <td><?= $coach['migradas']?></td>
+                <td><?= $coach['base']?></td>
+                <td><?= $coach['total']?>%</td>
+                <td><?= $coach['asistencia']?>%</td>
+                <td><?= $coach['factor']?>%</td>
+              
+            </tr>
+          <?php endforeach;?>
         </tbody>
       </table>
 

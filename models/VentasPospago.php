@@ -101,7 +101,6 @@ class VentasPospago
 
 	public function getMigradasCoach($idcoach,$fecha_i,$fecha_f){
 
-	$result = 0;
 	$complement = "";
 
 	if ($idcoach != "24897") {
@@ -113,14 +112,15 @@ class VentasPospago
 
     $migradas = $this->db->query($sql);
 
-    if ($migradas && !empty($migradas)) {
-    	
-    	$result = $migradas->fetch_object();
-    	$result = $result->migradas;
-    }
+    $result = $migradas->fetch_object();
+	$result = $result->migradas;
+    
+	if (empty($result)) {
+		
+		$result = 0;
 
+	}
     	return $result;
-
 	} 	
 
 }// se termina clase ventaspospago

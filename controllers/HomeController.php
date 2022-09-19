@@ -33,6 +33,7 @@ class HomeController
 		$coachPrepago       = $ventasCoach->getVentasCoach($fecha_i,$fecha_f);
 
 		$desglosePos   = $this->getDesglosePospago($pospago,$fecha_i,$fecha_f);
+		$desgloseCoach   = $this->getDesgloseCoaches($coachPrepago,$fecha_i,$fecha_f);
 
 		require_once 'views/home/home.php';
 	
@@ -188,6 +189,63 @@ class HomeController
 
 		return $arreglo;
 		
+	}
+
+	public static function getDesgloseCoaches($datos,$fecha_i,$fecha_f){
+
+		$pospagoV = new VentasPospago();
+		$utils = new Utils();
+		$prepagoT   = 0;
+		$migradasT  = 0;
+		$baseT      = 0;
+		$totalF     = 0;
+		$asistenciaT= 0;
+		$factorT    = 0;
+
+
+
+		while ($dato = $datos->fetch_object()) {
+
+			$coach      = $dato->Nombre;
+			$prepago    = $dato->ventas;
+			$prepagoT   += $prepago;
+			$migradas   = $pospagoV->getMigradasCoach($dato->Id,$fecha_i,$fecha_f);
+			$migradasT  += $migradas;
+			$basePos    = 0;
+			$baseT      = 0;
+			$total      = intval($prepago)+intval($migradas)+intval($basePos);
+			$totalF     += $total;
+			$asistencia = $utils->getAsistencia($coach,$fecha_i,$fecha_f);
+			$asistenciaT += $asistencia;
+			$factor     = Utils::getPromedio($total,$asistencia);
+
+		    $arreglo[] = array(
+                'coach'     =>$coach,
+                'prepago'   =>$prepago,
+                'migradas'  =>$migradas,
+                'base'      =>$baseT,
+                'total'     =>$total,
+                'asistencia'=>$asistencia,
+                'factor'    =>$factor,
+              );
+		
+		}
+
+			$factorT     = Utils::getPromedio($totalF,$asistenciaT);
+
+			$arreglo[] = array(
+                'coach'     =>"TOTAL",
+                'prepago'   =>$prepagoT,
+                'migradas'  =>$migradasT,
+                'base'      =>"0",
+                'total'     =>$totalF,
+                'asistencia'=>$asistenciaT,
+                'factor'    =>$factorT,
+              );
+
+		return $arreglo;
+
+
 	}
 
 }// fin de la clase HomeController
