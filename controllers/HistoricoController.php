@@ -6,17 +6,10 @@ require_once 'controllers/HomeController.php';
 class HistoricoController 
 {
 	public function index(){
-		$fecha_i = $_POST['date1'];
-		$fecha_f = $_POST['date2'];
-
-		//var_dump($fecha_i);
-
-
 		Utils::checkSession();
 
 		require 'views/historico/historico.php';
 	}
-
 
 	public function desglose(){
 
