@@ -22,17 +22,10 @@ class HistoricoController
 		$datosObtenidos = new HomeController();
 		$reporteCentro = $datosObtenidos->getDesgloseCentros($centrosPrepagos,$fecha_i,$fecha_f);
 
-		var_dump($reporteCentro); exit();
-
 			echo json_encode($reporteCentro);
-			exit();
-
+			//var_dump($reporteCentro);
 	}
 
 
 }
-
-
-
-
 ?>
