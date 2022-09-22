@@ -2,29 +2,7 @@
 
 class VentasPospago
 {
-	private $id;
-	private $idUsuarioCliente;
-	private $idUsuarioVendio;
-	private $idCentro;
-	private $usuarioVenta;
-	private $IdPlanContrato;
-	private $dn;
-	private $metodoEntrega;
-	private $cac;
-	private $sinoScore;
-	private $nip;
-	private $fechaCapturo;
-	private $horaCapturo;
-	private $idDatosClientes;
-	private $idEstatusPospago;
-	private $comentario;
-	private $idEstatusBitacoraVal;
-	private $idEstatusRechazo;
-	private $fechaFVC;
-	private $fechaCorte;
-	private $fechaLimite;
-	private $sinoMigrada;
-	private $estado;
+
 	private $db;
 
 	public function __construct(){
@@ -76,11 +54,14 @@ class VentasPospago
 				WHERE (Fecha_capturo >= '$fecha_i' AND Fecha_capturo <= '$fecha_f')
 				AND VP.Estado =1 AND VP.IdEstatusPospago =2  AND VP.IdEstatusBitacoraValPos = 1 AND VP.SINO_migrada = 0 AND UCC.Nombre = '".$coach."'";
 
-		$ingresada = $this->db->query($sql);
-		$ingresada = $ingresada->fetch_object();
+		$resultado = $this->db->query($sql);
+		$ingresa   = $resultado->fetch_object();
 
-
-		return $ingresada->ventas;
+		if (!isset($ingresa)) {
+			$ingresada = $ingresa->ventas;
+		}
+		
+		return $ingresada;
 
 	}
 
@@ -90,12 +71,14 @@ class VentasPospago
 
 		$sql = "SELECT SUM(SINO_migrada) AS migradas FROM VENTAS_POSPAGO_VAL WHERE (Fecha_capturo >= '".$fecha_i."' AND Fecha_capturo <= '".$fecha_f."') AND IdEstatusBitacoraValPos =1 AND IdEstatusPospago = 2 AND Estado = 1";
 
+		$result = $this->db->query($sql);
+		$ingresa = $result->fetch_object();
+		
+		if (!isset($ingresa)) {
+			$ingresada = $ingresa->migradas;	
+		}
 
-		$ingresada = $this->db->query($sql);
-		$ingresada = $ingresada->fetch_object();
-
-
-		return $ingresada->migradas;
+		return $ingresada;
 
 	}
 

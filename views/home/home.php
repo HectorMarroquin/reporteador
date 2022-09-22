@@ -139,8 +139,8 @@ require_once 'views/layout/header.php';
                 <td><?= $coach['prepago']?></td>
                 <td><?= $coach['migradas']?></td>
                 <td><?= $coach['base']?></td>
-                <td><?= $coach['total']?>%</td>
-                <td><?= $coach['asistencia']?>%</td>
+                <td><?= $coach['total']?></td>
+                <td><?= $coach['asistencia']?></td>
                 <td><?= $coach['factor']?>%</td>
               
             </tr>

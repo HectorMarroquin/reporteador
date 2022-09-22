@@ -85,14 +85,16 @@ class Utils
 
 	public function getAsistencia($coach,$fecha_i,$fecha_f){
 
-		$asistencia = 0;
-
 		$sql = "SELECT SUM(Asistencias) as asistencia FROM REPORTES_ALCANCE_META WHERE Fecha >= '$fecha_i' and Fecha <= '$fecha_f' AND Coach = '$coach' AND Estado = 1";
 
 		$resul = $this->db->query($sql);
 		$dato = $resul->fetch_object();
 		$asistencia = $dato->asistencia;
 
+		if(!isset($asistencia)){
+
+			$asistencia = 0;
+		}
 		return $asistencia;
 	}
 

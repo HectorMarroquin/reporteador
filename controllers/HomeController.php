@@ -9,8 +9,8 @@ class HomeController
 		$fecha_i = date('Y-m-d'); 
 		$fecha_f = date('Y-m-d');
 
-		$fecha_i = "2022-08-31";
-		$fecha_f = "2022-08-31";
+		// $fecha_i = "2022-08-31";
+		// $fecha_f = "2022-08-31";
 
 		Utils::checkSession();
 
@@ -32,8 +32,9 @@ class HomeController
 		$ventasCoach = new BitacoraValidacion();
 		$coachPrepago       = $ventasCoach->getVentasCoach($fecha_i,$fecha_f);
 
-		$desglosePos   = $this->getDesglosePospago($pospago,$fecha_i,$fecha_f);
 		$desgloseCoach   = $this->getDesgloseCoaches($coachPrepago,$fecha_i,$fecha_f);
+		$desglosePos   = $this->getDesglosePospago($pospago,$fecha_i,$fecha_f);
+		
 
 		require_once 'views/home/home.php';
 	
@@ -170,7 +171,6 @@ class HomeController
                 'asistencia'=>$asistencia,
                 'factor'    =>$factor,
               );
-
 			
 			$exitosaT    += $migradas; 
 			$ingresadaT  += $ingresada;
@@ -202,8 +202,6 @@ class HomeController
 		$asistenciaT= 0;
 		$factorT    = 0;
 
-
-
 		while ($dato = $datos->fetch_object()) {
 
 			$coach      = $dato->Nombre;
@@ -211,8 +209,8 @@ class HomeController
 			$prepagoT   += $prepago;
 			$migradas   = $pospagoV->getMigradasCoach($dato->Id,$fecha_i,$fecha_f);
 			$migradasT  += $migradas;
-			$basePos    = 0;
-			$baseT      = 0;
+			$basePos    = $pospagoV->getIngresadas($coach,$fecha_i,$fecha_f);
+			$baseT      += $basePos;
 			$total      = intval($prepago)+intval($migradas)+intval($basePos);
 			$totalF     += $total;
 			$asistencia = $utils->getAsistencia($coach,$fecha_i,$fecha_f);
@@ -223,7 +221,7 @@ class HomeController
                 'coach'     =>$coach,
                 'prepago'   =>$prepago,
                 'migradas'  =>$migradas,
-                'base'      =>$baseT,
+                'base'      =>$basePos,
                 'total'     =>$total,
                 'asistencia'=>$asistencia,
                 'factor'    =>$factor,
@@ -237,7 +235,7 @@ class HomeController
                 'coach'     =>"TOTAL",
                 'prepago'   =>$prepagoT,
                 'migradas'  =>$migradasT,
-                'base'      =>"0",
+                'base'      =>$baseT,
                 'total'     =>$totalF,
                 'asistencia'=>$asistenciaT,
                 'factor'    =>$factorT,
