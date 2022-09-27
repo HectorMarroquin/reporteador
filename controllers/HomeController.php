@@ -9,8 +9,8 @@ class HomeController
 		$fecha_i = date('Y-m-d'); 
 		$fecha_f = date('Y-m-d');
 
-		// $fecha_i = "2022-08-31";
-		// $fecha_f = "2022-08-31";
+		$fecha_i = "2022-08-31";
+		$fecha_f = "2022-08-31";
 
 		Utils::checkSession();
 

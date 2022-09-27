@@ -45,8 +45,6 @@ class VentasPospago
 
 	public function getIngresadas($coach,$fecha_i,$fecha_f){
 
-		$ingresada = 0;
-
 		$sql = "SELECT UCC.Nombre AS coach, COUNT( UCC.Id ) AS ventas
 				FROM VENTAS_POSPAGO_VAL AS VP
 				INNER JOIN USUARIO_CLIENTE AS UC ON UC.Id = VP.IdUsuario_vendio
@@ -56,9 +54,10 @@ class VentasPospago
 
 		$resultado = $this->db->query($sql);
 		$ingresa   = $resultado->fetch_object();
+		$ingresada = $ingresa->ventas;
 
-		if (!isset($ingresa)) {
-			$ingresada = $ingresa->ventas;
+		if (empty($ingresada)) {
+			$ingresada = 0;
 		}
 		
 		return $ingresada;
