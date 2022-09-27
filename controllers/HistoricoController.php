@@ -23,9 +23,20 @@ class HistoricoController
 		$reporteCentro = $datosObtenidos->getDesgloseCentros($centrosPrepagos,$fecha_i,$fecha_f);
 
 			echo json_encode($reporteCentro);
-			//var_dump($reporteCentro);
 	}
 
+	public function desglosePos(){
+		
+		$fecha_i = $_POST['date1'];
+		$fecha_f = $_POST['date2'];
+		
+		$ventasPos = new VentasPospago();
+		$ventaPos = $ventasPos->getAll($fecha_i,$fecha_f);
+
+		$ventasPospago = HomeController::getDesglosePospago($ventaPos,$fecha_i,$fecha_f);
+		echo json_encode($ventasPospago);
+		
+	}
 
 }
 ?>
