@@ -44,7 +44,7 @@ require_once 'views/layout/header.php';
                                 <th scope="row col-sm">Factor</th>
                             </tr>
                         </thead>
-                        <tbody id="tableReporteCentro">
+                        <tbody id="table">
                         </tbody>
                     </table>
                 </div>
@@ -67,7 +67,7 @@ require_once 'views/layout/header.php';
                                 <th scope="row col-sm">Factor</th>
                             </tr>
                         </thead>
-                        <tbody id="table">
+                        <tbody id="tableReportePos">
                         </tbody>
                     </table>
                 </div>
