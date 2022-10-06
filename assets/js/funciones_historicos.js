@@ -89,18 +89,13 @@ $(document).ready(function() {
                     dataType: "json",
                     data: { 'date1': date1, "date2": date2 },
                     success: function(datospos) {
-                        console.log(datospos);
                         $("#tableReportePos").empty();
-
-                        var idtotalpos;
 
                         datospos.forEach(pos => {
 
-                            if (pos.coach === 'TOTAL') {
-                                idtotalpos = "colortabla";
-                            }
-
-                            var tablapos = "<tr id=" + idtotalpos + ">" +
+                            totalcolor = colorTotal(pos);
+                            console.log("color pospago: " + totalcolor);
+                            var tablapos = "<tr id=" + totalcolor + ">" +
                                 "<td>" + pos.coach + "</td>" +
                                 "<td>" + pos.exitosa + "</td>" +
                                 "<td>" + pos.ingresada + "</td>" +
@@ -109,14 +104,75 @@ $(document).ready(function() {
                                 "</tr>";
                             $("#tableReportePos").append(tablapos);
                         }); // termia el foreach
-                        $("#colortabla").css('background-color', '#919191');
-                        $("#colortabla").css('font-weight', '800');
+
+                        $("#colorfila").css('background-color', '#919191');
+                        $("#colorfila").css('font-weight', '800');
                     }
-                }); // termina ajax 
+                }); // termina ajax reporte pospago
+
+                url3 = base_url + "Historico/desgloseCoach";
+                $.ajax({
+                        type: "POST",
+                        url: url3,
+                        dataType: "json",
+                        data: { 'date1': date1, 'date2': date2 },
+                        success: function(dataCoach) {
+                            $("#tableCoach").empty();
+
+                            dataCoach.forEach(coach => {
+
+                                totalcolor = Totalcolor(coach);
+                                console.log("color coach: " + totalcolor);
+                                var tablacoach = "<tr id = " + totalcolor + " >" +
+                                    "<td>" + coach.coach + "</td>" +
+                                    "<td>" + coach.prepago + "</td>" +
+                                    "<td>" + coach.migradas + "</td>" +
+                                    "<td>" + coach.base + "</td>" +
+                                    "<td>" + coach.total + "</td>" +
+                                    "<td>" + coach.asistencia + "</td>" +
+                                    "<td>" + coach.factor + "%" + "</td>" +
+                                    "</tr>";
+                                $("#tableCoach").append(tablacoach);
+                            }); //termina forEach de coach
+                            $("#colorfila2").css('background-color', '#919191');
+                            $("#colorfila2").css('font-weight', '800');
+                        }
+                    }) //termina ajax de coach
+
+                // ******************** EN PROCESO ***************************
+
+                /* TODO: Empieza reporte por hora coach */
+                url4 = base_url + "Historico/HoraCoach";
+                $.ajax({
+                    type: "POST",
+                    url: url4,
+                    dataType: "json",
+                    data: { 'date1': date1, 'date2': date2 },
+                    success: function(datoshoraCoach) {
+                        console.log(datoshoraCoach);
+                    },
+                })
             } //termina la confirmacion de cancelar
 
         });
-
     }); // cierre de llave y parentesis de #btnEnviar
 
 });
+
+function colorTotal(total) {
+    if (total.coach === 'TOTAL') {
+        colortotal = "colorfila";
+    } else {
+        colortotal = "na";
+    }
+    return colortotal;
+}
+
+function Totalcolor(total) {
+    if (total.coach === 'TOTAL') {
+        colortotal = "colorfila2";
+    } else {
+        colortotal = "na";
+    }
+    return colortotal;
+}
