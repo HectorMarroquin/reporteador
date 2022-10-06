@@ -74,6 +74,66 @@ require_once 'views/layout/header.php';
             </div>
         </div>
     </section>
+    
+    <br><br>
+
+    <section class="info-section bg-light text-muted" id="info-section">
+        <div class="container">
+            <div class="row text-center">
+                <h1>Reporte por Coach</h1>
+                <div class="table-responsive-sm">
+                <table class="table-container table caption-top">
+                    <thead>
+                        <tr>
+                            <th scope="row col-sm">Centro</th>
+                            <th scope="row col-sm">Prepago</th>
+                            <th scope="row col-sm">Migradas</th>
+                            <th scope="row col-sm">Pos/Base</th>
+                            <th scope="row col-sm">Total</th>
+                            <th scope="row col-sm">Asistencia</th>
+                            <th scope="row col-sm">Factor</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableCoach">
+
+                    </tbody>
+                </table>
+                </div>
+            </div>
+        </div>
+    </section>
+<br><br>
+<!----
+ ******************** EN PROCESO ***************************
+<section class="info-section bg-light text-muted" id="info-section">
+        <div class="container">
+            <div class="row text-center">
+                <h1>Reporte por Hora Coach</h1>
+                <div class="table-responsive-sm">
+                <table class="table-container table caption-top">
+                <thead>
+                        <tr>
+                                <th scope="row col-sm">Hora/coach</th>
+                                <th scope="row col-sm">MANUEL ALEJANDRO</th>
+                                <th scope="row col-sm">CECILIA MICHEL</th>
+                                <th scope="row col-sm">ALFREDO URIEL</th>
+                                <th scope="row col-sm">JORGE YAKIL</th>
+                                <th scope="row col-sm">JULIO CESAR</th>
+                                <th scope="row col-sm">SANDRA CARINA</th>
+                                <th scope="row col-sm">ALICIA</th>
+                                <th scope="row col-sm">ABIGAIL</th>
+                                <th scope="row col-sm">IAN OSWALDO</th>
+                                <th scope="row col-sm">TV</th>
+                                <th scope="row col-sm">OSCAR JOAQUIN</th>
+                                <th scope="row col-sm">EDUARDO</th>
+                            </tr>
+                        </thead>
+                </table>
+                </div>
+            </div>
+        </div>
+    </section>
+---->
 
 </section> <!-- /section del boton  -->
 
