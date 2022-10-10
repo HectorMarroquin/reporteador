@@ -1,9 +1,5 @@
 	<!--Footer-->
-	<footer id="footer">
-		
-	</footer>
-
-	<footer>
+	<footer class="footer-final">
       <div class="container">
         <div class="row">
           <div class="col-md-12">
