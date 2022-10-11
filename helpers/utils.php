@@ -25,9 +25,11 @@ class Utils
 
 	public static function isAdmin(){
 
-		$rol = $_SESSION['identity']->Permisos;
+		$admin = ['42','220','227','157','193'];
 
-		if ($rol != "admin") {
+		$rol = $_SESSION['identity']->idgrupo;
+
+		if (!in_array($rol,$admin)) {
 			header("Location:".base_url);
 
 		}else{
@@ -35,6 +37,7 @@ class Utils
 		}
 
 	}
+
 
 	public static function checkSession(){
 
@@ -96,6 +99,70 @@ class Utils
 			$asistencia = 0;
 		}
 		return $asistencia;
+	}
+
+
+
+	public static function segmentaHoras($ventas){
+
+		$indice1=$indice2=$indice3=$indice4=$indice5=$indice6=$indice7=$indice8=$indice9=$indice10=$indice11=$indice12=$indice13=0;		
+		
+		while($venta = $ventas->fetch_object()){
+
+			$horaventa = $venta->Hora;
+
+			if($horaventa >= '09:00:00' && $horaventa <= '09:59:59'){
+				$indice1++;
+			}elseif($horaventa >= '10:00:00' && $horaventa <= '10:59:59'){
+				$indice2++;
+			}elseif($horaventa >= '11:00:00' && $horaventa <= '11:59:59'){
+				$indice3++;
+			}elseif($horaventa >= '12:00:00' && $horaventa <= '12:59:59'){
+				$indice4++;
+			}elseif($horaventa >= '13:00:00' && $horaventa <= '13:59:59'){
+				$indice5++;
+			}elseif($horaventa >= '14:00:00' && $horaventa <= '14:59:59'){
+				$indice6++;
+			}elseif($horaventa >= '15:00:00' && $horaventa <= '15:59:59'){
+				$indice7++;
+			}elseif($horaventa >= '16:00:00' && $horaventa <= '16:59:59'){
+				$indice8++;
+			}elseif($horaventa >= '17:00:00' && $horaventa <= '17:59:59'){
+				$indice9++;
+			}elseif($horaventa >= '18:00:00' && $horaventa <= '18:59:59'){
+				$indice10++;
+			}elseif($horaventa >= '19:00:00' && $horaventa <= '19:59:59'){
+				$indice11++;
+			}elseif($horaventa >= '20:00:00' && $horaventa <= '20:59:59'){
+				$indice12++;
+			}elseif($horaventa >= '21:00:00' && $horaventa <= '21:59:59'){
+				$indice13++;
+			}
+			
+		}//fin del while
+
+		$total = $indice1+$indice2+$indice3+$indice4+$indice5+$indice6+$indice7+$indice8+$indice9+$indice10+$indice11+$indice12+$indice13;		
+
+		$centroHora = array(
+					'09-10' => $indice1,
+					'10-11' => $indice2,
+					'11-12' => $indice3,
+					'12-13' => $indice4,
+					'13-14' => $indice5,
+					'14-15' => $indice6,
+					'15-16' => $indice7,
+					'16-17' => $indice8,
+					'17-18' => $indice9,
+					'18-19' => $indice10,
+					'19-20' => $indice11,
+					'20-21' => $indice12,
+					'21-22' => $indice13,
+					'total' => $total,
+					
+		);
+
+		return $centroHora;
+
 	}
 
 }//fin de la clase utils

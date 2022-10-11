@@ -38,7 +38,7 @@
 <main class="form-signin">
 
   <!-- index.php?controller=UsuarioReporte&action=login -->
-  <form action="<?=base_url?>UsuarioReporte/login" method="POST">
+  <form action="<?=base_url?>UsuarioCliente/login" method="POST">
     <img class="mb-4" src="assets/img/lcc_azul.png" alt="" width="150" height="57">
 
     <?php if(isset($_SESSION['error_login'])) :?>
