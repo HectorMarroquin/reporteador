@@ -76,7 +76,6 @@ class HistoricoController
 		
 		while ($coach = $getCoach->fetch_object()) {
 			$coachId = $coach->Id;
-			//$namecoach = $coach->Nombre;
 			
 			$getCoachHora = $HoraCoach->getHoraCoach($fecha_i, $fecha_f, $coachId);
 			$horasCoach[$coach->Nombre] = Utils::segmentaHoras($getCoachHora);
