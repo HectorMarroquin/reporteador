@@ -25,7 +25,7 @@ class Utils
 
 	public static function isAdmin(){
 
-		$rol = $_SESSION['identity']->rol;
+		//$rol = $_SESSION['identity']->rol;
 
 		$admin = ['42','220','227','157','193'];
 
