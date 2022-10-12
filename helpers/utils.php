@@ -27,7 +27,12 @@ class Utils
 
 		$rol = $_SESSION['identity']->rol;
 
-		if ($rol != "admin") {
+		$admin = ['42','220','227','157','193'];
+
+
+		$rol = $_SESSION['identity']->idgrupo;
+
+		if (!in_array($rol,$admin)) {
 			header("Location:".base_url);
 
 		}else{
@@ -35,6 +40,7 @@ class Utils
 		}
 
 	}
+
 
 	public static function checkSession(){
 
@@ -110,6 +116,89 @@ class Utils
 		  return $porc;
 	}
 	
+
+
+	public static function segmentaHoras($ventas){
+
+		$indice1=$indice2=$indice3=$indice4=$indice5=$indice6=$indice7=$indice8=$indice9=$indice10=$indice11=$indice12=$indice13=$indice14=0;		
+		
+		while($venta = $ventas->fetch_object()){
+
+			$horaventa = $venta->Hora;
+			
+			switch ($horaventa) {
+				case ($horaventa >= '08:00:00') && ($horaventa <= '08:59:59'):
+					$indice1++; // si encuentra hace un incremento a uno 1
+					break;
+				case ($horaventa >= '09:00:00') && ($horaventa <= '09:59:59'):
+					$indice2++;
+					break;
+				case ($horaventa >= '10:00:00') && ($horaventa <= '10:59:59'):
+						$indice3++;
+					break;
+				case ($horaventa >= '11:00:00') && ($horaventa <= '11:59:59'):
+						$indice4++;
+					break;
+				case ($horaventa >= '12:00:00') && ($horaventa <= '12:59:59'):
+						$indice5++;
+					break;
+				case ($horaventa >= '13:00:00') && ($horaventa <= '13:59:59'):
+						$indice6++;
+					break;
+				case ($horaventa >= '14:00:00') && ($horaventa <= '14:59:59'):
+						$indice7++;
+					break;
+				case ($horaventa >= '15:00:00') && ($horaventa <= '15:59:59'):
+						$indice8++;
+					break;
+				case ($horaventa >= '16:00:00') && ($horaventa <= '16:59:59'):
+						$indice9++;
+					break;
+				case ($horaventa >= '17:00:00') && ($horaventa <= '17:59:59'):
+						$indice10++;
+					break;
+				case ($horaventa >= '18:00:00' && $horaventa <= '18:59:59'):
+						$indice11++;
+					break;
+				case ($horaventa >= '19:00:00') && ($horaventa <= '19:59:59'):
+						$indice12++;
+					break;
+				case ($horaventa >= '20:00:00') && ($horaventa <= '20:59:59'):
+						$indice13++;
+					break;
+				case ($horaventa >= '21:00:00:') && ($horaventa <= '21:59:59'):
+						$indice14++;
+					break;
+			} // fin switch
+			
+		}//fin del while
+
+		$total = $indice1+$indice2+$indice3+$indice4+$indice5+$indice6+$indice7+$indice8+$indice9+$indice10+$indice11+$indice12+$indice13+$indice14;		
+
+		$centroHora = array(
+					'hora08' => $indice1,
+					'hora09' => $indice2,
+					'hora10' => $indice3,
+					'hora11' => $indice4,
+					'hora12' => $indice5,
+					'hora13' => $indice6,
+					'hora14' => $indice7,
+					'hora15' => $indice8,
+					'hora16' => $indice9,
+					'hora17' => $indice10,
+					'hora18' => $indice11,
+					'hora19' => $indice12,
+					'hora20' => $indice13,
+					'hora21' => $indice14,
+					'total' => $total,
+					
+		);
+
+		return $centroHora;
+
+	}
+
+
 }//fin de la clase utils
 
 

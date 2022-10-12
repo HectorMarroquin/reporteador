@@ -82,6 +82,15 @@ class BitacoraValidacion
 		return $horaCoach;
 		
 	}
+
+	public function getHoraCentro($fecha_i,$fecha_f,$idcoach){
+
+		$sql = "SELECT Hora FROM BITACORA_VALIDACION WHERE (Fecha >= '".$fecha_i."' AND Fecha <= '".$fecha_f."') AND Id_ListaCentros = ".$idcoach." AND IdEstatus_bitacora_validador = 2 AND Estado = 1";
+		$result = $this->db->query($sql);
+		return $result;
+
+	}
+
 }
 
 

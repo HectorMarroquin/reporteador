@@ -1,7 +1,7 @@
 <?php
-require_once 'models/UsuarioReporte.php';
+require_once 'models/UsuarioCliente.php';
 
-class UsuarioReporteController{
+class UsuarioClienteController{
 
 	public function index(){
 
@@ -19,21 +19,29 @@ class UsuarioReporteController{
 			$usuario    = isset($usuario) ? $usuario : false;
 			$password = isset($pass) ? $pass: false;
 
+			$administradores = ['42','220','227','157'];
+			$coordinadores   = ['193'];
+			$coach           = ['150'];
+			$externos        = ['226'];
 
+			$usuarioCliente = new UsuarioCliente();
+			$usuarioCliente->setUsuario($usuario);
+			$usuarioCliente->setPassword($password);
+			$identity = $usuarioCliente->login();
 
-			$usuarioReporte = new UsuarioReporte();
-			$usuarioReporte->setUsuario($usuario);
-			$usuarioReporte->setPassword($password);
-			$identity = $usuarioReporte->login();
+			$idgrupo = $identity->idgrupo;
 
 			if ($identity && is_object($identity)) {
 				
 				   $_SESSION['identity'] = $identity;
 
-				if ($identity->rol == "admin") {
+				if (in_array($idgrupo,$administradores)) {
 					
 					$_SESSION['admin'] = true;
+				}else{
+					$_SESSION['admin'] = false;
 				}
+
 				header("Location:".base_url."Home/index");
 				
 			}else{

@@ -62,12 +62,6 @@ require_once 'views/layout/header.php';
           <?php endforeach;?>
         </tbody>
       </table>
-
-
-    </div>
-
-    <div class="col-sm">
-      <h1>REPORTE POR SECTOR</h1>
     </div>
 
   </div>
@@ -78,85 +72,180 @@ require_once 'views/layout/header.php';
 
 <section class="info-section bg-light text-muted" id="info-section">
 
+      <div class="container">
+          <div class="row">
+              <div class="col-sm table-responsive-sm">
+                    <table class="table caption-top">
+                    <caption>Reporte Pospago</caption>
+                      <thead>
+                        <tr>
+                          <th scope="col-sm">Coach</th>
+                          <th scope="col-sm">Exitosas</th>
+                          <th scope="col-sm">Ingresadas</th>
+                          <th scope="col-sm">Asistencia</th>
+                          <th scope="col-sm">Factor</th>
+                        </tr>
+                      </thead>
+                        <tbody>
+                        <?php foreach ($desglosePos as $key => $centro) : ?>
+
+                          <?php $res = $centro['coach'] == 'TOTAL' ? 'table-active fw-bold' : '' ?>
+
+                          <tr class="<?=$res?>">
+                              <td><?= $centro['coach']?></td>
+                              <td><?= $centro['exitosa']?></td>
+                              <td><?= $centro['ingresada']?></td>
+                              <td><?= $centro['asistencia']?></td>
+                              <td><?= $centro['factor']?>%</td>
+                            
+                          </tr>
+                        <?php endforeach;?>
+
+                        </tbody>
+                    </table>
+                </div>
+
+            <div class="col-sm table-responsive-sm">
+              
+                    <h1>REPORTE POR SECTOR</h1>
+            </div>
+
+          </div>
+        </div>
+</section>
+
+<section class="info-section bg-light text-muted" id="info-section">
+  <div class="container">
+      <div class="row">
+          <div class="col-sm table-responsive-sm">
+              <table class="table caption-top">
+                <caption>Reporte Por Coach</caption>
+                <thead>
+                  <tr>
+                    <th scope="col-sm">Centro</th>
+                    <th scope="col-sm">Prepago</th>
+                    <th scope="col-sm">Migradas</th>
+                    <th scope="col-sm">Pos/Base</th>
+                    <th scope="col-sm">Total</th>
+                    <th scope="col-sm">Asistencia</th>
+                    <th scope="col-sm">Factor</th>
+                  </tr>
+                </thead>
+                <tbody>
+                <?php foreach ($desgloseCoach as $key => $coach) : ?>
+
+                <?php $res = $coach['coach'] == 'TOTAL' ? 'table-active fw-bold' : '' ?>
+
+                    <tr class="<?=$res?>">
+                        <td><?= $coach['coach']?></td>
+                        <td><?= $coach['prepago']?></td>
+                        <td><?= $coach['migradas']?></td>
+                        <td><?= $coach['base']?></td>
+                        <td><?= $coach['total']?></td>
+                        <td><?= $coach['asistencia']?></td>
+                        <td><?= $coach['factor']?>%</td>
+                      
+                    </tr>
+                <?php endforeach;?>
+                </tbody>
+             </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="info-section bg-light text-muted" id="info-section">
 <div class="container">
   <div class="row">
     
     <div class="col-sm table-responsive-sm">
+
       <table class="table caption-top">
-         <caption>Reporte Pospago</caption>
-        <thead>
-          <tr>
-            <th scope="col-sm">Coach</th>
-            <th scope="col-sm">Exitosas</th>
-            <th scope="col-sm">Ingresadas</th>
-            <th scope="col-sm">Asistencia</th>
-            <th scope="col-sm">Factor</th>
-          </tr>
-        </thead>
-        <tbody>
-
-          <?php foreach ($desglosePos as $key => $centro) : ?>
-
-            <?php $res = $centro['coach'] == 'TOTAL' ? 'table-active fw-bold' : '' ?>
-
-            <tr class="<?=$res?>">
-                <td><?= $centro['coach']?></td>
-                <td><?= $centro['exitosa']?></td>
-                <td><?= $centro['ingresada']?></td>
-                <td><?= $centro['asistencia']?></td>
-                <td><?= $centro['factor']?>%</td>
-              
+        <caption>Reporte Por Centro</caption>
+          <thead>
+            <tr>
+              <th scope="col-sm">Centro</th>
+              <th scope="col-sm">08-09</th>
+              <th scope="col-sm">09-10</th>
+              <th scope="col-sm">10-11</th>
+              <th scope="col-sm">11-12</th>
+              <th scope="col-sm">12-13</th>
+              <th scope="col-sm">13-14</th>
+              <th scope="col-sm">14-15</th>
+              <th scope="col-sm">15-16</th>
+              <th scope="col-sm">16-17</th>
+              <th scope="col-sm">17-18</th>
+              <th scope="col-sm">18-19</th>
+              <th scope="col-sm">19-20</th>
+              <th scope="col-sm">20-21</th>
+              <th scope="col-sm">21-22</th>
+              <th scope="col-sm">Total</th>
             </tr>
-          <?php endforeach;?>
+          </thead>
+          <tbody>
 
-        </tbody>
-      </table>
+      <?php foreach($desgloseCentrosHoras as $ky => $centroshora) : ?>
 
-
-    </div>
-
-    <div class="col-sm table-responsive-sm">
-      <table class="table caption-top">
-         <caption>Reporte Por Coach</caption>
-        <thead>
-          <tr>
-            <th scope="col-sm">Centro</th>
-            <th scope="col-sm">Prepago</th>
-            <th scope="col-sm">Migradas</th>
-            <th scope="col-sm">Pos/Base</th>
-            <th scope="col-sm">Total</th>
-            <th scope="col-sm">Asistencia</th>
-            <th scope="col-sm">Factor</th>
-          </tr>
-        </thead>
-        <tbody>
-          <?php foreach ($desgloseCoach as $key => $coach) : ?>
-
-            <?php $res = $coach['coach'] == 'TOTAL' ? 'table-active fw-bold' : '' ?>
-
-            <tr class="<?=$res?>">
-                <td><?= $coach['coach']?></td>
-                <td><?= $coach['prepago']?></td>
-                <td><?= $coach['migradas']?></td>
-                <td><?= $coach['base']?></td>
-                <td><?= $coach['total']?></td>
-                <td><?= $coach['asistencia']?></td>
-                <td><?= $coach['factor']?>%</td>
-              
+            <tr>
+                <td><?=$ky;?></td>
+                <td><?= $centroshora['hora08'];?></td>
+                <td><?= $centroshora['hora09'];?></td>
+                <td><?= $centroshora['hora10'];?></td>
+                <td><?= $centroshora['hora11'];?></td>
+                <td><?= $centroshora['hora12'];?></td>
+                <td><?= $centroshora['hora13'];?></td>
+                <td><?= $centroshora['hora14'];?></td>
+                <td><?= $centroshora['hora15'];?></td>
+                <td><?= $centroshora['hora16'];?></td>
+                <td><?= $centroshora['hora17'];?></td>
+                <td><?= $centroshora['hora18'];?></td>
+                <td><?= $centroshora['hora19'];?></td>
+                <td><?= $centroshora['hora20'];?></td>
+                <td><?= $centroshora['hora21'];?></td>
+                <td><?= $centroshora['total'];?></td>
             </tr>
-          <?php endforeach;?>
-        </tbody>
-      </table>
-
-
-    </div>
-
+      <?php endforeach; ?>
+      </tbody>
+    </table>
+  </div>
   </div>
 </div>
-
-
 </section>
 
+<section class="info-section bg-light text-muted" id="info-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm table-responsive-sm">
+              <table class="table caption-top">
+                  <caption>Reporte Por Coach</caption>
+                    <thead>
+                      <tr>
+                        <th scope="col-sm">Coaches</th>
+                        <th scope="col-sm">09-10</th>
+                        <th scope="col-sm">10-11</th>
+                        <th scope="col-sm">11-12</th>
+                        <th scope="col-sm">12-13</th>
+                        <th scope="col-sm">13-14</th>
+                        <th scope="col-sm">14-15</th>
+                        <th scope="col-sm">15-16</th>
+                        <th scope="col-sm">16-17</th>
+                        <th scope="col-sm">17-18</th>
+                        <th scope="col-sm">18-19</th>
+                        <th scope="col-sm">19-20</th>
+                        <th scope="col-sm">20-21</th>
+                        <th scope="col-sm">21-22</th>
+                        <th scope="col-sm">Total</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+              </table>
+            </div>
+          </div>
+       </div>
+</section>
 
 <?php
 require_once 'views/layout/footer.php';

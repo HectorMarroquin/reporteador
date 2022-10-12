@@ -103,37 +103,43 @@ require_once 'views/layout/header.php';
         </div>
     </section>
 <br><br>
-<!----
- ******************** EN PROCESO ***************************
+
+<!--- ******************** EN PROCESO *************************** ---->
+
 <section class="info-section bg-light text-muted" id="info-section">
         <div class="container">
             <div class="row text-center">
                 <h1>Reporte por Hora Coach</h1>
                 <div class="table-responsive-sm">
                 <table class="table-container table caption-top">
-                <thead>
+                    <thead>
                         <tr>
-                                <th scope="row col-sm">Hora/coach</th>
-                                <th scope="row col-sm">MANUEL ALEJANDRO</th>
-                                <th scope="row col-sm">CECILIA MICHEL</th>
-                                <th scope="row col-sm">ALFREDO URIEL</th>
-                                <th scope="row col-sm">JORGE YAKIL</th>
-                                <th scope="row col-sm">JULIO CESAR</th>
-                                <th scope="row col-sm">SANDRA CARINA</th>
-                                <th scope="row col-sm">ALICIA</th>
-                                <th scope="row col-sm">ABIGAIL</th>
-                                <th scope="row col-sm">IAN OSWALDO</th>
-                                <th scope="row col-sm">TV</th>
-                                <th scope="row col-sm">OSCAR JOAQUIN</th>
-                                <th scope="row col-sm">EDUARDO</th>
-                            </tr>
-                        </thead>
+                        <th scope="row col-sm">Hora/coach</th>
+                                <th scope="row col-sm">8-9</th>
+                                <th scope="row col-sm">9-10</th>
+                                <th scope="row col-sm">10-11</th>
+                                <th scope="row col-sm">11-12</th>
+                                <th scope="row col-sm">12-13</th>
+                                <th scope="row col-sm">13-14</th>
+                                <th scope="row col-sm">14-15</th>
+                                <th scope="row col-sm">15-16</th>
+                                <th scope="row col-sm">16-17</th>
+                                <th scope="row col-sm">17-18</th>
+                                <th scope="row col-sm">18-19</th>
+                                <th scope="row col-sm">19-20</th>
+                                <th scope="row col-sm">20-21</th>
+                                <th scope="row col-sm">21-22</th>
+                                <th scope="row col-sm">TOTAL</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableHoraCoach">
+
+                    </tbody>
                 </table>
                 </div>
             </div>
         </div>
     </section>
----->
 
 </section> <!-- /section del boton  -->
 
