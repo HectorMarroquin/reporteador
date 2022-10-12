@@ -17,6 +17,7 @@ $(document).ready(function() {
 
             html: '<input type="date" id="Date1" class="flex-nowrap w-50 swal2-input">' +
                 '<input type="date" id="Date2" class="flex-nowrap w-50 swal2-input">',
+
         }).then(function(isConfirm) {
 
             var date1 = $('#Date1').val();
@@ -24,6 +25,7 @@ $(document).ready(function() {
             if (isConfirm.isConfirmed) {
 
                 if (date1 > date2) {
+
                     Swal.fire({
                         icon: "error",
                         title: "Error en las fechas",
@@ -37,7 +39,9 @@ $(document).ready(function() {
                         iconColor: "#FFFFFF",
                         color: "#FFFFFF",
                         background: "linear-gradient(63deg, rgba(2,0,36,1) 22%, rgba(121,9,32,1) 48%, rgba(255,0,22,1) 100%)"
+
                     });
+
                 } // termina if error 
 
 
@@ -65,6 +69,7 @@ $(document).ready(function() {
                             }
 
                             var fila = "<tr id=" + id + ">" +
+
                                 "<td>" + element.prefijo + "</td>" +
                                 "<td>" + element.prepago + "</td>" +
                                 "<td>" + element.pospago + "</td>" +
@@ -74,6 +79,7 @@ $(document).ready(function() {
                                 "<td>" + element.factor + "%" + "</td>" +
                                 "</tr>";
                             $("#table").append(fila);
+
                         }); // termina forEach
 
                         $("#tablecolor").css('background-color', '#919191');
@@ -94,15 +100,18 @@ $(document).ready(function() {
                         datospos.forEach(pos => {
 
                             totalcolor = colorTotal(pos);
-                            console.log("color pospago: " + totalcolor);
+
                             var tablapos = "<tr id=" + totalcolor + ">" +
+
                                 "<td>" + pos.coach + "</td>" +
                                 "<td>" + pos.exitosa + "</td>" +
                                 "<td>" + pos.ingresada + "</td>" +
                                 "<td>" + pos.asistencia + "</td>" +
                                 "<td>" + pos.factor + "%" + "</td>" +
                                 "</tr>";
+
                             $("#tableReportePos").append(tablapos);
+
                         }); // termia el foreach
 
                         $("#colorfila").css('background-color', '#919191');
@@ -117,13 +126,13 @@ $(document).ready(function() {
                         dataType: "json",
                         data: { 'date1': date1, 'date2': date2 },
                         success: function(dataCoach) {
-                            //console.log(dataCoach);
+
                             $("#tableCoach").empty();
 
                             dataCoach.forEach(coach => {
 
                                 totalcolor = Totalcolor(coach);
-                                console.log("color coach: " + totalcolor);
+
                                 var tablacoach = "<tr id = " + totalcolor + " >" +
                                     "<td>" + coach.coach + "</td>" +
                                     "<td>" + coach.prepago + "</td>" +
@@ -134,13 +143,13 @@ $(document).ready(function() {
                                     "<td>" + coach.factor + "%" + "</td>" +
                                     "</tr>";
                                 $("#tableCoach").append(tablacoach);
+
                             }); //termina forEach de coach
+
                             $("#colorfila2").css('background-color', '#919191');
                             $("#colorfila2").css('font-weight', '800');
                         }
                     }) //termina ajax de reporte coach
-
-                // ******************** EN PROCESO ***************************
 
                 /* TODO: Empieza reporte por hora coach */
                 url4 = base_url + "Historico/HoraCoach";
@@ -153,35 +162,38 @@ $(document).ready(function() {
 
                         $("#tableHoraCoach").empty();
 
-                        horasCoach.forEach(horaCoach => {
+                        Object.keys(horasCoach).forEach(function(keyhoras) {
 
                             var tablaHoraCoach = "<tr>" +
-                                "<td>" + horaCoach.name + "</td>" +
-                                "<td>" + horaCoach.hora1 + "</td>" +
-                                "<td>" + horaCoach.hora2 + "</td>" +
-                                "<td>" + horaCoach.hora3 + "</td>" +
-                                "<td>" + horaCoach.hora4 + "</td>" +
-                                "<td>" + horaCoach.hora5 + "</td>" +
-                                "<td>" + horaCoach.hora6 + "</td>" +
-                                "<td>" + horaCoach.hora7 + "</td>" +
-                                "<td>" + horaCoach.hora8 + "</td>" +
-                                "<td>" + horaCoach.hora9 + "</td>" +
-                                "<td>" + horaCoach.hora10 + "</td>" +
-                                "<td>" + horaCoach.hora11 + "</td>" +
-                                "<td>" + horaCoach.hora12 + "</td>" +
-                                "<td>" + horaCoach.hora13 + "</td>" +
-                                "<td>" + horaCoach.hora14 + "</td>" +
-                                "<td>" + horaCoach.total + "</td>" +
-                                "</tr>";
-                            $("#tableHoraCoach").append(tablaHoraCoach);
-                        }); // termina for each
 
-                    },
+                                "<td>" + keyhoras + "</td>" +
+                                "<td>" + horasCoach[keyhoras].hora08 + "</td>" +
+                                "<td>" + horasCoach[keyhoras].hora09 + "</td>" +
+                                "<td>" + horasCoach[keyhoras].hora10 + "</td>" +
+                                "<td>" + horasCoach[keyhoras].hora11 + "</td>" +
+                                "<td>" + horasCoach[keyhoras].hora12 + "</td>" +
+                                "<td>" + horasCoach[keyhoras].hora13 + "</td>" +
+                                "<td>" + horasCoach[keyhoras].hora14 + "</td>" +
+                                "<td>" + horasCoach[keyhoras].hora15 + "</td>" +
+                                "<td>" + horasCoach[keyhoras].hora16 + "</td>" +
+                                "<td>" + horasCoach[keyhoras].hora17 + "</td>" +
+                                "<td>" + horasCoach[keyhoras].hora18 + "</td>" +
+                                "<td>" + horasCoach[keyhoras].hora19 + "</td>" +
+                                "<td>" + horasCoach[keyhoras].hora20 + "</td>" +
+                                "<td>" + horasCoach[keyhoras].hora21 + "</td>" +
+                                "<td>" + horasCoach[keyhoras].total + "</td>" +
+                                "</tr>";
+
+                            $("#tableHoraCoach").append(tablaHoraCoach);
+
+                        }); //termina foreach
+                    }
                 }); // trermina hora coach
 
             } //termina la confirmacion de cancelar
 
         });
+
     }); // cierre de llave y parentesis de #btnEnviar
 
 });
