@@ -105,58 +105,76 @@ class Utils
 
 	public static function segmentaHoras($ventas){
 
-		$indice1=$indice2=$indice3=$indice4=$indice5=$indice6=$indice7=$indice8=$indice9=$indice10=$indice11=$indice12=$indice13=0;		
+		$indice1=$indice2=$indice3=$indice4=$indice5=$indice6=$indice7=$indice8=$indice9=$indice10=$indice11=$indice12=$indice13=$indice14=0;		
 		
 		while($venta = $ventas->fetch_object()){
 
 			$horaventa = $venta->Hora;
-
-			if($horaventa >= '09:00:00' && $horaventa <= '09:59:59'){
-				$indice1++;
-			}elseif($horaventa >= '10:00:00' && $horaventa <= '10:59:59'){
-				$indice2++;
-			}elseif($horaventa >= '11:00:00' && $horaventa <= '11:59:59'){
-				$indice3++;
-			}elseif($horaventa >= '12:00:00' && $horaventa <= '12:59:59'){
-				$indice4++;
-			}elseif($horaventa >= '13:00:00' && $horaventa <= '13:59:59'){
-				$indice5++;
-			}elseif($horaventa >= '14:00:00' && $horaventa <= '14:59:59'){
-				$indice6++;
-			}elseif($horaventa >= '15:00:00' && $horaventa <= '15:59:59'){
-				$indice7++;
-			}elseif($horaventa >= '16:00:00' && $horaventa <= '16:59:59'){
-				$indice8++;
-			}elseif($horaventa >= '17:00:00' && $horaventa <= '17:59:59'){
-				$indice9++;
-			}elseif($horaventa >= '18:00:00' && $horaventa <= '18:59:59'){
-				$indice10++;
-			}elseif($horaventa >= '19:00:00' && $horaventa <= '19:59:59'){
-				$indice11++;
-			}elseif($horaventa >= '20:00:00' && $horaventa <= '20:59:59'){
-				$indice12++;
-			}elseif($horaventa >= '21:00:00' && $horaventa <= '21:59:59'){
-				$indice13++;
-			}
+			
+			switch ($horaventa) {
+				case ($horaventa >= '08:00:00') && ($horaventa <= '08:59:59'):
+					$indice1++; // si encuentra hace un incremento a uno 1
+					break;
+				case ($horaventa >= '09:00:00') && ($horaventa <= '09:59:59'):
+					$indice2++;
+					break;
+				case ($horaventa >= '10:00:00') && ($horaventa <= '10:59:59'):
+						$indice3++;
+					break;
+				case ($horaventa >= '11:00:00') && ($horaventa <= '11:59:59'):
+						$indice4++;
+					break;
+				case ($horaventa >= '12:00:00') && ($horaventa <= '12:59:59'):
+						$indice5++;
+					break;
+				case ($horaventa >= '13:00:00') && ($horaventa <= '13:59:59'):
+						$indice6++;
+					break;
+				case ($horaventa >= '14:00:00') && ($horaventa <= '14:59:59'):
+						$indice7++;
+					break;
+				case ($horaventa >= '15:00:00') && ($horaventa <= '15:59:59'):
+						$indice8++;
+					break;
+				case ($horaventa >= '16:00:00') && ($horaventa <= '16:59:59'):
+						$indice9++;
+					break;
+				case ($horaventa >= '17:00:00') && ($horaventa <= '17:59:59'):
+						$indice10++;
+					break;
+				case ($horaventa >= '18:00:00' && $horaventa <= '18:59:59'):
+						$indice11++;
+					break;
+				case ($horaventa >= '19:00:00') && ($horaventa <= '19:59:59'):
+						$indice12++;
+					break;
+				case ($horaventa >= '20:00:00') && ($horaventa <= '20:59:59'):
+						$indice13++;
+					break;
+				case ($horaventa >= '21:00:00:') && ($horaventa <= '21:59:59'):
+						$indice14++;
+					break;
+			} // fin switch
 			
 		}//fin del while
 
-		$total = $indice1+$indice2+$indice3+$indice4+$indice5+$indice6+$indice7+$indice8+$indice9+$indice10+$indice11+$indice12+$indice13;		
+		$total = $indice1+$indice2+$indice3+$indice4+$indice5+$indice6+$indice7+$indice8+$indice9+$indice10+$indice11+$indice12+$indice13+$indice14;		
 
 		$centroHora = array(
-					'09-10' => $indice1,
-					'10-11' => $indice2,
-					'11-12' => $indice3,
-					'12-13' => $indice4,
-					'13-14' => $indice5,
-					'14-15' => $indice6,
-					'15-16' => $indice7,
-					'16-17' => $indice8,
-					'17-18' => $indice9,
-					'18-19' => $indice10,
-					'19-20' => $indice11,
-					'20-21' => $indice12,
-					'21-22' => $indice13,
+					'hora08' => $indice1,
+					'hora09' => $indice2,
+					'hora10' => $indice3,
+					'hora11' => $indice4,
+					'hora12' => $indice5,
+					'hora13' => $indice6,
+					'hora14' => $indice7,
+					'hora15' => $indice8,
+					'hora16' => $indice9,
+					'hora17' => $indice10,
+					'hora18' => $indice11,
+					'hora19' => $indice12,
+					'hora20' => $indice13,
+					'hora21' => $indice14,
 					'total' => $total,
 					
 		);
