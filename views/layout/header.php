@@ -14,6 +14,8 @@
 
   <link rel="stylesheet" type="text/css" href="<?=base_url?>assets/css/estilos_header.css">
 
+  <link rel="stylesheet" type="text/css" href="<?=base_url?>assets/bootstrap/css/daterangepicker.css">
+
   <link rel="stylesheet" type="text/css" href="<?=base_url?>assets/sweetalert/sweetalert2.min.css">
 
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&family=Raleway:wght@300&display=swap" rel="stylesheet">

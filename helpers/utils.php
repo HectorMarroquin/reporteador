@@ -25,7 +25,7 @@ class Utils
 
 	public static function isAdmin(){
 
-		$rol = $_SESSION['identity']->Permisos;
+		$rol = $_SESSION['identity']->rol;
 
 		if ($rol != "admin") {
 			header("Location:".base_url);
@@ -98,6 +98,18 @@ class Utils
 		return $asistencia;
 	}
 
+	public static function getPorcentaje($total,$parte){
+		  //porcentaje
+		  $porc =number_format(0,1);
+
+		  if(!empty($total)){
+		    $porc  = ($parte*100)/$total;
+		    $porc = number_format($porc,1);
+		  }
+
+		  return $porc;
+	}
+	
 }//fin de la clase utils
 
 
