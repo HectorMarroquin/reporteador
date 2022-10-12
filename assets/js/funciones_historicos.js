@@ -117,6 +117,7 @@ $(document).ready(function() {
                         dataType: "json",
                         data: { 'date1': date1, 'date2': date2 },
                         success: function(dataCoach) {
+                            //console.log(dataCoach);
                             $("#tableCoach").empty();
 
                             dataCoach.forEach(coach => {
@@ -137,7 +138,7 @@ $(document).ready(function() {
                             $("#colorfila2").css('background-color', '#919191');
                             $("#colorfila2").css('font-weight', '800');
                         }
-                    }) //termina ajax de coach
+                    }) //termina ajax de reporte coach
 
                 // ******************** EN PROCESO ***************************
 
@@ -148,16 +149,44 @@ $(document).ready(function() {
                     url: url4,
                     dataType: "json",
                     data: { 'date1': date1, 'date2': date2 },
-                    success: function(datoshoraCoach) {
-                        console.log(datoshoraCoach);
+                    success: function(horasCoach) {
+
+                        $("#tableHoraCoach").empty();
+
+                        horasCoach.forEach(horaCoach => {
+
+                            var tablaHoraCoach = "<tr>" +
+                                "<td>" + horaCoach.name + "</td>" +
+                                "<td>" + horaCoach.hora1 + "</td>" +
+                                "<td>" + horaCoach.hora2 + "</td>" +
+                                "<td>" + horaCoach.hora3 + "</td>" +
+                                "<td>" + horaCoach.hora4 + "</td>" +
+                                "<td>" + horaCoach.hora5 + "</td>" +
+                                "<td>" + horaCoach.hora6 + "</td>" +
+                                "<td>" + horaCoach.hora7 + "</td>" +
+                                "<td>" + horaCoach.hora8 + "</td>" +
+                                "<td>" + horaCoach.hora9 + "</td>" +
+                                "<td>" + horaCoach.hora10 + "</td>" +
+                                "<td>" + horaCoach.hora11 + "</td>" +
+                                "<td>" + horaCoach.hora12 + "</td>" +
+                                "<td>" + horaCoach.hora13 + "</td>" +
+                                "<td>" + horaCoach.hora14 + "</td>" +
+                                "<td>" + horaCoach.total + "</td>" +
+                                "</tr>";
+                            $("#tableHoraCoach").append(tablaHoraCoach);
+                        }); // termina for each
+
                     },
-                })
+                }); // trermina hora coach
+
             } //termina la confirmacion de cancelar
 
         });
     }); // cierre de llave y parentesis de #btnEnviar
 
 });
+
+
 
 function colorTotal(total) {
     if (total.coach === 'TOTAL') {

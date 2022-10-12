@@ -1,7 +1,5 @@
 <?php
 
-use LDAP\Result;
-
 require_once 'models/BitacoraValidacion.php';
 require_once 'models/VentasPospago.php';
 require_once 'controllers/HomeController.php';
@@ -59,125 +57,116 @@ class HistoricoController
 	// ******************** EN PROCESO ***************************
 	public function HoraCoach()
 	{
-		
+		$fecha_i = $_POST['date1'];
+		$fecha_f = $_POST['date2'];
 
 		$nameCoach = new UsuarioCliente();
 		$getCoach = $nameCoach->getNameCoach();
 
 
-		$desgloseHoraCoach = $this->desgloseHoraCoach($getCoach);
-		
+		$desgloseHoraCoach = $this->desgloseHoraCoach($getCoach, $fecha_i, $fecha_f);
+
 		echo json_encode($desgloseHoraCoach);
 	}
 
-	public function desgloseHoraCoach($getCoach)
+	public function desgloseHoraCoach($getCoach, $fecha_i, $fecha_f)
 	{
-		$fecha_i = $_POST['date1'];
-		$fecha_f = $_POST['date2'];
-
+		
 		$HoraCoach = new BitacoraValidacion();
-
-		foreach ($getCoach as $IdCoach){
-			$idCoach = $IdCoach['Id'];
-			//var_dump($idCoach); exit();
-			$gethoracoach = $HoraCoach->getHoracoach($fecha_i, $fecha_f, $idCoach);
+		
+		while ($coach = $getCoach->fetch_object()) {
 			
-			foreach ($gethoracoach as $value) {
-				$gethora = $value['Hora'];
-				//var_dump($gethora); exit();
-				
-				$assocCoach = $this->getCoachHora($gethora,$value);
-				//var_dump($assocCoach);
-				$resultHorasCoach = $assocCoach;
-			}
-			return $resultHorasCoach;
-		}
-		
-	}
-	// ******************** EN PROCESO ***************************
-	public function getCoachHora($horacoach, $value)
-	{
-		// var_dump($horacoach); exit();
-		$NameCoach = $value['Supervisor'];
-		//var_dump($NameCoach); exit();
-		$n = 1;
-		switch ($horacoach) {
-			case ($horacoach >= '08:00:00') && ($horacoach <= '09:00:00'):
-				//echo "esta en el rango 8 a 9";
-				$contador1 =+ $n;
-				break;
-			case ($horacoach >= '09:00:00') && ($horacoach <= '10:00:00'):
-				//echo "esta en el rango 9 a 10";
-				$contador2 =+ $n;
-				break;
-			case ($horacoach >= '10:00:00') && ($horacoach <= '11:00:00'):
-				//echo "esta en el rango de 10 a 11";
-				$contador3 =+ $n;
-				break;
-			case ($horacoach >= '11:00:00') && ($horacoach <= '12:00:00'):
-				//echo "esta en el rango de 11 a 12";
-				$contador4 =+ $n;
-				break;
-			case ($horacoach >= '12:00:00') && ($horacoach <= '13:00:00'):
-				//echo "esta en el rango de 12 a 1";
-				$contador5 =+ $n;
-				break;
-			case ($horacoach >= '13:00:00') && ($horacoach <= '14:00:00'):
-				//echo "esta en el rango de 1 a 2 PM";
-				$contador6 =+ $n;
-				break;
-			case ($horacoach >= '14:00:00') && ($horacoach <= '15:00:00'):
-				//echo "esta en el rango de 2 a 3 PM";
-				$contador7 =+ $n;
-				break;
-			case ($horacoach >= '15:00:00') && ($horacoach <= '16:00:00'):
-				//echo "esta en el rango de 3 a 4 PM";
-				$contador8 =+ $$n;
-				break;
-			case ($horacoach >= '16:00:00') && ($horacoach <= '17:00:00'):
-				//echo "esta en el rango de 4 a 5 PM";
-				$contador9 =+ $n;
-				break;
-			case ($horacoach >= '17:00:00') && ($horacoach <= '18:00:00'):
-				//echo "esta en el rango de 5 a 6 PM";
-				$contador10 =+ $n;
-				break;
-			case ($horacoach >= '18:00:00') && ($horacoach <= '19:00:00'):
-				//echo "esta en el rango de 6 a 7 PM";
-				$contador11["18a19"] =+ $n;
-				break;
-			case ($horacoach >= '19:00:00') && ($horacoach <= '20:00:00'):
-				//echo "esta en el rango de 7 a 8 PM";
-				$contador12 =+ $n;
-				break;
-			case ($horacoach >= '20:00:00') && ($horacoach <= '21:00:00'):
-				//echo "esta en el rango de 8 a 9 PM";
-				$contador13 =+ $n;
-				break;
-			case ($horacoach >= '21:00:00:') && ($horacoach <= '22:00:00'):
-				//echo "esta en el rango de 9 a 10 PM";
-				$contador14 =+ $n;
-				break;
+			$coachId = $coach->Id;
+			$namecoach = $coach->Nombre;
+			
+			$getCoachHora = $HoraCoach->getHoraCoach($fecha_i, $fecha_f, $coachId);
+
+			$resulthoras[] = $this->getCoachHora($getCoachHora, $namecoach);
 
 		}
-		$totalH = [
-		$hora8a9["8a9"] = $contador1,
-		$hora9a10["9a10"] = $contador2,
-		$hora10a11["10a11"] = $contador3,
-		$hora11a12["11a12"] = $contador4,
-		$hora12a13["12a13"] = $contador5,
-		$hora13a14["13a14"] = $contador6,
-		$hora14a15["14a15"] = $contador7,
-		$hora15a16["15a16"] = $contador8,
-		$hora16a17["16a17"] = $contador9,
-		$hora17a18["17a18"] = $contador10,
-		$hora18a19["18a19"] = $contador11,
-		$hora19a20["19a20"] = $contador12,
-		$hora20a21["20a21"] = $contador13,
-		$hora20a21["21a22"] = $contador14,
-		];
-		return $totalH;
+
+		return $resulthoras;
+	}
+	public function getCoachHora($getCoachHora,$namecoach)
+	{
 		
+		$contador1=$contador2=$contador3=$contador4=$contador5=$contador6=$contador7=$contador8=$contador9=$contador10=$contador11=$contador12=$contador13=$contador14=0;
+		while ($keyHora = $getCoachHora->fetch_object()) {
+			
+			$horas = $keyHora->Hora;
+			
+			$n = 1;
+			switch ($horas) {
+				case ($horas >= '08:00:00') && ($horas <= '08:59:59'):
+					$contador1 += $n; // si encuentra hace un incremento a uno 1
+					break;
+				case ($horas >= '09:00:00') && ($horas <= '09:59:59'):
+					$contador2 += $n;
+					break;
+				case ($horas >= '10:00:00') && ($horas <= '10:59:59'):
+						$contador3 += $n;
+					break;
+				case ($horas >= '11:00:00') && ($horas <= '11:59:59'):
+						$contador4 += $n;
+					break;
+				case ($horas >= '12:00:00') && ($horas <= '12:59:59'):
+						$contador5 += $n;
+					break;
+				case ($horas >= '13:00:00') && ($horas <= '13:59:59'):
+						$contador6 += $n;
+					break;
+				case ($horas >= '14:00:00') && ($horas <= '14:59:59'):
+						$contador7 += $n;
+					break;
+				case ($horas >= '15:00:00') && ($horas <= '15:59:59'):
+						$contador8 += $n;
+					break;
+				case ($horas >= '16:00:00') && ($horas <= '16:59:59'):
+						$contador9 += $n;
+					break;
+				case ($horas >= '17:00:00') && ($horas <= '17:59:59'):
+						$contador10 += $n;
+					break;
+				case ($horas >= '18:00:00' && $horas <= '18:59:59'):
+						$contador11 += $n;
+					break;
+				case ($horas >= '19:00:00') && ($horas <= '19:59:59'):
+						$contador12 += $n;
+					break;
+				case ($horas >= '20:00:00') && ($horas <= '20:59:59'):
+						$contador13 += $n;
+					break;
+				case ($horas >= '21:00:00:') && ($horas <= '21:59:59'):
+						$contador14 += $n;
+					break;
+			} // fin switch
+			
+		}// fin while
+		
+		$totalhoras = $contador1+$contador2+$contador3+$contador4+$contador5+$contador6+$contador7+$contador8+$contador9+$contador10+$contador11+$contador12+$contador13+$contador14;
+		
+
+		$ArrayTotalHoras = array(
+			'name'	  => $namecoach,
+			'hora1'  => $contador1,
+			'hora2'  => $contador2,
+			'hora3'  => $contador3,
+			'hora4'  => $contador4,
+			'hora5'  => $contador5,
+			'hora6'  => $contador6,
+			'hora7'  => $contador7,
+			'hora8'  => $contador8,
+			'hora9'  => $contador9,
+			'hora10' => $contador10,
+			'hora11' => $contador11,
+			'hora12' => $contador12,
+			'hora13' => $contador13,
+			'hora14' => $contador14,
+			'total' => $totalhoras,
+		);
+		
+		return $ArrayTotalHoras; 
 		
 	}
+
 }
