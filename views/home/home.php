@@ -166,6 +166,7 @@ require_once 'views/layout/header.php';
           <thead>
             <tr>
               <th scope="col-sm">Centro</th>
+              <th scope="col-sm">08-09</th>
               <th scope="col-sm">09-10</th>
               <th scope="col-sm">10-11</th>
               <th scope="col-sm">11-12</th>
@@ -188,19 +189,20 @@ require_once 'views/layout/header.php';
 
             <tr>
                 <td><?=$ky;?></td>
-                <td><?= $centroshora['09-10'];?></td>
-                <td><?= $centroshora['10-11'];?></td>
-                <td><?= $centroshora['11-12'];?></td>
-                <td><?= $centroshora['12-13'];?></td>
-                <td><?= $centroshora['13-14'];?></td>
-                <td><?= $centroshora['14-15'];?></td>
-                <td><?= $centroshora['15-16'];?></td>
-                <td><?= $centroshora['16-17'];?></td>
-                <td><?= $centroshora['17-18'];?></td>
-                <td><?= $centroshora['18-19'];?></td>
-                <td><?= $centroshora['19-20'];?></td>
-                <td><?= $centroshora['20-21'];?></td>
-                <td><?= $centroshora['21-22'];?></td>
+                <td><?= $centroshora['hora08'];?></td>
+                <td><?= $centroshora['hora09'];?></td>
+                <td><?= $centroshora['hora10'];?></td>
+                <td><?= $centroshora['hora11'];?></td>
+                <td><?= $centroshora['hora12'];?></td>
+                <td><?= $centroshora['hora13'];?></td>
+                <td><?= $centroshora['hora14'];?></td>
+                <td><?= $centroshora['hora15'];?></td>
+                <td><?= $centroshora['hora16'];?></td>
+                <td><?= $centroshora['hora17'];?></td>
+                <td><?= $centroshora['hora18'];?></td>
+                <td><?= $centroshora['hora19'];?></td>
+                <td><?= $centroshora['hora20'];?></td>
+                <td><?= $centroshora['hora21'];?></td>
                 <td><?= $centroshora['total'];?></td>
             </tr>
       <?php endforeach; ?>
