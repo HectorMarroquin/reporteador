@@ -30,8 +30,8 @@ require_once 'views/layout/header.php';
   <div class="row align-items-center">
     
     <div class="col-sm table-responsive-sm">
-      <table class="table caption-top">
-         <caption>Reporte por centros</caption>
+      <table class="table table-striped table-hover caption-top">
+         <caption>Reporte Centros</caption>
         <thead>
           <tr>
             <th scope="col-sm">Centro</th>
@@ -75,7 +75,7 @@ require_once 'views/layout/header.php';
       <div class="container">
           <div class="row">
               <div class="col-sm table-responsive-sm">
-                    <table class="table caption-top">
+                    <table class="table table-striped table-hover caption-top">
                     <caption>Reporte Pospago</caption>
                       <thead>
                         <tr>
@@ -118,8 +118,8 @@ require_once 'views/layout/header.php';
   <div class="container">
       <div class="row">
           <div class="col-sm table-responsive-sm">
-              <table class="table caption-top">
-                <caption>Reporte Por Coach</caption>
+              <table class="table table-striped table-hover caption-top">
+                <caption>Reporte Coaches</caption>
                 <thead>
                   <tr>
                     <th scope="col-sm">Centro</th>
@@ -161,8 +161,8 @@ require_once 'views/layout/header.php';
     
     <div class="col-sm table-responsive-sm">
 
-      <table class="table caption-top">
-        <caption>Reporte Por Centro</caption>
+      <table class="table table-striped table-hover caption-top">
+        <caption>Reporte Hora Centros</caption>
           <thead>
             <tr>
               <th scope="col-sm">Centro</th>
@@ -184,10 +184,10 @@ require_once 'views/layout/header.php';
             </tr>
           </thead>
           <tbody>
-
       <?php foreach($desgloseCentrosHoras as $ky => $centroshora) : ?>
 
-            <tr>
+        <?php $res = 'table-active fw-bold'; ?>
+              <tr>
                 <td><?=$ky;?></td>
                 <td><?= $centroshora['hora08'];?></td>
                 <td><?= $centroshora['hora09'];?></td>
@@ -203,7 +203,7 @@ require_once 'views/layout/header.php';
                 <td><?= $centroshora['hora19'];?></td>
                 <td><?= $centroshora['hora20'];?></td>
                 <td><?= $centroshora['hora21'];?></td>
-                <td><?= $centroshora['total'];?></td>
+                <td class="<?=$res?>"><?= $centroshora['total'];?></td>
             </tr>
       <?php endforeach; ?>
       </tbody>
@@ -217,11 +217,12 @@ require_once 'views/layout/header.php';
       <div class="container">
         <div class="row">
           <div class="col-sm table-responsive-sm">
-              <table class="table caption-top">
-                  <caption>Reporte Por Coach</caption>
+              <table class="table table-striped table-hover caption-top">
+                  <caption>Reporte Hora Coaches</caption>
                     <thead>
                       <tr>
                         <th scope="col-sm">Coaches</th>
+                        <th scope="col-sm">08-09</th>
                         <th scope="col-sm">09-10</th>
                         <th scope="col-sm">10-11</th>
                         <th scope="col-sm">11-12</th>
@@ -239,7 +240,29 @@ require_once 'views/layout/header.php';
                       </tr>
                     </thead>
                     <tbody>
+                    <?php foreach($desgloseCoachHoras as $k => $coachhora) : ?>
 
+                      <?php $res = 'table-active fw-bold'; ?>
+      
+                    <tr>
+                        <td><?=$k;?></td>
+                        <td><?= $coachhora['hora08'];?></td>
+                        <td><?= $coachhora['hora09'];?></td>
+                        <td><?= $coachhora['hora10'];?></td>
+                        <td><?= $coachhora['hora11'];?></td>
+                        <td><?= $coachhora['hora12'];?></td>
+                        <td><?= $coachhora['hora13'];?></td>
+                        <td><?= $coachhora['hora14'];?></td>
+                        <td><?= $coachhora['hora15'];?></td>
+                        <td><?= $coachhora['hora16'];?></td>
+                        <td><?= $coachhora['hora17'];?></td>
+                        <td><?= $coachhora['hora18'];?></td>
+                        <td><?= $coachhora['hora19'];?></td>
+                        <td><?= $coachhora['hora20'];?></td>
+                        <td><?= $coachhora['hora21'];?></td>
+                        <td class="<?=$res?>"><?= $coachhora['total'];?></td>
+                    </tr>
+                    <?php endforeach; ?>
                     </tbody>
               </table>
             </div>

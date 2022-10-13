@@ -2,6 +2,7 @@
 require_once 'models/BitacoraValidacion.php';
 require_once 'models/VentasPospago.php';
 require_once 'models/ListaCentro.php';
+require_once 'models/UsuarioCliente.php';
 
 class HomeController 
 {
@@ -39,9 +40,11 @@ class HomeController
 		$centros = new ListaCentro();
 		$centrosActivos = $centros->getAll();
 
+		$coaches = new UsuarioCliente();
+		$coachActivos = $coaches->getNameCoach();
 
 		$desgloseCentrosHoras = $this->getDesgloseHoraCentros($fecha_i,$fecha_f,$centrosActivos);
-		
+		$desgloseCoachHoras   = $this->getDesgloseHoraCoach($fecha_i,$fecha_f,$coachActivos);
 
 		require_once 'views/home/home.php';
 	
@@ -262,6 +265,20 @@ class HomeController
 	
 		}
 		return $horascentro;
+	}
+
+
+	public static function getDesgloseHoraCoach($fecha_i,$fecha_f,$coaches){
+
+		$ventascoach = new BitacoraValidacion();
+
+		while($coach = $coaches->fetch_object()){
+
+			$ventas = $ventascoach->getHoraCoach($fecha_i,$fecha_f,$coach->Id);
+			$horascoach[$coach->Nombre] = Utils::segmentaHoras($ventas);
+	
+		}
+		return $horascoach;
 	}
 
 }// fin de la clase HomeController
