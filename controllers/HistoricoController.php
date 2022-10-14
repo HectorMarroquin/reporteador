@@ -60,11 +60,11 @@ class HistoricoController
 		$fecha_i = $_POST['date1'];
 		$fecha_f = $_POST['date2'];
 
-		$nameCoach = new UsuarioCliente();
-		$getCoach = $nameCoach->getNameCoach();
+		$coaches = new UsuarioCliente();
+		$coaches = $coaches->getCoaches();
 
 
-		$desgloseHoraCoach = $this->desgloseHoraCoach($getCoach, $fecha_i, $fecha_f);
+		$desgloseHoraCoach = $this->desgloseHoraCoach($coaches, $fecha_i, $fecha_f);
 
 		echo json_encode($desgloseHoraCoach);
 	}
@@ -72,15 +72,15 @@ class HistoricoController
 	public function desgloseHoraCoach($getCoach, $fecha_i, $fecha_f)
 	{
 		
-		$HoraCoach = new BitacoraValidacion();
+		$ventashoracoaches = new BitacoraValidacion();
 		
 		while ($coach = $getCoach->fetch_object()) {
 			$coachId = $coach->Id;
 			
-			$getCoachHora = $HoraCoach->getHoraCoach($fecha_i, $fecha_f, $coachId);
+			$getCoachHora = $ventashoracoaches->gethoraventaCoach($fecha_i, $fecha_f, $coachId);
 			$horasCoach[$coach->Nombre] = Utils::segmentaHoras($getCoachHora);
 		}
-		
+		// $gethoraventaCoach
 		return $horasCoach;
 	}
 
