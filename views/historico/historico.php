@@ -18,21 +18,20 @@ require_once 'views/layout/header.php';
 </section>
 
 <section class="info-section bg-light text-muted" id="info-section">
-    <div class="col-auto p-5 text-center">
-        <form action="" id="formulario">
-            <input type="button" class="btn btn-outline-success" value="Ingrese Las Fechas" id="btnEnviar" autofocus="autofocus">
+    <div class="col-auto p-5 text-center d-md-block">
+        <form>
+            <input type="button" class="btn btn-outline-info" value="CALENDARIO" id="btnEnviar" autofocus="autofocus">
             </body>
 
             </html>
         </form>
     </div>
-
     <section class="info-section bg-light text-muted" id="info-section">
         <div class="container">
-            <div class="row text-center">
+            <div class="row">
                 <h1>Reporte Centros</h1>
                 <div class="table-responsive-sm">
-                    <table class="table-container table caption-top">
+                    <table class="table table-striped table-hover table caption-top">
                         <thead>
                             <tr>
                                 <th scope="row col-sm">Centro</th>
@@ -44,7 +43,7 @@ require_once 'views/layout/header.php';
                                 <th scope="row col-sm">Factor</th>
                             </tr>
                         </thead>
-                        <tbody id="table">
+                        <tbody id="tableReporteCentro">
                         </tbody>
                     </table>
                 </div>
@@ -54,10 +53,10 @@ require_once 'views/layout/header.php';
     <br><br>
     <section class="info-section bg-light text-muted" id="info-section">
         <div class="container">
-            <div class="row text-center">
+            <div class="row">
                 <h1>Reporte Pospago</h1>
                 <div class="table-responsive-sm">
-                    <table class="table-container table caption-top">
+                    <table class="table table-striped table-hover table caption-top">
                         <thead>
                             <tr>
                                 <th scope="row col-sm">Coach</th>
@@ -79,10 +78,10 @@ require_once 'views/layout/header.php';
 
     <section class="info-section bg-light text-muted" id="info-section">
         <div class="container">
-            <div class="row text-center">
-                <h1>Reporte por Coach</h1>
+            <div class="row">
+                <h1>Reporte Coaches</h1>
                 <div class="table-responsive-sm">
-                <table class="table-container table caption-top">
+                <table class="table table-striped table-hover caption-top">
                     <thead>
                         <tr>
                             <th scope="row col-sm">Centro</th>
@@ -104,15 +103,13 @@ require_once 'views/layout/header.php';
     </section>
 <br><br>
 
-<!--- ******************** EN PROCESO *************************** ---->
-
 <section class="info-section bg-light text-muted" id="info-section">
         <div class="container">
-            <div class="row text-center">
-                <h1>Reporte por Hora Coach</h1>
+            <div class="row">
+                <h1>Reporte Horas Coaches</h1>
                 <div class="table-responsive-sm">
-                <table class="table-container table caption-top">
-                    <thead>
+                <table class="table table-striped table-hover caption-top">
+                    <thead class="colorfila">
                         <tr>
                         <th scope="row col-sm">Hora/coach</th>
                                 <th scope="row col-sm">8-9</th>
