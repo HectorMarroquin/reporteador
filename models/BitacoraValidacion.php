@@ -75,7 +75,7 @@ class BitacoraValidacion
 
 	}
 
-	public function getHoraCoach($fecha_i,$fecha_f, $coach){
+	public function gethoraventaCoach($fecha_i,$fecha_f, $coach){
 		$horacoachdb = "SELECT Supervisor, Hora FROM `BITACORA_VALIDACION` where (Fecha >= '$fecha_i' AND Fecha <= '$fecha_f') AND IdEstatus_bitacora_validador = 2 AND IdUsuario_supervisor = '$coach'";
 
 		$horaCoach = $this->db->query($horacoachdb);
