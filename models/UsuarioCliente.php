@@ -118,7 +118,7 @@ class UsuarioCliente
 
 
 
-	public function getNameCoach(){
+	public function getCoaches(){
         $table = "SELECT Nombre, Id FROM `USUARIO_CLIENTE` WHERE IdGrupo_sistema =150 AND Estado =1";
         
         $data = $this->db->query($table);
