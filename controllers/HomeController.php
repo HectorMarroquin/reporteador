@@ -299,7 +299,7 @@ class HomeController
 
 		while($coach = $coaches->fetch_object()){
 
-			$ventas = $ventascoach->getHoraCoach($fecha_i,$fecha_f,$coach->Id);
+			$ventas = $ventascoach->gethoraventaCoach($fecha_i,$fecha_f,$coach->Id);
 			$horascoach[$coach->Nombre] = Utils::segmentaHoras($ventas);
 	
 		}
