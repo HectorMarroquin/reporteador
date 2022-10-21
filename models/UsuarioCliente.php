@@ -125,7 +125,12 @@ class UsuarioCliente
         return $data;
     }
 
-}
+	public static function getUsuariosCoach($idsuper){
+        $table = "SELECT Id,Nombre,Nro_nomina FROM USUARIO_CLIENTE WHERE IdSupervisor = '".$idsuper."' AND Estado =1";
+		$data = Database::connect()->query($table);
+        return $data;
+    }
 
+}
 
 ?>

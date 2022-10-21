@@ -101,6 +101,79 @@ class Utils
 		return $asistencia;
 	}
 
+	public function getHoraConexion($coach,$fecha_i,$fecha_f){
+
+		$datos = [];
+
+		$sql = "SELECT Horas_conexion,Talk FROM REPORTES_ALCANCE_META WHERE Fecha >= '$fecha_i' and Fecha <= '$fecha_f' AND Coach = '$coach' AND Estado = 1";
+		
+		$resul = $this->db->query($sql);
+
+		if ($resul && $resul->num_rows == 1) {
+
+			$dato = $resul->fetch_object();
+			$datos = [$dato->Horas_conexion,$dato->Talk];
+		}
+		
+		return $datos;
+
+	}
+
+	public static function getSegundosConversor($horas){
+
+		$segundos = 0;
+
+		if(!empty($horas)){
+			
+			$tiempo = explode(":",$horas);
+			$segundosh = floor($tiempo[0] * 3600);
+			$segundomin = floor($tiempo[1] * 60);
+			$segundos = floor($segundosh+$segundomin+$tiempo[2]);
+		}
+
+		return $segundos;
+
+	}
+
+	public static function getHorasConversor($segundos){
+
+		$hora_formato = "";
+
+		if(!empty($segundos)){
+
+			$horas    = floor($segundos / 3600);
+			$minutos  = floor(($segundos - ($horas * 3600)) / 60);
+			$segundos = floor($segundos - ($horas * 3600) - ($minutos * 60));
+
+			if($minutos<10){	
+				$minutos="0".$minutos; 
+			}
+			
+			if($segundos<10){
+				$segundos="0".$segundos;
+			}
+			
+			if($horas<10){
+				$horas="0".$horas; 
+			}
+			
+			$hora_formato = $horas . ':' . $minutos. ":" . $segundos;
+			
+		}
+
+		return $hora_formato;
+
+	}
+
+	public static function getSPH($ventas,$segundos){
+		$sph = 0;
+		if ($segundos != 0) {
+		  $sph = $ventas/($segundos/3600);
+		  $sph =number_format(round($sph,2),2);
+		}
+		return $sph;
+	}
+
 	public static function getPorcentaje($total,$parte){
 		  //porcentaje
 		  $porc =number_format(0,1);
@@ -192,6 +265,21 @@ class Utils
 		);
 
 		return $centroHora;
+
+	}
+
+
+	public static function concatenarDatos($datos){
+
+		$nominas = "";
+
+		while($dato = $datos->fetch_object()){
+
+			$nominas .= $dato->Nro_nomina.",";
+		}
+		$nominas = substr($nominas, 0, -1);
+
+		return $nominas;
 
 	}
 

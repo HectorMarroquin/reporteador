@@ -129,6 +129,9 @@ require_once 'views/layout/header.php';
                     <th scope="col-sm">Total</th>
                     <th scope="col-sm">Asistencia</th>
                     <th scope="col-sm">Factor</th>
+                    <th scope="col-sm">Horas Conexion</th>
+                    <th scope="col-sm">Talk</th>
+                    <th scope="col-sm">SPH</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -144,7 +147,9 @@ require_once 'views/layout/header.php';
                         <td><?= $coach['total']?></td>
                         <td><?= $coach['asistencia']?></td>
                         <td><?= $coach['factor']?>%</td>
-                      
+                        <td><?= $coach['conexion']?></td>
+                        <td><?= $coach['talk']?></td>
+                        <td><?= $coach['sph']?></td>
                     </tr>
                 <?php endforeach;?>
                 </tbody>

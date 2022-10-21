@@ -210,21 +210,39 @@ class HomeController
 		$totalF     = 0;
 		$asistenciaT= 0;
 		$factorT    = 0;
+		$segundos   = 0;
+		$seg        = 0;
 
 		while ($dato = $datos->fetch_object()) {
 
-			$coach      = $dato->Nombre;
-			$prepago    = $dato->ventas;
-			$prepagoT   += $prepago;
-			$migradas   = $pospagoV->getMigradasCoach($dato->Id,$fecha_i,$fecha_f);
-			$migradasT  += $migradas;
-			$basePos    = $pospagoV->getIngresadas($coach,$fecha_i,$fecha_f);
-			$baseT      += $basePos;
-			$total      = intval($prepago)+intval($migradas)+intval($basePos);
-			$totalF     += $total;
-			$asistencia = $utils->getAsistencia($coach,$fecha_i,$fecha_f);
+			$idcoach        = $dato->Id;
+			$coach        = $dato->Nombre;
+			$prepago      = $dato->ventas;
+			$prepagoT    += $prepago;
+			$migradas     = $pospagoV->getMigradasCoach($dato->Id,$fecha_i,$fecha_f);
+			$migradasT   += $migradas;
+			$basePos      = $pospagoV->getIngresadas($coach,$fecha_i,$fecha_f);
+			$baseT       += $basePos;
+			$total        = intval($prepago)+intval($migradas)+intval($basePos);
+			$totalF      += $total;
+			$asistencia   = $utils->getAsistencia($coach,$fecha_i,$fecha_f);
 			$asistenciaT += $asistencia;
-			$factor     = Utils::getPromedio($total,$asistencia);
+			$factor       = Utils::getPromedio($total,$asistencia);
+			$alcance      = $utils->getHoraConexion($coach,$fecha_i,$fecha_f);
+			
+			if(!empty($alcance)){
+				$horas = $alcance[0];
+				$talk  = $alcance[1];
+			}else{
+				$horas =0;
+				$talk  =0;
+			}
+
+			
+			$seg  = Utils::getSegundosConversor($horas);
+			$segundos += $seg;
+
+			$sph = Utils::getSPH($total,$seg);
 
 		    $arreglo[] = array(
                 'coach'     =>$coach,
@@ -234,11 +252,15 @@ class HomeController
                 'total'     =>$total,
                 'asistencia'=>$asistencia,
                 'factor'    =>$factor,
+				'conexion'  =>$horas,
+				'talk'      =>$talk,
+				'sph'       =>$sph,
               );
 		
 		}
-
-			$factorT     = Utils::getPromedio($totalF,$asistenciaT);
+			$factorT       = Utils::getPromedio($totalF,$asistenciaT);
+			$conexionTotal = Utils::getHorasConversor($segundos);
+			$sphTotal      = Utils::getSPH($totalF,$segundos);
 
 			$arreglo[] = array(
                 'coach'     =>"TOTAL",
@@ -248,6 +270,10 @@ class HomeController
                 'total'     =>$totalF,
                 'asistencia'=>$asistenciaT,
                 'factor'    =>$factorT,
+				'talk'      =>$conexionTotal,
+				'conexion'  =>$conexionTotal,
+				'talk'      =>$conexionTotal,
+				'sph'       =>$sphTotal,
               );
 
 		return $arreglo;
@@ -262,7 +288,6 @@ class HomeController
 
 			$ventas = $ventascentro->getHoraCentro($fecha_i,$fecha_f,$centro->Id);
 			$horascentro[$centro->Prefijo] = Utils::segmentaHoras($ventas);
-	
 		}
 		return $horascentro;
 	}
