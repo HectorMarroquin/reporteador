@@ -1,5 +1,4 @@
 $(document).ready(function() {
-
     $('#btnEnviar').click(function() {
 
         Swal.fire({
@@ -44,51 +43,46 @@ $(document).ready(function() {
 
                 } // termina if error 
 
-
+                //*urls para madar a cada ajax
                 url = base_url + "Historico/desglose";
+                url2 = base_url + "Historico/desglosePos";
+                url3 = base_url + "Historico/desgloseCoach";
+                url4 = base_url + "Historico/HoraCoach";
+
                 $.ajax({
                     type: 'POST',
                     url: url,
                     dataType: 'json',
                     data: { 'date1': date1, 'date2': date2 },
                     success: function(data) {
-                        $("#table").empty()
+                        $("#tableReporteCentro").empty()
 
-                        var id;
+                        data.forEach(centro => {
 
-                        data.forEach(element => {
-
-                            switch (element.prefijo) {
+                            switch (centro.prefijo) {
                                 case 'ECI':
-                                    element.prefijo = 'LCC';
-                                    break;
-                                case 'TOTAL':
-                                    id = "tablecolor";
-                                default:
+                                    centro.prefijo = 'LCC';
                                     break;
                             }
 
-                            var fila = "<tr id=" + id + ">" +
+                            var fila = "<tr>" +
 
-                                "<td>" + element.prefijo + "</td>" +
-                                "<td>" + element.prepago + "</td>" +
-                                "<td>" + element.pospago + "</td>" +
-                                "<td>" + element.totales + "</td>" +
-                                "<td>" + element.porcentaje + "%" + "</td>" +
-                                "<td>" + element.asistencia + "</td>" +
-                                "<td>" + element.factor + "%" + "</td>" +
+                                "<td>" + centro.prefijo + "</td>" +
+                                "<td>" + centro.prepago + "</td>" +
+                                "<td>" + centro.pospago + "</td>" +
+                                "<td>" + centro.totales + "</td>" +
+                                "<td>" + centro.porcentaje + "%" + "</td>" +
+                                "<td>" + centro.asistencia + "</td>" +
+                                "<td>" + centro.factor + "%" + "</td>" +
                                 "</tr>";
-                            $("#table").append(fila);
-
+                            $("#tableReporteCentro").append(fila);
                         }); // termina forEach
 
-                        $("#tablecolor").css('background-color', '#919191');
-                        $("#tablecolor").css('font-weight', '800');
-
+                        $("#tableReporteCentro tr:last").css('background-color', '#e6e6e7').css('font-weight', '800');
                     }
 
                 }); //termina ajax reporte por centro
-                url2 = base_url + "Historico/desglosePos";
+
                 $.ajax({
                     type: "POST",
                     url: url2,
@@ -99,9 +93,7 @@ $(document).ready(function() {
 
                         datospos.forEach(pos => {
 
-                            totalcolor = colorTotal(pos);
-
-                            var tablapos = "<tr id=" + totalcolor + ">" +
+                            var tablapos = "<tr>" +
 
                                 "<td>" + pos.coach + "</td>" +
                                 "<td>" + pos.exitosa + "</td>" +
@@ -113,13 +105,10 @@ $(document).ready(function() {
                             $("#tableReportePos").append(tablapos);
 
                         }); // termia el foreach
-
-                        $("#colorfila").css('background-color', '#919191');
-                        $("#colorfila").css('font-weight', '800');
+                        $("#tableReportePos tr:last").css('background-color', '#e6e6e7').css('font-weight', '800');
                     }
                 }); // termina ajax reporte pospago
 
-                url3 = base_url + "Historico/desgloseCoach";
                 $.ajax({
                         type: "POST",
                         url: url3,
@@ -131,9 +120,8 @@ $(document).ready(function() {
 
                             dataCoach.forEach(coach => {
 
-                                totalcolor = Totalcolor(coach);
+                                var tablacoach = "<tr>" +
 
-                                var tablacoach = "<tr id = " + totalcolor + " >" +
                                     "<td>" + coach.coach + "</td>" +
                                     "<td>" + coach.prepago + "</td>" +
                                     "<td>" + coach.migradas + "</td>" +
@@ -142,17 +130,18 @@ $(document).ready(function() {
                                     "<td>" + coach.asistencia + "</td>" +
                                     "<td>" + coach.factor + "%" + "</td>" +
                                     "</tr>";
+
                                 $("#tableCoach").append(tablacoach);
 
                             }); //termina forEach de coach
 
-                            $("#colorfila2").css('background-color', '#919191');
-                            $("#colorfila2").css('font-weight', '800');
+                            $("#tableCoach tr:last").css("background-color", "#e6e6e7").css('font-weight', '800');
+
                         }
                     }) //termina ajax de reporte coach
 
                 /* TODO: Empieza reporte por hora coach */
-                url4 = base_url + "Historico/HoraCoach";
+
                 $.ajax({
                     type: "POST",
                     url: url4,
@@ -185,8 +174,10 @@ $(document).ready(function() {
                                 "</tr>";
 
                             $("#tableHoraCoach").append(tablaHoraCoach);
+                            $("#tableHoraCoach td:last").css("background-color", "#e6e6e7").css('font-weight', '800'); // color a la ultima fila TOTAL
 
                         }); //termina foreach
+
                     }
                 }); // trermina hora coach
 
@@ -197,23 +188,3 @@ $(document).ready(function() {
     }); // cierre de llave y parentesis de #btnEnviar
 
 });
-
-
-
-function colorTotal(total) {
-    if (total.coach === 'TOTAL') {
-        colortotal = "colorfila";
-    } else {
-        colortotal = "na";
-    }
-    return colortotal;
-}
-
-function Totalcolor(total) {
-    if (total.coach === 'TOTAL') {
-        colortotal = "colorfila2";
-    } else {
-        colortotal = "na";
-    }
-    return colortotal;
-}

@@ -1,3 +1,8 @@
-    .progress-bar {
-        background: #dedede;
-    }
+.progress-bar {
+    background: #dedede;
+}
+
+.colorfila th:last-child {
+    background-color: #cabfbf8e;
+    font-weight: 800;
+}
