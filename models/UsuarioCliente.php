@@ -131,6 +131,26 @@ class UsuarioCliente
         return $data;
     }
 
+	public function getSectores($fecha_i,$fecha_f){
+		
+		$table = "SELECT UC.Idcampania as idsector,C.Nombre, COUNT(UC.Idcampania) AS ventas
+		FROM BITACORA_VALIDACION AS BV
+		INNER JOIN USUARIO_CLIENTE AS UC ON UC.Id = BV.IdUsuario_ejecutivo
+		INNER JOIN CAMPANIA AS C ON C.Id = UC.Idcampania
+		WHERE BV.IdEstatus_bitacora_validador =2
+		AND (
+		BV.Fecha >= '".$fecha_i."'
+		AND BV.Fecha <= '".$fecha_f."'
+		)
+		GROUP BY UC.Idcampania";
+
+		//echo $table; exit();
+
+        $data = $this->db->query($table);
+        return $data;
+
+	}
+
 }
 
 ?>

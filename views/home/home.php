@@ -23,13 +23,12 @@ require_once 'views/layout/header.php';
 
 </section>
 
-
 <section class="info-section bg-light text-muted" id="info-section">
 
 <div class="container">
-  <div class="row align-items-center">
+  <div class="row justify-content-center">
     
-    <div class="col-sm table-responsive-sm">
+    <div class="col-sm-8 table-responsive-sm">
       <table class="table table-striped table-hover caption-top">
          <caption>Reporte Centros</caption>
         <thead>
@@ -107,7 +106,33 @@ require_once 'views/layout/header.php';
 
             <div class="col-sm table-responsive-sm">
               
-                    <h1>REPORTE POR SECTOR</h1>
+            <table class="table table-striped table-hover caption-top">
+                <caption>Reporte Sectores</caption>
+                <thead>
+                  <tr>
+                    <th scope="col-sm">Lugar</th>
+                    <th scope="col-sm">Prepago</th>
+                    <th scope="col-sm">Asistencia</th>
+                    <th scope="col-sm">Factor</th>
+                  </tr>
+                </thead>
+                <tbody>
+
+                <?php foreach ($desgloSector as $key => $sector) : ?>
+
+                  <?php $res = $sector['sector'] == 'TOTAL' ? 'table-active fw-bold' : '' ?>
+
+                  <tr class="<?=$res?>">
+                      <td><?= $sector['sector']?></td>
+                      <td><?= $sector['ventas']?></td>
+                      <td><?= $sector['asistencia']?></td>
+                      <td><?= $sector['factor']?>%</td>
+                    
+                  </tr>
+                  <?php endforeach;?>
+                 
+                </tbody>
+             </table>
             </div>
 
           </div>

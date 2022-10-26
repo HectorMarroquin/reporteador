@@ -86,9 +86,9 @@ class Utils
 		  return $factor;
 		}
 
-	public function getAsistencia($coach,$fecha_i,$fecha_f){
+	public function getAsistencia($idcoach,$fecha_i,$fecha_f){
 
-		$sql = "SELECT SUM(Asistencias) as asistencia FROM REPORTES_ALCANCE_META WHERE Fecha >= '$fecha_i' and Fecha <= '$fecha_f' AND Coach = '$coach' AND Estado = 1";
+		$sql = "SELECT SUM(Asistencias) as asistencia FROM REPORTES_ALCANCE_META WHERE Fecha >= '$fecha_i' and Fecha <= '$fecha_f' AND IdCoach = '$idcoach' AND Estado = 1";
 
 		$resul = $this->db->query($sql);
 		$dato = $resul->fetch_object();
@@ -280,6 +280,29 @@ class Utils
 		$nominas = substr($nominas, 0, -1);
 
 		return $nominas;
+
+	}
+
+	public function getAsistenciaSector($idsector,$fecha_i,$fecha_f){
+
+		$sql_coaches = "SELECT IdSupervisor as idcoach
+		FROM USUARIO_CLIENTE
+		WHERE Idcampania = '".$idsector."'
+		AND Estado =1
+		GROUP BY IdSupervisor";
+		$resul = $this->db->query($sql_coaches);	
+
+		$total = 0;
+		
+		while($dato = $resul->fetch_object()){
+
+			$idcoach = $dato->idcoach; 
+			$asistencia = $this->getAsistencia($idcoach,$fecha_i,$fecha_f);
+
+			$total += intval($asistencia);
+
+		}
+		return $total;
 
 	}
 

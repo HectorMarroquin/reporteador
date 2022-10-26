@@ -11,8 +11,8 @@ class HomeController
 		$fecha_i = date('Y-m-d'); 
 		$fecha_f = date('Y-m-d');
 
-		$fecha_i = "2022-08-31";
-		$fecha_f = "2022-08-31";
+		// $fecha_i = "2022-08-31";
+		// $fecha_f = "2022-08-31";
 
 		Utils::checkSession();
 
@@ -26,25 +26,32 @@ class HomeController
 		$centros = $ventasCentros->getAll($fecha_i,$fecha_f);
 
 		//extraer centro,prepago,pospago,pos/pre,%pos,asistencia,factor
+		
 		$desglose   = $this->getDesgloseCentros($centros,$fecha_i,$fecha_f);
-
+		
 		$ventasPospago = new VentasPospago();
 		$pospago       = $ventasPospago->getAll($fecha_i,$fecha_f);
-
+		
 		$ventasCoach = new BitacoraValidacion();
 		$coachPrepago       = $ventasCoach->getVentasCoach($fecha_i,$fecha_f);
-
+		
 		$desgloseCoach   = $this->getDesgloseCoaches($coachPrepago,$fecha_i,$fecha_f);
 		$desglosePos   = $this->getDesglosePospago($pospago,$fecha_i,$fecha_f);
-
+		
+		$sectores = new UsuarioCliente();
+		$ventaSector = $sectores->getSectores($fecha_i,$fecha_f); 
+		$desgloSector         = $this->getDesgloSector($ventaSector,$fecha_i,$fecha_f);
+		
+		
 		$centros = new ListaCentro();
 		$centrosActivos = $centros->getAll();
 
 		$coaches = new UsuarioCliente();
-		$coachActivos = $coaches->getNameCoach();
-
+		$coachActivos = $coaches->getCoaches(); 
+		
 		$desgloseCentrosHoras = $this->getDesgloseHoraCentros($fecha_i,$fecha_f,$centrosActivos);
 		$desgloseCoachHoras   = $this->getDesgloseHoraCoach($fecha_i,$fecha_f,$coachActivos);
+		
 
 		require_once 'views/home/home.php';
 	
@@ -130,7 +137,7 @@ class HomeController
 			$idcoach    = $dato->idSuper;
 			$coach      = $dato->coach;
 			$group      = $dato->usergroup;
-			$asistencia = $utils->getAsistencia($coach,$fecha_i,$fecha_f);
+			$asistencia = $utils->getAsistencia($idcoach,$fecha_i,$fecha_f);
 			$ingresada  = $ventasPos->getIngresadas($coach,$fecha_i,$fecha_f);
 
 
@@ -167,10 +174,10 @@ class HomeController
 
 		if (!$existe && !empty($arreglo)) {
 
-			$coach      = "MELENDEZ SERRANO CECILIA MICHEL";
+			$idcoach      = "24897";
 			$migradas   = $ventasPos->getMigradasCoach("24897",$fecha_i,$fecha_f);
 			$ingresada  = $ventasPos->getIngresadasVal($fecha_i,$fecha_f);
-			$asistencia = $utils->getAsistencia($coach,$fecha_i,$fecha_f);
+			$asistencia = $utils->getAsistencia($idcoach,$fecha_i,$fecha_f);
 			$factor     = $utils->getPromedio($migradas,$asistencia);
 
 		    $arreglo[] = array(
@@ -225,7 +232,7 @@ class HomeController
 			$baseT       += $basePos;
 			$total        = intval($prepago)+intval($migradas)+intval($basePos);
 			$totalF      += $total;
-			$asistencia   = $utils->getAsistencia($coach,$fecha_i,$fecha_f);
+			$asistencia   = $utils->getAsistencia($idcoach,$fecha_i,$fecha_f);
 			$asistenciaT += $asistencia;
 			$factor       = Utils::getPromedio($total,$asistencia);
 			$alcance      = $utils->getHoraConexion($coach,$fecha_i,$fecha_f);
@@ -304,6 +311,49 @@ class HomeController
 	
 		}
 		return $horascoach;
+	}
+
+	public function getDesgloSector($sectores,$fecha_i,$fecha_f){
+
+		$util        = new Utils();
+		$ventasT     = 0;
+		$asistenciaT = 0;
+
+		while($sector = $sectores->fetch_object()){
+
+			if($sector->idsector != "62"){
+
+				$idsector    = $sector->idsector;
+				$name_sector = $sector->Nombre;
+				$ventas      = $sector->ventas;
+				$ventasT     += $sector->ventas;
+				$asistencia  = $util->getAsistenciaSector($idsector,$fecha_i,$fecha_f);
+				$asistenciaT += $asistencia;			
+				$factor      = Utils::getPromedio($ventas,$asistencia);
+	
+				$arreglo[] = array(
+					'sector'     =>$name_sector,
+					'ventas'     =>$ventas,
+					'asistencia' =>$asistencia,
+					'factor'     =>$factor,
+				  );
+			}
+
+		}
+		$factorT      = Utils::getPromedio($ventasT,$asistenciaT);
+
+		$arreglo[] = array(
+			'sector'     =>"TOTAL",
+			'ventas'     =>$ventasT,
+			'asistencia' =>$asistenciaT,
+			'factor'     =>$factorT,
+		  );
+$asistencia;
+
+
+		return $arreglo;
+
+
 	}
 
 }// fin de la clase HomeController
