@@ -11,8 +11,8 @@ class HomeController
 		$fecha_i = date('Y-m-d'); 
 		$fecha_f = date('Y-m-d');
 
-		// $fecha_i = "2022-08-31";
-		// $fecha_f = "2022-08-31";
+		 $fecha_i = "2022-08-31";
+		 $fecha_f = "2022-08-31";
 
 		Utils::checkSession();
 
@@ -28,11 +28,7 @@ class HomeController
 		//extraer centro,prepago,pospago,pos/pre,%pos,asistencia,factor
 		
 		$desglose   = $this->getDesgloseCentros($centros,$fecha_i,$fecha_f);
-<<<<<<< HEAD
-		//var_dump($desglose);
-=======
-		
->>>>>>> origin/main
+
 		$ventasPospago = new VentasPospago();
 		$pospago       = $ventasPospago->getAll($fecha_i,$fecha_f);
 		
