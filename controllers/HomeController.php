@@ -27,7 +27,7 @@ class HomeController
 
 		//extraer centro,prepago,pospago,pos/pre,%pos,asistencia,factor
 		$desglose   = $this->getDesgloseCentros($centros,$fecha_i,$fecha_f);
-
+		//var_dump($desglose);
 		$ventasPospago = new VentasPospago();
 		$pospago       = $ventasPospago->getAll($fecha_i,$fecha_f);
 
@@ -41,7 +41,7 @@ class HomeController
 		$centrosActivos = $centros->getAll();
 
 		$coaches = new UsuarioCliente();
-		$coachActivos = $coaches->getNameCoach();
+		$coachActivos = $coaches->getCoaches();
 
 		$desgloseCentrosHoras = $this->getDesgloseHoraCentros($fecha_i,$fecha_f,$centrosActivos);
 		$desgloseCoachHoras   = $this->getDesgloseHoraCoach($fecha_i,$fecha_f,$coachActivos);
@@ -274,7 +274,7 @@ class HomeController
 
 		while($coach = $coaches->fetch_object()){
 
-			$ventas = $ventascoach->getHoraCoach($fecha_i,$fecha_f,$coach->Id);
+			$ventas = $ventascoach->gethoraventaCoach($fecha_i,$fecha_f,$coach->Id);
 			$horascoach[$coach->Nombre] = Utils::segmentaHoras($ventas);
 	
 		}
