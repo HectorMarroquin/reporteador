@@ -8,8 +8,8 @@ class HomeController
 {
 	public function index(){
 
-		$fecha_i = date('Y-m-d'); 
-		$fecha_f = date('Y-m-d');
+		//$fecha_i = date('Y-m-d'); 
+		//$fecha_f = date('Y-m-d');
 
 		 $fecha_i = "2022-08-31";
 		 $fecha_f = "2022-08-31";
@@ -220,6 +220,8 @@ class HomeController
 		$factorT    = 0;
 		$segundos   = 0;
 		$seg        = 0;
+		$segTalk    = 0;
+		$segT       = 0;
 
 		while ($dato = $datos->fetch_object()) {
 
@@ -239,17 +241,23 @@ class HomeController
 			$alcance      = $utils->getHoraConexion($coach,$fecha_i,$fecha_f);
 			
 			if(!empty($alcance)){
-				$horas = $alcance[0];
-				$talk  = $alcance[1];
+				$horas   = $alcance[0];
+				$talk    = $alcance[1];
+				$talkseg = $alcance[2];
 			}else{
-				$horas =0;
-				$talk  =0;
+				$horas   = 0;
+				$talk    = 0;
+				$talkseg = 0;
 			}
 
 			
 			$seg  = Utils::getSegundosConversor($horas);
 			$segundos += $seg;
 
+			$segT  = Utils::getSegundosConversor($talkseg);
+			$segTalk += $segT;
+
+			
 			$sph = Utils::getSPH($total,$seg);
 
 		    $arreglo[] = array(
@@ -265,10 +273,12 @@ class HomeController
 				'sph'       =>$sph,
               );
 		
-		}
+		}	
+
 			$factorT       = Utils::getPromedio($totalF,$asistenciaT);
 			$conexionTotal = Utils::getHorasConversor($segundos);
 			$sphTotal      = Utils::getSPH($totalF,$segundos);
+			$talkT       = Utils::getPorcentaje($segundos,$segTalk);
 
 			$arreglo[] = array(
                 'coach'     =>"TOTAL",
@@ -278,9 +288,8 @@ class HomeController
                 'total'     =>$totalF,
                 'asistencia'=>$asistenciaT,
                 'factor'    =>$factorT,
-				'talk'      =>$conexionTotal,
 				'conexion'  =>$conexionTotal,
-				'talk'      =>$conexionTotal,
+				'talk'      =>$talkT,
 				'sph'       =>$sphTotal,
               );
 

@@ -105,14 +105,14 @@ class Utils
 
 		$datos = [];
 
-		$sql = "SELECT Horas_conexion,Talk FROM REPORTES_ALCANCE_META WHERE Fecha >= '$fecha_i' and Fecha <= '$fecha_f' AND Coach = '$coach' AND Estado = 1";
+		$sql = "SELECT Horas_conexion,Talk,Talk1 FROM REPORTES_ALCANCE_META WHERE Fecha >= '$fecha_i' and Fecha <= '$fecha_f' AND Coach = '$coach' AND Estado = 1";
 		
 		$resul = $this->db->query($sql);
 
 		if ($resul && $resul->num_rows == 1) {
 
 			$dato = $resul->fetch_object();
-			$datos = [$dato->Horas_conexion,$dato->Talk];
+			$datos = [$dato->Horas_conexion,$dato->Talk,$dato->Talk1];
 		}
 		
 		return $datos;
