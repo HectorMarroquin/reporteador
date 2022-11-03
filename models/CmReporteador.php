@@ -1,50 +1,27 @@
 <?php
 
-class CM_Reporteador {
+class CmReporteador {
     private $db;
 
-    function __construct() {
+    public function __construct() {
         $this->db = Database::connect();
     }
-    
-    //* Consulatar fechas
-    //*Restar un dia de la fecha final del mes anterior y restar un dia de la fecha final del mes actual
-    
-    function ObtenerFechasPrincipales(){
-        $fechas = array();
-        $base_fecha  = date('Y-m');
-        $fechas['Inicio'] = $base_fecha.'-01';
-        $fecha_temp = date('Y').'-'.intval(date('m')+1).'-01';
-        $fecha_fin = $this->SumarRestarFechas($fecha_temp,0,1);
-        $fechas['Fin'] = $fecha_fin;
-        
-        return $fechas;
-     
-     }
-    
-    public function SumarRestarFechas($fecha,$sumaresta,$dias){
-        if ($sumaresta == 1) {
-            $fecha_res = date("Y-m-d",strtotime($fecha."+ ".$dias." days"));  
-        }else{
-            $fecha_res = date("Y-m-d",strtotime($fecha."- ".$dias." days")); 
-        }
-            return $fecha_res;
-      }
 
-      function recorreFechas($fecha){
-        //extrae las fechas
-        $fecha_r = array();
-        $fecha_r['Inicio'] = date("Y-m-d", strtotime($fecha['Inicio']."- 1 days"));
-        $fecha_r['Fin'] = date("Y-m-d", strtotime($fecha['Fin']."- 1 days"));
-    
-        return $fecha_r;
-    }
-    
-    //*Obtner usuarios telemarketing
 
-    public function getusuariotlmk($fechas) {
+    //*Obtener usuarios telemarketing
+
+    public function getDataCm($fechas) {
 		//$dbcmr = 'SELECT Usuario FROM CM_REPORTEADOR WHERE Fecha_encuesta >= "'.$fechas['Inicio'].'" AND Fecha_encuesta <= "'.$fechas['Fin'].'"  AND Estado =1 AND (Usuario LIKE "ECI%" OR Usuario LIKE "LCC%") GROUP BY Usuario ORDER BY Id DESC LIMIT 0, 8';
-        $dbcmr = 'SELECT Usuario FROM CM_REPORTEADOR WHERE Fecha_encuesta >= "'.$fechas['Inicio'].'" AND Fecha_encuesta <= "'.$fechas['Fin'].'" AND Estado = 1 AND (Usuario LIKE "ECI%" OR Usuario LIKE "LCC%") GROUP BY Usuario ORDER BY Id DESC LIMIT 0, 8';
+        $dbcmr = 'SELECT P.Nro_nomina as nomina, UC.Nombre as ejecutivo, UCC.Id as idcoach, UCC.Nombre as coach, CM.Usuario as tlmk
+        FROM CM_REPORTEADOR AS CM
+        LEFT JOIN PERSONA AS P ON P.Usuario_telemarketing = CM.Usuario
+        LEFT JOIN USUARIO_CLIENTE AS UC ON UC.IdPersona = P.Id
+        LEFT JOIN USUARIO_CLIENTE AS UCC ON UCC.Id = UC.IdSupervisor
+        WHERE (CM.Fecha_encuesta >= "'.$fechas['Inicio'].'" AND CM.Fecha_encuesta <= "'.$fechas['Fin'].'")
+        AND (CM.Usuario LIKE "ECI%" OR CM.Usuario LIKE "LCC%") AND CM.Estado =1
+        GROUP BY CM.Usuario
+        ORDER BY CM.Id DESC';
+
         $result = $this->db->query($dbcmr);
         
         return $result;
@@ -52,10 +29,11 @@ class CM_Reporteador {
 
     //*Obtner el idsupervisor 
     public function getTlmk($usuarionomina) {
+        
         $dbcmr2 = "SELECT P.Usuario_telemarketing AS TLMK, UC.Nombre, UC.IdSupervisor
         FROM PERSONA AS P
         INNER JOIN USUARIO_CLIENTE AS UC ON UC.Nro_nomina = P.Nro_Nomina
-        WHERE P.Usuario_telemarketing = '".$usuarionomina."' AND P.Estado =1    AND UC.Estado =1 ";
+        WHERE P.Usuario_telemarketing = '".$usuarionomina."' AND P.Estado =1";
 
         $result = $this->db->query($dbcmr2);
         return $result;
@@ -74,6 +52,7 @@ class CM_Reporteador {
     //*Ventas acomuladas de cada telemarketing 
     public function getVenta($telemarketing,$getfechas){
         $dbcmr4 = 'SELECT COUNT(DISTINCT(DN)) AS TOTAL FROM CM_REPORTEADOR WHERE Usuario="'.$telemarketing.'" AND (Fecha_encuesta >= "'.$getfechas['Inicio'].'" AND Fecha_encuesta <= "'.$getfechas['Fin'].'")';
+
         $result = $this->db->query($dbcmr4);
 
         while ($venta = $result->fetch_object()) {
@@ -84,7 +63,8 @@ class CM_Reporteador {
 
     //*Contar los FVC de cada telemarketing
     public function getFVC($telemarketing, $fechas, $getfechas){
-        $dbcmr5 = 'SELECT COUNT(DISTINCT(DN)) AS TOTAL FROM CM_REPORTEADOR WHERE Usuario="'.$telemarketing.'" AND (Fecha_encuesta >= "'.$getfechas['Inicio'].'" AND Fecha_encuesta <= "'.$getfechas['Fin'].'") AND (Fecha_FVC >= "'.$fechas['Inicio'].'" AND Fecha_FVC <= "'.$fechas['Fin'].'")';
+        $dbcmr5 = 'SELECT COUNT(DISTINCT(DN)) AS TOTAL FROM CM_REPORTEADOR WHERE Usuario="'.$telemarketing.'" AND (Fecha_encuesta >= "'.$fechas['Inicio'].'" AND Fecha_encuesta <= "'.$fechas['Fin'].'") AND (Fecha_FVC >= "'.$getfechas['Inicio'].'" AND Fecha_FVC <= "'.$getfechas['Fin'].'")';
+
         $result = $this->db->query($dbcmr5);
 
         while ($fvc = $result->fetch_object()) {
@@ -107,19 +87,25 @@ class CM_Reporteador {
 
 
     public function getAltas($tlmk, $fechas, $getfechas){
-        $dbcmr6 = 'SELECT COUNT(Status) AS ALTAS FROM ( SELECT DN, Fecha,Status FROM CM_REPORTEADOR WHERE Usuario = "'.$tlmk.'"
+
+        $alta = 0;
+
+        $dbcmr6 = 'SELECT COUNT(Id) as altas FROM CM_REPORTEADOR WHERE Usuario = "'.$tlmk.'"
         AND (Fecha_encuesta >= "'.$getfechas['Inicio'].'" AND Fecha_encuesta <= "'.$getfechas['Fin'].'")
         AND (Fecha_FVC >= "'.$fechas['Inicio'].'"      AND Fecha_FVC <= "'.$fechas['Fin'].'")
         AND (Fecha_alta >= "'.$fechas['Inicio'].'"     AND Fecha_alta <= "'.$fechas['Fin'].'")
-        ORDER BY Fecha DESC) AS C
-        GROUP BY DN';
+        AND Status IN ("ALTA","ALTA/POSPAGO","ALTA/REC_TRANSITORIA")
+        ORDER BY Fecha DESC';
 
         $result = $this->db->query($dbcmr6);
-        $resultado = 0;
-        while ($row = $result->fetch_object()) {
-            $resultado = $row->ALTAS;
-        }
-        return $resultado;
+
+        if (!empty($result)) {
+			
+			$dato = $result->fetch_object();
+			$alta = $dato->altas;
+		}
+
+        return $alta;
     }
     
     public function Coaches(){

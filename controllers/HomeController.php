@@ -13,6 +13,7 @@ class HomeController
 
 		 $fecha_i = "2022-08-31";
 		 $fecha_f = "2022-08-31";
+		 
 
 		Utils::checkSession();
 

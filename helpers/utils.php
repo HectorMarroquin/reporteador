@@ -63,7 +63,7 @@ class Utils
 
 		}else{
 			
-			$sql ="SELECT count(user) as asistencia,sum(talk_sec) as tiempo FROM vicidial_agent_log WHERE (event_time BETWEEN '$fecha_i 00:00:00' AND '$fecha_f 23:59:59') AND (campaign_id ='4040' OR campaign_id='3330' OR campaign_id='3333' OR campaign_id= '3336') AND user_group = '$centro' group by user HAVING tiempo >= 1800";
+			$sql ="SELECT count(user) as asistencia,sum(talk_sec) as tiempo FROM vicidial_agent_log WHERE (event_time BETWEEN '$fecha_i 00:00:00' AND '$fecha_f 23:59:59') AND user_group = '$centro' group by user HAVING tiempo >= 1800";
 
 			$result = $this->dbv->query($sql);
 			$asistencia = $result->num_rows;
@@ -305,6 +305,39 @@ class Utils
 		return $total;
 
 	}
+
+
+    // Consulatar fechas
+    // Restar un dia de la fecha final del mes anterior y restar un dia de la fecha final del mes actual
+    public static function ObtenerFechasPrincipales(){
+        $fechas = array();
+        $base_fecha  = date('Y-m');
+        $fechas['Inicio'] = $base_fecha.'-01';
+        $fecha_temp = date('Y').'-'.intval(date('m')+1).'-01';
+        $fecha_fin = Utils::SumarRestarFechas($fecha_temp,0,1);
+        $fechas['Fin'] = $fecha_fin;
+        
+        return $fechas;
+     
+     }
+
+	 public static function sumarRestarFechas($fecha,$sumaresta,$dias){
+        if ($sumaresta == 1) {
+            $fecha_res = date("Y-m-d",strtotime($fecha."+ ".$dias." days"));  
+        }else{
+            $fecha_res = date("Y-m-d",strtotime($fecha."- ".$dias." days")); 
+        }
+            return $fecha_res;
+      }
+
+	public static function recorreFechas($fecha){
+        //extrae las fechas
+        $fecha_r = array();
+        $fecha_r['Inicio'] = date("Y-m-d", strtotime($fecha['Inicio']."- 1 days"));
+        $fecha_r['Fin'] = date("Y-m-d", strtotime($fecha['Fin'].      "- 1 days"));
+    
+        return $fecha_r;
+    }
 
 
 }//fin de la clase utils

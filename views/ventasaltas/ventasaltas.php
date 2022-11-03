@@ -1,6 +1,7 @@
 <?php
 require_once 'views/layout/header.php';
 ?>
+
 <section class="info-section-head">
   
   <div class="container">
@@ -16,32 +17,40 @@ require_once 'views/layout/header.php';
 
 </section>
 
+
 <section class="info-section bg-light text-muted" id="info-section">
         <div class="container">
             <div class="row">
-                <h1>Altas Coaches</h1>
-                <div class="table-responsive-sm">
+                <div class="table-responsive-sm table-wrapper">
                 <table class="table table-striped table-hover caption-top">
+                <caption>DESGLOSE CM</caption>
                     <thead>
                         <tr>
-                            <th scope="row col-sm">Coach</th>
-                            <th scope="row col-sm">ventas</th>
+                            <th scope="row col-sm">ID</th>
+                            <th scope="row col-sm">TLMK</th>
+                            <th scope="row col-sm">NOMBRE</th>
+                            <th scope="row col-sm">VENTAS</th>
                             <th scope="row col-sm">FVC</th>
                             <th scope="row col-sm">%FVC</th>
-                            <th scope="row col-sm">Alta</th>
-                            <th scope="row col-sm">%Alta</th>
+                            <th scope="row col-sm">ALTA</th>
+                            <th scope="row col-sm">%ALTA</th>
+                            <th scope="row col-sm">COACH</th>
                         </tr>
                     </thead>
                     <tbody>
-                    <?php foreach ($desglosAltasCoach as $key => $altaCoach):?>
-                      <?php $res = 'table-active fw-bold'; ?>
-                      <tr>
-                        <td><?= $altaCoach["coach"];?></td>
-                        <td><?= $altaCoach["venta"];?></td>
-                        <td><?= $altaCoach["fvc"];?></td>
-                        <td><?= $altaCoach["porcentajefvc"];?></td>
-                        <td><?= $altaCoach["altas"];?></td>
-                        <td><?= $altaCoach["porcentajealta"];?></td>
+                    <?php foreach ($desglose as $key => $dato):?>
+                      <?php $res = $dato['user'] == 'TOTAL' ? 'table-active fw-bold' : '' ?>
+                     
+                      <tr class="<?=$res?>">
+                        <td><?= $dato["nomina"];?></td>
+                        <td><?= $dato["tlmk"];?></td>
+                        <td><?= $dato["user"];?></td>
+                        <td><?= $dato["venta"];?></td>
+                        <td><?= $dato["fvc"];?></td>
+                        <td><?= $dato["porcentajefvc"];?></td>
+                        <td><?= $dato["alta"];?></td>
+                        <td><?= $dato["porcentajealta"];?></td>
+                        <td><?= $dato["nomCoach"];?></td>
                         
                       </tr>
                       <?php endforeach;?>
