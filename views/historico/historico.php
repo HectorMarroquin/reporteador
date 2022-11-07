@@ -1,5 +1,6 @@
 <?php
 require_once 'views/layout/header.php';
+
 ?>
 <section class="info-section-head">
 
@@ -51,39 +52,60 @@ require_once 'views/layout/header.php';
         </div>
     </section>
     <br><br>
-    <section class="info-section bg-light text-muted" id="info-section">
-        <div class="container">
-            <div class="row">
-                <h1>Reporte Pospago</h1>
-                <div class="table-responsive-sm">
-                    <table class="table table-striped table-hover table caption-top">
-                        <thead>
-                            <tr>
-                                <th scope="row col-sm">Coach</th>
-                                <th scope="row col-sm">Exitosas</th>
-                                <th scope="row col-sm">Ingresadas</th>
-                                <th scope="row col-sm">Asistencias</th>
-                                <th scope="row col-sm">Factor</th>
-                            </tr>
-                        </thead>
+    </section>
+
+<section class="info-section bg-light text-muted" id="info-section">
+
+      <div class="container">
+          <div class="row">
+              <div class="col-sm table-responsive-sm">
+                    <table class="table table-striped table-hover caption-top">
+                    <h1>Reporte Pospago</h1>
+                      <thead>
+                        <tr>
+                          <th scope="col-sm">Coach</th>
+                          <th scope="col-sm">Exitosas</th>
+                          <th scope="col-sm">Ingresadas</th>
+                          <th scope="col-sm">Asistencia</th>
+                          <th scope="col-sm">Factor</th>
+                        </tr>
+                      </thead>
                         <tbody id="tableReportePos">
+                        
                         </tbody>
                     </table>
                 </div>
-            </div>
-        </div>
-    </section>
-    
-    <br><br>
 
-    <section class="info-section bg-light text-muted" id="info-section">
+            <div class="col-sm table-responsive-sm">
+              
+            <table class="table table-striped table-hover caption-top">
+                <h1>Reporte Sectores</h1>
+                <thead>
+                  <tr>
+                    <th scope="col-sm">Lugar</th>
+                    <th scope="col-sm">Prepago</th>
+                    <th scope="col-sm">Asistencia</th>
+                    <th scope="col-sm">Factor</th>
+                  </tr>
+                </thead>
+                <tbody id="sector">
+
+                </tbody>
+             </table>
+            </div>
+
+          </div>
+        </div>
+</section>
+
+<section class="info-section bg-light text-muted" id="info-section">
         <div class="container">
             <div class="row">
                 <h1>Reporte Coaches</h1>
-                <div class="table-responsive-sm">
-                <table class="table table-striped table-hover caption-top">
-                    <thead>
-                        <tr>
+                <div class="table-responsive-sm container">
+                    <table class="table table-striped table-hover table caption-top">
+                        <thead>
+                            <tr>
                             <th scope="row col-sm">Centro</th>
                             <th scope="row col-sm">Prepago</th>
                             <th scope="row col-sm">Migradas</th>
@@ -91,17 +113,23 @@ require_once 'views/layout/header.php';
                             <th scope="row col-sm">Total</th>
                             <th scope="row col-sm">Asistencia</th>
                             <th scope="row col-sm">Factor</th>
+                            <th scope="row col-sm">Horas Conexion</th>
+                            <th scope="row col-sm">Talk</th>
+                            <th scope="row col-sm">SPH</th>
                         </tr>
                     </thead>
                     <tbody id="tableCoach">
-
                     </tbody>
                 </table>
                 </div>
             </div>
         </div>
     </section>
-<br><br>
+        <div class=" container mx-auto">
+            <input class="btn btn-success" type="button" value="Descargar Tabla En Formato CSV"  onclick="descargar()" >
+        </div>
+        
+<br>
 
 <section class="info-section bg-light text-muted" id="info-section">
         <div class="container">
@@ -130,7 +158,7 @@ require_once 'views/layout/header.php';
                         </tr>
                     </thead>
                     <tbody id="tableHoraCoach">
-
+                    
                     </tbody>
                 </table>
                 </div>
