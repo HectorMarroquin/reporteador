@@ -174,17 +174,14 @@ class Utils
 		return $sph;
 	}
 
-	public static function getPorcentaje($total,$parte){
-		  //porcentaje
-		  $porc =number_format(0,1);
-
-		  if(!empty($total)){
-		    $porc  = ($parte*100)/$total;
-		    $porc = number_format($porc,1);
-		  }
-
-		  return $porc;
-	}
+    public static function getPorcentaje($dividendo, $divisor){
+        $porcentaje = 0;
+            if ($dividendo != 0 && $divisor != 0) {
+        $porcentaje = ($divisor * 100)/$dividendo;
+    }
+        $porcentaje = number_format(round($porcentaje, 2),2).'%';
+        return $porcentaje;
+    }
 	
 
 
@@ -338,6 +335,23 @@ class Utils
     
         return $fecha_r;
     }
+
+    public static function getAltasFinal($res){
+
+            $contador = 0;
+            $estatus = array("ALTA","ALTA/POSPAGO","ALTA/REC_TRANSITORIA");
+
+          while ($alta = $res->fetch_object()) {
+
+                if (in_array($alta->Status, $estatus)) {
+                  
+                      $contador++;
+                 }
+          }
+
+           return $contador;
+
+}
 
 
 }//fin de la clase utils

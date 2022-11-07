@@ -7,23 +7,24 @@ class VentasAltasUsuariosController
 		
 		Utils::checkSession();
 		
-		$usuarios = new CmReporteador();
-		$fechas = Utils::ObtenerFechasPrincipales();
-		$fechas_ant = Utils::recorreFechas($fechas);
+		$fechas_alta = Utils::ObtenerFechasPrincipales();
+		$fechas_enc = Utils::recorreFechas($fechas_alta);
 
-		$fechas     = ['Inicio' => "2022-10-01",'Fin' => "2022-10-31"];
-		$fechas_ant = ['Inicio' => "2022-09-29",'Fin' => "2022-10-30"];
+		$fechas_enc      = ['Inicio' => "2022-09-30",'Fin' => "2022-10-30"];
+		$fechas_alta     = ['Inicio' => "2022-10-01",'Fin' => "2022-10-31"];
 		
-		$desglose = $this->desgloseAltas($fechas, $fechas_ant);
-		//$desglosAltasCoach = $this->VentaAltasCoach($desglose);
+		$desglose     = $this->desgloseAltas($fechas_alta, $fechas_enc);
+		$desglosCoach = $this->VentaAltasCoach($desglose);
+
+		$desgloSector = $this->ventasAltasSector($desglosCoach);
 		
 		require_once 'views/ventasaltas/ventasaltas.php';
 	}
 
-	public static function desgloseAltas($fechas, $fechas_ant) {
+	public static function desgloseAltas($fechas_alta, $fechas_enc) {
 
 		$datos    = new CmReporteador();
-		$usuarios = $datos->getDataCm($fechas_ant);
+		$usuarios = $datos->getDataCm($fechas_enc);
 		$array    = [];
 		$ventasT  = 0;
 		$fvcT     = 0;
@@ -37,22 +38,23 @@ class VentasAltasUsuariosController
 			$user     = $usuario->ejecutivo;
 			$nomina   = $usuario->nomina;
 
-			$venta 	         = $datos->getVenta($usertlmk, $fechas_ant);
-			$fvc 	         = $datos->getFVC($usertlmk, $fechas_ant, $fechas);
-			$porcentajefvc   = $datos->getPorcentajes($venta, $fvc);
-			$alta 	         = $datos->getAltas($usertlmk, $fechas, $fechas_ant);
-			$porcentajealtas = $datos->getPorcentajes($fvc, $alta);
+			$venta 	         = $datos->getVenta($usertlmk, $fechas_enc);
+			$fvc 	         = $datos->getFVC($usertlmk, $fechas_enc, $fechas_alta);
+			$porcentajefvc   = Utils::getPorcentaje($venta, $fvc);
+			$alta 	         = $datos->getAltas($usertlmk, $fechas_enc, $fechas_alta);
+			$altasfinal      = Utils::getAltasfinal($alta);
+			$porcentajealtas = Utils::getPorcentaje($fvc, $altasfinal);
 
 			$ventasT += $venta;
 			$fvcT    += $fvc;
-			$altaT   += $alta;
+			$altaT   += $altasfinal;
 
 			if(empty($user)){
 
 				$user = "S/N";
 				$idcoach = 0;
 				$nomina = 0;
-				$coach   = "S/N";
+				$coach   = "SIN COACH";
 			}
 
 			$array[]  = array(
@@ -62,15 +64,16 @@ class VentasAltasUsuariosController
 				"venta" 	      => $venta,
 				"fvc" 		      => $fvc,
 				"porcentajefvc"   => $porcentajefvc,
-				"alta" 		      => $alta,
+				"alta" 		      => $altasfinal,
 				"porcentajealta" => $porcentajealtas,
-				"nomCoach" 	      => $coach
+				"nomCoach" 	      => $coach,
+				"idcoach" 	      => $idcoach
 			);
 			
 		}
 
-		$porcenfvc   = $datos->getPorcentajes($ventasT, $fvcT);
-		$porcenaltas = $datos->getPorcentajes($fvcT, $altaT);
+		$porcenfvc   = Utils::getPorcentaje($ventasT, $fvcT);
+		$porcenaltas = Utils::getPorcentaje($fvcT, $altaT);
 
 		$array[]  = array(
 			"nomina" 		  => "",
@@ -81,26 +84,28 @@ class VentasAltasUsuariosController
 			"porcentajefvc"   => $porcenfvc,
 			"alta" 		      => $altaT,
 			"porcentajealta"  => $porcenaltas,
-			"nomCoach" 	      => ""
+			"nomCoach" 	      => "---",
+			"idcoach" 	      => "---"
 		);
 
 		return $array;
 	}
 
 	public static function VentaAltasCoach($desglose){
+
 		$altascoach = new CmReporteador();
 		$getcoach = $altascoach->Coaches();
 
 		while ($coaches = $getcoach->fetch_object()) {
 			
-			$id = $coaches->Id;
+			$id    = $coaches->Id;
 			$coach = $coaches->Nombre;
-			
+			$campania = $coaches->idcampania;
 			$venta = $FVC = $altas = $porcentajeFvc = $porcentajeAlta = 0; 	
 			
 			foreach ($desglose as $value) {
 				
-				$idCoach = $value["id"];
+				$idCoach = $value["idcoach"];
 				$ventas  = $value["venta"];
 				$fvc     = $value["fvc"];
 				$alta    = $value["alta"];
@@ -109,41 +114,126 @@ class VentasAltasUsuariosController
 					$venta += $ventas;
 					$FVC += $fvc;
 					$altas += $alta;
-					$porcentajeFvc = $altascoach->getPorcentajes($venta, $fvc);
-					$porcentajeAlta = $altascoach->getPorcentajes($fvc, $altas);
+					$porcentajeFvc  = Utils::getPorcentaje($ventas, $fvc);
+					$porcentajeAlta = Utils::getPorcentaje($fvc, $alta);
 					
+				}elseif($id == "27569" && $idCoach == "0"){
+
+					$coach = "SIN COACH";
+					$venta += $ventas;
+					$FVC += $fvc;
+					$altas += $alta;
+					$porcentajeFvc = Utils::getPorcentaje($ventas, $fvc);
+					$porcentajeAlta= Utils::getPorcentaje($fvc, $alta);
+
 				}
 			}
-		
-			$altasxCoach[] = array(
-				"coach" => $coach,
-				"venta" => $venta,
-				"fvc" 	=> $FVC,
-				"altas" => $altas,
-				"porcentajefvc" => $porcentajeFvc,
-				"porcentajealta" => $porcentajeAlta,
-			);
+
+			if($venta != "0"){
+
+				$altasxCoach[] = array(
+					"idcampania" => $campania,
+					"coach" => $coach,
+					"venta" => $venta,
+					"fvc" 	=> $FVC,
+					"altas" => $altas,
+					"porcentajefvc" => $porcentajeFvc,
+					"porcentajealta" => $porcentajeAlta,
+				);
+			}
 			
 			$arrayventa[] = $venta;
-			$arrayfvc[] = $FVC;
+			$arrayfvc[]   = $FVC;
 			$arrayaltas[] = $altas;
 		}
-		$totalventa = array_sum($arrayventa);
-		$totalfvc = array_sum($arrayfvc);
-		$totalaltas = array_sum($arrayaltas);
-		$porcentajeFvc = $altascoach->getPorcentajes($totalventa, $totalfvc);
-		$porcentajeAlta = $altascoach->getPorcentajes($totalfvc, $totalaltas);
+
+		$totalventa     = array_sum($arrayventa);
+		$totalfvc       = array_sum($arrayfvc);
+		$totalaltas     = array_sum($arrayaltas);
+		$porcentajeFvc  = Utils::getPorcentaje($totalventa, $totalfvc);
+		$porcentajeAlta = Utils::getPorcentaje($totalfvc, $totalaltas);
 
 		$altasxCoach[] = array(
-				"coach" => "TOTAL",
-				"venta" => $totalventa,
-				"fvc" 	=> $totalfvc,
-				"altas" => $totalaltas,
+			    "idcampania"    => "",
+				"coach"         => "TOTAL",
+				"venta"         => $totalventa,
+				"fvc" 	        => $totalfvc,
+				"altas"         => $totalaltas,
 				"porcentajefvc" => $porcentajeFvc,
-				"porcentajealta" => $porcentajeAlta,
+				"porcentajealta"=> $porcentajeAlta,
 		);
 		
 		return $altasxCoach;
+	}
+
+	public function ventasAltasSector($desgloses){
+
+		$datos = new CmReporteador();
+		$campanias = $datos->getCampanias();
+		$altasxSector = [];
+		$ventasf = 0;
+		$fvcf    = 0;
+		$altasf  = 0;
+
+		while($campania = $campanias->fetch_object()){
+
+			$idcamp   = $campania->Id; 
+			$campname = $campania->Nombre; 
+			$ventas   = 0;
+			$fvcs     = 0;
+			$altas    = 0;
+
+			foreach($desgloses as $desglose){
+
+				$idcampania = $desglose['idcampania'];
+				$venta      = $desglose['venta'];
+				$fvc        = $desglose['fvc'];
+				$alta       = $desglose['altas'];
+
+				if($idcamp == $idcampania){
+
+					$ventas   += $venta;
+					$fvcs     += $fvc;
+					$altas    += $alta;
+					$fvcporc  = Utils::getPorcentaje($venta,$fvc);
+					$altaporc = Utils::getPorcentaje($fvc,$altas);
+
+				}
+			}
+
+			if($ventas != "0"){
+
+				$ventasf += $ventas;
+				$fvcf    += $fvcs;
+				$altasf  += $altas;
+
+				$altasxSector[] = array(
+					"lugar"     => $campname,
+					"ventas"    => $ventas,
+					"fvc"       => $fvcs,
+					"fvcporc" 	=> $fvcporc,
+					"alta"      => $altas,
+					"altaporc"  => $altaporc,
+				);
+
+			}
+
+		}
+
+		$fvcporcf  = Utils::getPorcentaje($ventasf,$fvcf);
+		$altaporcf = Utils::getPorcentaje($fvcf,$altasf);
+
+		$altasxSector[] = array(
+			"lugar"     => "TOTAL",
+			"ventas"    => $ventasf,
+			"fvc"       => $fvcf,
+			"fvcporc" 	=> $fvcporcf,
+			"alta"      => $altasf,
+			"altaporc"  => $altaporcf,
+		);
+
+		return $altasxSector;
+
 	}
 	
 }

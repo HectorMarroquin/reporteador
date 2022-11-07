@@ -11,14 +11,14 @@ class CmReporteador {
     //*Obtener usuarios telemarketing
 
     public function getDataCm($fechas) {
-		//$dbcmr = 'SELECT Usuario FROM CM_REPORTEADOR WHERE Fecha_encuesta >= "'.$fechas['Inicio'].'" AND Fecha_encuesta <= "'.$fechas['Fin'].'"  AND Estado =1 AND (Usuario LIKE "ECI%" OR Usuario LIKE "LCC%") GROUP BY Usuario ORDER BY Id DESC LIMIT 0, 8';
-        $dbcmr = 'SELECT P.Nro_nomina as nomina, UC.Nombre as ejecutivo, UCC.Id as idcoach, UCC.Nombre as coach, CM.Usuario as tlmk
+        //$dbcmr = 'SELECT Usuario FROM CM_REPORTEADOR WHERE Fecha_encuesta >= "'.$fechas['Inicio'].'" AND Fecha_encuesta <= "'.$fechas['Fin'].'"  AND Estado =1 AND (Usuario LIKE "ECI%" OR Usuario LIKE "LCC%") GROUP BY Usuario ORDER BY Id DESC LIMIT 0, 8';
+        $dbcmr = 'SELECT P.Nro_nomina as nomina, UC.Nombre as ejecutivo, UCC.Id as idcoach,UCC.Nombre as coach, CM.Usuario as tlmk
         FROM CM_REPORTEADOR AS CM
         LEFT JOIN PERSONA AS P ON P.Usuario_telemarketing = CM.Usuario
         LEFT JOIN USUARIO_CLIENTE AS UC ON UC.IdPersona = P.Id
         LEFT JOIN USUARIO_CLIENTE AS UCC ON UCC.Id = UC.IdSupervisor
         WHERE (CM.Fecha_encuesta >= "'.$fechas['Inicio'].'" AND CM.Fecha_encuesta <= "'.$fechas['Fin'].'")
-        AND (CM.Usuario LIKE "ECI%" OR CM.Usuario LIKE "LCC%") AND CM.Estado =1
+        AND (CM.Usuario LIKE "ECI%" OR CM.Usuario LIKE "LCC%" OR CM.Usuario LIKE "JAZ%") AND CM.Estado =1
         GROUP BY CM.Usuario
         ORDER BY CM.Id DESC';
 
@@ -50,8 +50,8 @@ class CmReporteador {
         return $nombre;
     }
     //*Ventas acomuladas de cada telemarketing 
-    public function getVenta($telemarketing,$getfechas){
-        $dbcmr4 = 'SELECT COUNT(DISTINCT(DN)) AS TOTAL FROM CM_REPORTEADOR WHERE Usuario="'.$telemarketing.'" AND (Fecha_encuesta >= "'.$getfechas['Inicio'].'" AND Fecha_encuesta <= "'.$getfechas['Fin'].'")';
+    public function getVenta($telemarketing,$fechas){
+        $dbcmr4 = 'SELECT COUNT(DISTINCT(DN)) AS TOTAL FROM CM_REPORTEADOR WHERE Usuario="'.$telemarketing.'" AND (Fecha_encuesta >= "'.$fechas['Inicio'].'" AND Fecha_encuesta <= "'.$fechas['Fin'].'")';
 
         $result = $this->db->query($dbcmr4);
 
@@ -62,9 +62,8 @@ class CmReporteador {
     }
 
     //*Contar los FVC de cada telemarketing
-    public function getFVC($telemarketing, $fechas, $getfechas){
-        $dbcmr5 = 'SELECT COUNT(DISTINCT(DN)) AS TOTAL FROM CM_REPORTEADOR WHERE Usuario="'.$telemarketing.'" AND (Fecha_encuesta >= "'.$fechas['Inicio'].'" AND Fecha_encuesta <= "'.$fechas['Fin'].'") AND (Fecha_FVC >= "'.$getfechas['Inicio'].'" AND Fecha_FVC <= "'.$getfechas['Fin'].'")';
-
+    public function getFVC($telemarketing, $fechas, $fechas_alta){
+        $dbcmr5 = 'SELECT COUNT(DISTINCT(DN)) AS TOTAL FROM CM_REPORTEADOR WHERE Usuario="'.$telemarketing.'" AND (Fecha_encuesta >= "'.$fechas['Inicio'].'" AND Fecha_encuesta <= "'.$fechas['Fin'].'") AND (Fecha_FVC <> "0000-00-00")';
         $result = $this->db->query($dbcmr5);
 
         while ($fvc = $result->fetch_object()) {
@@ -74,43 +73,35 @@ class CmReporteador {
         return $resultfvc;
     }
 
-    //* consultar el porcentaje 
-    public function getPorcentajes($dividendo, $divisor){
-        $porcentaje = 0;
-            if ($dividendo != 0 && $divisor != 0) {
-        $porcentaje = ($divisor * 100)/$dividendo;
-    }
-        $porcentaje = number_format(round($porcentaje, 2),2).'%';
-        return $porcentaje;
-    }
-
-
-
-    public function getAltas($tlmk, $fechas, $getfechas){
+    public function getAltas($tlmk, $fechas, $fechas_alta){
 
         $alta = 0;
-
-        $dbcmr6 = 'SELECT COUNT(Id) as altas FROM CM_REPORTEADOR WHERE Usuario = "'.$tlmk.'"
-        AND (Fecha_encuesta >= "'.$getfechas['Inicio'].'" AND Fecha_encuesta <= "'.$getfechas['Fin'].'")
-        AND (Fecha_FVC >= "'.$fechas['Inicio'].'"      AND Fecha_FVC <= "'.$fechas['Fin'].'")
-        AND (Fecha_alta >= "'.$fechas['Inicio'].'"     AND Fecha_alta <= "'.$fechas['Fin'].'")
-        AND Status IN ("ALTA","ALTA/POSPAGO","ALTA/REC_TRANSITORIA")
-        ORDER BY Fecha DESC';
+        
+        $dbcmr6 = 'SELECT * FROM ( SELECT DN, Fecha,Status
+                          FROM CM_REPORTEADOR
+                          WHERE Usuario = "'.$tlmk.'"
+                          AND (Fecha_encuesta >= "'.$fechas['Inicio'].'" AND Fecha_encuesta <= "'.$fechas['Fin'].'")
+                          AND (Fecha_FVC >= "0000-00-00")
+                          AND (Fecha_alta >= "'.$fechas_alta['Inicio'].'"     AND Fecha_alta <= "'.$fechas_alta['Fin'].'")
+          ORDER BY Fecha DESC) AS C
+          GROUP BY DN';
 
         $result = $this->db->query($dbcmr6);
 
-        if (!empty($result)) {
-			
-			$dato = $result->fetch_object();
-			$alta = $dato->altas;
-		}
-
-        return $alta;
+        return $result;
     }
-    
+     
     public function Coaches(){
         
-        $db = "SELECT Id, Nombre FROM USUARIO_CLIENTE WHERE Estado =1 AND IdGrupo_sistema IN ( 150, 157, 193, 50 ) ORDER BY IdGrupo_sistema";
+        $db = "SELECT Id, Nombre, IdCampania as idcampania FROM USUARIO_CLIENTE WHERE Estado =1 AND IdGrupo_sistema IN (150, 157, 193,50 ,227,148) ORDER BY IdGrupo_sistema";
+        $result = $this->db->query($db);
+
+        return $result;
+    }
+
+    public function getCampanias(){
+        
+        $db = "SELECT Id, Nombre FROM CAMPANIA WHERE Estado =1";
         $result = $this->db->query($db);
 
         return $result;

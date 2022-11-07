@@ -14,16 +14,83 @@ require_once 'views/layout/header.php';
     </div>
   </div>
 </div>
-
 </section>
 
+<section class="info-section bg-light text-muted" id="info-section">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm table-responsive-sm">
+                  <table class="table table-striped table-hover caption-top">
+                  <caption>CM COACHES</caption>
+                      <thead>
+                          <tr>
+                              <th scope="row col-sm">COACH</th>
+                              <th scope="row col-sm">VENTAS</th>
+                              <th scope="row col-sm">FVC</th>
+                              <th scope="row col-sm">%FVC</th>
+                              <th scope="row col-sm">ALTA</th>
+                              <th scope="row col-sm">%ALTA</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                      <?php foreach ($desglosCoach as $key => $alta):?>
+                        <?php $res = $alta['coach'] == 'TOTAL' ? 'table-active fw-bold' : '' ?>
+                      
+                        <tr class="<?=$res?>">
+                          <td><?= $alta["coach"];?></td>
+                          <td><?= $alta["venta"];?></td>
+                          <td><?= $alta["fvc"];?></td>
+                          <td><?= $alta["porcentajefvc"];?></td>
+                          <td><?= $alta["altas"];?></td>
+                          <td><?= $alta["porcentajealta"];?></td>
+                          
+                        </tr>
+                        <?php endforeach;?>
+                      </tbody>
+                  </table>
+              </div>
+
+              <div class="col-sm table-responsive-sm">
+                  <table class="table table-striped table-hover caption-top">
+                      <caption>CM SECTORES</caption>
+                      <thead>
+                        <tr>
+                            <th scope="col-sm">LUGAR</th>
+                            <th scope="col-sm">VENTAS</th>
+                            <th scope="col-sm">FVC</th>
+                            <th scope="col-sm">%FVC</th>
+                            <th scope="col-sm">ALTA</th>
+                            <th scope="col-sm">%ALTA</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      <?php foreach ($desgloSector as $key => $sector):?>
+
+                        <!-- <?php $res = $sector['lugar'] == 'TOTAL' ? 'table-active fw-bold' : '' ?> -->
+                      
+                        <tr class="<?=$res?>">
+                          <td><?= $sector["lugar"];?></td>
+                          <td><?= $sector["ventas"];?></td>
+                          <td><?= $sector["fvc"];?></td>
+                          <td><?= $sector["fvcporc"];?></td>
+                          <td><?= $sector["alta"];?></td>
+                          <td><?= $sector["altaporc"];?></td>
+                          
+                        </tr>
+                        <?php endforeach;?>
+                      </tbody>
+                  </table>
+              </div>
+            </div>
+        </div>
+    </section>
 
 <section class="info-section bg-light text-muted" id="info-section">
         <div class="container">
             <div class="row">
+              <caption>CM EJECUTIVOS</caption>
                 <div class="table-responsive-sm table-wrapper">
                 <table class="table table-striped table-hover caption-top">
-                <caption>DESGLOSE CM</caption>
                     <thead>
                         <tr>
                             <th scope="row col-sm">ID</th>
@@ -60,6 +127,8 @@ require_once 'views/layout/header.php';
             </div>
         </div>
     </section>
+
+
 <?php
 require_once 'views/layout/footer.php';
 ?>
