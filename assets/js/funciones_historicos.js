@@ -48,6 +48,7 @@ $(document).ready(function() {
                 url2 = base_url + "Historico/desglosePos";
                 url3 = base_url + "Historico/desgloseCoach";
                 url4 = base_url + "Historico/HoraCoach";
+                url5 = base_url + "Historico/desgloseSector";
 
                 $.ajax({
                     type: 'POST',
@@ -55,7 +56,7 @@ $(document).ready(function() {
                     dataType: 'json',
                     data: { 'date1': date1, 'date2': date2 },
                     success: function(data) {
-                        $("#tableReporteCentro").empty()
+                        $("#tableReporteCentro").empty();
 
                         data.forEach(centro => {
 
@@ -77,7 +78,6 @@ $(document).ready(function() {
                                 "</tr>";
                             $("#tableReporteCentro").append(fila);
                         }); // termina forEach
-
                         $("#tableReporteCentro tr:last").css('background-color', '#e6e6e7').css('font-weight', '800');
                     }
 
@@ -115,11 +115,9 @@ $(document).ready(function() {
                         dataType: "json",
                         data: { 'date1': date1, 'date2': date2 },
                         success: function(dataCoach) {
-
                             $("#tableCoach").empty();
 
                             dataCoach.forEach(coach => {
-
                                 var tablacoach = "<tr>" +
 
                                     "<td>" + coach.coach + "</td>" +
@@ -129,6 +127,9 @@ $(document).ready(function() {
                                     "<td>" + coach.total + "</td>" +
                                     "<td>" + coach.asistencia + "</td>" +
                                     "<td>" + coach.factor + "%" + "</td>" +
+                                    "<td>" + coach.conexion + "</td>" +
+                                    "<td>" + coach.talk + "%" + "</td>" +
+                                    "<td>" + coach.sph + "</td>" +
                                     "</tr>";
 
                                 $("#tableCoach").append(tablacoach);
@@ -148,7 +149,6 @@ $(document).ready(function() {
                     dataType: "json",
                     data: { 'date1': date1, 'date2': date2 },
                     success: function(horasCoach) {
-
                         $("#tableHoraCoach").empty();
 
                         Object.keys(horasCoach).forEach(function(keyhoras) {
@@ -181,10 +181,45 @@ $(document).ready(function() {
                     }
                 }); // trermina hora coach
 
-            } //termina la confirmacion de cancelar
+                // REPORTE POR SECTOR 
+                $.ajax({
+                    type: "POST",
+                    url: url5,
+                    dataType: "json",
+                    data: { 'date1': date1, 'date2': date2 },
+                    success: function(sector) {
+                        $("#sector").empty();
+                        sector.forEach(function(sectores) {
 
+                            var tablasector = "<tr>" +
+                                "<td>" + sectores.sector + "</td>" +
+                                "<td>" + sectores.ventas + "</td>" +
+                                "<td>" + sectores.asistencia + "</td>" +
+                                "<td>" + sectores.factor + "</td>" +
+                                "</tr>"
+                            $("#sector").append(tablasector);
+                        });
+                    },
+                }); //Fin de reporte por sector
+
+                // ajax para mandar las fechas y generar el csv
+                urlexcel = base_url + "Historico/generarCSV";
+                $.ajax({
+                    type: "POST",
+                    url: urlexcel,
+                    data: { 'date1': date1, 'date2': date2 },
+                    cache: false,
+                    success: function(data) {}
+                })
+            } //termina la confirmacion de cancelar
         });
+
 
     }); // cierre de llave y parentesis de #btnEnviar
 
+
 });
+
+function descargar() {
+    window.location.href = "/reporteador/controllers/save/ReporteCoaches.csv";
+}
