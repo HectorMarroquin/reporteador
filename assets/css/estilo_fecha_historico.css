@@ -6,3 +6,61 @@
     background-color: #cabfbf8e;
     font-weight: 800;
 }
+
+
+/*! progress */
+
+.fondo {
+    background: rgb(21, 155, 215);
+    background: linear-gradient(90deg, rgba(21, 155, 215, 0.7791491596638656) 8%, rgba(21, 106, 215, 0.7595413165266106) 44%, rgba(0, 212, 255, 0.6671043417366946) 100%);
+    position: fixed;
+    top: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -10px 0 0 -100px;
+    width: 200px;
+    height: 20px;
+}
+
+.border {
+    border: 10px solid #ff0303;
+    height: 100%;
+    width: 100%;
+    padding: 4px;
+}
+
+.space {
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+    margin: 0 auto;
+}
+
+@keyframes loading {
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
+.loading {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: #ffffff;
+    animation: loading 5s steps(40) infinite;
+}
+
+.color {
+    color: white;
+    top: 50%;
+}
