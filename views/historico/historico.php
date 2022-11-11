@@ -2,6 +2,24 @@
 require_once 'views/layout/header.php';
 
 ?>
+<!-- //*!progress bar  -->
+<section>
+        <div id="contenedor" class="fondo">
+                <div class="wrapper">
+                <div>
+                <h1 class="color text-center">Cargando</h1>
+            </div>
+            <div class="border">
+                <div class="space">
+                    <div class="loading">
+                    </div>
+                </div>
+            </div>
+            </div>
+            </div>  
+</section>
+
+
 <section class="info-section-head">
 
     <div class="container">
@@ -18,6 +36,7 @@ require_once 'views/layout/header.php';
     </div>
 </section>
 
+
 <section class="info-section bg-light text-muted" id="info-section">
     <div class="col-auto p-5 text-center d-md-block">
         <form>
@@ -27,6 +46,8 @@ require_once 'views/layout/header.php';
             </html>
         </form>
     </div>
+</section>
+
     <section class="info-section bg-light text-muted" id="info-section">
         <div class="container">
             <div class="row">
@@ -45,13 +66,29 @@ require_once 'views/layout/header.php';
                             </tr>
                         </thead>
                         <tbody id="tableReporteCentro">
+                            <tr>
+                                <td>---</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <td>---</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
-    </section>
-    <br><br>
     </section>
 
 <section class="info-section bg-light text-muted" id="info-section">
@@ -71,7 +108,20 @@ require_once 'views/layout/header.php';
                         </tr>
                       </thead>
                         <tbody id="tableReportePos">
-                        
+                        <tr>
+                                <td>---</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <td>---</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -89,7 +139,20 @@ require_once 'views/layout/header.php';
                   </tr>
                 </thead>
                 <tbody id="sector">
-
+                <tr>
+                                <td>---</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <td>---</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                            </tr>
                 </tbody>
              </table>
             </div>
@@ -119,17 +182,39 @@ require_once 'views/layout/header.php';
                         </tr>
                     </thead>
                     <tbody id="tableCoach">
+                    <tr>
+                                <td>---</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <td>---</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                            </tr>
                     </tbody>
                 </table>
                 </div>
             </div>
-        </div>
-    </section>
-        <div class=" container mx-auto">
             <input class="btn btn-success" type="button" value="Descargar Tabla En Formato CSV"  onclick="descargar()" >
         </div>
-        
-<br>
+    </section>
 
 <section class="info-section bg-light text-muted" id="info-section">
         <div class="container">
@@ -158,7 +243,44 @@ require_once 'views/layout/header.php';
                         </tr>
                     </thead>
                     <tbody id="tableHoraCoach">
-                    
+                    <tr>
+                                <td>---</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <td>---</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                            </tr>
                     </tbody>
                 </table>
                 </div>
@@ -167,7 +289,6 @@ require_once 'views/layout/header.php';
     </section>
 
 </section> <!-- /section del boton  -->
-
 <?php
 require_once 'views/layout/footer.php';
 ?>
