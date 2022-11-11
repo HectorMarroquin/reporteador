@@ -1,225 +1,221 @@
-$(document).ready(function() {
-    $('#btnEnviar').click(function() {
+ $('#contenedor').hide(); //ocultar el progres bar
+ $(document).ready(function() {
+     $('#btnEnviar').click(function() {
+         Swal.fire({
+             title: "Ingrese una fecha inicial y una final",
+             confirmButtonText: "Aceptar",
+             allowOutsideClick: false,
+             allowEscapeKey: false,
+             allowEnterKey: false,
 
-        Swal.fire({
-            title: "Ingrese una fecha inicial y una final",
-            confirmButtonText: "Aceptar",
-            allowOutsideClick: false,
-            allowEscapeKey: false,
-            allowEnterKey: false,
+             showDenyButton: true,
+             denyButtonText: "Cancelar",
 
-            showDenyButton: true,
-            denyButtonText: "Cancelar",
+             background: "linear-gradient(63deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 37%, rgba(0,212,255,1) 100%)",
+             color: "#FFFFFF",
 
-            background: "linear-gradient(63deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 37%, rgba(0,212,255,1) 100%)",
-            color: "#FFFFFF",
+             html: '<input type="date" id="Date1" class="flex-nowrap w-50 swal2-input">' + '<br>' +
+                 '<input type="date" id="Date2" class="flex-nowrap w-50 swal2-input">',
 
-            html: '<input type="date" id="Date1" class="flex-nowrap w-50 swal2-input">' +
-                '<input type="date" id="Date2" class="flex-nowrap w-50 swal2-input">',
+         }).then(function(isConfirm) {
+             var date1 = $('#Date1').val();
+             var date2 = $('#Date2').val();
 
-        }).then(function(isConfirm) {
+             if (isConfirm.isConfirmed) {
+                 $('#contenedor').show(); // mostrar el prpgress
+                 if (date1 > date2) {
+                     Swal.fire({
+                         icon: "error",
+                         title: "Error en las fechas",
+                         text: "asegurese de agregar correctamente las fechas",
+                         timer: "3500",
+                         showConfirmButton: false,
+                         timerProgressBar: true,
+                         customClass: {
+                             timerProgressBar: "progress-bar"
+                         },
+                         iconColor: "#FFFFFF",
+                         color: "#FFFFFF",
+                         background: "linear-gradient(63deg, rgba(2,0,36,1) 22%, rgba(121,9,32,1) 48%, rgba(255,0,22,1) 100%)"
+                     });
+                 } // termina if error 
 
-            var date1 = $('#Date1').val();
-            var date2 = $('#Date2').val();
-            if (isConfirm.isConfirmed) {
+                 //*urls para madar a cada ajax
+                 url = base_url + "Historico/desglose";
+                 url2 = base_url + "Historico/desglosePos";
+                 url3 = base_url + "Historico/desgloseCoach";
+                 url4 = base_url + "Historico/HoraCoach";
+                 url5 = base_url + "Historico/desgloseSector";
 
-                if (date1 > date2) {
+                 $.ajax({
+                     type: 'POST',
+                     url: url,
+                     dataType: 'json',
+                     data: { 'date1': date1, 'date2': date2 },
+                     success: function(data) {
+                         $("#tableReporteCentro").empty();
 
-                    Swal.fire({
-                        icon: "error",
-                        title: "Error en las fechas",
-                        text: "asegurese de agregar correctamente las fechas",
-                        timer: "3500",
-                        showConfirmButton: false,
-                        timerProgressBar: true,
-                        customClass: {
-                            timerProgressBar: "progress-bar"
-                        },
-                        iconColor: "#FFFFFF",
-                        color: "#FFFFFF",
-                        background: "linear-gradient(63deg, rgba(2,0,36,1) 22%, rgba(121,9,32,1) 48%, rgba(255,0,22,1) 100%)"
+                         data.forEach(centro => {
 
-                    });
+                             switch (centro.prefijo) {
+                                 case 'ECI':
+                                     centro.prefijo = 'LCC';
+                                     break;
+                             }
 
-                } // termina if error 
+                             var fila = "<tr>" +
 
-                //*urls para madar a cada ajax
-                url = base_url + "Historico/desglose";
-                url2 = base_url + "Historico/desglosePos";
-                url3 = base_url + "Historico/desgloseCoach";
-                url4 = base_url + "Historico/HoraCoach";
-                url5 = base_url + "Historico/desgloseSector";
+                                 "<td>" + centro.prefijo + "</td>" +
+                                 "<td>" + centro.prepago + "</td>" +
+                                 "<td>" + centro.pospago + "</td>" +
+                                 "<td>" + centro.totales + "</td>" +
+                                 "<td>" + centro.porcentaje + "%" + "</td>" +
+                                 "<td>" + centro.asistencia + "</td>" +
+                                 "<td>" + centro.factor + "%" + "</td>" +
+                                 "</tr>";
+                             $("#tableReporteCentro").append(fila);
+                         });
+                         //$('#progressbar').hide();
+                         // termina forEach
+                         $("#tableReporteCentro tr:last").css('background-color', '#e6e6e7').css('font-weight', '800');
+                     }
+                 }); //termina ajax reporte por centro
 
-                $.ajax({
-                    type: 'POST',
-                    url: url,
-                    dataType: 'json',
-                    data: { 'date1': date1, 'date2': date2 },
-                    success: function(data) {
-                        $("#tableReporteCentro").empty();
+                 $.ajax({
+                     type: "POST",
+                     url: url2,
+                     dataType: "json",
+                     data: { 'date1': date1, "date2": date2 },
+                     success: function(datospos) {
+                         $("#tableReportePos").empty();
 
-                        data.forEach(centro => {
+                         datospos.forEach(pos => {
 
-                            switch (centro.prefijo) {
-                                case 'ECI':
-                                    centro.prefijo = 'LCC';
-                                    break;
-                            }
+                             var tablapos = "<tr>" +
 
-                            var fila = "<tr>" +
+                                 "<td>" + pos.coach + "</td>" +
+                                 "<td>" + pos.exitosa + "</td>" +
+                                 "<td>" + pos.ingresada + "</td>" +
+                                 "<td>" + pos.asistencia + "</td>" +
+                                 "<td>" + pos.factor + "%" + "</td>" +
+                                 "</tr>";
 
-                                "<td>" + centro.prefijo + "</td>" +
-                                "<td>" + centro.prepago + "</td>" +
-                                "<td>" + centro.pospago + "</td>" +
-                                "<td>" + centro.totales + "</td>" +
-                                "<td>" + centro.porcentaje + "%" + "</td>" +
-                                "<td>" + centro.asistencia + "</td>" +
-                                "<td>" + centro.factor + "%" + "</td>" +
-                                "</tr>";
-                            $("#tableReporteCentro").append(fila);
-                        }); // termina forEach
-                        $("#tableReporteCentro tr:last").css('background-color', '#e6e6e7').css('font-weight', '800');
-                    }
+                             $("#tableReportePos").append(tablapos);
 
-                }); //termina ajax reporte por centro
+                         }); // termia el foreach
+                         $("#tableReportePos tr:last").css('background-color', '#e6e6e7').css('font-weight', '800');
+                     }
+                 }); // termina ajax reporte pospago
 
-                $.ajax({
-                    type: "POST",
-                    url: url2,
-                    dataType: "json",
-                    data: { 'date1': date1, "date2": date2 },
-                    success: function(datospos) {
-                        $("#tableReportePos").empty();
+                 $.ajax({
+                         type: "POST",
+                         url: url3,
+                         dataType: "json",
+                         data: { 'date1': date1, 'date2': date2 },
+                         success: function(dataCoach) {
+                             $("#tableCoach").empty();
 
-                        datospos.forEach(pos => {
+                             dataCoach.forEach(coach => {
+                                 var tablacoach = "<tr>" +
 
-                            var tablapos = "<tr>" +
+                                     "<td>" + coach.coach + "</td>" +
+                                     "<td>" + coach.prepago + "</td>" +
+                                     "<td>" + coach.migradas + "</td>" +
+                                     "<td>" + coach.base + "</td>" +
+                                     "<td>" + coach.total + "</td>" +
+                                     "<td>" + coach.asistencia + "</td>" +
+                                     "<td>" + coach.factor + "%" + "</td>" +
+                                     "<td>" + coach.conexion + "</td>" +
+                                     "<td>" + coach.talk + "%" + "</td>" +
+                                     "<td>" + coach.sph + "</td>" +
+                                     "</tr>";
 
-                                "<td>" + pos.coach + "</td>" +
-                                "<td>" + pos.exitosa + "</td>" +
-                                "<td>" + pos.ingresada + "</td>" +
-                                "<td>" + pos.asistencia + "</td>" +
-                                "<td>" + pos.factor + "%" + "</td>" +
-                                "</tr>";
+                                 $("#tableCoach").append(tablacoach);
 
-                            $("#tableReportePos").append(tablapos);
+                             }); //termina forEach de coach
 
-                        }); // termia el foreach
-                        $("#tableReportePos tr:last").css('background-color', '#e6e6e7').css('font-weight', '800');
-                    }
-                }); // termina ajax reporte pospago
+                             $("#tableCoach tr:last").css("background-color", "#e6e6e7").css('font-weight', '800');
 
-                $.ajax({
-                        type: "POST",
-                        url: url3,
-                        dataType: "json",
-                        data: { 'date1': date1, 'date2': date2 },
-                        success: function(dataCoach) {
-                            $("#tableCoach").empty();
+                         }
+                     }) //termina ajax de reporte coach
 
-                            dataCoach.forEach(coach => {
-                                var tablacoach = "<tr>" +
+                 /* TODO: Empieza reporte por hora coach */
 
-                                    "<td>" + coach.coach + "</td>" +
-                                    "<td>" + coach.prepago + "</td>" +
-                                    "<td>" + coach.migradas + "</td>" +
-                                    "<td>" + coach.base + "</td>" +
-                                    "<td>" + coach.total + "</td>" +
-                                    "<td>" + coach.asistencia + "</td>" +
-                                    "<td>" + coach.factor + "%" + "</td>" +
-                                    "<td>" + coach.conexion + "</td>" +
-                                    "<td>" + coach.talk + "%" + "</td>" +
-                                    "<td>" + coach.sph + "</td>" +
-                                    "</tr>";
+                 $.ajax({
+                     type: "POST",
+                     url: url4,
+                     dataType: "json",
+                     data: { 'date1': date1, 'date2': date2 },
+                     success: function(horasCoach) {
+                         $("#tableHoraCoach").empty();
 
-                                $("#tableCoach").append(tablacoach);
+                         Object.keys(horasCoach).forEach(function(keyhoras) {
 
-                            }); //termina forEach de coach
+                             var tablaHoraCoach = "<tr>" +
 
-                            $("#tableCoach tr:last").css("background-color", "#e6e6e7").css('font-weight', '800');
+                                 "<td>" + keyhoras + "</td>" +
+                                 "<td>" + horasCoach[keyhoras].hora08 + "</td>" +
+                                 "<td>" + horasCoach[keyhoras].hora09 + "</td>" +
+                                 "<td>" + horasCoach[keyhoras].hora10 + "</td>" +
+                                 "<td>" + horasCoach[keyhoras].hora11 + "</td>" +
+                                 "<td>" + horasCoach[keyhoras].hora12 + "</td>" +
+                                 "<td>" + horasCoach[keyhoras].hora13 + "</td>" +
+                                 "<td>" + horasCoach[keyhoras].hora14 + "</td>" +
+                                 "<td>" + horasCoach[keyhoras].hora15 + "</td>" +
+                                 "<td>" + horasCoach[keyhoras].hora16 + "</td>" +
+                                 "<td>" + horasCoach[keyhoras].hora17 + "</td>" +
+                                 "<td>" + horasCoach[keyhoras].hora18 + "</td>" +
+                                 "<td>" + horasCoach[keyhoras].hora19 + "</td>" +
+                                 "<td>" + horasCoach[keyhoras].hora20 + "</td>" +
+                                 "<td>" + horasCoach[keyhoras].hora21 + "</td>" +
+                                 "<td>" + horasCoach[keyhoras].total + "</td>" +
+                                 "</tr>";
 
-                        }
-                    }) //termina ajax de reporte coach
+                             $("#tableHoraCoach").append(tablaHoraCoach);
+                             $("#tableHoraCoach td:last").css("background-color", "#e6e6e7").css('font-weight', '800'); // color a la ultima fila TOTAL
 
-                /* TODO: Empieza reporte por hora coach */
+                         }); //termina foreach
 
-                $.ajax({
-                    type: "POST",
-                    url: url4,
-                    dataType: "json",
-                    data: { 'date1': date1, 'date2': date2 },
-                    success: function(horasCoach) {
-                        $("#tableHoraCoach").empty();
+                     }
+                 }); // trermina hora coach
 
-                        Object.keys(horasCoach).forEach(function(keyhoras) {
+                 // REPORTE POR SECTOR 
+                 $.ajax({
+                     type: "POST",
+                     url: url5,
+                     dataType: "json",
+                     data: { 'date1': date1, 'date2': date2 },
+                     success: function(sector) {
+                         $("#sector").empty();
+                         sector.forEach(function(sectores) {
 
-                            var tablaHoraCoach = "<tr>" +
+                             var tablasector = "<tr>" +
+                                 "<td>" + sectores.sector + "</td>" +
+                                 "<td>" + sectores.ventas + "</td>" +
+                                 "<td>" + sectores.asistencia + "</td>" +
+                                 "<td>" + sectores.factor + "</td>" +
+                                 "</tr>"
+                             $("#sector").append(tablasector);
+                         });
+                         $('#contenedor').hide();
+                     },
+                 }); //Fin de reporte por sector
 
-                                "<td>" + keyhoras + "</td>" +
-                                "<td>" + horasCoach[keyhoras].hora08 + "</td>" +
-                                "<td>" + horasCoach[keyhoras].hora09 + "</td>" +
-                                "<td>" + horasCoach[keyhoras].hora10 + "</td>" +
-                                "<td>" + horasCoach[keyhoras].hora11 + "</td>" +
-                                "<td>" + horasCoach[keyhoras].hora12 + "</td>" +
-                                "<td>" + horasCoach[keyhoras].hora13 + "</td>" +
-                                "<td>" + horasCoach[keyhoras].hora14 + "</td>" +
-                                "<td>" + horasCoach[keyhoras].hora15 + "</td>" +
-                                "<td>" + horasCoach[keyhoras].hora16 + "</td>" +
-                                "<td>" + horasCoach[keyhoras].hora17 + "</td>" +
-                                "<td>" + horasCoach[keyhoras].hora18 + "</td>" +
-                                "<td>" + horasCoach[keyhoras].hora19 + "</td>" +
-                                "<td>" + horasCoach[keyhoras].hora20 + "</td>" +
-                                "<td>" + horasCoach[keyhoras].hora21 + "</td>" +
-                                "<td>" + horasCoach[keyhoras].total + "</td>" +
-                                "</tr>";
+                 // ajax para mandar las fechas y generar el csv
+                 urlexcel = base_url + "Historico/generarCSV";
+                 $.ajax({
+                     type: "POST",
+                     url: urlexcel,
+                     data: { 'date1': date1, 'date2': date2 },
+                     cache: false,
+                     success: function(data) {}
+                 })
+             } //termina la confirmacion de cancelar
+         });
+     });
+     // cierre de llave y parentesis de #btnEnviar
+ });
 
-                            $("#tableHoraCoach").append(tablaHoraCoach);
-                            $("#tableHoraCoach td:last").css("background-color", "#e6e6e7").css('font-weight', '800'); // color a la ultima fila TOTAL
-
-                        }); //termina foreach
-
-                    }
-                }); // trermina hora coach
-
-                // REPORTE POR SECTOR 
-                $.ajax({
-                    type: "POST",
-                    url: url5,
-                    dataType: "json",
-                    data: { 'date1': date1, 'date2': date2 },
-                    success: function(sector) {
-                        $("#sector").empty();
-                        sector.forEach(function(sectores) {
-
-                            var tablasector = "<tr>" +
-                                "<td>" + sectores.sector + "</td>" +
-                                "<td>" + sectores.ventas + "</td>" +
-                                "<td>" + sectores.asistencia + "</td>" +
-                                "<td>" + sectores.factor + "</td>" +
-                                "</tr>"
-                            $("#sector").append(tablasector);
-                        });
-                    },
-                }); //Fin de reporte por sector
-
-                // ajax para mandar las fechas y generar el csv
-                urlexcel = base_url + "Historico/generarCSV";
-                $.ajax({
-                    type: "POST",
-                    url: urlexcel,
-                    data: { 'date1': date1, 'date2': date2 },
-                    cache: false,
-                    success: function(data) {}
-                })
-            } //termina la confirmacion de cancelar
-        });
-
-
-    }); // cierre de llave y parentesis de #btnEnviar
-
-
-});
-
-function descargar() {
-    window.location.href = "/reporteador/controllers/save/ReporteCoaches.csv";
-}
+ function descargar() {
+     window.location.href = "/reporteador/controllers/save/ReporteCoaches.csv";
+ }
