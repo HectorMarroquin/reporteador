@@ -2,24 +2,6 @@
 require_once 'views/layout/header.php';
 
 ?>
-<!-- //*!progress bar  -->
-<section>
-        <div id="contenedor" class="fondo">
-                <div class="wrapper">
-                <div>
-                <h1 class="color text-center">Cargando</h1>
-            </div>
-            <div class="border">
-                <div class="space">
-                    <div class="loading">
-                    </div>
-                </div>
-            </div>
-            </div>
-            </div>  
-</section>
-
-
 <section class="info-section-head">
 
     <div class="container">
@@ -34,6 +16,22 @@ require_once 'views/layout/header.php';
             </div>
         </div>
     </div>
+    <!-- //*!progress bar  -->
+<section>
+        <div id="contenedor" class="fondo">
+                <div class="wrapper">
+                <div>
+                <h1 class="color text-center">Cargando</h1>
+            </div>
+            <div class="border">
+                <div class="space">
+                    <div class="cargando">
+                    </div>
+                </div>
+            </div>
+            </div>
+            </div>  
+</section>
 </section>
 
 
@@ -47,10 +45,12 @@ require_once 'views/layout/header.php';
         </form>
     </div>
 </section>
-
     <section class="info-section bg-light text-muted" id="info-section">
         <div class="container">
             <div class="row">
+                <div class = "text-center"> 
+                    <h5 id="fechasconsultadas" style="font-weight: bold"></h5>
+                </div>
                 <h1>Reporte Centros</h1>
                 <div class="table-responsive-sm">
                     <table class="table table-striped table-hover table caption-top">

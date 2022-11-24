@@ -2,7 +2,11 @@
  $(document).ready(function() {
      $('#btnEnviar').click(function() {
          Swal.fire({
+             customClass: { // clases del sweetAlert
+                 popup: 'popup-class', // estilo fondo sweetlert 
+             },
              title: "Ingrese una fecha inicial y una final",
+             confirmButtonColor: "#097206", // estilo color boton aceptar
              confirmButtonText: "Aceptar",
              allowOutsideClick: false,
              allowEscapeKey: false,
@@ -11,8 +15,7 @@
              showDenyButton: true,
              denyButtonText: "Cancelar",
 
-             background: "linear-gradient(63deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 37%, rgba(0,212,255,1) 100%)",
-             color: "#FFFFFF",
+             color: "#FFFFFF", //estilos de color de letras 
 
              html: '<input type="date" id="Date1" class="flex-nowrap w-50 swal2-input">' + '<br>' +
                  '<input type="date" id="Date2" class="flex-nowrap w-50 swal2-input">',
@@ -21,6 +24,7 @@
              var date1 = $('#Date1').val();
              var date2 = $('#Date2').val();
 
+             $("#fechasconsultadas").html('fechas consultadas:  ' + date1 + '   al    ' + date2);
              if (isConfirm.isConfirmed) {
                  $('#contenedor').show(); // mostrar el prpgress
                  if (date1 > date2) {
@@ -75,7 +79,6 @@
                                  "</tr>";
                              $("#tableReporteCentro").append(fila);
                          });
-                         //$('#progressbar').hide();
                          // termina forEach
                          $("#tableReporteCentro tr:last").css('background-color', '#e6e6e7').css('font-weight', '800');
                      }
@@ -116,6 +119,7 @@
                              $("#tableCoach").empty();
 
                              dataCoach.forEach(coach => {
+                                 console.log(coach);
                                  var tablacoach = "<tr>" +
 
                                      "<td>" + coach.coach + "</td>" +
@@ -197,11 +201,12 @@
                                  "</tr>"
                              $("#sector").append(tablasector);
                          });
-                         $('#contenedor').hide();
+                         $('#contenedor').hide(); // ocultar el prpogress bar al terminar la consulta
                      },
                  }); //Fin de reporte por sector
 
                  // ajax para mandar las fechas y generar el csv
+
                  urlexcel = base_url + "Historico/generarCSV";
                  $.ajax({
                      type: "POST",
@@ -210,6 +215,7 @@
                      cache: false,
                      success: function(data) {}
                  })
+
              } //termina la confirmacion de cancelar
          });
      });

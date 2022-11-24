@@ -2,6 +2,17 @@
     background: #dedede;
 }
 
+.popup-class {
+    background: rgb(24, 193, 193);
+    background: linear-gradient(90deg, rgba(24, 193, 193, 1) 0%, rgba(18, 168, 150, 1) 50%, rgba(1, 190, 240, 1) 100%);
+}
+
+.title-class {
+    color: #000000;
+    font-weight: bolder;
+    font-style: italic;
+}
+
 .colorfila th:last-child {
     background-color: #cabfbf8e;
     font-weight: 800;
@@ -52,7 +63,7 @@
     }
 }
 
-.loading {
+.cargando {
     position: absolute;
     height: 100%;
     width: 100%;
