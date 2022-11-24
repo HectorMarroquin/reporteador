@@ -1,7 +1,6 @@
 <?php
 require_once 'views/layout/header.php';
 ?>
-
 <section class="info-section-head">
   
   <div class="container">
@@ -13,7 +12,6 @@ require_once 'views/layout/header.php';
       <img id="img-home" class="img-fluid" src="<?=base_url?>/assets/img/lcc_azul.png">
     </div>
   </div>
-
   <div class="row">
       <div class="col-sm">
            Ultima hora de actualización: <span style="font-weight: bold"><?= $reg ?></span>
@@ -44,10 +42,31 @@ require_once 'views/layout/header.php';
         </thead>
         <tbody>
 
+          <?php if(isset($_SESSION['identity']) && $_SESSION['identity']->idgrupo == "150") :?>  <!--coach que solo puede visiualizar LCC--->
+
           <?php foreach ($desglose as $key => $centro) : ?>
-
+            
+            <?php if($centro['prefijo'] === "ECI") : ?>
             <?php $res = $centro['prefijo'] == 'TOTAL' ? 'table-active fw-bold' : '' ?>
+            <tr class="<?=$res?>">
+                <td><?= $centro['prefijo']?></td>
+                <td><?= $centro['prepago']?></td>
+                <td><?= $centro['pospago']?></td>
+                <td><?= $centro['totales']?></td>
+                <td><?= $centro['porcentaje']?>%</td>
+                <td><?= $centro['asistencia']?></td>
+                <td><?= $centro['factor']?>%</td>
+              
+            </tr>
+            <?php endif;?>
+          <?php endforeach;?>
+        <?php endif;?>
 
+        <?php if(isset($_SESSION['identity']) && $_SESSION['identity']->idgrupo == "42" || isset($_SESSION['identity']) && $_SESSION['identity']->idgrupo == "193") :?>
+          <!-- perimisos a Admin y Coordinadores que puede ver toda la tabla reporte centro -->
+          <?php foreach ($desglose as $key => $centro) : ?>
+        
+            <?php $res = $centro['prefijo'] == 'TOTAL' ? 'table-active fw-bold' : '' ?>
             <tr class="<?=$res?>">
                 <td><?= $centro['prefijo']?></td>
                 <td><?= $centro['prepago']?></td>
@@ -59,6 +78,8 @@ require_once 'views/layout/header.php';
               
             </tr>
           <?php endforeach;?>
+        <?php endif;?>
+        
         </tbody>
       </table>
     </div>
@@ -74,6 +95,8 @@ require_once 'views/layout/header.php';
       <div class="container">
           <div class="row">
               <div class="col-sm table-responsive-sm">
+              <?php if(isset($_SESSION['identity']) && $_SESSION['identity']->idgrupo == "150" || isset($_SESSION['identity']) && $_SESSION['identity']->idgrupo == "193" || isset($_SESSION['identity']) && $_SESSION['identity']->idgrupo == "42") :?>
+                    <!-- visualizan todos la cabecera de la tabla -->
                     <table class="table table-striped table-hover caption-top">
                     <caption>Reporte Pospago</caption>
                       <thead>
@@ -85,9 +108,11 @@ require_once 'views/layout/header.php';
                           <th scope="col-sm">Factor</th>
                         </tr>
                       </thead>
+                    
                         <tbody>
                         <?php foreach ($desglosePos as $key => $centro) : ?>
-
+                
+                          <?php if($centro['coach'] === $_SESSION['identity']->Nombre) :?> <!--solo pueden vesualizar sus datos de coach-->
                           <?php $res = $centro['coach'] == 'TOTAL' ? 'table-active fw-bold' : '' ?>
 
                           <tr class="<?=$res?>">
@@ -96,12 +121,22 @@ require_once 'views/layout/header.php';
                               <td><?= $centro['ingresada']?></td>
                               <td><?= $centro['asistencia']?></td>
                               <td><?= $centro['factor']?>%</td>
-                            
                           </tr>
+                          <?php endif;?>
+                          <?php if(isset($_SESSION['identity']) && $_SESSION['identity']->idgrupo == "193" || isset($_SESSION['identity']) && $_SESSION['identity']->idgrupo == "42") :?>
+                            <!-- pueden ver todos las filas del reporte pospagop -->
+                            <tr class="<?=$res?>">
+                              <td><?= $centro['coach']?></td>
+                              <td><?= $centro['exitosa']?></td>
+                              <td><?= $centro['ingresada']?></td>
+                              <td><?= $centro['asistencia']?></td>
+                              <td><?= $centro['factor']?>%</td>
+                          </tr>
+                          <?php endif;?>
                         <?php endforeach;?>
-
                         </tbody>
                     </table>
+                    <?php endif;?>
                 </div>
 
             <div class="col-sm table-responsive-sm">
@@ -190,7 +225,8 @@ require_once 'views/layout/header.php';
   <div class="row">
     
     <div class="col-sm table-responsive-sm">
-
+      <!-- la tabla solo se le mostrara a los coordinadores y Admin -->
+    <?php if(isset($_SESSION['identity']) && $_SESSION['identity']->idgrupo == "42" || isset($_SESSION['identity']) && $_SESSION['identity']->idgrupo == "193") : ?> 
       <table class="table table-striped table-hover caption-top">
         <caption>Reporte Hora Centros</caption>
           <thead>
@@ -215,7 +251,6 @@ require_once 'views/layout/header.php';
           </thead>
           <tbody>
       <?php foreach($desgloseCentrosHoras as $ky => $centroshora) : ?>
-
         <?php $res = 'table-active fw-bold'; ?>
               <tr>
                 <td><?=$ky;?></td>
@@ -236,6 +271,7 @@ require_once 'views/layout/header.php';
                 <td class="<?=$res?>"><?= $centroshora['total'];?></td>
             </tr>
       <?php endforeach; ?>
+      <?php endif ?>
       </tbody>
     </table>
   </div>
@@ -299,7 +335,10 @@ require_once 'views/layout/header.php';
           </div>
        </div>
 </section>
-
 <?php
 require_once 'views/layout/footer.php';
 ?>
+<!-- <script>
+    var base_url = '<?= base_url ?>';
+</script>
+<script src="<?= base_url ?>assets/js/home.js"></script> -->
