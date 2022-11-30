@@ -1,6 +1,12 @@
 <?php
 require_once 'views/layout/header.php';
+require_once 'helpers/permisos.php';
 ?>
+<?php //Uusarios
+      $sesionAdmin = $_SESSION['identity']->idgrupo == "42";
+      $sesionCoach = $_SESSION['identity']->idgrupo == "150";
+      $sesionCoordinador = $_SESSION['identity']->idgrupo == "193";
+      ?>
 
 <section class="info-section-head">
   
@@ -43,7 +49,6 @@ require_once 'views/layout/header.php';
                           <td><?= $alta["porcentajefvc"];?></td>
                           <td><?= $alta["altas"];?></td>
                           <td><?= $alta["porcentajealta"];?></td>
-                          
                         </tr>
                         <?php endforeach;?>
                       </tbody>
@@ -51,6 +56,7 @@ require_once 'views/layout/header.php';
               </div>
 
               <div class="col-sm table-responsive-sm">
+              <?php if($sesionAdmin) :?>
                   <table class="table table-striped table-hover caption-top">
                       <caption>CM SECTORES</caption>
                       <thead>
@@ -80,6 +86,7 @@ require_once 'views/layout/header.php';
                         <?php endforeach;?>
                       </tbody>
                   </table>
+                  <?php endif;?>
               </div>
             </div>
         </div>
@@ -89,6 +96,7 @@ require_once 'views/layout/header.php';
         <div class="container">
             <div class="row">
               <caption>CM EJECUTIVOS</caption>
+               
                 <div class="table-responsive-sm table-wrapper">
                 <table class="table table-striped table-hover caption-top">
                     <thead>
@@ -108,18 +116,27 @@ require_once 'views/layout/header.php';
                     <?php foreach ($desglose as $key => $dato):?>
                       <?php $res = $dato['user'] == 'TOTAL' ? 'table-active fw-bold' : '' ?>
                      
-                      <tr class="<?=$res?>">
-                        <td><?= $dato["nomina"];?></td>
-                        <td><?= $dato["tlmk"];?></td>
-                        <td><?= $dato["user"];?></td>
-                        <td><?= $dato["venta"];?></td>
-                        <td><?= $dato["fvc"];?></td>
-                        <td><?= $dato["porcentajefvc"];?></td>
-                        <td><?= $dato["alta"];?></td>
-                        <td><?= $dato["porcentajealta"];?></td>
-                        <td><?= $dato["nomCoach"];?></td>
-                        
-                      </tr>
+                      <!-- permiso solo mostar los datos del coach cm ejecutivos -->
+                      <?php if($sesionCoach && $dato["nomCoach"] === $_SESSION['identity']->Nombre) : ?>
+                        <tr class="<?=$res?>">
+                          <?php $tablaCM = Permisos::cmEjecutivos($dato);
+                          echo $tablaCM;?>
+                        </tr>
+                      <?php elseif($sesionCoordinador) :?>
+                        <!-- permisos de coordinar solo se mostrara en la zona que esta con sus respectivos coach -->
+                        <?php if($dato['nomCoach'] != "CAE CONTACT" && $dato['nomCoach'] != "HOMEOFFICE Y COMISIONISTA" && $dato['nomCoach'] != "TEZIUTLAN CONTACT" && $dato['nomCoach'] != "ZACAPOAXTLA CONTACT" && $dato['nomCoach'] != "MELENDEZ SERRANO CECILIA MICHEL") : ?>
+                          <tr class="<?=$res?>">
+                            <?php $tablaCM = Permisos::cmEjecutivos($dato);
+                            echo $tablaCM;?>
+                          </tr>
+                          <?php endif; ?>
+                        <?php elseif($sesionAdmin): ?>
+                          <!-- permisos del Admin se muestran todas las filas de la tabla -->
+                          <tr class="<?=$res?>">
+                          <?php $tablaCM = Permisos::cmEjecutivos($dato);
+                          echo $tablaCM;?>
+                          </tr>
+                      <?php endif; ?>
                       <?php endforeach;?>
                     </tbody>
                 </table>
