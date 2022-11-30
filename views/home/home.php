@@ -1,6 +1,14 @@
 <?php
 require_once 'views/layout/header.php';
+require_once 'helpers/permisos.php'
 ?>
+
+<?php //Uusarios
+      $sesionAdmin = $_SESSION['identity']->idgrupo == "42";
+      $sesionCoach = $_SESSION['identity']->idgrupo == "150";
+      $sesionCoordinador = $_SESSION['identity']->idgrupo == "193";
+      ?>
+
 <section class="info-section-head">
   
   <div class="container">
@@ -22,7 +30,6 @@ require_once 'views/layout/header.php';
 </section>
 
 <section class="info-section bg-light text-muted" id="info-section">
-
 <div class="container">
   <div class="row justify-content-center">
     
@@ -41,44 +48,26 @@ require_once 'views/layout/header.php';
           </tr>
         </thead>
         <tbody>
-
-          <?php if(isset($_SESSION['identity']) && $_SESSION['identity']->idgrupo == "150") :?>  <!--coach que solo puede visiualizar LCC--->
-
-          <?php foreach ($desglose as $key => $centro) : ?>
-            
+        <?php foreach ($desglose as $key => $centro) : ?>
+          <?php if($sesionCoach || $sesionCoordinador) :?>  <!--coach y Coordinar que solo puede visiualizar LCC--->
             <?php if($centro['prefijo'] === "ECI") : ?>
+             
             <?php $res = $centro['prefijo'] == 'TOTAL' ? 'table-active fw-bold' : '' ?>
             <tr class="<?=$res?>">
-                <td><?= $centro['prefijo']?></td>
-                <td><?= $centro['prepago']?></td>
-                <td><?= $centro['pospago']?></td>
-                <td><?= $centro['totales']?></td>
-                <td><?= $centro['porcentaje']?>%</td>
-                <td><?= $centro['asistencia']?></td>
-                <td><?= $centro['factor']?>%</td>
-              
+            <?php $fila = Permisos::reporteCentro($centro);
+            echo $fila;
+            ?>
             </tr>
             <?php endif;?>
-          <?php endforeach;?>
-        <?php endif;?>
-
-        <?php if(isset($_SESSION['identity']) && $_SESSION['identity']->idgrupo == "42" || isset($_SESSION['identity']) && $_SESSION['identity']->idgrupo == "193") :?>
-          <!-- perimisos a Admin y Coordinadores que puede ver toda la tabla reporte centro -->
-          <?php foreach ($desglose as $key => $centro) : ?>
-        
-            <?php $res = $centro['prefijo'] == 'TOTAL' ? 'table-active fw-bold' : '' ?>
+        <?php elseif($sesionAdmin) :?>
+          <!-- perimisos a Admin puede ver toda la tabla reporte centro -->
             <tr class="<?=$res?>">
-                <td><?= $centro['prefijo']?></td>
-                <td><?= $centro['prepago']?></td>
-                <td><?= $centro['pospago']?></td>
-                <td><?= $centro['totales']?></td>
-                <td><?= $centro['porcentaje']?>%</td>
-                <td><?= $centro['asistencia']?></td>
-                <td><?= $centro['factor']?>%</td>
-              
+                <?php $fila = Permisos::reporteCentro($centro);
+                echo $fila;
+            ?>
             </tr>
-          <?php endforeach;?>
-        <?php endif;?>
+            <?php endif;?>
+        <?php endforeach;?>
         
         </tbody>
       </table>
@@ -95,7 +84,6 @@ require_once 'views/layout/header.php';
       <div class="container">
           <div class="row">
               <div class="col-sm table-responsive-sm">
-              <?php if(isset($_SESSION['identity']) && $_SESSION['identity']->idgrupo == "150" || isset($_SESSION['identity']) && $_SESSION['identity']->idgrupo == "193" || isset($_SESSION['identity']) && $_SESSION['identity']->idgrupo == "42") :?>
                     <!-- visualizan todos la cabecera de la tabla -->
                     <table class="table table-striped table-hover caption-top">
                     <caption>Reporte Pospago</caption>
@@ -108,35 +96,33 @@ require_once 'views/layout/header.php';
                           <th scope="col-sm">Factor</th>
                         </tr>
                       </thead>
-                    
-                        <tbody>
-                        <?php foreach ($desglosePos as $key => $centro) : ?>
-                
+                      <?php  ?>
+                      <?php foreach ($desglosePos as $key => $centro) : ?>
+                      <?php if($sesionCoach) :?>
+                        <tbody>                
                           <?php if($centro['coach'] === $_SESSION['identity']->Nombre) :?> <!--solo pueden vesualizar sus datos de coach-->
                           <?php $res = $centro['coach'] == 'TOTAL' ? 'table-active fw-bold' : '' ?>
-
                           <tr class="<?=$res?>">
-                              <td><?= $centro['coach']?></td>
-                              <td><?= $centro['exitosa']?></td>
-                              <td><?= $centro['ingresada']?></td>
-                              <td><?= $centro['asistencia']?></td>
-                              <td><?= $centro['factor']?>%</td>
+                              <?php $tabladesglosePospago = Permisos::reportePospago($centro, $res);
+                              echo $tabladesglosePospago;?>
                           </tr>
                           <?php endif;?>
-                          <?php if(isset($_SESSION['identity']) && $_SESSION['identity']->idgrupo == "193" || isset($_SESSION['identity']) && $_SESSION['identity']->idgrupo == "42") :?>
-                            <!-- pueden ver todos las filas del reporte pospagop -->
-                            <tr class="<?=$res?>">
-                              <td><?= $centro['coach']?></td>
-                              <td><?= $centro['exitosa']?></td>
-                              <td><?= $centro['ingresada']?></td>
-                              <td><?= $centro['asistencia']?></td>
-                              <td><?= $centro['factor']?>%</td>
-                          </tr>
+                            <?php elseif($sesionCoordinador) : ?>
+                              <?php if($centro['coach'] != "CAE CONTACT" && $centro['coach'] != "HOMEOFFICE Y COMISIONISTA" && $centro['coach'] != "TEZIUTLAN CONTACT" && $centro['coach'] != "ZACAPOAXTLA CONTACT" && $centro['coach'] != "MELENDEZ SERRANO CECILIA MICHEL") : ?>
+                                <tr class="<?=$res?>">
+                                <?php $tabladesglosePospago = Permisos::reportePospago($centro, $res);
+                                echo $tabladesglosePospago;?>
+                                </tr>
+                                <?php endif;?>
+                                  <?php elseif($sesionAdmin) : ?>
+                                    <tr class="<?=$res?>">
+                                    <?php $tabladesglosePospago = Permisos::reportePospago($centro, $res);
+                                      echo $tabladesglosePospago;?>
+                                    </tr>
                           <?php endif;?>
                         <?php endforeach;?>
                         </tbody>
                     </table>
-                    <?php endif;?>
                 </div>
 
             <div class="col-sm table-responsive-sm">
@@ -152,20 +138,15 @@ require_once 'views/layout/header.php';
                   </tr>
                 </thead>
                 <tbody>
-
                 <?php foreach ($desgloSector as $key => $sector) : ?>
-
                   <?php $res = $sector['sector'] == 'TOTAL' ? 'table-active fw-bold' : '' ?>
-
                   <tr class="<?=$res?>">
                       <td><?= $sector['sector']?></td>
                       <td><?= $sector['ventas']?></td>
                       <td><?= $sector['asistencia']?></td>
                       <td><?= $sector['factor']?>%</td>
-                    
                   </tr>
                   <?php endforeach;?>
-                 
                 </tbody>
              </table>
             </div>
@@ -198,18 +179,9 @@ require_once 'views/layout/header.php';
                 <?php foreach ($desgloseCoach as $key => $coach) : ?>
 
                 <?php $res = $coach['coach'] == 'TOTAL' ? 'table-active fw-bold' : '' ?>
-
                     <tr class="<?=$res?>">
-                        <td><?= $coach['coach']?></td>
-                        <td><?= $coach['prepago']?></td>
-                        <td><?= $coach['migradas']?></td>
-                        <td><?= $coach['base']?></td>
-                        <td><?= $coach['total']?></td>
-                        <td><?= $coach['asistencia']?></td>
-                        <td><?= $coach['factor']?>%</td>
-                        <td><?= $coach['conexion']?></td>
-                        <td><?= $coach['talk']?></td>
-                        <td><?= $coach['sph']?></td>
+                      <?php $tabladesgloseCoach = Permisos::reporteCoach($coach);
+                      echo $tabladesglosePospago;?>
                     </tr>
                 <?php endforeach;?>
                 </tbody>
@@ -226,7 +198,7 @@ require_once 'views/layout/header.php';
     
     <div class="col-sm table-responsive-sm">
       <!-- la tabla solo se le mostrara a los coordinadores y Admin -->
-    <?php if(isset($_SESSION['identity']) && $_SESSION['identity']->idgrupo == "42" || isset($_SESSION['identity']) && $_SESSION['identity']->idgrupo == "193") : ?> 
+    <?php if($sesionAdmin || $sesionCoordinador) : ?> 
       <table class="table table-striped table-hover caption-top">
         <caption>Reporte Hora Centros</caption>
           <thead>
@@ -251,25 +223,22 @@ require_once 'views/layout/header.php';
           </thead>
           <tbody>
       <?php foreach($desgloseCentrosHoras as $ky => $centroshora) : ?>
+
+        <!-- mostrar solo el centro LCC al coordinador  -->
+        <?php if($sesionCoordinador) : ?> 
+          <?php if($ky === "ECI") : ?>
         <?php $res = 'table-active fw-bold'; ?>
               <tr>
-                <td><?=$ky;?></td>
-                <td><?= $centroshora['hora08'];?></td>
-                <td><?= $centroshora['hora09'];?></td>
-                <td><?= $centroshora['hora10'];?></td>
-                <td><?= $centroshora['hora11'];?></td>
-                <td><?= $centroshora['hora12'];?></td>
-                <td><?= $centroshora['hora13'];?></td>
-                <td><?= $centroshora['hora14'];?></td>
-                <td><?= $centroshora['hora15'];?></td>
-                <td><?= $centroshora['hora16'];?></td>
-                <td><?= $centroshora['hora17'];?></td>
-                <td><?= $centroshora['hora18'];?></td>
-                <td><?= $centroshora['hora19'];?></td>
-                <td><?= $centroshora['hora20'];?></td>
-                <td><?= $centroshora['hora21'];?></td>
-                <td class="<?=$res?>"><?= $centroshora['total'];?></td>
+              <?php $tabladesgloseCoach = Permisos::tablaHoras($ky,$centroshora, $res);
+                      echo $tabladesglosePospago;?>
             </tr>
+            <?php endif;?>
+          <?php elseif ($sesionAdmin) : ?>
+            <tr>
+            <?php $tabladesgloseCoach = Permisos::tablaHoras($ky,$centroshora, $res);
+                      echo $tabladesglosePospago;?>
+            </tr>
+          <?php endif;?>
       <?php endforeach; ?>
       <?php endif ?>
       </tbody>
@@ -307,27 +276,20 @@ require_once 'views/layout/header.php';
                     </thead>
                     <tbody>
                     <?php foreach($desgloseCoachHoras as $k => $coachhora) : ?>
-
                       <?php $res = 'table-active fw-bold'; ?>
-      
-                    <tr>
-                        <td><?=$k;?></td>
-                        <td><?= $coachhora['hora08'];?></td>
-                        <td><?= $coachhora['hora09'];?></td>
-                        <td><?= $coachhora['hora10'];?></td>
-                        <td><?= $coachhora['hora11'];?></td>
-                        <td><?= $coachhora['hora12'];?></td>
-                        <td><?= $coachhora['hora13'];?></td>
-                        <td><?= $coachhora['hora14'];?></td>
-                        <td><?= $coachhora['hora15'];?></td>
-                        <td><?= $coachhora['hora16'];?></td>
-                        <td><?= $coachhora['hora17'];?></td>
-                        <td><?= $coachhora['hora18'];?></td>
-                        <td><?= $coachhora['hora19'];?></td>
-                        <td><?= $coachhora['hora20'];?></td>
-                        <td><?= $coachhora['hora21'];?></td>
-                        <td class="<?=$res?>"><?= $coachhora['total'];?></td>
-                    </tr>
+                      <?php if($sesionCoach || $sesionCoordinador) : ?> 
+                        <?php if($k != "CAE CONTACT" && $k != "HOMEOFFICE Y COMISIONISTA" && $k != "TEZIUTLAN CONTACT" && $k != "ZACAPOAXTLA CONTACT" && $k != "MELENDEZ SERRANO CECILIA MICHEL") : ?>    
+                            <tr>
+                            <?php $tabladesgloseCoach = Permisos::tablaHoras($k,$coachhora, $res);
+                            echo $tabladesglosePospago;?>
+                            </tr>
+                            <?php endif; ?>
+                            <?php elseif(isset($_SESSION['identity']) && $_SESSION['identity']->idgrupo == "42") : ?>
+                              <tr>
+                              <?php $tabladesgloseCoach = Permisos::tablaHoras($k,$coachhora, $res);
+                              echo $tabladesglosePospago;?>
+                            </tr>
+                    <?php endif; ?>
                     <?php endforeach; ?>
                     </tbody>
               </table>
@@ -338,7 +300,3 @@ require_once 'views/layout/header.php';
 <?php
 require_once 'views/layout/footer.php';
 ?>
-<!-- <script>
-    var base_url = '<?= base_url ?>';
-</script>
-<script src="<?= base_url ?>assets/js/home.js"></script> -->
