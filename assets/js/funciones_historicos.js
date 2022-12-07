@@ -17,9 +17,10 @@
 
              color: "#FFFFFF", //estilos de color de letras 
 
-             html: '<input type="date" id="Date1" class="flex-nowrap w-50 swal2-input">' + '<br>' +
-                 '<input type="date" id="Date2" class="flex-nowrap w-50 swal2-input">',
-
+             html: '<input type="date" id="Date1" class="swal2-input">' + '<br>' +
+                 '<input type="date" id="Date2" class="swal2-input">',
+             //  flex-nowrap w-50 swal2-input
+             //  flex-nowrap w-50 swal2-input
          }).then(function(isConfirm) {
              var date1 = $('#Date1').val();
              var date2 = $('#Date2').val();
