@@ -18,7 +18,7 @@ class CmReporteador {
         LEFT JOIN USUARIO_CLIENTE AS UC ON UC.IdPersona = P.Id
         LEFT JOIN USUARIO_CLIENTE AS UCC ON UCC.Id = UC.IdSupervisor
         WHERE (CM.Fecha_encuesta >= "'.$fechas['Inicio'].'" AND CM.Fecha_encuesta <= "'.$fechas['Fin'].'")
-        AND (CM.Usuario LIKE "ECI%" OR CM.Usuario LIKE "LCC%" OR CM.Usuario LIKE "JAZ%") AND CM.Estado =1
+        AND (CM.Usuario LIKE "ECI%" OR CM.Usuario LIKE "LCC%") AND CM.Estado =1
         GROUP BY CM.Usuario
         ORDER BY CM.Id DESC';
 

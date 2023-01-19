@@ -223,5 +223,5 @@
  });
 
  function descargar() {
-     window.location.href = "/reporteador/controllers/save/ReporteCoaches.csv";
+     window.location.href = "/controllers/save/ReporteCoaches.csv";
  }

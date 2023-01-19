@@ -38,6 +38,7 @@ class VentasPospago
 				WHERE (Fecha_capturo >= '$fecha_i' AND Fecha_capturo <= '$fecha_f')
 				AND VP.Estado =1 AND VP.IdEstatusPospago =2 AND VP.SINO_migrada = 0 GROUP BY UCC.Id";
 
+
 		$res = $this->db->query($sql);
 
 		return $res;

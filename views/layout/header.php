@@ -73,8 +73,6 @@
 
       <a class="nav-link" href="<?=base_url?>UsuarioCliente/logout" tabindex="-1" aria-disabled="true">Cerrar Sesión</a>
 
-       <a id="prueba" class="nav-link" href="#" tabindex="-1" aria-disabled="true">Alert</a>
-
     </div>
   </div>
 </nav>

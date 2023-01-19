@@ -1,4 +1,6 @@
-$( "#prueba" ).click(function() {
+// solo se uso para pruebas de alert
+
+/*$( "#prueba" ).click(function() {
 
 	 Swal.fire(
 	  'Buen trabajo!',
@@ -7,3 +9,5 @@ $( "#prueba" ).click(function() {
 	)
 
 });
+
+*/

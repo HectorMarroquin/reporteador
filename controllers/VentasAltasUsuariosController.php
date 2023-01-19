@@ -10,8 +10,8 @@ class VentasAltasUsuariosController
 		$fechas_alta = Utils::ObtenerFechasPrincipales();
 		$fechas_enc = Utils::recorreFechas($fechas_alta);
 
-		$fechas_enc      = ['Inicio' => "2022-09-30",'Fin' => "2022-10-30"];
-		$fechas_alta     = ['Inicio' => "2022-10-01",'Fin' => "2022-10-31"];
+		$fechas_enc      = ['Inicio' => "2022-12-31",'Fin' => "2023-01-30"];
+		$fechas_alta     = ['Inicio' => "2023-01-01",'Fin' => "2023-01-31"];
 		
 		$desglose     = $this->desgloseAltas($fechas_alta, $fechas_enc);
 		$desglosCoach = $this->VentaAltasCoach($desglose);

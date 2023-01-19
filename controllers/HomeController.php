@@ -11,8 +11,8 @@ class HomeController
 		//$fecha_i = date('Y-m-d'); 
 		//$fecha_f = date('Y-m-d');
 
-		 $fecha_i = "2022-11-02";
-		 $fecha_f = "2022-11-02";
+		 $fecha_i = "2022-12-05";
+		 $fecha_f = "2022-12-05";
 		 
 
 		Utils::checkSession();
@@ -133,6 +133,7 @@ class HomeController
 		$factorT     = 0;
 		$existe      = false; 
 
+		
 		while ($dato = $datos->fetch_object()) {
 						
 		    $migradas   = 0;
@@ -174,7 +175,7 @@ class HomeController
 
 		}
 
-		if (!$existe && !empty($arreglo)) {
+		if (!$existe){
 
 			$idcoach      = "24897";
 			$migradas   = $ventasPos->getMigradasCoach("24897",$fecha_i,$fecha_f);
@@ -183,13 +184,14 @@ class HomeController
 			$factor     = $utils->getPromedio($migradas,$asistencia);
 
 		    $arreglo[] = array(
-                'coach'     =>$coach,
+                'coach'     =>"MELENDEZ SERRANO CECILIA MICHEL",
                 'exitosa'   =>$migradas,
                 'ingresada' =>$ingresada,
                 'asistencia'=>$asistencia,
                 'factor'    =>$factor,
               );
-			
+
+
 			$exitosaT    += $migradas; 
 			$ingresadaT  += $ingresada;
 			$asistenciaT += $asistencia;
