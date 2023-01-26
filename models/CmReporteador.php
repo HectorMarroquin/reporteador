@@ -10,17 +10,34 @@ class CmReporteador {
 
     //*Obtener usuarios telemarketing
 
-    public function getDataCm($fechas) {
-        //$dbcmr = 'SELECT Usuario FROM CM_REPORTEADOR WHERE Fecha_encuesta >= "'.$fechas['Inicio'].'" AND Fecha_encuesta <= "'.$fechas['Fin'].'"  AND Estado =1 AND (Usuario LIKE "ECI%" OR Usuario LIKE "LCC%") GROUP BY Usuario ORDER BY Id DESC LIMIT 0, 8';
-        $dbcmr = 'SELECT P.Nro_nomina as nomina, UC.Nombre as ejecutivo, UCC.Id as idcoach,UCC.Nombre as coach, CM.Usuario as tlmk
-        FROM CM_REPORTEADOR AS CM
-        LEFT JOIN PERSONA AS P ON P.Usuario_telemarketing = CM.Usuario
-        LEFT JOIN USUARIO_CLIENTE AS UC ON UC.IdPersona = P.Id
-        LEFT JOIN USUARIO_CLIENTE AS UCC ON UCC.Id = UC.IdSupervisor
-        WHERE (CM.Fecha_encuesta >= "'.$fechas['Inicio'].'" AND CM.Fecha_encuesta <= "'.$fechas['Fin'].'")
-        AND (CM.Usuario LIKE "ECI%" OR CM.Usuario LIKE "LCC%") AND CM.Estado =1
-        GROUP BY CM.Usuario
-        ORDER BY CM.Id DESC';
+    public function getDataCm($fechas,$rol,$iduserclient,$admin) {
+
+        if(in_array($rol,$admin)){
+
+            $dbcmr = 'SELECT P.Nro_nomina as nomina, UC.Nombre as ejecutivo, UCC.Id as idcoach,UCC.Nombre as coach, CM.Usuario as tlmk
+            FROM CM_REPORTEADOR AS CM
+            LEFT JOIN PERSONA AS P ON P.Usuario_telemarketing = CM.Usuario
+            LEFT JOIN USUARIO_CLIENTE AS UC ON UC.IdPersona = P.Id
+            LEFT JOIN USUARIO_CLIENTE AS UCC ON UCC.Id = UC.IdSupervisor
+            WHERE (CM.Fecha_encuesta >= "'.$fechas['Inicio'].'" AND CM.Fecha_encuesta <= "'.$fechas['Fin'].'")
+            AND (CM.Usuario LIKE "ECI%" OR CM.Usuario LIKE "LCC%") AND CM.Estado =1
+            GROUP BY CM.Usuario
+            ORDER BY CM.Id DESC';
+
+        }else{
+
+            $dbcmr = 'SELECT P.Nro_nomina as nomina, UC.Nombre as ejecutivo, UCC.Id as idcoach,UCC.Nombre as coach, CM.Usuario as tlmk
+            FROM CM_REPORTEADOR AS CM
+            LEFT JOIN PERSONA AS P ON P.Usuario_telemarketing = CM.Usuario
+            LEFT JOIN USUARIO_CLIENTE AS UC ON UC.IdPersona = P.Id
+            LEFT JOIN USUARIO_CLIENTE AS UCC ON UCC.Id = UC.IdSupervisor
+            WHERE (CM.Fecha_encuesta >= "'.$fechas['Inicio'].'" AND CM.Fecha_encuesta <= "'.$fechas['Fin'].'")
+            AND UC.IdSupervisor = "'.$iduserclient.'" AND CM.Estado =1
+            GROUP BY CM.Usuario
+            ORDER BY CM.Id DESC';
+
+        }
+        
 
         $result = $this->db->query($dbcmr);
         
@@ -106,5 +123,22 @@ class CmReporteador {
 
         return $result;
     }
+
+    public function ultimoRegistro(){
+
+		$reg = false;
+
+		$sql = "SELECT Fecha,Hora FROM CM_REPORTEADOR WHERE Estado = 1 ORDER BY Id DESC LIMIT 1";
+
+		$registro = $this->db->query($sql);
+
+		if ($registro && $registro->num_rows == 1) {
+			
+			$reg = $registro->fetch_object();
+		}
+
+		return $reg; 
+
+	}
     
 }

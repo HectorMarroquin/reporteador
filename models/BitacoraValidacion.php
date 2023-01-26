@@ -56,7 +56,7 @@ class BitacoraValidacion
 
 	public function getAll($fecha_i,$fecha_f,$rol,$admin){
 
-		$coord    = ['193'];
+		$coord    = ['237'];
 		$coach    = ['150'];
 		$externos = ['226'];
 

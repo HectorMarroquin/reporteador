@@ -54,11 +54,7 @@
     <input type="text" id="nomina" class="form-control" placeholder="Usuario" required autofocus name="usuario" autocomplete="off">
     <label for="contrasena" class="visually-hidden">Contraseña</label>
     <input type="password" id="contrasena" class="form-control" placeholder="Contraseña" name="password" autocomplete="off" required>
-    <div class="checkbox mb-3">
-      <label>
-        <input type="checkbox" value="remember-me"> Recordarme
-      </label>
-    </div>
+ 
     <button class="w-100 btn btn-lg btn-primary" type="submit">Entrar</button>
     <p class="mt-5 mb-3 text-muted">&copy; 2022-2023</p>
   </form>

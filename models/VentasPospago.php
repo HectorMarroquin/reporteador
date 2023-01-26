@@ -14,8 +14,8 @@ class VentasPospago
 
 		$venta = 0;
 
-		$sql = "SELECT COUNT(*) AS ventas FROM VENTAS_POSPAGO_VAL WHERE Fecha_capturo = '".$fecha_i."' AND Fecha_capturo <= '".$fecha_f."' AND IdEstatusPospago =2 AND Estado =1 AND IdCentro= '".$id_centro."'";
- 
+		$sql = "SELECT COUNT(*) AS ventas FROM VENTAS_POSPAGO_VAL WHERE (Fecha_capturo >= '".$fecha_i."' AND Fecha_capturo <= '".$fecha_f."') AND IdEstatusPospago =2 AND Estado =1 AND IdCentro= '".$id_centro."'";
+
 		$result = $this->db->query($sql);
 
 		if (!empty($result)) {
@@ -30,7 +30,7 @@ class VentasPospago
 
 	public function getAll($fecha_i,$fecha_f,$rol,$admin,$iduserclient){
 
-		if(in_array($rol,$admin)){
+		if(in_array($rol,$admin) || $rol == "237"){
 
 			$sql = "SELECT UC.IdSupervisor as idSuper,UCC.Nombre AS coach, COUNT( UCC.Id ) AS ventas,LC.User_group AS usergroup
 					FROM VENTAS_POSPAGO_VAL AS VP

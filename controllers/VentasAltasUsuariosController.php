@@ -6,14 +6,25 @@ class VentasAltasUsuariosController
 	public function index(){
 		
 		Utils::checkSession();
+
+		$rol          = $_SESSION['identity']->idgrupo;
+		$iduserclient = $_SESSION['identity']->Id;
+		$admin        = ['42','220','227','157','32','193','237'];
 		
 		$fechas_alta = Utils::ObtenerFechasPrincipales();
 		$fechas_enc = Utils::recorreFechas($fechas_alta);
-
+		
 		$fechas_enc      = ['Inicio' => "2022-12-31",'Fin' => "2023-01-30"];
 		$fechas_alta     = ['Inicio' => "2023-01-01",'Fin' => "2023-01-31"];
 		
-		$desglose     = $this->desgloseAltas($fechas_alta, $fechas_enc);
+		//extrae el fecha y hora del ultimo reg cargado del cm
+		$ultRegistro = new CmReporteador();
+		$registro = $ultRegistro->ultimoRegistro();
+		$reg = $registro ? $registro->Fecha . " " .$registro->Hora : 'S/N';
+
+		$mes_actual = Utils::getMes($registro->Fecha);
+		
+		$desglose     = $this->desgloseAltas($fechas_alta, $fechas_enc,$rol,$iduserclient,$admin);
 		$desglosCoach = $this->VentaAltasCoach($desglose);
 
 		$desgloSector = $this->ventasAltasSector($desglosCoach);
@@ -21,10 +32,10 @@ class VentasAltasUsuariosController
 		require_once 'views/ventasaltas/ventasaltas.php';
 	}
 
-	public static function desgloseAltas($fechas_alta, $fechas_enc) {
+	public static function desgloseAltas($fechas_alta, $fechas_enc,$rol,$iduserclient,$admin) {
 
 		$datos    = new CmReporteador();
-		$usuarios = $datos->getDataCm($fechas_enc);
+		$usuarios = $datos->getDataCm($fechas_enc,$rol,$iduserclient,$admin);
 		$array    = [];
 		$ventasT  = 0;
 		$fvcT     = 0;

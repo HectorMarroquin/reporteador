@@ -2,25 +2,33 @@
 require_once 'views/layout/header.php';
 require_once 'helpers/permisos.php';
 ?>
-<?php //Uusarios
-      $sesionAdmin = $_SESSION['identity']->idgrupo == "42";
-      $sesionCoach = $_SESSION['identity']->idgrupo == "150";
-      $sesionCoordinador = $_SESSION['identity']->idgrupo == "193";
-      ?>
+<?php //Usuarios
+
+      $rol      = $_SESSION['identity']->idgrupo;
+      $admincor = ['42','220','227','157','32','193','237'];
+?>
 
 <section class="info-section-head">
   
   <div class="container">
   <div class="row align-items-center">
     <div class="col-sm">
-      <h1>LCC DESGLOSE CM</h1>
+      <h1>DESGLOSE CM <span style="font-weight: bold"><?= $mes_actual ?></span></h1>
     </div>
     <div class="col-sm">
       <img id="img-home" class="img-fluid" src="<?=base_url?>/assets/img/lcc_azul.png">
     </div>
   </div>
+  <div class="row">
+      <div class="col-sm">
+           Ultima fecha actualización CM: <span style="font-weight: bold"><?= $reg ?></span>
+      </div>
+  </div>
 </div>
 </section>
+
+
+<?php if(in_array($rol,$admincor)) :?>
 
 <section class="info-section bg-light text-muted" id="info-section">
         <div class="container-fluid">
@@ -92,6 +100,8 @@ require_once 'helpers/permisos.php';
         </div>
     </section>
 
+<?php endif; ?>
+
 <section class="info-section bg-light text-muted" id="info-section">
         <div class="container">
             <div class="row">
@@ -116,27 +126,18 @@ require_once 'helpers/permisos.php';
                     <?php foreach ($desglose as $key => $dato):?>
                       <?php $res = $dato['user'] == 'TOTAL' ? 'table-active fw-bold' : '' ?>
                      
-                      <!-- permiso solo mostar los datos del coach cm ejecutivos -->
-                      <?php if($sesionCoach && $dato["nomCoach"] === $_SESSION['identity']->Nombre) : ?>
                         <tr class="<?=$res?>">
-                          <?php $tablaCM = Permisos::cmEjecutivos($dato);
-                          echo $tablaCM;?>
+                            <td><?= $dato["nomina"] ?></td>
+                            <td><?= $dato["tlmk"] ?></td>
+                            <td><?= $dato["user"] ?></td>
+                            <td><?= $dato["venta"] ?></td>
+                            <td><?= $dato["fvc"] ?></td>
+                            <td><?= $dato["porcentajefvc"] ?></td>
+                            <td><?= $dato["alta"] ?></td>
+                            <td><?= $dato["porcentajealta"] ?></td>
+                            <td><?= $dato["nomCoach"] ?></td>
                         </tr>
-                      <?php elseif($sesionCoordinador) :?>
-                        <!-- permisos de coordinar solo se mostrara en la zona que esta con sus respectivos coach -->
-                        <?php if($dato['nomCoach'] != "CAE CONTACT" && $dato['nomCoach'] != "HOMEOFFICE Y COMISIONISTA" && $dato['nomCoach'] != "TEZIUTLAN CONTACT" && $dato['nomCoach'] != "ZACAPOAXTLA CONTACT" && $dato['nomCoach'] != "MELENDEZ SERRANO CECILIA MICHEL") : ?>
-                          <tr class="<?=$res?>">
-                            <?php $tablaCM = Permisos::cmEjecutivos($dato);
-                            echo $tablaCM;?>
-                          </tr>
-                          <?php endif; ?>
-                        <?php elseif($sesionAdmin): ?>
-                          <!-- permisos del Admin se muestran todas las filas de la tabla -->
-                          <tr class="<?=$res?>">
-                          <?php $tablaCM = Permisos::cmEjecutivos($dato);
-                          echo $tablaCM;?>
-                          </tr>
-                      <?php endif; ?>
+
                       <?php endforeach;?>
                     </tbody>
                 </table>

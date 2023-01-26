@@ -1,3 +1,12 @@
+<?php 
+
+$rol = $_SESSION['identity']->idgrupo;
+
+$todo  = ['42'];
+$admincor = ['220','227','157','32','193','237'];
+$coach = ['150'];
+
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -37,9 +46,9 @@
           <a class="nav-link" href="<?=base_url?>Home/index">Inicio</a>
         </li>
 
-        <?php if(isset($_SESSION['identity']) && $_SESSION['identity']->idgrupo == "42") : ?>    
+        <?php if(isset($_SESSION['identity']) && in_array($rol,$todo)) : ?>    
         <li class="nav-item">
-          <a class="nav-link" href="<?=base_url?>VentasAltasUsuarios/index">Altas</a>
+          <a class="nav-link" href="<?=base_url?>VentasAltasUsuarios/index">Altas CM</a>
         </li>
 
         <li class="nav-item">
@@ -50,19 +59,19 @@
           <a class="nav-link" href="<?=base_url?>Reclutamiento/index" tabindex="-1" aria-disabled="true">Reclutamiento</a>
         </li>
 
-      <?php elseif(isset($_SESSION['identity']) && $_SESSION['identity']->idgrupo == "193"): ?>
+      <?php elseif(isset($_SESSION['identity']) && in_array($rol,$admincor)): ?>
 
         <li class="nav-item">
           <a class="nav-link" href="<?=base_url?>Historico/index" tabindex="-1" aria-disabled="true">Historico</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="<?=base_url?>VentasAltasUsuarios/index" tabindex="-1" aria-disabled="true">Altas</a>
+          <a class="nav-link" href="<?=base_url?>VentasAltasUsuarios/index" tabindex="-1" aria-disabled="true">Altas CM</a>
         </li>
 
-      <?php elseif(isset($_SESSION['identity']) && $_SESSION['identity']->idgrupo == "150"): ?>
+      <?php elseif(isset($_SESSION['identity']) && in_array($rol,$coach)): ?>
 
         <li class="nav-item">
-          <a class="nav-link" href="<?=base_url?>VentasAltasUsuarios/index" tabindex="-1" aria-disabled="true">Altas</a>
+          <a class="nav-link" href="<?=base_url?>VentasAltasUsuarios/index" tabindex="-1" aria-disabled="true">Altas CM</a>
         </li>
         <?php endif; ?>
       </ul>

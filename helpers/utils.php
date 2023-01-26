@@ -25,7 +25,7 @@ class Utils
 
 	public static function isAdmin(){
 
-		$admin = ['42','220','227','157','193','32'];
+		$admin = ['42','220','227','157','193','32','237'];
 
 		$rol = $_SESSION['identity']->idgrupo;
 
@@ -352,6 +352,58 @@ class Utils
            return $contador;
 
 }
+
+
+	public static function getMes($mes){
+
+		$mes = explode("-",$mes);
+
+		$mes = $mes[1];
+
+		switch($mes){
+
+			case '01' : $mesActual = 'ENERO';
+			break;
+
+			case '02' : $mesActual = 'FEBRERO';
+			break;
+
+			case '03' : $mesActual = 'MARZO';
+			break;
+
+			case '04' : $mesActual = 'ABRIL';
+			break;
+
+			case '05' : $mesActual = 'MAYO';
+			break;
+
+			case '06' : $mesActual = 'JUNIO';
+			break;
+
+			case '07' : $mesActual = 'JULIO';
+			break;
+
+			case '08' : $mesActual = 'AGOSTO';
+			break;
+
+			case '09' : $mesActual = 'SEPTIEMBRE';
+			break;
+
+			case '10' : $mesActual = 'OCTUBRE';
+			break;
+
+			case '11' : $mesActual = 'NOVIEMBRE';
+			break;
+
+			case '12' : $mesActual = 'DICIEMBRE';
+			break;
+
+		}
+
+		return $mesActual;
+
+}
+
 
 
 }//fin de la clase utils
