@@ -8,11 +8,15 @@ class HomeController
 {
 	public function index(){
 
+		$rol          = $_SESSION['identity']->idgrupo;
+		$iduserclient = $_SESSION['identity']->Id;
+		$admin        = ['42','220','227','157','32','193'];
+
 		//$fecha_i = date('Y-m-d'); 
 		//$fecha_f = date('Y-m-d');
 
-		 $fecha_i = "2022-12-05";
-		 $fecha_f = "2022-12-05";
+		 $fecha_i = "2023-01-20";
+		 $fecha_f = "2023-01-20";
 		 
 
 		Utils::checkSession();
@@ -24,32 +28,32 @@ class HomeController
 
 		//extraer todas las ventas prepago
 		$ventasCentros  = new BitacoraValidacion();
-		$centros = $ventasCentros->getAll($fecha_i,$fecha_f);
+		$centros = $ventasCentros->getAll($fecha_i,$fecha_f,$rol,$admin);
 
 		//extraer centro,prepago,pospago,pos/pre,%pos,asistencia,factor
 		
 		$desglose   = $this->getDesgloseCentros($centros,$fecha_i,$fecha_f);
 
 		$ventasPospago = new VentasPospago();
-		$pospago       = $ventasPospago->getAll($fecha_i,$fecha_f);
+		$pospago       = $ventasPospago->getAll($fecha_i,$fecha_f,$rol,$admin,$iduserclient);
 		
-		$ventasCoach = new BitacoraValidacion();
-		$coachPrepago       = $ventasCoach->getVentasCoach($fecha_i,$fecha_f);
+		$ventasCoach   = new BitacoraValidacion();
+		$coachPrepago  = $ventasCoach->getVentasCoach($fecha_i,$fecha_f);
 		
-		$desgloseCoach   = $this->getDesgloseCoaches($coachPrepago,$fecha_i,$fecha_f);
-		$desglosePos   = $this->getDesglosePospago($pospago,$fecha_i,$fecha_f);
+		$desgloseCoach = $this->getDesgloseCoaches($coachPrepago,$fecha_i,$fecha_f);
+		$desglosePos   = $this->getDesglosePospago($pospago,$fecha_i,$fecha_f,$rol,$admin);
 		
-		$sectores = new UsuarioCliente();
-		$ventaSector = $sectores->getSectores($fecha_i,$fecha_f); 
-		$desgloSector         = $this->getDesgloSector($ventaSector,$fecha_i,$fecha_f);
+		$sectores      = new UsuarioCliente();
+		$ventaSector   = $sectores->getSectores($fecha_i,$fecha_f); 
+		$desgloSector  = $this->getDesgloSector($ventaSector,$fecha_i,$fecha_f);
 		
 		
-		$centros = new ListaCentro();
-		$centrosActivos = $centros->getAll();
+		$centros       = new ListaCentro();
+		$centrosActivos= $centros->getAll();
 
 		$coaches = new UsuarioCliente();
 
-		$coachActivos = $coaches->getCoaches(); 
+		$coachActivos = $coaches->getCoaches($iduserclient,$rol,$admin); 
 		
 		$desgloseCentrosHoras = $this->getDesgloseHoraCentros($fecha_i,$fecha_f,$centrosActivos);
 		$desgloseCoachHoras   = $this->getDesgloseHoraCoach($fecha_i,$fecha_f,$coachActivos);
@@ -72,6 +76,7 @@ class HomeController
 		$asistenciaT = 0;
 		$factorT     = 0;
 
+		
 		while ($centro = $centros->fetch_object()) {
 			
 			$nameCentro  = $centro->centro;
@@ -90,7 +95,8 @@ class HomeController
 			$factorT     = Utils::getPromedio($ventasAcum,$asistenciaT);
 			$porcentaje  = Utils::getPromedio($ventasPos,$ventasT);
 			$porcentajeT = Utils::getPromedio($ventasPosT,$ventasAcum);
-
+		
+			
 			$arreglo[] = array(
 							'centro'    =>$nameCentro,
                             'prefijo'   =>$prefijo,
@@ -114,13 +120,14 @@ class HomeController
                             'asistencia'=>$asistenciaT,
                             'factor'    =>$factorT,
                           );
-
+						  
 		return $arreglo;
+
 
 	}
 
 
-	public static function getDesglosePospago($datos,$fecha_i,$fecha_f){
+	public static function getDesglosePospago($datos,$fecha_i,$fecha_f,$rol,$admin){
 
 		// hay que insertar los centros externos en tabla alcance meta para poder optimizar esta parte
 		$arreglo = array();
@@ -131,7 +138,7 @@ class HomeController
 		$ingresadaT  = 0;
 		$asistenciaT = 0;
 		$factorT     = 0;
-		$existe      = false; 
+		$existe      = false;
 
 		
 		while ($dato = $datos->fetch_object()) {
@@ -144,7 +151,7 @@ class HomeController
 			$ingresada  = $ventasPos->getIngresadas($coach,$fecha_i,$fecha_f);
 
 
-		     if ($idcoach == "24897") {
+		     if ($idcoach == "24897" && in_array($rol,$admin)) { // permite que en la vista de coach no salga cecilia, solo los del mismo coach
 		      	$existe = true;
 		        $migradas   = $ventasPos->getMigradasCoach($idcoach,$fecha_i,$fecha_f);
 		        $ingresa  = $ventasPos->getIngresadasVal($fecha_i,$fecha_f);
@@ -175,7 +182,7 @@ class HomeController
 
 		}
 
-		if (!$existe){
+		if (!$existe && in_array($rol,$admin)){  // permite que en la vista de coach no salga cecilia, solo los del mismo coach
 
 			$idcoach      = "24897";
 			$migradas   = $ventasPos->getMigradasCoach("24897",$fecha_i,$fecha_f);
@@ -206,6 +213,7 @@ class HomeController
                 'asistencia'=>$asistenciaT,
                 'factor'    =>$factorT,
               );
+
 
 		return $arreglo;
 		
@@ -322,7 +330,9 @@ class HomeController
 			$ventas = $ventascoach->gethoraventaCoach($fecha_i,$fecha_f,$coach->Id);
 			$horascoach[$coach->Nombre] = Utils::segmentaHoras($ventas);
 	
+
 		}
+
 		return $horascoach;
 	}
 

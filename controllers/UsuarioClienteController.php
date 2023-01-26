@@ -19,10 +19,7 @@ class UsuarioClienteController{
 			$usuario    = isset($usuario) ? $usuario : false;
 			$password = isset($pass) ? $pass: false;
 
-			$administradores = ['42','220','227','157'];
-			$coordinadores   = ['193'];
-			$coach           = ['150'];
-			$externos        = ['226'];
+			$administradores = ['42','220','227','157','32','193'];
 
 			$usuarioCliente = new UsuarioCliente();
 			$usuarioCliente->setUsuario($usuario);
@@ -38,8 +35,10 @@ class UsuarioClienteController{
 				if (in_array($idgrupo,$administradores)) {
 					
 					$_SESSION['admin'] = true;
+				
 				}else{
 					$_SESSION['admin'] = false;
+
 				}
 
 				header("Location:".base_url."Home/index");

@@ -3,7 +3,7 @@ require_once 'views/layout/header.php';
 require_once 'helpers/permisos.php'
 ?>
 
-<?php //Uusarios
+<?php //Usuarios
       $sesionAdmin = $_SESSION['identity']->idgrupo == "42";
       $sesionCoach = $_SESSION['identity']->idgrupo == "150";
       $sesionCoordinador = $_SESSION['identity']->idgrupo == "193";
@@ -49,24 +49,18 @@ require_once 'helpers/permisos.php'
         </thead>
         <tbody>
         <?php foreach ($desglose as $key => $centro) : ?>
-          <?php if($sesionCoach || $sesionCoordinador) :?>  <!--coach y Coordinar que solo puede visiualizar LCC--->
-            <?php if($centro['prefijo'] === "ECI") : ?>
-             
-            <?php $res = $centro['prefijo'] == 'TOTAL' ? 'table-active fw-bold' : '' ?>
+          
+          <?php $res = $centro['prefijo'] == 'TOTAL' ? 'table-active fw-bold' : '' ?>
+
             <tr class="<?=$res?>">
-            <?php $fila = Permisos::reporteCentro($centro);
-            echo $fila;
-            ?>
-            </tr>
-            <?php endif;?>
-        <?php elseif($sesionAdmin) :?>
-          <!-- perimisos a Admin puede ver toda la tabla reporte centro -->
-            <tr class="<?=$res?>">
-                <?php $fila = Permisos::reporteCentro($centro);
-                echo $fila;
-            ?>
-            </tr>
-            <?php endif;?>
+            <td><?= $centro['prefijo']?></td>
+            <td><?= $centro['prepago']?></td>
+            <td><?= $centro['pospago']?></td>
+            <td><?= $centro['totales']?></td>
+            <td><?= $centro['porcentaje']?></td>
+            <td><?= $centro['asistencia']?></td>
+            <td><?= $centro['factor']?></td>
+           </tr>
         <?php endforeach;?>
         
         </tbody>
@@ -96,31 +90,17 @@ require_once 'helpers/permisos.php'
                           <th scope="col-sm">Factor</th>
                         </tr>
                       </thead>
-                      <?php  ?>
+                      <tbody>
                       <?php foreach ($desglosePos as $key => $centro) : ?>
-                      <?php if($sesionCoach) :?>
-                        <tbody>                
-                          <?php if($centro['coach'] === $_SESSION['identity']->Nombre) :?> <!--solo pueden vesualizar sus datos de coach-->
-                          <?php $res = $centro['coach'] == 'TOTAL' ? 'table-active fw-bold' : '' ?>
-                          <tr class="<?=$res?>">
-                              <?php $tabladesglosePospago = Permisos::reportePospago($centro, $res);
-                              echo $tabladesglosePospago;?>
-                          </tr>
-                          <?php endif;?>
-                            <?php elseif($sesionCoordinador) : ?>
-                              <?php if($centro['coach'] != "CAE CONTACT" && $centro['coach'] != "HOMEOFFICE Y COMISIONISTA" && $centro['coach'] != "TEZIUTLAN CONTACT" && $centro['coach'] != "ZACAPOAXTLA CONTACT" && $centro['coach'] != "MELENDEZ SERRANO CECILIA MICHEL") : ?>
-                                <tr class="<?=$res?>">
-                                <?php $tabladesglosePospago = Permisos::reportePospago($centro, $res);
-                                echo $tabladesglosePospago;?>
+                            <?php $res = $centro['coach'] == 'TOTAL' ? 'table-active fw-bold' : '' ?>
+                                 <tr class="<?=$res?>">
+                                    <td><?=$centro['coach']?></td>
+                                    <td><?=$centro['exitosa']?></td>
+                                    <td><?=$centro['ingresada']?></td>
+                                    <td><?=$centro['asistencia']?></td>
+                                    <td><?=$centro['factor']?></td>
                                 </tr>
-                                <?php endif;?>
-                                  <?php elseif($sesionAdmin) : ?>
-                                    <tr class="<?=$res?>">
-                                    <?php $tabladesglosePospago = Permisos::reportePospago($centro, $res);
-                                      echo $tabladesglosePospago;?>
-                                    </tr>
-                          <?php endif;?>
-                        <?php endforeach;?>
+                      <?php endforeach;?>
                         </tbody>
                     </table>
                 </div>
@@ -223,22 +203,27 @@ require_once 'helpers/permisos.php'
           </thead>
           <tbody>
       <?php foreach($desgloseCentrosHoras as $ky => $centroshora) : ?>
+          <?php $res = 'table-active fw-bold'; ?>
 
-        <!-- mostrar solo el centro LCC al coordinador  -->
-        <?php if($sesionCoordinador) : ?> 
-          <?php if($ky === "ECI") : ?>
-        <?php $res = 'table-active fw-bold'; ?>
-              <tr>
-              <?php $tabladesgloseCoach = Permisos::tablaHoras($ky,$centroshora, $res);
-                      echo $tabladesglosePospago;?>
-            </tr>
-            <?php endif;?>
-          <?php elseif ($sesionAdmin) : ?>
             <tr>
-            <?php $tabladesgloseCoach = Permisos::tablaHoras($ky,$centroshora, $res);
-                      echo $tabladesglosePospago;?>
+                <td><?= $ky ?></td>
+                <td><?= $centroshora['hora08']?></td>
+                <td><?= $centroshora['hora09']?></td>
+                <td><?= $centroshora['hora10']?></td>
+                <td><?= $centroshora['hora11']?></td>
+                <td><?= $centroshora['hora12']?></td>
+                <td><?= $centroshora['hora13']?></td>
+                <td><?= $centroshora['hora14']?></td>
+                <td><?= $centroshora['hora15']?></td>
+                <td><?= $centroshora['hora16']?></td>
+                <td><?= $centroshora['hora17']?></td>
+                <td><?= $centroshora['hora18']?></td>
+                <td><?= $centroshora['hora19']?></td>
+                <td><?= $centroshora['hora20']?></td>
+                <td><?= $centroshora['hora21']?></td>
+                <td class="<?=$res?>"><?=$centroshora['total']?></td>
             </tr>
-          <?php endif;?>
+
       <?php endforeach; ?>
       <?php endif ?>
       </tbody>
@@ -277,19 +262,24 @@ require_once 'helpers/permisos.php'
                     <tbody>
                     <?php foreach($desgloseCoachHoras as $k => $coachhora) : ?>
                       <?php $res = 'table-active fw-bold'; ?>
-                      <?php if($sesionCoach || $sesionCoordinador) : ?> 
-                        <?php if($k != "CAE CONTACT" && $k != "HOMEOFFICE Y COMISIONISTA" && $k != "TEZIUTLAN CONTACT" && $k != "ZACAPOAXTLA CONTACT" && $k != "MELENDEZ SERRANO CECILIA MICHEL") : ?>    
-                            <tr>
-                            <?php $tabladesgloseCoach = Permisos::tablaHoras($k,$coachhora, $res);
-                            echo $tabladesglosePospago;?>
-                            </tr>
-                            <?php endif; ?>
-                            <?php elseif(isset($_SESSION['identity']) && $_SESSION['identity']->idgrupo == "42") : ?>
-                              <tr>
-                              <?php $tabladesgloseCoach = Permisos::tablaHoras($k,$coachhora, $res);
-                              echo $tabladesglosePospago;?>
-                            </tr>
-                    <?php endif; ?>
+                          <tr>
+                                <td><?= $k ?></td>
+                                <td><?= $coachhora['hora08']?></td>
+                                <td><?= $coachhora['hora09']?></td>
+                                <td><?= $coachhora['hora10']?></td>
+                                <td><?= $coachhora['hora11']?></td>
+                                <td><?= $coachhora['hora12']?></td>
+                                <td><?= $coachhora['hora13']?></td>
+                                <td><?= $coachhora['hora14']?></td>
+                                <td><?= $coachhora['hora15']?></td>
+                                <td><?= $coachhora['hora16']?></td>
+                                <td><?= $coachhora['hora17']?></td>
+                                <td><?= $coachhora['hora18']?></td>
+                                <td><?= $coachhora['hora19']?></td>
+                                <td><?= $coachhora['hora20']?></td>
+                                <td><?= $coachhora['hora21']?></td>
+                                <td class="<?=$res?>"><?=$coachhora['total']?></td>
+                          </tr>
                     <?php endforeach; ?>
                     </tbody>
               </table>

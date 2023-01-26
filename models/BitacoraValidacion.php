@@ -54,9 +54,24 @@ class BitacoraValidacion
 
 	}
 
-	public function getAll($fecha_i,$fecha_f){
+	public function getAll($fecha_i,$fecha_f,$rol,$admin){
 
-		$sql = "SELECT LC.Centro as centro,LC.Prefijo as prefijo,COUNT(*) as ventas, LC.User_group as ugroup,LC.Id as id FROM BITACORA_VALIDACION AS BV INNER JOIN LISTA_CENTROS AS LC ON LC.Id = BV.Id_ListaCentros WHERE (BV.Fecha >= '$fecha_i' AND BV.Fecha <= '$fecha_f') AND BV.IdEstatus_bitacora_validador = 2 AND BV.Estado = 1 GROUP BY BV.Id_ListaCentros";
+		$coord    = ['193'];
+		$coach    = ['150'];
+		$externos = ['226'];
+
+
+		if(in_array($rol,$admin)){
+
+			$sql = "SELECT LC.Centro as centro,LC.Prefijo as prefijo,COUNT(*) as ventas, LC.User_group as ugroup,LC.Id as id FROM BITACORA_VALIDACION AS BV INNER JOIN LISTA_CENTROS AS LC ON LC.Id = BV.Id_ListaCentros WHERE (BV.Fecha >= '$fecha_i' AND BV.Fecha <= '$fecha_f') AND BV.IdEstatus_bitacora_validador = 2 AND BV.Estado = 1 GROUP BY BV.Id_ListaCentros";
+		
+		}elseif(in_array($rol,$coord) || in_array($rol,$coach)){
+
+			$sql = "SELECT LC.Centro as centro,LC.Prefijo as prefijo,COUNT(*) as ventas, LC.User_group as ugroup,LC.Id as id FROM BITACORA_VALIDACION AS BV INNER JOIN LISTA_CENTROS AS LC ON LC.Id = BV.Id_ListaCentros WHERE (BV.Fecha >= '$fecha_i' AND BV.Fecha <= '$fecha_f') AND (BV.IdEstatus_bitacora_validador = 2 AND BV.Id_ListaCentros = 1) AND BV.Estado = 1 GROUP BY BV.Id_ListaCentros";
+		}else{
+			
+			$sql = "SELECT LC.Centro as centro,LC.Prefijo as prefijo,COUNT(*) as ventas, LC.User_group as ugroup,LC.Id as id FROM BITACORA_VALIDACION AS BV INNER JOIN LISTA_CENTROS AS LC ON LC.Id = BV.Id_ListaCentros WHERE (BV.Fecha >= '$fecha_i' AND BV.Fecha <= '$fecha_f') AND (BV.IdEstatus_bitacora_validador = 2 AND BV.Id_ListaCentros = 22) AND BV.Estado = 1 GROUP BY BV.Id_ListaCentros";
+		}
 
 		$registros = $this->db->query($sql);
 
@@ -67,8 +82,8 @@ class BitacoraValidacion
 
 	public function getVentasCoach($fecha_i,$fecha_f){
 
-		$sql = "SELECT UC.Id,UC.Nombre, COUNT( BV.Id ) AS ventas FROM BITACORA_VALIDACION AS BV INNER JOIN USUARIO_CLIENTE AS UC ON UC.Id = BV.IdUsuario_supervisor WHERE (BV.Fecha >= '$fecha_i' AND BV.Fecha <= '$fecha_f') AND BV.Estado =1 GROUP BY BV.IdUsuario_supervisor";
-
+		$sql = "SELECT UC.Id,UC.Nombre, COUNT( BV.Id ) AS ventas FROM BITACORA_VALIDACION AS BV INNER JOIN USUARIO_CLIENTE AS UC ON UC.Id = BV.IdUsuario_supervisor WHERE (BV.Fecha >= '$fecha_i' AND BV.Fecha <= '$fecha_f') AND (BV.Estado =1 AND UC.IdCampania NOT IN (62) AND IdEstatus_bitacora_validador = 2) GROUP BY BV.IdUsuario_supervisor";
+		
 		$registros = $this->db->query($sql);
 
 		return $registros;

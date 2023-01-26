@@ -28,16 +28,31 @@ class VentasPospago
 
 	}
 
-	public function getAll($fecha_i,$fecha_f){
+	public function getAll($fecha_i,$fecha_f,$rol,$admin,$iduserclient){
 
-		$sql = "SELECT UC.IdSupervisor as idSuper,UCC.Nombre AS coach, COUNT( UCC.Id ) AS ventas,LC.User_group AS usergroup
-				FROM VENTAS_POSPAGO_VAL AS VP
-				INNER JOIN USUARIO_CLIENTE AS UC ON UC.Id = VP.IdUsuario_vendio
-				INNER JOIN USUARIO_CLIENTE AS UCC ON UCC.Id = UC.IdSupervisor
-				INNER JOIN LISTA_CENTROS AS LC ON LC.Id = VP.IdCentro
-				WHERE (Fecha_capturo >= '$fecha_i' AND Fecha_capturo <= '$fecha_f')
-				AND VP.Estado =1 AND VP.IdEstatusPospago =2 AND VP.SINO_migrada = 0 GROUP BY UCC.Id";
+		if(in_array($rol,$admin)){
 
+			$sql = "SELECT UC.IdSupervisor as idSuper,UCC.Nombre AS coach, COUNT( UCC.Id ) AS ventas,LC.User_group AS usergroup
+					FROM VENTAS_POSPAGO_VAL AS VP
+					INNER JOIN USUARIO_CLIENTE AS UC ON UC.Id = VP.IdUsuario_vendio
+					INNER JOIN USUARIO_CLIENTE AS UCC ON UCC.Id = UC.IdSupervisor
+					INNER JOIN LISTA_CENTROS AS LC ON LC.Id = VP.IdCentro
+					WHERE (Fecha_capturo >= '$fecha_i' AND Fecha_capturo <= '$fecha_f')
+					AND VP.Estado =1 AND VP.IdEstatusPospago =2 AND VP.SINO_migrada = 0 GROUP BY UCC.Id";
+
+		}else{
+
+			$sql = "SELECT UC.IdSupervisor as idSuper,UCC.Nombre AS coach, COUNT( UCC.Id ) AS ventas,LC.User_group AS usergroup
+					FROM VENTAS_POSPAGO_VAL AS VP
+					INNER JOIN USUARIO_CLIENTE AS UC ON UC.Id = VP.IdUsuario_vendio
+					INNER JOIN USUARIO_CLIENTE AS UCC ON UCC.Id = UC.IdSupervisor
+					INNER JOIN LISTA_CENTROS AS LC ON LC.Id = VP.IdCentro
+					WHERE (Fecha_capturo >= '$fecha_i' AND Fecha_capturo <= '$fecha_f' AND UC.IdSupervisor = '".$iduserclient."' )
+					AND (VP.Estado =1 AND VP.IdEstatusPospago =2 AND VP.SINO_migrada = 0) GROUP BY UCC.Id";
+
+
+
+		}
 
 		$res = $this->db->query($sql);
 

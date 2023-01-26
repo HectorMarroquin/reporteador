@@ -41,7 +41,7 @@
                          },
                          iconColor: "#FFFFFF",
                          color: "#FFFFFF",
-                         background: "linear-gradient(63deg, rgba(2,0,36,1) 22%, rgba(121,9,32,1) 48%, rgba(255,0,22,1) 100%)"
+                         background: "rgba(14,113,223,60)"
                      });
                  } // termina if error 
 

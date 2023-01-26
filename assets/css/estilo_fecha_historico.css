@@ -3,8 +3,7 @@
 }
 
 .popup-class {
-    background: rgb(24, 193, 193);
-    background: linear-gradient(90deg, rgba(24, 193, 193, 1) 0%, rgba(18, 168, 150, 1) 50%, rgba(1, 190, 240, 1) 100%);
+    background: rgba(14,113,223,60);
 }
 
 .title-class {

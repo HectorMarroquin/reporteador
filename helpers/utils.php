@@ -25,7 +25,7 @@ class Utils
 
 	public static function isAdmin(){
 
-		$admin = ['42','220','227','157','193'];
+		$admin = ['42','220','227','157','193','32'];
 
 		$rol = $_SESSION['identity']->idgrupo;
 

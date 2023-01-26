@@ -101,7 +101,7 @@ class UsuarioCliente
 		$pass  = $this->password;
 		$password = md5($pass);
 
-		$sql   = "SELECT Nro_nomina,Usuario,IdGrupo_sistema as idgrupo,Pass,Nombre FROM USUARIO_CLIENTE WHERE Usuario = '$usuario' AND IdGrupo_sistema IN(42,220,227,157,193,150,226) AND Estado = 1";
+		$sql   = "SELECT Id,Nro_nomina,Usuario,IdGrupo_sistema as idgrupo,Pass,Nombre FROM USUARIO_CLIENTE WHERE Usuario = '$usuario' AND IdGrupo_sistema IN(42,220,227,157,193,150,226) AND Estado = 1";
 		$login = $this->db->query($sql);
 
 		if ($login && $login->num_rows == 1) {
@@ -118,8 +118,16 @@ class UsuarioCliente
 
 
 
-	public function getCoaches(){
-        $table = "SELECT Nombre, Id FROM `USUARIO_CLIENTE` WHERE IdGrupo_sistema =150 AND Estado =1";
+	public function getCoaches($iduserclient,$rol,$admin){
+
+		if(in_array($rol,$admin)){
+
+			$table = "SELECT Nombre, Id FROM `USUARIO_CLIENTE` WHERE IdGrupo_sistema =150 AND Estado =1";
+
+		}else{
+
+			$table = "SELECT Nombre, Id FROM `USUARIO_CLIENTE` WHERE Id = '".$iduserclient."' AND Estado =1";
+		}
         
         $data = $this->db->query($table);
         return $data;
@@ -135,8 +143,8 @@ class UsuarioCliente
 		
 		$table = "SELECT UC.Idcampania as idsector,C.Nombre, COUNT(UC.Idcampania) AS ventas
 		FROM BITACORA_VALIDACION AS BV
-		INNER JOIN USUARIO_CLIENTE AS UC ON UC.Id = BV.IdUsuario_ejecutivo
-		INNER JOIN CAMPANIA AS C ON C.Id = UC.Idcampania
+		LEFT JOIN USUARIO_CLIENTE AS UC ON UC.Id = BV.IdUsuario_ejecutivo
+		LEFT JOIN CAMPANIA AS C ON C.Id = UC.Idcampania
 		WHERE BV.IdEstatus_bitacora_validador =2
 		AND (
 		BV.Fecha >= '".$fecha_i."'

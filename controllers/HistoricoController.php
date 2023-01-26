@@ -10,26 +10,28 @@ require 'vendor/autoload.php';
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Csv;
 
+
 class HistoricoController
 {
+
 	public function index()
 	{
 		Utils::checkSession();
-
-		
-
+		Utils::isAdmin();
 
 		require 'views/historico/historico.php';
 	}
 
 	public function desglose()
 	{
-
 		$fecha_i = $_POST['date1'];
 		$fecha_f = $_POST['date2'];
 
+		$admin        = ['42','220','227','157','32'];
+		$rol          = $_SESSION['identity']->idgrupo;
+
 		$centrosPre = new BitacoraValidacion();
-		$centrosPrepagos = $centrosPre->getAll($fecha_i, $fecha_f);
+		$centrosPrepagos = $centrosPre->getAll($fecha_i, $fecha_f,$rol,$admin);
 
 		$datosObtenidos = new HomeController();
 		$reporteCentro = $datosObtenidos->getDesgloseCentros($centrosPrepagos, $fecha_i, $fecha_f);
@@ -43,10 +45,14 @@ class HistoricoController
 		$fecha_i = $_POST['date1'];
 		$fecha_f = $_POST['date2'];
 
-		$ventasPos = new VentasPospago();
-		$ventaPos = $ventasPos->getAll($fecha_i, $fecha_f);
+		$admin        = ['42','220','227','157','32'];
+		$rol          = $_SESSION['identity']->idgrupo;
+		$iduserclient = $_SESSION['identity']->Id;
 
-		$ventasPospago = HomeController::getDesglosePospago($ventaPos, $fecha_i, $fecha_f);
+		$ventasPos = new VentasPospago();
+		$ventaPos = $ventasPos->getAll($fecha_i, $fecha_f,$rol,$admin,$iduserclient);
+
+		$ventasPospago = HomeController::getDesglosePospago($ventaPos, $fecha_i, $fecha_f,$rol,$admin);
 		echo json_encode($ventasPospago);
 	}
 
@@ -67,8 +73,12 @@ class HistoricoController
 		$fecha_i = $_POST['date1'];
 		$fecha_f = $_POST['date2'];
 
+		$rol          = $_SESSION['identity']->idgrupo;
+		$iduserclient = $_SESSION['identity']->Id;
+		$admin        = ['42','220','227','157','32'];
+
 		$coaches = new UsuarioCliente();
-		$coaches = $coaches->getCoaches();
+		$coaches = $coaches->getCoaches($iduserclient,$rol,$admin);
 
 
 		$desgloseHoraCoach = $this->desgloseHoraCoach($fecha_i, $fecha_f, $coaches);
