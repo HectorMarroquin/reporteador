@@ -282,11 +282,11 @@ class Utils
 
 	public function getAsistenciaSector($idsector,$fecha_i,$fecha_f){
 
-		$sql_coaches = "SELECT IdSupervisor as idcoach
+		$sql_coaches = "SELECT Id as idcoach
 		FROM USUARIO_CLIENTE
 		WHERE Idcampania = '".$idsector."'
-		AND Estado =1
-		GROUP BY IdSupervisor";
+		AND Estado =1 AND IdGrupo_sistema IN (150,50,151,157,167)";
+
 		$resul = $this->db->query($sql_coaches);	
 
 		$total = 0;
@@ -295,7 +295,6 @@ class Utils
 
 			$idcoach = $dato->idcoach; 
 			$asistencia = $this->getAsistencia($idcoach,$fecha_i,$fecha_f);
-
 			$total += intval($asistencia);
 
 		}

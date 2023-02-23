@@ -20,11 +20,12 @@ class UsuarioClienteController{
 			$password = isset($pass) ? $pass: false;
 
 			$administradores = ['42','220','227','157','32','193','237'];
-
+			
 			$usuarioCliente = new UsuarioCliente();
 			$usuarioCliente->setUsuario($usuario);
 			$usuarioCliente->setPassword($password);
 			$identity = $usuarioCliente->login();
+
 
 			$idgrupo = $identity->idgrupo;
 

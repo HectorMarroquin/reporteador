@@ -15,8 +15,8 @@ class HomeController
 		//$fecha_i = date('Y-m-d'); 
 		//$fecha_f = date('Y-m-d');
 
-		 $fecha_i = "2023-01-26";
-		 $fecha_f = "2023-01-26";
+		 $fecha_i = "2023-02-23";
+		 $fecha_f = "2023-02-23";
 		 
 
 		Utils::checkSession();
@@ -342,10 +342,12 @@ class HomeController
 		$ventasT     = 0;
 		$asistenciaT = 0;
 
+		
 		while($sector = $sectores->fetch_object()){
-
+			
 			if($sector->idsector != "62"){
-
+				
+				
 				$idsector    = $sector->idsector;
 				$name_sector = $sector->Nombre;
 				$ventas      = $sector->ventas;

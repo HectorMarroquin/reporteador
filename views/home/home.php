@@ -7,7 +7,9 @@ require_once 'helpers/permisos.php'
       $sesionAdmin = $_SESSION['identity']->idgrupo == "42";
       $sesionCoach = $_SESSION['identity']->idgrupo == "150";
       $sesionCoordinador = $_SESSION['identity']->idgrupo == "193";
-      ?>
+
+
+?>
 
 <section class="info-section-head">
   
@@ -157,11 +159,19 @@ require_once 'helpers/permisos.php'
                 </thead>
                 <tbody>
                 <?php foreach ($desgloseCoach as $key => $coach) : ?>
-
+                  
                 <?php $res = $coach['coach'] == 'TOTAL' ? 'table-active fw-bold' : '' ?>
                     <tr class="<?=$res?>">
-                      <?php $tabladesgloseCoach = Permisos::reporteCoach($coach);
-                      echo $tabladesglosePospago;?>
+                        <td><?= $coach['coach']     ?></td>
+                        <td><?= $coach['prepago']   ?></td>
+                        <td><?= $coach['migradas']  ?></td>
+                        <td><?= $coach['base']      ?></td>
+                        <td><?= $coach['total']     ?></td>
+                        <td><?= $coach['asistencia']?></td>
+                        <td><?= $coach['factor']    ?></td>
+                        <td><?= $coach['conexion']  ?></td>
+                        <td><?= $coach['talk']      ?></td>
+                        <td><?= $coach['sph']       ?></td>
                     </tr>
                 <?php endforeach;?>
                 </tbody>

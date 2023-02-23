@@ -101,7 +101,7 @@ class UsuarioCliente
 		$pass  = $this->password;
 		$password = md5($pass);
 
-		$sql   = "SELECT Id,Nro_nomina,Usuario,IdGrupo_sistema as idgrupo,Pass,Nombre FROM USUARIO_CLIENTE WHERE Usuario = '$usuario' AND IdGrupo_sistema IN(42,220,227,157,193,150,226,237) AND Estado = 1";
+		$sql   = "SELECT Id,Nro_nomina,Usuario,IdGrupo_sistema as idgrupo,Pass,Nombre FROM USUARIO_CLIENTE WHERE Usuario = '$usuario' AND IdGrupo_sistema IN(42,220,227,157,193,150,226,237,32) AND Estado = 1";
 		$login = $this->db->query($sql);
 
 		if ($login && $login->num_rows == 1) {
@@ -151,8 +151,6 @@ class UsuarioCliente
 		AND BV.Fecha <= '".$fecha_f."'
 		)
 		GROUP BY UC.Idcampania";
-
-		//echo $table; exit();
 
         $data = $this->db->query($table);
         return $data;
