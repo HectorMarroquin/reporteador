@@ -120,7 +120,7 @@ class UsuarioCliente
 
 	public function getCoaches($iduserclient,$rol,$admin){
 
-		if(in_array($rol,$admin)){
+		if(in_array($rol,$admin) || $iduserclient == '4561' ){
 
 			$table = "SELECT Nombre, Id FROM `USUARIO_CLIENTE` WHERE IdGrupo_sistema =150 AND Estado =1";
 

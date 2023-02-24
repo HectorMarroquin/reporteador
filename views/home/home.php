@@ -145,7 +145,7 @@ require_once 'helpers/permisos.php'
                 <caption>Reporte Coaches</caption>
                 <thead>
                   <tr>
-                    <th scope="col-sm">Centro</th>
+                    <th scope="col-sm">Coach</th>
                     <th scope="col-sm">Prepago</th>
                     <th scope="col-sm">Migradas</th>
                     <th scope="col-sm">Pos/Base</th>

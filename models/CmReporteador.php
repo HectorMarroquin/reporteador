@@ -37,7 +37,6 @@ class CmReporteador {
             ORDER BY CM.Id DESC';
 
         }
-        
 
         $result = $this->db->query($dbcmr);
         

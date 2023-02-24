@@ -288,7 +288,6 @@ class Utils
 		AND Estado =1 AND IdGrupo_sistema IN (150,50,151,157,167)";
 
 		$resul = $this->db->query($sql_coaches);	
-
 		$total = 0;
 		
 		while($dato = $resul->fetch_object()){

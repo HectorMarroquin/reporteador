@@ -330,7 +330,6 @@ class HomeController
 			$ventas = $ventascoach->gethoraventaCoach($fecha_i,$fecha_f,$coach->Id);
 			$horascoach[$coach->Nombre] = Utils::segmentaHoras($ventas);
 	
-
 		}
 
 		return $horascoach;

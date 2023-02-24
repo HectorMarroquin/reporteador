@@ -6,6 +6,7 @@ require_once 'helpers/permisos.php';
 
       $rol      = $_SESSION['identity']->idgrupo;
       $admincor = ['42','220','227','157','32','193','237'];
+
 ?>
 
 <section class="info-section-head">
@@ -26,9 +27,6 @@ require_once 'helpers/permisos.php';
   </div>
 </div>
 </section>
-
-
-<?php if(in_array($rol,$admincor)) :?>
 
 <section class="info-section bg-light text-muted" id="info-section">
         <div class="container-fluid">
@@ -64,7 +62,6 @@ require_once 'helpers/permisos.php';
               </div>
 
               <div class="col-sm table-responsive-sm">
-              <?php if($sesionAdmin) :?>
                   <table class="table table-striped table-hover caption-top">
                       <caption>CM SECTORES</caption>
                       <thead>
@@ -94,13 +91,10 @@ require_once 'helpers/permisos.php';
                         <?php endforeach;?>
                       </tbody>
                   </table>
-                  <?php endif;?>
               </div>
             </div>
         </div>
     </section>
-
-<?php endif; ?>
 
 <section class="info-section bg-light text-muted" id="info-section">
         <div class="container">
