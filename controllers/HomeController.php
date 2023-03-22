@@ -15,8 +15,8 @@ class HomeController
 		//$fecha_i = date('Y-m-d'); 
 		//$fecha_f = date('Y-m-d');
 
-		 $fecha_i = "2023-02-23";
-		 $fecha_f = "2023-02-23";
+		 $fecha_i = "2023-03-21";
+		 $fecha_f = "2023-03-21";
 		 
 
 		Utils::checkSession();
@@ -28,7 +28,7 @@ class HomeController
 
 		//extraer todas las ventas prepago
 		$ventasCentros  = new BitacoraValidacion();
-		$centros = $ventasCentros->getAll($fecha_i,$fecha_f,$rol,$admin);
+		$centros = $ventasCentros->getAll($fecha_i,$fecha_f,$rol,$admin,$iduserclient);
 
 		//extraer centro,prepago,pospago,pos/pre,%pos,asistencia,factor
 		

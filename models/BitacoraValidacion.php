@@ -54,7 +54,7 @@ class BitacoraValidacion
 
 	}
 
-	public function getAll($fecha_i,$fecha_f,$rol,$admin){
+	public function getAll($fecha_i,$fecha_f,$rol,$admin,$idusuariocliente){
 
 		$coord    = ['237'];
 		$coach    = ['150'];
@@ -68,12 +68,16 @@ class BitacoraValidacion
 		}elseif(in_array($rol,$coord) || in_array($rol,$coach)){
 
 			$sql = "SELECT LC.Centro as centro,LC.Prefijo as prefijo,COUNT(*) as ventas, LC.User_group as ugroup,LC.Id as id FROM BITACORA_VALIDACION AS BV INNER JOIN LISTA_CENTROS AS LC ON LC.Id = BV.Id_ListaCentros WHERE (BV.Fecha >= '$fecha_i' AND BV.Fecha <= '$fecha_f') AND (BV.IdEstatus_bitacora_validador = 2 AND BV.Id_ListaCentros = 1) AND BV.Estado = 1 GROUP BY BV.Id_ListaCentros";
+		}elseif($rol == "226"){
+			
+			$sql = "SELECT LC.Centro as centro,LC.Prefijo as prefijo,COUNT(*) as ventas, LC.User_group as ugroup,LC.Id as id FROM BITACORA_VALIDACION AS BV INNER JOIN LISTA_CENTROS AS LC ON LC.Id = BV.Id_ListaCentros WHERE (BV.Fecha >= '$fecha_i' AND BV.Fecha <= '$fecha_f') AND (BV.IdEstatus_bitacora_validador = 2) AND BV.Estado = 1 AND IdUsuario_supervisor = '".$idusuariocliente."' GROUP BY BV.Id_ListaCentros";
 		}else{
 			
-			$sql = "SELECT LC.Centro as centro,LC.Prefijo as prefijo,COUNT(*) as ventas, LC.User_group as ugroup,LC.Id as id FROM BITACORA_VALIDACION AS BV INNER JOIN LISTA_CENTROS AS LC ON LC.Id = BV.Id_ListaCentros WHERE (BV.Fecha >= '$fecha_i' AND BV.Fecha <= '$fecha_f') AND (BV.IdEstatus_bitacora_validador = 2 AND BV.Id_ListaCentros = 22) AND BV.Estado = 1 GROUP BY BV.Id_ListaCentros";
+			$sql = "SELECT LC.Centro as centro,LC.Prefijo as prefijo,COUNT(*) as ventas, LC.User_group as ugroup,LC.Id as id FROM BITACORA_VALIDACION AS BV INNER JOIN LISTA_CENTROS AS LC ON LC.Id = BV.Id_ListaCentros WHERE (BV.Fecha >= '$fecha_i' AND BV.Fecha <= '$fecha_f') AND (BV.IdEstatus_bitacora_validador = 2 AND BV.Id_ListaCentros = 0) AND BV.Estado = 1 GROUP BY BV.Id_ListaCentros";
 		}
 
 		$registros = $this->db->query($sql);
+		//var_dump($registros);  exit();
 
 		return $registros; 
 

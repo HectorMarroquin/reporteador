@@ -14,8 +14,8 @@ class VentasAltasUsuariosController
 		$fechas_alta = Utils::ObtenerFechasPrincipales();
 		$fechas_enc = Utils::recorreFechas($fechas_alta);
 		
-		$fechas_enc      = ['Inicio' => "2023-01-31",'Fin' => "2023-02-27"];
-		$fechas_alta     = ['Inicio' => "2023-02-01",'Fin' => "2023-02-28"];
+		$fechas_enc      = ['Inicio' => "2023-02-28",'Fin' => "2023-03-30"];
+		$fechas_alta     = ['Inicio' => "2023-03-01",'Fin' => "2023-03-31"];
 		
 		//extrae el fecha y hora del ultimo reg cargado del cm
 		$ultRegistro = new CmReporteador();

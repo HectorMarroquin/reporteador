@@ -66,7 +66,7 @@ class VentasPospago
 				INNER JOIN USUARIO_CLIENTE AS UC ON UC.Id = VP.IdUsuario_vendio
 				INNER JOIN USUARIO_CLIENTE AS UCC ON UCC.Id = UC.IdSupervisor
 				WHERE (Fecha_capturo >= '$fecha_i' AND Fecha_capturo <= '$fecha_f')
-				AND VP.Estado =1 AND VP.IdEstatusPospago =2  AND VP.IdEstatusBitacoraValPos = 1 AND VP.SINO_migrada = 0 AND UCC.Nombre = '".$coach."'";
+				AND VP.Estado =1 AND VP.IdEstatusPospago =2  AND VP.IdEstatusBitacoraValPos = 1 AND VP.SINO_migrada IN(1,3) AND UCC.Nombre = '".$coach."'";
 
 		$resultado = $this->db->query($sql);
 		$ingresa   = $resultado->fetch_object();
@@ -84,12 +84,13 @@ class VentasPospago
 
 		$ingresada = 0;
 
-		$sql = "SELECT SUM(SINO_migrada) AS migradas FROM VENTAS_POSPAGO_VAL WHERE (Fecha_capturo >= '".$fecha_i."' AND Fecha_capturo <= '".$fecha_f."') AND IdEstatusBitacoraValPos =1 AND IdEstatusPospago = 2 AND Estado = 1";
+		$sql = "SELECT SUM(SINO_migrada) AS migradas FROM VENTAS_POSPAGO_VAL WHERE (Fecha_capturo >= '".$fecha_i."' AND Fecha_capturo <= '".$fecha_f."') AND IdEstatusBitacoraValPos = 1 AND IdEstatusPospago = 2 AND Estado = 1 AND SINO_migrada = 1";
 
+		
 		$result = $this->db->query($sql);
 		$ingresa = $result->fetch_object();
-		
-		if (!isset($ingresa)) {
+				
+		if (!empty($ingresa)) {
 			$ingresada = $ingresa->migradas;	
 		}
 
