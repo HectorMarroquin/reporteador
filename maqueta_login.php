@@ -6,7 +6,14 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.79.0">
-     <link href="assets/img/logoLcc.png" rel="icon">
+    <link href="assets/img/logoLcc.png" rel="icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="<?=base_url?>assets/img/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="<?=base_url?>assets/img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="<?=base_url?>assets/img/favicon/favicon-16x16.png">
+    <link rel="manifest" href="<?=base_url?>assets/img/favicon/site.webmanifest">
+    <link rel="mask-icon" href="<?=base_url?>assets/img/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
     <title>REPORTEADOR</title>
 
     <!-- Bootstrap core CSS -->

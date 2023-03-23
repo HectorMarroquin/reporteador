@@ -29,9 +29,13 @@ class HistoricoController
 
 		$admin        = ['42','220','227','157','32'];
 		$rol          = $_SESSION['identity']->idgrupo;
+		$iduserclient = $_SESSION['identity']->Id;
+
+		$centros       = new ListaCentro();
+		$centrosActivos= $centros->getAll($rol,$admin,$iduserclient);
 
 		$centrosPre = new BitacoraValidacion();
-		$centrosPrepagos = $centrosPre->getAll($fecha_i, $fecha_f,$rol,$admin);
+		$centrosPrepagos = $centrosPre->getAll($fecha_i, $fecha_f,$centrosActivos);
 
 		$datosObtenidos = new HomeController();
 		$reporteCentro = $datosObtenidos->getDesgloseCentros($centrosPrepagos, $fecha_i, $fecha_f);

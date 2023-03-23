@@ -36,7 +36,7 @@ require_once 'helpers/permisos.php'
   <div class="row justify-content-center">
     
     <div class="col-sm-8 table-responsive-sm">
-      <table class="table table-striped table-hover caption-top">
+      <table class="table table-striped table-hover caption-top table-sm">
          <caption>Reporte Centros</caption>
         <thead>
           <tr>

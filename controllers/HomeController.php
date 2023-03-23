@@ -15,8 +15,8 @@ class HomeController
 		//$fecha_i = date('Y-m-d'); 
 		//$fecha_f = date('Y-m-d');
 
-		 $fecha_i = "2023-03-21";
-		 $fecha_f = "2023-03-21";
+		 $fecha_i = "2023-03-22";
+		 $fecha_f = "2023-03-22";
 		 
 
 		Utils::checkSession();
@@ -26,9 +26,12 @@ class HomeController
 		$registro = $ultRegistro->ultimoRegistro($fecha_i);
 		$reg = $registro ? $registro->Hora : 'S/N';
 
+		$centros       = new ListaCentro();
+		$centrosActivos= $centros->getAll($rol,$admin,$iduserclient);
+
 		//extraer todas las ventas prepago
 		$ventasCentros  = new BitacoraValidacion();
-		$centros = $ventasCentros->getAll($fecha_i,$fecha_f,$rol,$admin,$iduserclient);
+		$centros = $ventasCentros->getAll($fecha_i,$fecha_f,$centrosActivos);
 
 		//extraer centro,prepago,pospago,pos/pre,%pos,asistencia,factor
 		
@@ -46,16 +49,15 @@ class HomeController
 		$sectores      = new UsuarioCliente();
 		$ventaSector   = $sectores->getSectores($fecha_i,$fecha_f); 
 		$desgloSector  = $this->getDesgloSector($ventaSector,$fecha_i,$fecha_f);
-		
-		
-		$centros       = new ListaCentro();
-		$centrosActivos= $centros->getAll();
 
 		$coaches = new UsuarioCliente();
 
 		$coachActivos = $coaches->getCoaches($iduserclient,$rol,$admin); 
+
+		$centroList       = new ListaCentro();
+		$centrosAct= $centroList->getAll($rol,$admin,$iduserclient);
 		
-		$desgloseCentrosHoras = $this->getDesgloseHoraCentros($fecha_i,$fecha_f,$centrosActivos);
+		$desgloseCentrosHoras = $this->getDesgloseHoraCentros($fecha_i,$fecha_f,$centrosAct);
 		$desgloseCoachHoras   = $this->getDesgloseHoraCoach($fecha_i,$fecha_f,$coachActivos);
 		
 
@@ -76,19 +78,19 @@ class HomeController
 		$asistenciaT = 0;
 		$factorT     = 0;
 
-		
-		while ($centro = $centros->fetch_object()) {
-			
-			$nameCentro  = $centro->centro;
-			$prefijo     = $centro->prefijo;
-			$id_cen      = $centro->id;
-			$ventasPre   = $centro->ventas;
+
+		foreach($centros as $centro){
+
+			$nameCentro  = $centro['centro'];
+			$prefijo     = $centro['prefijo'];
+			$id_cen      = $centro['id'];
+			$ventasPre   = $centro['ventas'];
 			$ventasPreT  += $ventasPre;
 			$ventasPos   = $ventasp->getVentasPosCentro($id_cen,$fecha_i,$fecha_f);
 			$ventasPosT  += $ventasPos;
 			$ventasT     = intval($ventasPre) + intval($ventasPos);
 			$ventasAcum  += $ventasT;
-			$userGroup   = $centro->ugroup;
+			$userGroup   = $centro['ugroup'];
 			$asistencia  = $utils->getAsistenciaCentro($userGroup,$fecha_i,$fecha_f);
 			$asistenciaT += $asistencia;
 			$factor      = Utils::getPromedio($ventasT,$asistencia);
@@ -107,6 +109,8 @@ class HomeController
                             'asistencia'=>$asistencia,
                             'factor'    =>$factor,
                           );
+
+
 
 		}
 
@@ -311,7 +315,8 @@ class HomeController
 	public static function getDesgloseHoraCentros($fecha_i,$fecha_f,$centros){
 
 		$ventascentro = new BitacoraValidacion();
-
+		$horascentro = [];
+		
 		while($centro = $centros->fetch_object()){
 
 			$ventas = $ventascentro->getHoraCentro($fecha_i,$fecha_f,$centro->Id);
