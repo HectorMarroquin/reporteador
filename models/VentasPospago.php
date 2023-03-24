@@ -38,7 +38,7 @@ class VentasPospago
 					INNER JOIN USUARIO_CLIENTE AS UCC ON UCC.Id = UC.IdSupervisor
 					INNER JOIN LISTA_CENTROS AS LC ON LC.Id = VP.IdCentro
 					WHERE (Fecha_capturo >= '$fecha_i' AND Fecha_capturo <= '$fecha_f')
-					AND VP.Estado =1 AND VP.IdEstatusPospago =2 AND VP.SINO_migrada = 0 GROUP BY UCC.Id";
+					AND VP.Estado =1 AND VP.IdEstatusPospago =2 AND VP.SINO_migrada IN(3) GROUP BY UCC.Id";
 
 		}else{
 
@@ -48,7 +48,7 @@ class VentasPospago
 					INNER JOIN USUARIO_CLIENTE AS UCC ON UCC.Id = UC.IdSupervisor
 					INNER JOIN LISTA_CENTROS AS LC ON LC.Id = VP.IdCentro
 					WHERE (Fecha_capturo >= '$fecha_i' AND Fecha_capturo <= '$fecha_f' AND UC.IdSupervisor = '".$iduserclient."' )
-					AND (VP.Estado =1 AND VP.IdEstatusPospago =2 AND VP.SINO_migrada = 0) GROUP BY UCC.Id";
+					AND (VP.Estado =1 AND VP.IdEstatusPospago =2 AND VP.SINO_migrada IN(3) ) GROUP BY UCC.Id";
 
 
 
@@ -66,7 +66,7 @@ class VentasPospago
 				INNER JOIN USUARIO_CLIENTE AS UC ON UC.Id = VP.IdUsuario_vendio
 				INNER JOIN USUARIO_CLIENTE AS UCC ON UCC.Id = UC.IdSupervisor
 				WHERE (Fecha_capturo >= '$fecha_i' AND Fecha_capturo <= '$fecha_f')
-				AND VP.Estado =1 AND VP.IdEstatusPospago =2  AND VP.IdEstatusBitacoraValPos = 1 AND VP.SINO_migrada IN(1,3) AND UCC.Nombre = '".$coach."'";
+				AND VP.Estado =1 AND VP.IdEstatusPospago =2  AND VP.IdEstatusBitacoraValPos = 1 AND VP.SINO_migrada IN(3) AND UCC.Nombre = '".$coach."'";
 
 		$resultado = $this->db->query($sql);
 		$ingresa   = $resultado->fetch_object();
@@ -107,8 +107,7 @@ class VentasPospago
 		$complement = "UC.IdSupervisor=".$idcoach ." AND";
 	}
 
-	$sql = "SELECT SUM(VP.SINO_migrada) AS migradas FROM VENTAS_POSPAGO_VAL AS VP INNER JOIN USUARIO_CLIENTE AS UC ON UC.Id = VP.IdUsuario_vendio INNER JOIN USUARIO_CLIENTE AS UCC ON UCC.Id = UC.IdSupervisor WHERE (VP.Fecha_capturo >= '$fecha_i' AND VP.Fecha_capturo <= '$fecha_f') AND VP.IdEstatusPospago =2 AND $complement VP.Estado =1";
-
+	$sql = "SELECT SUM(VP.SINO_migrada) AS migradas FROM VENTAS_POSPAGO_VAL AS VP INNER JOIN USUARIO_CLIENTE AS UC ON UC.Id = VP.IdUsuario_vendio INNER JOIN USUARIO_CLIENTE AS UCC ON UCC.Id = UC.IdSupervisor WHERE (VP.Fecha_capturo >= '$fecha_i' AND VP.Fecha_capturo <= '$fecha_f') AND VP.IdEstatusPospago =2 AND VP.SINO_migrada =1 AND $complement VP.Estado =1";
     $migradas = $this->db->query($sql);
 
     $result = $migradas->fetch_object();

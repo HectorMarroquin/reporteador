@@ -15,8 +15,8 @@ class HomeController
 		//$fecha_i = date('Y-m-d'); 
 		//$fecha_f = date('Y-m-d');
 
-		 $fecha_i = "2023-03-22";
-		 $fecha_f = "2023-03-22";
+		 $fecha_i = "2023-03-24";
+		 $fecha_f = "2023-03-24";
 		 
 
 		Utils::checkSession();
