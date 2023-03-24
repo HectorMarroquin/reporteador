@@ -39,7 +39,7 @@ require_once 'helpers/permisos.php'
       <table style="table-layout: fixed;" class="table table-striped table-hover caption-top table-sm">
          <caption>Reporte Centros</caption>
         <thead>
-          <tr>
+          <tr class="ocultar-cab">
             <th scope="col-sm">Centro</th>
             <th scope="col-sm">Pre</th>
             <th scope="col-sm">Pos</th>
