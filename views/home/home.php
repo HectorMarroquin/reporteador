@@ -35,16 +35,16 @@ require_once 'helpers/permisos.php'
 <div class="container">
   <div class="row justify-content-center">
     
-    <div class="col-sm-8 table-responsive-sm">
-      <table class="table table-striped table-hover caption-top table-sm">
+    <div class="col-sm-6 col-md-7 table-responsive-sm">
+      <table style="table-layout: fixed;" class="table table-striped table-hover caption-top table-sm">
          <caption>Reporte Centros</caption>
         <thead>
           <tr>
             <th scope="col-sm">Centro</th>
-            <th scope="col-sm">Prepago</th>
-            <th scope="col-sm">Pospago</th>
+            <th scope="col-sm">Pre</th>
+            <th scope="col-sm">Pos</th>
             <th scope="col-sm">Pos/pre</th>
-            <th scope="col-sm">% Pos</th>
+            <th scope="col-sm">%Pos</th>
             <th scope="col-sm">Asistencia</th>
             <th scope="col-sm">Factor</th>
           </tr>
