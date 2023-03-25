@@ -91,8 +91,7 @@ h1{
 	background-color: #B7D6FC;
   }
 
-.oculta-cab th{
-
-	overflow-x: hidden;
+.ocultar-cab th{
+	overflow-x:hidden !important;
  }
  

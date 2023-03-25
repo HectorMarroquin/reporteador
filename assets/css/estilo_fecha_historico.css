@@ -74,3 +74,7 @@
     color: white;
     top: 50%;
 }
+
+.ocultar-cab th{
+	overflow-x:hidden !important;
+ }

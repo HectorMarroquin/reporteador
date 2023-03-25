@@ -151,7 +151,7 @@ class UsuarioCliente
 		AND BV.Fecha <= '".$fecha_f."'
 		)
 		GROUP BY UC.Idcampania";
-
+			
         $data = $this->db->query($table);
         return $data;
 

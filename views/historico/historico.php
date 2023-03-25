@@ -47,22 +47,22 @@ require_once 'views/layout/header.php';
 </section>
     <section class="info-section bg-light text-muted" id="info-section">
         <div class="container">
-            <div class="row">
+            <div class="row justify-content-center">
                 <div class = "text-center"> 
                     <h5 id="fechasconsultadas" style="font-weight: bold"></h5>
                 </div>
                 <h1>Reporte Centros</h1>
-                <div class="table-responsive-sm">
-                    <table class="table table-striped table-hover table caption-top">
+                <div class="col-sm-6 col-md-7 table-responsive-sm">
+                    <table class="table table-striped table-hover caption-top table-sm">
                         <thead>
-                            <tr>
-                                <th scope="row col-sm">Centro</th>
-                                <th scope="row col-sm">Prepago</th>
-                                <th scope="row col-sm">Pospago</th>
-                                <th scope="row col-sm">Pos/pre</th>
-                                <th scope="row col-sm">% Pos</th>
-                                <th scope="row col-sm">Asistencia</th>
-                                <th scope="row col-sm">Factor</th>
+                            <tr class="ocultar-cab">
+                                <th scope="col-sm">Centro</th>
+                                <th scope="col-sm">Prepago</th>
+                                <th scope="col-sm">Pospago</th>
+                                <th scope="col-sm">Pos/pre</th>
+                                <th scope="col-sm">% Pos</th>
+                                <th scope="col-sm">Asistencia</th>
+                                <th scope="col-sm">Factor</th>
                             </tr>
                         </thead>
                         <tbody id="tableReporteCentro">
