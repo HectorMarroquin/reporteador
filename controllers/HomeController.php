@@ -10,7 +10,7 @@ class HomeController
 
 		$rol          = $_SESSION['identity']->idgrupo;
 		$iduserclient = $_SESSION['identity']->Id;
-		$admin        = ['42','220','227','157','32','193'];
+		$admin        = ['42','220','227','157','32','193','16'];
 
 		//$fecha_i = date('Y-m-d'); 
 		//$fecha_f = date('Y-m-d');

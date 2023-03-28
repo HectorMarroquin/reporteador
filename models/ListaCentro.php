@@ -11,6 +11,7 @@ class ListaCentro{
 
         public function getAll($rol,$admin,$idusuario){
 
+            $sql = "";
             $coord    = ['237'];
             $coach    = ['150'];
             $externos = ['226'];

@@ -45,7 +45,7 @@ require_once 'helpers/permisos.php'
             <th scope="col-sm">Pos</th>
             <th scope="col-sm">Pos/pre</th>
             <th scope="col-sm">%Pos</th>
-            <th scope="col-sm">Asistencia</th>
+            <th scope="col-sm">Asis</th>
             <th scope="col-sm">Factor</th>
           </tr>
         </thead>
