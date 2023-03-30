@@ -402,7 +402,24 @@ class Utils
 
 }
 
+	public static function extraerPrefijoFicticio(&$arrCentros){
 
+		$aleatorio= array_rand($arrCentros, 1);
+		$newPrefijo = $arrCentros[$aleatorio];
+		unset($arrCentros[$aleatorio]);
+		return $newPrefijo;
+
+	}
+
+	public static function crearArrCentros($elementos){
+
+		$arr = [];
+
+		for ($i=1; $i < $elementos; $i++) { 
+			$arr[] = "Centro" . $i;
+		}
+		return $arr;
+	}
 
 }//fin de la clase utils
 

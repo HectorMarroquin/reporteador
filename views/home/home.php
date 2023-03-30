@@ -4,10 +4,12 @@ require_once 'helpers/permisos.php'
 ?>
 
 <?php //Usuarios
+      $grupo       = $_SESSION['identity']->idgrupo;
       $sesionAdmin = $_SESSION['identity']->idgrupo == "42";
       $sesionCoach = $_SESSION['identity']->idgrupo == "150";
       $sesionCoordinador = $_SESSION['identity']->idgrupo == "193";
 
+      $col = $grupo == '226' ? 'col-sm-12' : 'col-sm';
 
 ?>
 
@@ -79,10 +81,10 @@ require_once 'helpers/permisos.php'
 
       <div class="container">
           <div class="row">
-              <div class="col-sm table-responsive-sm">
+              <div class= <?=$col." table-responsive-sm"?>>
                     <!-- visualizan todos la cabecera de la tabla -->
                     <table class="table table-striped table-hover caption-top">
-                    <caption>Reporte Pospago</caption>
+                    <caption>Reporte Pospago De Base</caption>
                       <thead>
                         <tr>
                           <th scope="col-sm">Coach</th>
@@ -108,29 +110,30 @@ require_once 'helpers/permisos.php'
                 </div>
 
             <div class="col-sm table-responsive-sm">
-              
-            <table class="table table-striped table-hover caption-top">
-                <caption>Reporte Sectores</caption>
-                <thead>
-                  <tr>
-                    <th scope="col-sm">Lugar</th>
-                    <th scope="col-sm">Prepago</th>
-                    <th scope="col-sm">Asistencia</th>
-                    <th scope="col-sm">Factor</th>
-                  </tr>
-                </thead>
-                <tbody>
-                <?php foreach ($desgloSector as $key => $sector) : ?>
-                  <?php $res = $sector['sector'] == 'TOTAL' ? 'table-active fw-bold' : '' ?>
-                  <tr class="<?=$res?>">
-                      <td><?= $sector['sector']?></td>
-                      <td><?= $sector['ventas']?></td>
-                      <td><?= $sector['asistencia']?></td>
-                      <td><?= $sector['factor']?>%</td>
-                  </tr>
-                  <?php endforeach;?>
-                </tbody>
-             </table>
+            <?php if($sesionAdmin || $sesionCoordinador || $sesionCoach) : ?>
+                <table class="table table-striped table-hover caption-top">
+                    <caption>Reporte Sectores</caption>
+                    <thead>
+                      <tr>
+                        <th scope="col-sm">Lugar</th>
+                        <th scope="col-sm">Prepago</th>
+                        <th scope="col-sm">Asistencia</th>
+                        <th scope="col-sm">Factor</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    <?php foreach ($desgloSector as $key => $sector) : ?>
+                      <?php $res = $sector['sector'] == 'TOTAL' ? 'table-active fw-bold' : '' ?>
+                      <tr class="<?=$res?>">
+                          <td><?= $sector['sector']?></td>
+                          <td><?= $sector['ventas']?></td>
+                          <td><?= $sector['asistencia']?></td>
+                          <td><?= $sector['factor']?>%</td>
+                      </tr>
+                      <?php endforeach;?>
+                    </tbody>
+                </table>
+            <?php endif ?>
             </div>
 
           </div>
@@ -141,6 +144,7 @@ require_once 'helpers/permisos.php'
   <div class="container">
       <div class="row">
           <div class="col-sm table-responsive-sm">
+          <?php if($sesionAdmin || $sesionCoordinador || $sesionCoach) : ?>
               <table class="table table-striped table-hover caption-top">
                 <caption>Reporte Coaches</caption>
                 <thead>
@@ -176,6 +180,7 @@ require_once 'helpers/permisos.php'
                 <?php endforeach;?>
                 </tbody>
              </table>
+             <?php endif ?>
             </div>
         </div>
     </div>
@@ -235,9 +240,9 @@ require_once 'helpers/permisos.php'
             </tr>
 
       <?php endforeach; ?>
-      <?php endif ?>
-      </tbody>
-    </table>
+    </tbody>
+  </table>
+  <?php endif ?>
   </div>
   </div>
 </div>

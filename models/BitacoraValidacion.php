@@ -62,14 +62,15 @@ class BitacoraValidacion
 
 			$idcentro = $cen->Id; 
 
-			$sql = "SELECT LC.Centro as centro,LC.Prefijo as prefijo,COUNT(*) as ventas, LC.User_group as ugroup,LC.Id as id FROM BITACORA_VALIDACION AS BV INNER JOIN LISTA_CENTROS AS LC ON LC.Id = BV.Id_ListaCentros WHERE (BV.Fecha >= '$fecha_i' AND BV.Fecha <= '$fecha_f') AND BV.IdEstatus_bitacora_validador = 2 AND BV.Estado = 1 AND BV.Id_ListaCentros = '".$idcentro."' ";
-			
+			$sql = "SELECT LC.IdUsuarioCliente as iduser ,LC.Centro as centro,LC.Prefijo as prefijo,COUNT(*) as ventas, LC.User_group as ugroup,LC.Id as id FROM BITACORA_VALIDACION AS BV INNER JOIN LISTA_CENTROS AS LC ON LC.Id = BV.Id_ListaCentros WHERE (BV.Fecha >= '$fecha_i' AND BV.Fecha <= '$fecha_f') AND BV.IdEstatus_bitacora_validador = 2 AND BV.Estado = 1 AND BV.Id_ListaCentros = '".$idcentro."' ";
+
 			$centros = $this->db->query($sql);
 
 			while ($centro = $centros->fetch_object()) {
 
 
 				$registros[$centro->id] = array(
+					'iduser'  =>$centro->iduser,
 					'centro'  =>$centro->centro,
 					'prefijo' =>$centro->prefijo,
 					'ventas'  =>$centro->ventas,

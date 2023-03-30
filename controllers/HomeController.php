@@ -15,8 +15,8 @@ class HomeController
 		//$fecha_i = date('Y-m-d'); 
 		//$fecha_f = date('Y-m-d');
 
-		 $fecha_i = "2023-03-25";
-		 $fecha_f = "2023-03-25";
+		 $fecha_i = "2023-03-28";
+		 $fecha_f = "2023-03-28";
 		 
 
 		Utils::checkSession();
@@ -35,7 +35,7 @@ class HomeController
 
 		//extraer centro,prepago,pospago,pos/pre,%pos,asistencia,factor
 		
-		$desglose   = $this->getDesgloseCentros($centros,$fecha_i,$fecha_f);
+		$desglose   = $this->getDesgloseCentros($centros,$fecha_i,$fecha_f,$iduserclient,$rol);
 
 		$ventasPospago = new VentasPospago();
 		$pospago       = $ventasPospago->getAll($fecha_i,$fecha_f,$rol,$admin,$iduserclient);
@@ -65,7 +65,7 @@ class HomeController
 	
 	}
 
-	public static function getDesgloseCentros($centros,$fecha_i,$fecha_f){
+	public static function getDesgloseCentros($centros,$fecha_i,$fecha_f, $iduser,$rol){
 
 		$arreglo = array();
 		$ventasp = new VentasPospago();
@@ -77,12 +77,26 @@ class HomeController
 		$porcentajeT = 0;
 		$asistenciaT = 0;
 		$factorT     = 0;
+		
+		$valor = count($centros);
+		$arrCentrox = Utils::crearArrCentros($valor);
 
 
 		foreach($centros as $centro){
 
-			$nameCentro  = $centro['centro'];
+
 			$prefijo     = $centro['prefijo'];
+
+			if($rol == '226'){
+
+				if($iduser == $centro['iduser']){
+					$prefijo = $centro['prefijo'];
+				}else{
+					$prefijo =  Utils::extraerPrefijoFicticio($arrCentrox);
+				}
+			}
+
+			$nameCentro  = $centro['centro'];
 			$id_cen      = $centro['id'];
 			$ventasPre   = $centro['ventas'];
 			$ventasPreT  += $ventasPre;

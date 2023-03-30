@@ -25,13 +25,9 @@ class ListaCentro{
 
                 $sql = "SELECT Id,Centro,Prefijo FROM LISTA_CENTROS WHERE Comentario = 'ACTIVO' AND Id IN(1) AND Estado = 1";
 
-            }elseif(in_array($rol,$externos) && in_array($idusuario,$tez)){
-
-                $sql = "SELECT Id,Centro,Prefijo FROM LISTA_CENTROS WHERE Comentario = 'ACTIVO' AND Id IN(4,21,23) AND Estado = 1";
-            
             }elseif(in_array($rol,$externos)){
 
-                $sql = "SELECT Id,Centro,Prefijo FROM LISTA_CENTROS WHERE Comentario = 'ACTIVO' AND IdUsuarioCliente = '".$idusuario."' AND Estado = 1";
+                $sql = "SELECT Id,Centro,Prefijo FROM LISTA_CENTROS WHERE Comentario = 'ACTIVO' AND Estado = 1";
             }
             
             $registros = $this->db->query($sql);
@@ -39,10 +35,6 @@ class ListaCentro{
             return $registros; 
 
         }
-
-
-
-
 }
 
 ?>
