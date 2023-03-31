@@ -15,8 +15,8 @@ class HomeController
 		//$fecha_i = date('Y-m-d'); 
 		//$fecha_f = date('Y-m-d');
 
-		 $fecha_i = "2023-03-28";
-		 $fecha_f = "2023-03-28";
+		 $fecha_i = "2023-03-30";
+		 $fecha_f = "2023-03-30";
 		 
 
 		Utils::checkSession();
@@ -77,22 +77,18 @@ class HomeController
 		$porcentajeT = 0;
 		$asistenciaT = 0;
 		$factorT     = 0;
-		
-		$valor = count($centros);
-		$arrCentrox = Utils::crearArrCentros($valor);
 
 
 		foreach($centros as $centro){
 
-
 			$prefijo     = $centro['prefijo'];
-
+			
 			if($rol == '226'){
 
 				if($iduser == $centro['iduser']){
 					$prefijo = $centro['prefijo'];
 				}else{
-					$prefijo =  Utils::extraerPrefijoFicticio($arrCentrox);
+					$prefijo =  Utils::extraerPrefijoFicticio($prefijo);
 				}
 			}
 

@@ -38,7 +38,7 @@ class HistoricoController
 		$centrosPrepagos = $centrosPre->getAll($fecha_i, $fecha_f,$centrosActivos);
 
 		$datosObtenidos = new HomeController();
-		$reporteCentro = $datosObtenidos->getDesgloseCentros($centrosPrepagos, $fecha_i, $fecha_f);
+		$reporteCentro = $datosObtenidos->getDesgloseCentros($centrosPrepagos, $fecha_i, $fecha_f,$iduserclient,$rol);
 
 		echo json_encode($reporteCentro);
 	}
