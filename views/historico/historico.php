@@ -1,6 +1,12 @@
 <?php
 require_once 'views/layout/header.php';
 
+$grupo       = $_SESSION['identity']->idgrupo;
+$sesionAdmin = $_SESSION['identity']->idgrupo == "42";
+$sesionCoach = $_SESSION['identity']->idgrupo == "150";
+$sesionCoordinador = $_SESSION['identity']->idgrupo == "193";
+
+$col = $grupo == '226' ? 'col-sm-12' : 'col-sm';
 ?>
 <section class="info-section-head">
 
@@ -95,9 +101,9 @@ require_once 'views/layout/header.php';
 
       <div class="container">
           <div class="row">
-              <div class="col-sm table-responsive-sm">
+              <div class= <?=$col." table-responsive-sm"?>>
                     <table class="table table-striped table-hover caption-top">
-                    <h1>Reporte Pospago</h1>
+                    <h1>Pospago Base</h1>
                       <thead>
                         <tr>
                           <th scope="col-sm">Coach</th>
@@ -127,7 +133,7 @@ require_once 'views/layout/header.php';
                 </div>
 
             <div class="col-sm table-responsive-sm">
-              
+            <?php if($sesionAdmin || $sesionCoordinador || $sesionCoach) : ?>
             <table class="table table-striped table-hover caption-top">
                 <h1>Reporte Sectores</h1>
                 <thead>
@@ -155,12 +161,14 @@ require_once 'views/layout/header.php';
                             </tr>
                 </tbody>
              </table>
+             <?php endif ?>
             </div>
 
           </div>
         </div>
 </section>
 
+<?php if($sesionAdmin || $sesionCoordinador || $sesionCoach) : ?>
 <section class="info-section bg-light text-muted" id="info-section">
         <div class="container">
             <div class="row">
@@ -215,6 +223,7 @@ require_once 'views/layout/header.php';
             <input class="btn btn-success" type="button" value="Descargar Tabla En Formato CSV"  onclick="descargar()" >
         </div>
     </section>
+<?php endif ?>
 
 <section class="info-section bg-light text-muted" id="info-section">
         <div class="container">
@@ -260,7 +269,7 @@ require_once 'views/layout/header.php';
                                 <td>0</td>
                                 <td>0</td>
                                 <td>0</td>
-                                <td>0</td>
+                               
                             </tr>
                             <tr>
                                 <td>---</td>
@@ -279,7 +288,7 @@ require_once 'views/layout/header.php';
                                 <td>0</td>
                                 <td>0</td>
                                 <td>0</td>
-                                <td>0</td>
+                              
                             </tr>
                     </tbody>
                 </table>

@@ -101,7 +101,8 @@ class HomeController
 			$ventasT     = intval($ventasPre) + intval($ventasPos);
 			$ventasAcum  += $ventasT;
 			$userGroup   = $centro['ugroup'];
-			$asistencia  = $utils->getAsistenciaCentro($userGroup,$fecha_i,$fecha_f);
+			$asistencia  = $utils->getAsistenciaCentro($userGroup,$fecha_i,$fecha_f,$prefijo);
+		
 			$asistenciaT += $asistencia;
 			$factor      = Utils::getPromedio($ventasT,$asistencia);
 			$factorT     = Utils::getPromedio($ventasAcum,$asistenciaT);
@@ -123,7 +124,6 @@ class HomeController
 
 
 		}
-
 		$arreglo[] = array(
 							'centro'    =>"TOTAL",
                             'prefijo'   =>"TOTAL",

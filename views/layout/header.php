@@ -5,6 +5,7 @@ $rol = $_SESSION['identity']->idgrupo;
 $todo  = ['42'];
 $admincor = ['220','227','157','32','193','237'];
 $coach = ['150'];
+$externos = ['226'];
 
 ?>
 <!doctype html>
@@ -67,6 +68,12 @@ $coach = ['150'];
         <li class="nav-item">
           <a class="nav-link" href="<?=base_url?>VentasAltasUsuarios/index" tabindex="-1" aria-disabled="true">Altas CM</a>
         </li>
+
+        <?php elseif(isset($_SESSION['identity']) && in_array($rol,$externos)): ?>
+
+          <li class="nav-item">
+            <a class="nav-link" href="<?=base_url?>Historico/index" tabindex="-1" aria-disabled="true">Historico</a>
+          </li>
 
       <?php elseif(isset($_SESSION['identity']) && in_array($rol,$coach)): ?>
 

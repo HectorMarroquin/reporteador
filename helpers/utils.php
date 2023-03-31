@@ -25,7 +25,7 @@ class Utils
 
 	public static function isAdmin(){
 
-		$admin = ['42','220','227','157','193','32','237'];
+		$admin = ['42','220','227','157','193','32','237','226'];
 
 		$rol = $_SESSION['identity']->idgrupo;
 
@@ -51,9 +51,9 @@ class Utils
 		}
 	}
 
-	public function getAsistenciaCentro($centro,$fecha_i,$fecha_f){
+	public function getAsistenciaCentro($userGroup,$fecha_i,$fecha_f,$centro){
 
-		if ($centro == "") {
+		if ($userGroup == "") {
 
 			$sql = "SELECT SUM(Asistencias) as asistencia FROM REPORTES_ALCANCE_META WHERE Fecha >= '$fecha_i' and Fecha <= '$fecha_f' AND Coach != 'TOTAL' AND Estado = 1";
 
@@ -63,10 +63,11 @@ class Utils
 
 		}else{
 			
-			$sql ="SELECT count(user) as asistencia,sum(talk_sec) as tiempo FROM vicidial_agent_log WHERE (event_time BETWEEN '$fecha_i 00:00:00' AND '$fecha_f 23:59:59') AND user_group = '$centro' group by user HAVING tiempo >= 1800";
-
-			$result = $this->dbv->query($sql);
-			$asistencia = $result->num_rows;
+			$sql = "SELECT SUM(Asistencia) as asistencia FROM REPORTES_CENTRO WHERE Fecha >= '$fecha_i' and Fecha <= '$fecha_f' AND Centro = '".$centro."' AND Estado = 1";
+			$result     = $this->db->query($sql);
+			$datos      = $result->fetch_object();
+		 	$asistencia = $datos->asistencia;
+			$asistencia = (!empty($asistencia)) ? $asistencia : 0;
 		
 		}
 

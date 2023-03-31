@@ -27,8 +27,23 @@ class ListaCentro{
 
             }elseif(in_array($rol,$externos)){
 
-                $sql = "SELECT Id,Centro,Prefijo FROM LISTA_CENTROS WHERE Comentario = 'ACTIVO' AND Estado = 1";
+                $sql = "SELECT Id,Centro,Prefijo FROM LISTA_CENTROS WHERE Comentario = 'ACTIVO' AND Id IN(1) AND Estado = 1";
+            }else{
+                
+                $sql = "SELECT Id,Centro,Prefijo FROM LISTA_CENTROS WHERE Comentario = 'ACTIVO' AND IdUsuarioCliente = '".$idusuario."' AND Estado = 1";
             }
+            
+            $registros = $this->db->query($sql);
+
+            return $registros; 
+
+        }
+
+        public function getAllExternos($idusuario){
+
+            $sql = "";
+
+            $sql = "SELECT Id,Centro,Prefijo FROM LISTA_CENTROS WHERE Comentario = 'ACTIVO' AND IdUsuarioCliente = '".$idusuario."' AND Estado = 1";
             
             $registros = $this->db->query($sql);
 

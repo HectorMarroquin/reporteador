@@ -32,9 +32,15 @@ class HistoricoController
 		$iduserclient = $_SESSION['identity']->Id;
 
 		$centros       = new ListaCentro();
-		$centrosActivos= $centros->getAll($rol,$admin,$iduserclient);
+
+		if($rol == '226'){
+			$centrosActivos= $centros->getAllExternos($iduserclient);
+		}else{
+			$centrosActivos= $centros->getAll($rol,$admin,$iduserclient);
+		}
 
 		$centrosPre = new BitacoraValidacion();
+		
 		$centrosPrepagos = $centrosPre->getAll($fecha_i, $fecha_f,$centrosActivos);
 
 		$datosObtenidos = new HomeController();
