@@ -161,6 +161,7 @@ class HomeController
 			$idcoach    = $dato->idSuper;
 			$coach      = $dato->coach;
 			$group      = $dato->usergroup;
+			$prefijo      = $dato->usergroup;
 			$asistencia = $utils->getAsistencia($idcoach,$fecha_i,$fecha_f);
 			$ingresada  = $ventasPos->getIngresadas($coach,$fecha_i,$fecha_f);
 
@@ -175,7 +176,7 @@ class HomeController
 		      }
 
 		      if (!empty($group)) {
-		        $asistencia = $utils->getAsistenciaCentro($group,$fecha_i,$fecha_f);
+		        $asistencia = $utils->getAsistenciaCentro($group,$fecha_i,$fecha_f,$prefijo);
 		      }
 
 		    $asistenciaT += $asistencia; 

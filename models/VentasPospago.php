@@ -42,7 +42,7 @@ class VentasPospago
 
 		}else{
 
-			$sql = "SELECT UC.IdSupervisor as idSuper,UCC.Nombre AS coach, COUNT( UCC.Id ) AS ventas,LC.User_group AS usergroup
+			$sql = "SELECT UC.IdSupervisor as idSuper,UCC.Nombre AS coach, COUNT( UCC.Id ) AS ventas,LC.User_group AS usergroup, LC.Prefijo as prefijo
 					FROM VENTAS_POSPAGO_VAL AS VP
 					INNER JOIN USUARIO_CLIENTE AS UC ON UC.Id = VP.IdUsuario_vendio
 					INNER JOIN USUARIO_CLIENTE AS UCC ON UCC.Id = UC.IdSupervisor
