@@ -77,6 +77,7 @@ class HomeController
 		$porcentajeT = 0;
 		$asistenciaT = 0;
 		$factorT     = 0;
+		$prefijoName = 0;
 
 		foreach($centros as $centro){
 
@@ -85,10 +86,12 @@ class HomeController
 			if($rol == '226'){
 				
 				if($iduser == $centro['iduser']){
-					$prefijo = $centro['prefijo'];
+					$prefijoName = $centro['prefijo'];
 				}else{
-					$prefijo =  Utils::extraerPrefijoFicticio($prefijo);
+					$prefijoName =  Utils::extraerPrefijoFicticio($prefijo);
 				}
+			}else{
+				$prefijoName =  $prefijo;
 			}
 
 			$nameCentro  = $centro['centro'];
@@ -110,7 +113,7 @@ class HomeController
 			
 			$arreglo[] = array(
 							'centro'    =>$nameCentro,
-                            'prefijo'   =>$prefijo,
+                            'prefijo'   =>$prefijoName,
                             'prepago'   =>$ventasPre,
                             'pospago'   =>$ventasPos,
                             'totales'   =>$ventasT,
@@ -154,7 +157,7 @@ class HomeController
 
 		
 		while ($dato = $datos->fetch_object()) {
-						
+
 		    $migradas   = 0;
 			$idcoach    = $dato->idSuper;
 			$coach      = $dato->coach;
