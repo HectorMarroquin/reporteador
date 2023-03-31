@@ -15,8 +15,8 @@ class HomeController
 		//$fecha_i = date('Y-m-d'); 
 		//$fecha_f = date('Y-m-d');
 
-		 $fecha_i = "2023-03-30";
-		 $fecha_f = "2023-03-30";
+		 $fecha_i = "2023-03-31";
+		 $fecha_f = "2023-03-31";
 		 
 
 		Utils::checkSession();
@@ -78,13 +78,12 @@ class HomeController
 		$asistenciaT = 0;
 		$factorT     = 0;
 
-
 		foreach($centros as $centro){
 
 			$prefijo     = $centro['prefijo'];
 			
 			if($rol == '226'){
-
+				
 				if($iduser == $centro['iduser']){
 					$prefijo = $centro['prefijo'];
 				}else{
@@ -102,7 +101,6 @@ class HomeController
 			$ventasAcum  += $ventasT;
 			$userGroup   = $centro['ugroup'];
 			$asistencia  = $utils->getAsistenciaCentro($userGroup,$fecha_i,$fecha_f,$prefijo);
-		
 			$asistenciaT += $asistencia;
 			$factor      = Utils::getPromedio($ventasT,$asistencia);
 			$factorT     = Utils::getPromedio($ventasAcum,$asistenciaT);
@@ -161,7 +159,7 @@ class HomeController
 			$idcoach    = $dato->idSuper;
 			$coach      = $dato->coach;
 			$group      = $dato->usergroup;
-			$prefijo      = $dato->usergroup;
+			$prefijo    = $dato->prefijo;
 			$asistencia = $utils->getAsistencia($idcoach,$fecha_i,$fecha_f);
 			$ingresada  = $ventasPos->getIngresadas($coach,$fecha_i,$fecha_f);
 
