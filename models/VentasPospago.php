@@ -14,7 +14,7 @@ class VentasPospago
 
 		$venta = 0;
 
-		$sql = "SELECT COUNT(*) AS ventas FROM VENTAS_POSPAGO_VAL WHERE (Fecha_capturo >= '".$fecha_i."' AND Fecha_capturo <= '".$fecha_f."') AND IdEstatusPospago =2 AND Estado =1 AND IdCentro= '".$id_centro."'";
+		$sql = "SELECT COUNT(*) AS ventas FROM VENTAS_POSPAGO_VAL WHERE (Fecha_capturo >= '".$fecha_i."' AND Fecha_capturo <= '".$fecha_f."') AND IdEstatusBitacoraValPos =1 AND Estado =1 AND IdCentro= '".$id_centro."'";
 
 		$result = $this->db->query($sql);
 
