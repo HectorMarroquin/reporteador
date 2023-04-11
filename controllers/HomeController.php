@@ -12,11 +12,11 @@ class HomeController
 		$iduserclient = $_SESSION['identity']->Id;
 		$admin        = ['42','220','227','157','32','193','16'];
 
-		//$fecha_i = date('Y-m-d'); 
-		//$fecha_f = date('Y-m-d');
+		$fecha_i = date('Y-m-d'); 
+		$fecha_f = date('Y-m-d');
 
-		 $fecha_i = "2023-04-11";
-		 $fecha_f = "2023-04-11";
+		// $fecha_i = "2023-04-11";
+		// $fecha_f = "2023-04-11";
 		 
 
 		Utils::checkSession();

@@ -16,7 +16,7 @@
   <script src="<?=base_url?>assets/bootstrap/js/moment.min.js"></script>
   <script src="<?=base_url?>assets/bootstrap/js/daterangepicker.js"></script>
   <script src="<?=base_url?>assets/sweetalert/sweetalert2.all.min.js"></script>
-
+  <script src="<?=base_url?>assets/js/funciones_home.js"></script>
 </body>
 
 </html>

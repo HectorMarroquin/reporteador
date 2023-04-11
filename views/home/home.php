@@ -38,17 +38,17 @@ require_once 'helpers/permisos.php'
   <div class="row justify-content-center">
     
     <div class="col-sm-6 col-md-7 table-responsive-sm">
-      <table class="table table-striped table-hover caption-top table-sm">
+      <table class="table table-striped table-hover caption-top table-sm" id="myTable">
          <caption>Reporte Centros</caption>
         <thead>
           <tr class="ocultar-cab">
             <th scope="col-sm">Centro</th>
-            <th scope="col-sm">Pre</th>
-            <th scope="col-sm">Pos</th>
-            <th scope="col-sm">Pos/pre</th>
-            <th scope="col-sm">%Pos</th>
-            <th scope="col-sm">Asis</th>
-            <th scope="col-sm">Factor</th>
+            <th scope="col-sm" onclick="sortTable(1, 'int')">Pre</th>
+            <th scope="col-sm" onclick="sortTable(2, 'int')">Pos</th>
+            <th scope="col-sm" onclick="sortTable(3, 'int')">Pos/pre</th>
+            <th scope="col-sm" onclick="sortTable(4, 'int')">%Pos</th>
+            <th scope="col-sm" onclick="sortTable(5, 'int')">Asis</th>
+            <th scope="col-sm" onclick="sortTable(6, 'int')">Factor</th>
           </tr>
         </thead>
         <tbody>
