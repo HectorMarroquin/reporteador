@@ -421,6 +421,8 @@ class Utils
 			$newPrefijo = 'Centro7';
 		}elseif($prefijo == 'INE'){
 			$newPrefijo = 'Centro7';
+		}elseif($prefijo == 'AGL'){
+			$newPrefijo = 'Centro8';
 		}else{
 			$newPrefijo = 'S/N';
 		}

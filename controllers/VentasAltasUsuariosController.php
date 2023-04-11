@@ -12,10 +12,10 @@ class VentasAltasUsuariosController
 		$admin        = ['42','220','227','157','32','193','237'];
 		
 		$fechas_alta = Utils::ObtenerFechasPrincipales();
-		$fechas_enc = Utils::recorreFechas($fechas_alta);
+		$fechas_enc  = Utils::recorreFechas($fechas_alta);
 		
-		$fechas_enc      = ['Inicio' => "2023-02-28",'Fin' => "2023-03-30"];
-		$fechas_alta     = ['Inicio' => "2023-03-01",'Fin' => "2023-03-31"];
+		$fechas_enc      = ['Inicio' => "2023-03-31",'Fin' => "2023-04-29"];
+		$fechas_alta     = ['Inicio' => "2023-04-01",'Fin' => "2023-04-31"];
 		
 		//extrae el fecha y hora del ultimo reg cargado del cm
 		$ultRegistro = new CmReporteador();
