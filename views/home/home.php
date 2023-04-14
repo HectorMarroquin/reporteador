@@ -81,7 +81,7 @@ require_once 'helpers/permisos.php'
 
       <div class="container">
           <div class="row">
-              <div class= <?=$col." table-responsive-sm"?>>
+              <div class="<?=$col. ' table-responsive-sm'?>">
                     <!-- visualizan todos la cabecera de la tabla -->
                     <table class="table table-striped table-hover caption-top">
                     <caption>Reporte Pospago De Base</caption>
