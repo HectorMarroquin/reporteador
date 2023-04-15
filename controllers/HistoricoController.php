@@ -27,7 +27,7 @@ class HistoricoController
 		$fecha_i = $_POST['date1'];
 		$fecha_f = $_POST['date2'];
 
-		$admin        = ['42','220','227','157','32'];
+		$admin        = ['42','220','227','157','32','212'];
 		$rol          = $_SESSION['identity']->idgrupo;
 		$iduserclient = $_SESSION['identity']->Id;
 
@@ -55,7 +55,7 @@ class HistoricoController
 		$fecha_i = $_POST['date1'];
 		$fecha_f = $_POST['date2'];
 
-		$admin        = ['42','220','227','157','32'];
+		$admin        = ['42','220','227','157','32','212'];
 		$rol          = $_SESSION['identity']->idgrupo;
 		$iduserclient = $_SESSION['identity']->Id;
 
@@ -85,7 +85,7 @@ class HistoricoController
 
 		$rol          = $_SESSION['identity']->idgrupo;
 		$iduserclient = $_SESSION['identity']->Id;
-		$admin        = ['42','220','227','157','32'];
+		$admin        = ['42','220','227','157','32','212'];
 
 		$coaches = new UsuarioCliente();
 		$coaches = $coaches->getCoaches($iduserclient,$rol,$admin);

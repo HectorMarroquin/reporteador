@@ -9,7 +9,7 @@ class VentasAltasUsuariosController
 
 		$rol          = $_SESSION['identity']->idgrupo;
 		$iduserclient = $_SESSION['identity']->Id;
-		$admin        = ['42','220','227','157','32','193','237'];
+		$admin        = ['42','220','227','157','32','193','237','212'];
 		
 		$fechas_alta = Utils::ObtenerFechasPrincipales();
 		$fechas_enc  = Utils::recorreFechas($fechas_alta);

@@ -5,7 +5,7 @@ require_once 'helpers/permisos.php';
 <?php //Usuarios
 
       $rol      = $_SESSION['identity']->idgrupo;
-      $admincor = ['42','220','227','157','32','193','237'];
+      $admincor = ['42','220','227','157','32','193','237','212'];
 
 ?>
 
