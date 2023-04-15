@@ -7,7 +7,7 @@ require_once 'helpers/permisos.php'
       $grupo       = $_SESSION['identity']->idgrupo;
       $sesionAdmin = $_SESSION['identity']->idgrupo == "42";
       $sesionCoach = $_SESSION['identity']->idgrupo == "150";
-      $sesionCoordinador = $_SESSION['identity']->idgrupo == "193";
+      $sesionCoordinador = $_SESSION['identity']->idgrupo == "212";
 
       $col = $grupo == '226' ? 'col-sm-12' : 'col-sm';
 
