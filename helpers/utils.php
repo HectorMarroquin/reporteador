@@ -403,33 +403,15 @@ class Utils
 
 }
 
-	public static function extraerPrefijoFicticio($prefijo){
+public static function extraerPrefijoFicticio(&$arrCentros){
 
-		if($prefijo == 'ECI'){
-			$newPrefijo = 'Centro1';
-		}elseif($prefijo == 'TEZ' ){
-			$newPrefijo = 'Centro2';
-		}elseif($prefijo == 'CAE'){
-			$newPrefijo = 'Centro3';
-		}elseif($prefijo == 'ZAC'){
-			$newPrefijo = 'Centro4';
-		}elseif($prefijo == 'CCA'){
-			$newPrefijo = 'Centro5';
-		}elseif($prefijo == 'GBL'){
-			$newPrefijo = 'Centro6';
-		}elseif($prefijo == 'VGC'){
-			$newPrefijo = 'Centro7';
-		}elseif($prefijo == 'INE'){
-			$newPrefijo = 'Centro7';
-		}elseif($prefijo == 'AGL'){
-			$newPrefijo = 'Centro8';
-		}else{
-			$newPrefijo = 'S/N';
-		}
-		
-		return $newPrefijo;
+	$aleatorio= array_rand($arrCentros, 1);
+	$newPrefijo = $arrCentros[$aleatorio];
+	unset($arrCentros[$aleatorio]);
+	return $newPrefijo;
 
-	}
+}
+
 
 	public static function crearArrCentros($elementos){
 

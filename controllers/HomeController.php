@@ -77,21 +77,23 @@ class HomeController
 		$porcentajeT = 0;
 		$asistenciaT = 0;
 		$factorT     = 0;
-		$prefijoName = 0;
+
+		$valor = count($centros);
+		$arrCentrox = Utils::crearArrCentros($valor);
+
 
 		foreach($centros as $centro){
 
+
 			$prefijo     = $centro['prefijo'];
-			
+
 			if($rol == '226'){
-				
+
 				if($iduser == $centro['iduser']){
-					$prefijoName = $centro['prefijo'];
+					$prefijo = $centro['prefijo'];
 				}else{
-					$prefijoName =  Utils::extraerPrefijoFicticio($prefijo);
+					$prefijo =  Utils::extraerPrefijoFicticio($arrCentrox);
 				}
-			}else{
-				$prefijoName =  $prefijo;
 			}
 
 			$nameCentro  = $centro['centro'];
@@ -113,7 +115,7 @@ class HomeController
 			
 			$arreglo[] = array(
 							'centro'    =>$nameCentro,
-                            'prefijo'   =>$prefijoName,
+                            'prefijo'   =>$prefijo,
                             'prepago'   =>$ventasPre,
                             'pospago'   =>$ventasPos,
                             'totales'   =>$ventasT,
