@@ -81,11 +81,13 @@ class HomeController
 		$valor = count($centros);
 		$arrCentrox = Utils::crearArrCentros($valor);
 
-
 		foreach($centros as $centro){
 
-
 			$prefijo     = $centro['prefijo'];
+			
+			//esto va aqui para que el prefijo no se sobreescriba al pasar por extraerPrefijoFicticio()
+			$userGroup   = $centro['ugroup'];
+			$asistencia  = $utils->getAsistenciaCentro($userGroup,$fecha_i,$fecha_f,$prefijo);
 
 			if($rol == '226'){
 
@@ -104,8 +106,6 @@ class HomeController
 			$ventasPosT  += $ventasPos;
 			$ventasT     = intval($ventasPre) + intval($ventasPos);
 			$ventasAcum  += $ventasT;
-			$userGroup   = $centro['ugroup'];
-			$asistencia  = $utils->getAsistenciaCentro($userGroup,$fecha_i,$fecha_f,$prefijo);
 			$asistenciaT += $asistencia;
 			$factor      = Utils::getPromedio($ventasT,$asistencia);
 			$factorT     = Utils::getPromedio($ventasAcum,$asistenciaT);

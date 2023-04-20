@@ -62,7 +62,7 @@ class Utils
 		 	$asistencia = $datos->asistencia;
 
 		}else{
-			
+
 			$sql = "SELECT SUM(Asistencia) as asistencia FROM REPORTES_CENTRO WHERE Fecha >= '$fecha_i' and Fecha <= '$fecha_f' AND Centro = '".$centro."' AND Estado = 1";
 			$result     = $this->db->query($sql);
 			$datos      = $result->fetch_object();
