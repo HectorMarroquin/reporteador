@@ -160,6 +160,8 @@ class HomeController
 		
 		while ($dato = $datos->fetch_object()) {
 
+			$coachName      = Utils::getOnlyName($dato->coach);
+
 		    $migradas   = 0;
 			$idcoach    = $dato->idSuper;
 			$coach      = $dato->coach;
@@ -191,7 +193,7 @@ class HomeController
 			$factorT     = Utils::getPromedio($exitosaT,$asistenciaT);
 
 			$arreglo[] = array(
-                'coach'     =>$coach,
+                'coach'     =>$coachName,
                 'exitosa'   =>$exitosa,
                 'ingresada' =>$ingresada,
                 'asistencia'=>$asistencia,
@@ -209,7 +211,7 @@ class HomeController
 			$factor     = $utils->getPromedio($migradas,$asistencia);
 
 		    $arreglo[] = array(
-                'coach'     =>"MELENDEZ SERRANO CECILIA MICHEL",
+                'coach'     =>"CECILIA",
                 'exitosa'   =>$migradas,
                 'ingresada' =>$ingresada,
                 'asistencia'=>$asistencia,
@@ -254,7 +256,10 @@ class HomeController
 
 		while ($dato = $datos->fetch_object()) {
 
-			$idcoach        = $dato->Id;
+
+			$coachName      = Utils::getOnlyName($dato->Nombre);
+
+			$idcoach      = $dato->Id;
 			$coach        = $dato->Nombre;
 			$prepago      = $dato->ventas;
 			$prepagoT    += $prepago;
@@ -290,7 +295,7 @@ class HomeController
 			$sph = Utils::getSPH($total,$seg);
 
 		    $arreglo[] = array(
-                'coach'     =>$coach,
+                'coach'     =>$coachName,
                 'prepago'   =>$prepago,
                 'migradas'  =>$migradas,
                 'base'      =>$basePos,
@@ -346,8 +351,10 @@ class HomeController
 
 		while($coach = $coaches->fetch_object()){
 
+			$coachName      = Utils::getOnlyName($coach->Nombre);
+
 			$ventas = $ventascoach->gethoraventaCoach($fecha_i,$fecha_f,$coach->Id);
-			$horascoach[$coach->Nombre] = Utils::segmentaHoras($ventas);
+			$horascoach[$coachName] = Utils::segmentaHoras($ventas);
 	
 		}
 
@@ -391,11 +398,8 @@ class HomeController
 			'asistencia' =>$asistenciaT,
 			'factor'     =>$factorT,
 		  );
-$asistencia;
-
-
+		
 		return $arreglo;
-
 
 	}
 

@@ -423,6 +423,20 @@ public static function extraerPrefijoFicticio(&$arrCentros){
 		return $arr;
 	}
 
+	public static function getOnlyName($name){
+
+		$newName = explode(" ",$name);
+		$size = count($newName);
+
+		if($size < 2){
+			$name = $newName[$size -1];
+		}else{
+			$name = $newName[$size -2] . " " . $newName[$size -1];
+		}
+
+		return $name;
+	}
+
 }//fin de la clase utils
 
 
