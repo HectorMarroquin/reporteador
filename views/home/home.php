@@ -4,12 +4,12 @@ require_once 'helpers/permisos.php'
 ?>
 
 <?php //Usuarios
-      $grupo       = $_SESSION['identity']->idgrupo;
-      $sesionAdmin = $_SESSION['identity']->idgrupo == "42";
+      $sesionGrupo = $_SESSION['identity']->idgrupo;
       $sesionCoach = $_SESSION['identity']->idgrupo == "150";
-      $sesionCoordinador = $_SESSION['identity']->idgrupo == "212";
 
-      $col = $grupo == '226' ? 'col-sm-12' : 'col-sm';
+      $gruposVerTodo = ['42','212','12','220','32','227','157','12'];
+
+      $col = $sesionGrupo == '226' ? 'col-sm-12' : 'col-sm';
 
 ?>
 
@@ -110,7 +110,7 @@ require_once 'helpers/permisos.php'
                 </div>
 
             <div class="col-sm table-responsive-sm">
-            <?php if($sesionAdmin || $sesionCoordinador || $sesionCoach) : ?>
+            <?php if(in_array($sesionGrupo,$gruposVerTodo) || $sesionCoach ) : ?>
                 <table class="table table-striped table-hover caption-top">
                     <caption>Reporte Sectores</caption>
                     <thead>
@@ -144,7 +144,7 @@ require_once 'helpers/permisos.php'
   <div class="container">
       <div class="row">
           <div class="col-sm table-responsive-sm">
-          <?php if($sesionAdmin || $sesionCoordinador || $sesionCoach) : ?>
+          <?php  if(in_array($sesionGrupo,$gruposVerTodo) || $sesionCoach) : ?>
               <table class="table table-striped table-hover caption-top">
                 <caption>Reporte Coaches</caption>
                 <thead>
@@ -193,7 +193,7 @@ require_once 'helpers/permisos.php'
     
     <div class="col-sm table-responsive-sm">
       <!-- la tabla solo se le mostrara a los coordinadores y Admin -->
-    <?php if($sesionAdmin || $sesionCoordinador) : ?> 
+    <?php if(in_array($sesionGrupo,$gruposVerTodo)) : ?> 
       <table class="table table-striped table-hover caption-top">
         <caption>Reporte Hora Centros</caption>
           <thead>
