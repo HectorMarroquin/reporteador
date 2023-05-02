@@ -96,7 +96,14 @@ class BitacoraValidacion
 	}
 
 	public function gethoraventaCoach($fecha_i,$fecha_f, $coach){
-		$horacoachdb = "SELECT Supervisor, Hora FROM `BITACORA_VALIDACION` where (Fecha >= '$fecha_i' AND Fecha <= '$fecha_f') AND IdEstatus_bitacora_validador = 2 AND IdUsuario_supervisor = '$coach'";
+
+		if($coach == "22919239"){
+			$horacoachdb = "SELECT Supervisor, Hora FROM `BITACORA_VALIDACION` where (Fecha >= '$fecha_i' AND Fecha <= '$fecha_f') AND IdEstatus_bitacora_validador = 2 AND IdUsuario_supervisor IN ('$coach','22920642','22921141') ";
+		}else{
+
+			$horacoachdb = "SELECT Supervisor, Hora FROM `BITACORA_VALIDACION` where (Fecha >= '$fecha_i' AND Fecha <= '$fecha_f') AND IdEstatus_bitacora_validador = 2 AND IdUsuario_supervisor = '$coach'";
+		}
+
 
 		$horaCoach = $this->db->query($horacoachdb);
 		return $horaCoach;

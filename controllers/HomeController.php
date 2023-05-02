@@ -89,13 +89,25 @@ class HomeController
 			$userGroup   = $centro['ugroup'];
 			$asistencia  = $utils->getAsistenciaCentro($userGroup,$fecha_i,$fecha_f,$prefijo);
 
-			if($rol == '226'){
+			if($rol == '226' && $iduser != '22919239' ){
 
 				if($iduser == $centro['iduser']){
 					$prefijo = $centro['prefijo'];
 				}else{
 					$prefijo =  Utils::extraerPrefijoFicticio($arrCentrox);
 				}
+					
+			}elseif($iduser == '22919239' ){
+				var_dump($centro['prefijo']); 
+				if($centro['prefijo'] != 'ZAC' && $centro['prefijo'] != 'CCA'){
+
+					if($iduser == $centro['iduser']){
+						$prefijo = $centro['prefijo'];
+					}else{
+						$prefijo =  Utils::extraerPrefijoFicticio($arrCentrox);
+					}
+				}
+
 			}
 
 			$nameCentro  = $centro['centro'];

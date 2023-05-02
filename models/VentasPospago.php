@@ -40,6 +40,18 @@ class VentasPospago
 					WHERE (Fecha_capturo >= '$fecha_i' AND Fecha_capturo <= '$fecha_f')
 					AND VP.Estado =1 AND VP.IdEstatusPospago =2 AND VP.SINO_migrada IN(3) GROUP BY UCC.Id";
 
+		}elseif($iduserclient == "22919239"){
+
+			$sql = "SELECT UC.IdSupervisor as idSuper,UCC.Nombre AS coach, COUNT( UCC.Id ) AS ventas,LC.User_group AS usergroup, LC.Prefijo as prefijo
+					FROM VENTAS_POSPAGO_VAL AS VP
+					INNER JOIN USUARIO_CLIENTE AS UC ON UC.Id = VP.IdUsuario_vendio
+					INNER JOIN USUARIO_CLIENTE AS UCC ON UCC.Id = UC.IdSupervisor
+					INNER JOIN LISTA_CENTROS AS LC ON LC.Id = VP.IdCentro
+					WHERE (Fecha_capturo >= '$fecha_i' AND Fecha_capturo <= '$fecha_f' AND UC.IdSupervisor IN ('".$iduserclient."','22920642','22921141'))
+					AND (VP.Estado =1 AND VP.IdEstatusPospago =2 AND VP.SINO_migrada IN(3) ) GROUP BY UCC.Id";
+
+
+
 		}else{
 
 			$sql = "SELECT UC.IdSupervisor as idSuper,UCC.Nombre AS coach, COUNT( UCC.Id ) AS ventas,LC.User_group AS usergroup, LC.Prefijo as prefijo
