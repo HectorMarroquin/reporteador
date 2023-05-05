@@ -98,7 +98,6 @@ class HomeController
 				}
 					
 			}elseif($iduser == '22919239' ){
-				var_dump($centro['prefijo']); 
 				if($centro['prefijo'] != 'ZAC' && $centro['prefijo'] != 'CCA'){
 
 					if($iduser == $centro['iduser']){
