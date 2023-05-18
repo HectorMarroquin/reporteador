@@ -12,6 +12,8 @@ class HomeController
 		$iduserclient = $_SESSION['identity']->Id;
 		$admin        = ['42','220','227','157','32','193','16','212','12','237'];
 
+		$sucursales      = ['22919239','22920642','22921141','22917334'];
+
 		$fecha_i = date('Y-m-d'); 
 		$fecha_f = date('Y-m-d');
 
@@ -27,7 +29,7 @@ class HomeController
 		$reg = $registro ? $registro->Hora : 'S/N';
 
 		$centros       = new ListaCentro();
-		$centrosActivos= $centros->getAll($rol,$admin,$iduserclient);
+		$centrosActivos= $centros->getAll($rol,$admin,$iduserclient,$sucursales);
 
 		//extraer todas las ventas prepago
 		$ventasCentros  = new BitacoraValidacion();
@@ -35,7 +37,7 @@ class HomeController
 
 		//extraer centro,prepago,pospago,pos/pre,%pos,asistencia,factor
 		
-		$desglose   = $this->getDesgloseCentros($centros,$fecha_i,$fecha_f,$iduserclient,$rol);
+		$desglose   = $this->getDesgloseCentros($centros,$fecha_i,$fecha_f,$iduserclient,$rol,$sucursales);
 
 		$ventasPospago = new VentasPospago();
 		$pospago       = $ventasPospago->getAll($fecha_i,$fecha_f,$rol,$admin,$iduserclient);
@@ -55,7 +57,7 @@ class HomeController
 		$coachActivos = $coaches->getCoaches($iduserclient,$rol,$admin); 
 
 		$centroList       = new ListaCentro();
-		$centrosAct= $centroList->getAll($rol,$admin,$iduserclient);
+		$centrosAct= $centroList->getAll($rol,$admin,$iduserclient,$sucursales);
 		
 		$desgloseCentrosHoras = $this->getDesgloseHoraCentros($fecha_i,$fecha_f,$centrosAct);
 		$desgloseCoachHoras   = $this->getDesgloseHoraCoach($fecha_i,$fecha_f,$coachActivos);
@@ -65,7 +67,7 @@ class HomeController
 	
 	}
 
-	public static function getDesgloseCentros($centros,$fecha_i,$fecha_f, $iduser,$rol){
+	public static function getDesgloseCentros($centros,$fecha_i,$fecha_f, $iduser,$rol,$sucursales){
 
 		$arreglo = array();
 		$ventasp = new VentasPospago();
@@ -89,7 +91,7 @@ class HomeController
 			$userGroup   = $centro['ugroup'];
 			$asistencia  = $utils->getAsistenciaCentro($userGroup,$fecha_i,$fecha_f,$prefijo);
 
-			if($rol == '226' && $iduser != '22919239' ){
+			if($rol == '226' && !in_array($iduser,$sucursales)){
 
 				if($iduser == $centro['iduser']){
 					$prefijo = $centro['prefijo'];
@@ -97,16 +99,6 @@ class HomeController
 					$prefijo =  Utils::extraerPrefijoFicticio($arrCentrox);
 				}
 					
-			}elseif($iduser == '22919239' ){
-				if($centro['prefijo'] != 'ZAC' && $centro['prefijo'] != 'CCA'){
-
-					if($iduser == $centro['iduser']){
-						$prefijo = $centro['prefijo'];
-					}else{
-						$prefijo =  Utils::extraerPrefijoFicticio($arrCentrox);
-					}
-				}
-
 			}
 
 			$nameCentro  = $centro['centro'];

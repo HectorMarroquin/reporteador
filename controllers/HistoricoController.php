@@ -30,13 +30,14 @@ class HistoricoController
 		$admin        = ['42','220','227','157','32','212','12','237','16'];
 		$rol          = $_SESSION['identity']->idgrupo;
 		$iduserclient = $_SESSION['identity']->Id;
+		$sucursales      = ['22919239','22920642','22921141','22917334'];
 
 		$centros       = new ListaCentro();
 
 		if($rol == '226'){
 			$centrosActivos= $centros->getAllExternos($iduserclient);
 		}else{
-			$centrosActivos= $centros->getAll($rol,$admin,$iduserclient);
+			$centrosActivos= $centros->getAll($rol,$admin,$iduserclient,$sucursales);
 		}
 
 		$centrosPre = new BitacoraValidacion();
@@ -44,7 +45,7 @@ class HistoricoController
 		$centrosPrepagos = $centrosPre->getAll($fecha_i, $fecha_f,$centrosActivos);
 
 		$datosObtenidos = new HomeController();
-		$reporteCentro = $datosObtenidos->getDesgloseCentros($centrosPrepagos, $fecha_i, $fecha_f,$iduserclient,$rol);
+		$reporteCentro = $datosObtenidos->getDesgloseCentros($centrosPrepagos, $fecha_i, $fecha_f,$iduserclient,$rol,$sucursales);
 
 		echo json_encode($reporteCentro);
 	}
