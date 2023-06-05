@@ -51,12 +51,19 @@ class Utils
 		}
 	}
 
-	public function getAsistenciaCentro($userGroup,$fecha_i,$fecha_f,$centro){
+	public function getAsistenciaCentro($userGroup,$fecha_i,$fecha_f,$centro,$iduser,$sucursales){
+
 
 		if ($userGroup == "") {
 
 			$sql = "SELECT SUM(Asistencias) as asistencia FROM REPORTES_ALCANCE_META WHERE Fecha >= '$fecha_i' and Fecha <= '$fecha_f' AND (Coach != 'TOTAL') AND Estado = 1";
-
+			
+			if(in_array($iduser,$sucursales)){
+				
+				
+				$sql = "SELECT SUM(Asistencias) as asistencia FROM REPORTES_ALCANCE_META WHERE Fecha >= '$fecha_i' and Fecha <= '$fecha_f' AND (Coach != 'TOTAL' AND IdCoach != 24897) AND Estado = 1";
+			}
+			
 			$result     = $this->db->query($sql);
 			$datos      = $result->fetch_object();
 		 	$asistencia = $datos->asistencia;

@@ -17,8 +17,8 @@ class HomeController
 		$fecha_i = date('Y-m-d'); 
 		$fecha_f = date('Y-m-d');
 
-		//$fecha_i = "2023-05-31";
-		//$fecha_f = "2023-05-31";
+		// $fecha_i = "2023-06-02";
+		// $fecha_f = "2023-06-02";
 		 
 
 		Utils::checkSession();
@@ -46,7 +46,7 @@ class HomeController
 		$coachPrepago  = $ventasCoach->getVentasCoach($fecha_i,$fecha_f);
 		
 		$desgloseCoach = $this->getDesgloseCoaches($coachPrepago,$fecha_i,$fecha_f);
-		$desglosePos   = $this->getDesglosePospago($pospago,$fecha_i,$fecha_f,$rol,$admin);
+		$desglosePos   = $this->getDesglosePospago($pospago,$fecha_i,$fecha_f,$rol,$admin,$iduserclient,$sucursales);
 		
 		$sectores      = new UsuarioCliente();
 		$ventaSector   = $sectores->getSectores($fecha_i,$fecha_f); 
@@ -86,10 +86,9 @@ class HomeController
 		foreach($centros as $centro){
 
 			$prefijo     = $centro['prefijo'];
-			
 			//esto va aqui para que el prefijo no se sobreescriba al pasar por extraerPrefijoFicticio()
 			$userGroup   = $centro['ugroup'];
-			$asistencia  = $utils->getAsistenciaCentro($userGroup,$fecha_i,$fecha_f,$prefijo);
+			$asistencia  = $utils->getAsistenciaCentro($userGroup,$fecha_i,$fecha_f,$prefijo,$iduser,$sucursales);
 
 			if($rol == '226' && !in_array($iduser,$sucursales)){
 
@@ -147,7 +146,7 @@ class HomeController
 	}
 
 
-	public static function getDesglosePospago($datos,$fecha_i,$fecha_f,$rol,$admin){
+	public static function getDesglosePospago($datos,$fecha_i,$fecha_f,$rol,$admin,$iduser,$sucursales){
 
 		// hay que insertar los centros externos en tabla alcance meta para poder optimizar esta parte
 		$arreglo = array();
@@ -184,7 +183,7 @@ class HomeController
 		      }
 
 		      if (!empty($group)) {
-		        $asistencia = $utils->getAsistenciaCentro($group,$fecha_i,$fecha_f,$prefijo);
+		        $asistencia = $utils->getAsistenciaCentro($group,$fecha_i,$fecha_f,$prefijo,$iduser,$sucursales);
 		      }
 
 		    $asistenciaT += $asistencia; 
