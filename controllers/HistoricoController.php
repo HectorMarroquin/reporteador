@@ -27,7 +27,7 @@ class HistoricoController
 		$fecha_i = $_POST['date1'];
 		$fecha_f = $_POST['date2'];
 
-		$admin        = ['42','220','227','157','32','212','12','237','16'];
+		$admin        = ['42','220','227','157','32','212','12','237'];
 		$rol          = $_SESSION['identity']->idgrupo;
 		$iduserclient = $_SESSION['identity']->Id;
 		$sucursales      = ['22919239','22920642','22921141','22917334'];
@@ -56,14 +56,15 @@ class HistoricoController
 		$fecha_i = $_POST['date1'];
 		$fecha_f = $_POST['date2'];
 
-		$admin        = ['42','220','227','157','32','212','12','16'];
+		$admin        = ['42','220','227','157','32','212','12'];
+		$sucursales      = ['22919239','22920642','22921141','22917334'];
 		$rol          = $_SESSION['identity']->idgrupo;
 		$iduserclient = $_SESSION['identity']->Id;
 
 		$ventasPos = new VentasPospago();
 		$ventaPos = $ventasPos->getAll($fecha_i, $fecha_f,$rol,$admin,$iduserclient);
 
-		$ventasPospago = HomeController::getDesglosePospago($ventaPos, $fecha_i, $fecha_f,$rol,$admin);
+		$ventasPospago = HomeController::getDesglosePospago($ventaPos, $fecha_i, $fecha_f,$rol,$admin,$iduserclient,$sucursales);
 		echo json_encode($ventasPospago);
 	}
 
@@ -86,7 +87,7 @@ class HistoricoController
 
 		$rol          = $_SESSION['identity']->idgrupo;
 		$iduserclient = $_SESSION['identity']->Id;
-		$admin        = ['42','220','227','157','32','212','12','16'];
+		$admin        = ['42','220','227','157','32','212','12'];
 
 		$coaches = new UsuarioCliente();
 		$coaches = $coaches->getCoaches($iduserclient,$rol,$admin);

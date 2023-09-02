@@ -13,7 +13,7 @@ class ListaCentro{
 
             $sql = "";
             $coord    = ['237'];
-            $coach    = ['150'];
+            $coach    = ['150','16'];
             $externos = ['226'];
 
             if(in_array($rol,$admin)){
