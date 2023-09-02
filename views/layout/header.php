@@ -60,6 +60,10 @@ $externos = ['226'];
           <a class="nav-link" href="<?=base_url?>Reclutamiento/index" tabindex="-1" aria-disabled="true">Reclutamiento</a>
         </li>
 
+        <li class="nav-item">
+          <a class="nav-link" href="<?=base_url?>UsuarioLogin/index" tabindex="-1" aria-disabled="true">Mapeo</a>
+        </li>
+
       <?php elseif(isset($_SESSION['identity']) && in_array($rol,$admincor)): ?>
 
         <li class="nav-item">
