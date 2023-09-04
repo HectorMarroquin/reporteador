@@ -41,7 +41,7 @@ require_once 'views/layout/header.php';
 	<div class="contenido-principal">
 		
 
-		<div class="parte1__individual parteCalidad"> CALIDAD</div>
+		<div class="parte1__individual parteCalidad" style="visibility: hidden;"> </div>
 
 
 		<!--Empieza isla de Cecilia-->
@@ -53,10 +53,12 @@ require_once 'views/layout/header.php';
 			<div class="contenedor2">
 				<div class="divs div1">
 					<div class="contenido-div">
-						<?php foreach ($iniciados as $key):?>
-							<div class="numero colorvalidacion">234 Val</div>
-							<input type="hidden" id="ver" value="<?php echo $key['IP_ADDRESS']; ?>">
-						<?php endforeach; ?>
+						<div class="numero colorvalidacion">234 Val</div>
+						<div class="numero colorvalidacion">Val 241</div>
+						<div class="numero colorvalidacion">Val 242</div>
+						<div class="numero colorvalidacion">Val 243</div>
+						<div class="numero colorvalidacion">Val 244</div>
+						<div class="numero colorvalidacion">Val 245</div>
 					</div>
 				</div>
 				<div class="laptops">
@@ -1234,12 +1236,89 @@ require_once 'views/layout/header.php';
 
 	</div>
 
-	<?php foreach ($iniciados as $key) {
-			var_dump($key);
-	} ?>
+	<hr>
+	<hr>
 
-	<script>var base_url = '<?= base_url ?>';</script>
-	<script src="<?=base_url?>assets/js/funciones_mapeo.js"></script>
+	<div class="contenido-principal">
+		<?php foreach ($iniciados as $key):?>
+			<?php if ($key['num_isla'] == '0') {
+				echo "<div class='parte1__individual parteCalidad' style='visibility: hidden;'> </div>";
+			} ?>
+			<div class="estecontenido">
+				<div class="contenedor3">
+					<i class='bx bxs-user-voice bx-flashing bx-lg' ></i>
+					<img src="<?=base_url?>/assets/img/escritorioder.png" class="img1">
+				</div>
+				
+				<div class="contenedor2">
+					<div class="divs div1">
+						<div class="contenido-div">
+						<?php foreach($key['mamparas'] as $mapara_uno): ?>
+							<div class="numero colorvalidacion">234 Val <?php var_dump($mapara_uno['activo']); ?></div>
+						<?php endforeach; ?>
+						</div>
+					</div>
+					<div class="laptops">
+						<i class='bx bx-child bx-md'></i>
+						<i class='bx bx-child bx-md'></i>
+						<i class='bx bx-child bx-md'></i>
+						<i class='bx bx-child bx-md'></i>
+						<i class='bx bx-child bx-md'></i>
+						<i class='bx bx-child bx-md'></i>
+						
+					</div>
+					<div class="div2">
+						
+					</div>
+					<div class="laptops">
+						<i class='bx bx-child bx-flip-vertical bx-md' ></i>
+						<i class='bx bx-child bx-flip-vertical bx-md' ></i>
+						<i class='bx bx-child bx-flip-vertical bx-md' ></i>
+						<i class='bx bx-child bx-flip-vertical bx-md' ></i>
+						<i class='bx bx-child bx-flip-vertical bx-md' ></i>
+						<i class='bx bx-child bx-flip-vertical bx-md' ></i>
+					</div>
+
+					<div class="divs div3">
+						<div class="contenido-div">		
+						<?php foreach($key['mamparas_2'] as $mapara_dos): ?>			
+							<div class="numero colorvalidacion">Val 240 <?php var_dump($mapara_dos['activo']); ?></div>
+						<?php endforeach; ?>
+						</div>
+					</div>
+					<marquee class="div4"><?php echo $key['nombre']; ?></marquee>
+				</div>
+			</div>
+
+			<?php if ($key['num_isla'] == '11') {
+			echo " <div class='estecontenido'>
+					<div class='contenedor3'>
+						<i class='bx bxs-user-voice bx-flashing bx-lg' ></i>
+						<img src='<?=base_url?>/assets/img/escritorioder.png' class='img1'>
+					</div>
+					<div class='contenedor2__coordinador'>
+						<div class='coordinador__coach---sistemas'>
+							<img src='<?=base_url?>/assets/img/mesaeci2.png' class='img2'>
+						<div class='generenteOperaciones'>Gerente de Operaciones</div>
+					</div>
+					<div class='coordinador__coach---sistemas'>
+						<img src='<?=base_url?>/assets/img/sistemas.png' class='img2'>
+						<div class='sistemas'>Sistemas</div>
+						</div>
+					</div>
+				</div> ";
+			} ?>
+		<?php endforeach; ?>
+		
+	</div>
+
+	<script type="text/javascript">
+	    const miVariableEnJavaScript = "<?php echo $mapara_uno; ?>";
+	    console.log(miVariableEnJavaScript)
+	    // Justo aquí estamos pasando la variable ----^
+	    // Y ya la tenemos desde JavaScript. Podemos hacer cualquier cosa con ella
+	</script
+
 	
 </body>
 </html>
