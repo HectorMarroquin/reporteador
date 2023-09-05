@@ -16,7 +16,7 @@ require_once 'views/layout/header.php';
 	<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400&display=swap" rel="stylesheet">
 	-->
 </head>
-
+<!--
 <body>
 	<header class="header">
 		<div class="nav-bg">  
@@ -44,7 +44,7 @@ require_once 'views/layout/header.php';
 		<div class="parte1__individual parteCalidad" style="visibility: hidden;"> </div>
 
 
-		<!--Empieza isla de Cecilia-->
+		Empieza isla de Cecilia
 		<div class="estecontenido">
 			<div class="contenedor3">
 				<i class='bx bxs-user-voice bx-flashing bx-lg' ></i>
@@ -96,9 +96,9 @@ require_once 'views/layout/header.php';
 			</div>
 			
 		</div>
-		<!--se cierra-->
+		se cierra
 
-		<!--Empieza isla de JANETHE-->
+		Empieza isla de JANETHE
 		<div class="contenedor">
 			<div class="contenedor2">
 				<div class="divs div1">
@@ -149,9 +149,9 @@ require_once 'views/layout/header.php';
 			</div>
 			<marquee class="div4">CAB-1001 Janethe</marquee>
 		</div>
-		<!--se cierra isla-->
+		se cierra isla
 
-		<!--Empieza isla de Daniel-->
+		Empieza isla de Daniel
 		<div class="estecontenido">
 			<div class="contenedor3">
 				<i class='bx bxs-user-voice bx-flashing bx-lg' ></i>
@@ -202,9 +202,9 @@ require_once 'views/layout/header.php';
 			</div>
 			
 		</div>
-		<!--se cierra-->
+		se cierra
 
-		<!--Empieza isla de CAB-1002-->
+		Empieza isla de CAB-1002
 		<div class="contenedor">
 			<div class="contenedor2">
 				<div class="divs div1">
@@ -255,9 +255,9 @@ require_once 'views/layout/header.php';
 			</div>
 			<marquee class="div4">CAB-1002</marquee>
 		</div>
-		<!--se cierra isla-->
+		se cierra isla
 
-		<!--Empieza isla de CAB-1014-->
+		Empieza isla de CAB-1014
 		<div class="estecontenido">
 			<div class="contenedor3">
 				<i class='bx bxs-user-voice bx-flashing bx-lg' ></i>
@@ -308,9 +308,9 @@ require_once 'views/layout/header.php';
 			</div>
 			
 		</div>
-		<!--se cierra-->
+		se cierra
 
-		<!--Empieza isla de DANTE-->
+		Empieza isla de DANTE
 		<div class="contenedor">
 			<div class="contenedor2">
 				<div class="divs div1">
@@ -361,9 +361,9 @@ require_once 'views/layout/header.php';
 			</div>
 			<marquee class="div4">CAB-1003 Dante</marquee>
 		</div>
-		<!--se cierra isla-->
+		se cierra isla
 
-		<!--Empieza isla de Alejandro-->
+		Empieza isla de Alejandro
 		<div class="estecontenido">
 			<div class="contenedor3">
 				<i class='bx bxs-user-voice bx-flashing bx-lg' ></i>
@@ -414,9 +414,9 @@ require_once 'views/layout/header.php';
 			</div>
 			
 		</div>
-		<!--se cierra-->
+		se cierra
 
-		<!--Empieza isla de Navil-->
+		Empieza isla de Navil
 		<div class="contenedor">
 			<div class="contenedor2">
 				<div class="divs div1">
@@ -467,9 +467,9 @@ require_once 'views/layout/header.php';
 			</div>
 			<marquee class="div4">CAB-1004 Navil</marquee>
 		</div>
-		<!--se cierra isla-->
+		se cierra isla
 
-		<!--Empieza isla de CAB-1016-->
+		Empieza isla de CAB-1016
 		<div class="estecontenido">
 			<div class="contenedor3">
 				<i class='bx bxs-user-voice bx-flashing bx-lg' ></i>
@@ -520,10 +520,10 @@ require_once 'views/layout/header.php';
 			</div>
 			
 		</div>
-		<!--se cierra-->
+		se cierra
 
 
-		<!--Empieza isla de CAB-1005-->
+		Empieza isla de CAB-1005
 		<div class="contenedor">
 			<div class="contenedor2">
 				<div class="divs div1">
@@ -574,9 +574,9 @@ require_once 'views/layout/header.php';
 			</div>
 			<marquee class="div4">CAB-1005</marquee>
 		</div>
-		<!--se cierra isla-->
+		se cierra isla
 
-		<!--Empieza isla de Cautiño-->
+		Empieza isla de Cautiño
 		<div class="estecontenido">
 			<div class="contenedor3">
 				<i class='bx bxs-user-voice bx-flashing bx-lg' ></i>
@@ -627,9 +627,9 @@ require_once 'views/layout/header.php';
 			</div>
 			
 		</div>
-		<!--se cierra-->
+		se cierra
 
-		<!--Empieza isla de Lalo/Rafael-->
+		Empieza isla de Lalo/Rafael
 		<div class="contenedor">
 			<div class="contenedor2">
 				<div class="divs div1">
@@ -680,9 +680,9 @@ require_once 'views/layout/header.php';
 			</div>
 			<marquee class="div4">CAB-006 Lalo/Rafael</marquee>
 		</div>
-		<!--se cierra isla-->
+		se cierra isla
 
-		<!--Empieza isla de Coordinador-->
+		Empieza isla de Coordinador
 		<div class="estecontenido">
 			<div class="contenedor3">
 				<i class='bx bxs-user-voice bx-flashing bx-lg' ></i>
@@ -700,9 +700,9 @@ require_once 'views/layout/header.php';
 				
 			</div>
 		</div>
-		<!--se cierra-->
+		se cierra
 
-		<!--Empieza isla de CAB-1007-->
+		Empieza isla de CAB-1007
 		<div class="contenedor">
 			<div class="contenedor2">
 				<div class="divs div1">
@@ -753,9 +753,9 @@ require_once 'views/layout/header.php';
 			</div>
 			<marquee class="div4">CAB-1007</marquee>
 		</div>
-		<!--se cierra isla-->
+		se cierra isla
 
-		<!--Empieza isla de CAB-1018-->
+		Empieza isla de CAB-1018
 		<div class="estecontenido">
 			<div class="contenedor3">
 				<i class='bx bxs-user-voice bx-flashing bx-lg' ></i>
@@ -806,9 +806,9 @@ require_once 'views/layout/header.php';
 			</div>
 			
 		</div>
-		<!--se cierra-->
+		se cierra
 
-		<!--Empieza isla de Oscar-->
+		Empieza isla de Oscar
 		<div class="contenedor">
 			<div class="contenedor2">
 				<div class="divs div1">
@@ -859,9 +859,9 @@ require_once 'views/layout/header.php';
 			</div>
 			<marquee class="div4">CAB-1008 Oscar</marquee>
 		</div>
-		<!--se cierra isla-->
+		se cierra isla
 
-		<!--Empieza isla de CAB-1019-->
+		Empieza isla de CAB-1019
 		<div class="estecontenido">
 			<div class="contenedor3">
 				<i class='bx bxs-user-voice bx-flashing bx-lg' ></i>
@@ -912,9 +912,9 @@ require_once 'views/layout/header.php';
 			</div>
 			
 		</div>
-		<!--se cierra-->
+		se cierra
 
-		<!--Empieza isla de Fernando-->
+		Empieza isla de Fernando
 		<div class="contenedor">
 			<div class="contenedor2">
 				<div class="divs div1">
@@ -965,9 +965,9 @@ require_once 'views/layout/header.php';
 			</div>
 			<marquee class="div4">CAB-1009 Fernando</marquee>
 		</div>
-		<!--se cierra isla-->
+		se cierra isla
 
-		<!--Empieza isla de CAB-1020-->
+		Empieza isla de CAB-1020
 		<div class="estecontenido">
 			<div class="contenedor3">
 				<i class='bx bxs-user-voice bx-flashing bx-lg' ></i>
@@ -1018,9 +1018,9 @@ require_once 'views/layout/header.php';
 			</div>
 			
 		</div>
-		<!--se cierra-->
+		se cierra
 
-		<!--Empieza isla de CAB-1010-->
+		Empieza isla de CAB-1010
 		<div class="contenedor">
 			<div class="contenedor2">
 				<div class="divs div1">
@@ -1071,9 +1071,9 @@ require_once 'views/layout/header.php';
 			</div>
 			<marquee class="div4">CAB-1010</marquee>
 		</div>
-		<!--se cierra isla-->
+		se cierra isla
 
-		<!--Empieza isla de CAB-1021-->
+		Empieza isla de CAB-1021
 		<div class="estecontenido">
 			<div class="contenedor3">
 				<i class='bx bxs-user-voice bx-flashing bx-lg' ></i>
@@ -1124,9 +1124,9 @@ require_once 'views/layout/header.php';
 			</div>
 			
 		</div>
-		<!--se cierra-->
+		se cierra
 
-		<!--Empieza isla de CAB-1011-->
+		Empieza isla de CAB-1011
 		<div class="contenedor">
 			<div class="contenedor2">
 				<div class="divs div1">
@@ -1177,9 +1177,9 @@ require_once 'views/layout/header.php';
 			</div>
 			<marquee class="div4">CAB-1011</marquee>
 		</div>
-		<!--se cierra isla-->
+		se cierra isla
 
-		<!--Empieza isla de CAB-1022-->
+		Empieza isla de CAB-1022
 		<div class="estecontenido">
 			<div class="contenedor3">
 				<i class='bx bxs-user-voice bx-flashing bx-lg' ></i>
@@ -1230,12 +1230,12 @@ require_once 'views/layout/header.php';
 			</div>
 			
 		</div>
-		<!--se cierra-->
+		se cierra
 		
 
 
 	</div>
-
+-->
 	<hr>
 	<hr>
 
@@ -1254,7 +1254,23 @@ require_once 'views/layout/header.php';
 					<div class="divs div1">
 						<div class="contenido-div">
 						<?php foreach($key['mamparas'] as $mapara_uno): ?>
-							<div class="numero colorvalidacion">234 Val <?php var_dump($mapara_uno['activo']); ?></div>
+							<?php if($mapara_uno['activo'] == '0'){
+								echo '<div class="numero colorinv">234 Val</div>';
+							}else if($mapara_uno['activo'] == '1'){
+
+								if ($mapara_uno['ventas'] == '0') {
+									echo '<div class="numero colorFuntionDiadema_0">234 Val</div>';
+								}else if ($mapara_uno['ventas'] == '1'){
+									echo '<div class="numero colorFuntionDiadema_1">234 Val</div>';
+								}else if ($mapara_uno['ventas'] == '2'){
+									echo '<div class="numero colorFuntionDiadema">234 Val</div>';
+								}else if ($mapara_uno['ventas'] >= '3'){
+									echo '<div class="numero colorFuntionDiadema_3">234 Val</div>';
+								}
+
+							}else if($mapara_uno['activo'] == '2'){
+								echo '<div class="numero colorvalidacion">234 Val</div>';
+							}?>
 						<?php endforeach; ?>
 						</div>
 					</div>
@@ -1281,8 +1297,24 @@ require_once 'views/layout/header.php';
 
 					<div class="divs div3">
 						<div class="contenido-div">		
-						<?php foreach($key['mamparas_2'] as $mapara_dos): ?>			
-							<div class="numero colorvalidacion">Val 240 <?php var_dump($mapara_dos['activo']); ?></div>
+						<?php foreach($key['mamparas_2'] as $mapara_dos): ?>
+							<?php if($mapara_dos['activo'] == '0'){
+								echo '<div class="numero colorinv">234 Val</div>';
+							}else if($mapara_dos['activo'] == '1'){
+								if ($mapara_dos['ventas'] == '0') {
+									echo '<div class="numero colorFuntionDiadema_0">234 Val</div>';
+								}else if ($mapara_dos['ventas'] == '1'){
+									echo '<div class="numero colorFuntionDiadema_1">234 Val</div>';
+								}else if ($mapara_dos['ventas'] == '2'){
+									echo '<div class="numero colorFuntionDiadema">234 Val</div>';
+								}else if ($mapara_dos['ventas'] >= '3'){
+									echo '<div class="numero colorFuntionDiadema_3">234 Val</div>';
+								}
+
+							}else if($mapara_dos['activo'] == '2'){
+								echo '<div class="numero colorvalidacion">234 Val</div>';
+							}?>			
+	
 						<?php endforeach; ?>
 						</div>
 					</div>
@@ -1311,14 +1343,6 @@ require_once 'views/layout/header.php';
 		<?php endforeach; ?>
 		
 	</div>
-
-	<script type="text/javascript">
-	    const miVariableEnJavaScript = "<?php echo $mapara_uno; ?>";
-	    console.log(miVariableEnJavaScript)
-	    // Justo aquí estamos pasando la variable ----^
-	    // Y ya la tenemos desde JavaScript. Podemos hacer cualquier cosa con ella
-	</script
-
 	
 </body>
 </html>

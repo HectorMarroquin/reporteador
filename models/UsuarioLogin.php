@@ -24,14 +24,12 @@ class UsuarioLogin
 		
 	$registros =array(
 			'Isla_0' => array(
-				'marca' => "Bic",
-				'precio'  => "0.75€",
-				'referencia'  => "552BIC12",
 				'num_isla' => '0',
 				'nombre' => 'Cecilia',
 				'mamparas' =>array(
 					'mampara_1' =>array(
 						'activo' => '1',
+						'ventas' => '5'
 					),
 					'mampara_2' =>array(
 						'activo' => '0',
@@ -44,48 +42,57 @@ class UsuarioLogin
 					),
 					'mampara_5' =>array(
 						'activo' => '1',
+						'ventas' => '1'
 					),
 					'mampara_6' =>array(
 						'activo' => '1',
+						'ventas' => '1'
 					)
 				),
 				'mamparas_2' => array(
 					'mampara_7' =>array(
 						'activo' => '1',
+						'ventas' => '0'
 					),
 					'mampara_8' =>array(
 						'activo' => '1',
+						'ventas' => '2'
 					),
 					'mampara_9' =>array(
 						'activo' => '1',
+						'ventas' => '3'
 					),
 					'mampara_10' =>array(
 						'activo' => '1',
+						'ventas' => '0'
 					),
 					'mampara_11' =>array(
 						'activo' => '1',
+						'ventas' => '2'
 					),
 					'mampara_12' =>array(
 						'activo' => '1',
+						'ventas' => '5'
 					)
 				)
 			),
 			
 			'Isla_1' => array(
-				'marca' => "Bic",
-				'precio'  => "0.75€",
-				'referencia'  => "552BIC12",
+
 				'num_isla' => '1',
 				'nombre' => 'JANETHE',
 				'mamparas' =>array(
 					'mampara_1' =>array(
 						'activo' => '1',
+						'ventas' => '1'
 					),
 					'mampara_2' =>array(
 						'activo' => '1',
+						'ventas' => '3'
 					),
 					'mampara_3' =>array(
 						'activo' => '1',
+						'ventas' => '5'
 					),
 					'mampara_4' =>array(
 						'activo' => '0',
@@ -95,6 +102,7 @@ class UsuarioLogin
 					),
 					'mampara_6' =>array(
 						'activo' => '1',
+						'ventas' => '0'
 					)
 				),
 				'mamparas_2' => array(
@@ -115,6 +123,7 @@ class UsuarioLogin
 					),
 					'mampara_12' =>array(
 						'activo' => '1',
+						'ventas' => '1'
 					)
 				)
 			),
@@ -128,6 +137,7 @@ class UsuarioLogin
 				'mamparas' =>array(
 					'mampara_1' =>array(
 						'activo' => '1',
+						'ventas' => '3'
 					),
 					'mampara_2' =>array(
 						'activo' => '2',
@@ -137,9 +147,11 @@ class UsuarioLogin
 					),
 					'mampara_4' =>array(
 						'activo' => '1',
+						'ventas' => '1'
 					),
 					'mampara_5' =>array(
 						'activo' => '1',
+						'ventas' => '3'
 					),
 					'mampara_6' =>array(
 						'activo' => '0',
@@ -154,9 +166,11 @@ class UsuarioLogin
 					),
 					'mampara_9' =>array(
 						'activo' => '1',
+						'ventas' => '0'
 					),
 					'mampara_10' =>array(
 						'activo' => '1',
+						'ventas' => '1'
 					),
 					'mampara_11' =>array(
 						'activo' => '0',
@@ -167,49 +181,59 @@ class UsuarioLogin
 				)
 			),
 			'Isla_3' => array(
-				'marca' => "Bic",
-				'precio'  => "0.75€",
-				'referencia'  => "552BIC12",
+
 				'num_isla' => '3',
 				'nombre' => 'CAB-1002',
 				'mamparas' =>array(
 					'mampara_1' =>array(
 						'activo' => '1',
+						'ventas' => '3'
 					),
 					'mampara_2' =>array(
 						'activo' => '1',
+						'ventas' => '3'
 					),
 					'mampara_3' =>array(
 						'activo' => '1',
+						'ventas' => '2'
 					),
 					'mampara_4' =>array(
 						'activo' => '1',
+						'ventas' => '0'
 					),
 					'mampara_5' =>array(
 						'activo' => '1',
+						'ventas' => '1'
 					),
 					'mampara_6' =>array(
 						'activo' => '1',
+						'ventas' => '0'
 					)
 				),
 				'mamparas_2' => array(
 					'mampara_7' =>array(
 						'activo' => '1',
+						'ventas' => '2'
 					),
 					'mampara_8' =>array(
 						'activo' => '1',
+						'ventas' => '3'
 					),
 					'mampara_9' =>array(
 						'activo' => '1',
+						'ventas' => '1'
 					),
 					'mampara_10' =>array(
 						'activo' => '1',
+						'ventas' => '2'
 					),
 					'mampara_11' =>array(
 						'activo' => '1',
+						'ventas' => '3'
 					),
 					'mampara_12' =>array(
 						'activo' => '1',
+						'ventas' => '4'
 					)
 				)
 			),
@@ -223,6 +247,7 @@ class UsuarioLogin
 				'mamparas' =>array(
 					'mampara_1' =>array(
 						'activo' => '1',
+						'ventas' => '1'
 					),
 					'mampara_2' =>array(
 						'activo' => '0',
@@ -235,6 +260,7 @@ class UsuarioLogin
 					),
 					'mampara_5' =>array(
 						'activo' => '1',
+						'ventas' => '2'
 					),
 					'mampara_6' =>array(
 						'activo' => '0',
@@ -243,18 +269,22 @@ class UsuarioLogin
 				'mamparas_2' => array(
 					'mampara_7' =>array(
 						'activo' => '1',
+						'ventas' => '3'
 					),
 					'mampara_8' =>array(
 						'activo' => '1',
+						'ventas' => '1'
 					),
 					'mampara_9' =>array(
 						'activo' => '0',
 					),
 					'mampara_10' =>array(
 						'activo' => '1',
+						'ventas' => '2'
 					),
 					'mampara_11' =>array(
 						'activo' => '1',
+						'ventas' => '3'
 					),
 					'mampara_12' =>array(
 						'activo' => '0',
@@ -262,14 +292,13 @@ class UsuarioLogin
 				)
 			),
 			'Isla_5' => array(
-				'marca' => "Bic",
-				'precio'  => "0.75€",
-				'referencia'  => "552BIC12",
+
 				'num_isla' => '5',
 				'nombre' => 'DANTE',
 				'mamparas' =>array(
 					'mampara_1' =>array(
 						'activo' => '1',
+						'ventas' => '2'
 					),
 					'mampara_2' =>array(
 						'activo' => '0',
@@ -282,23 +311,29 @@ class UsuarioLogin
 					),
 					'mampara_5' =>array(
 						'activo' => '1',
+						'ventas' => '1'
 					),
 					'mampara_6' =>array(
 						'activo' => '1',
+						'ventas' => '3'
 					)
 				),
 				'mamparas_2' => array(
 					'mampara_7' =>array(
 						'activo' => '1',
+						'ventas' => '2'
 					),
 					'mampara_8' =>array(
 						'activo' => '1',
+						'ventas' => '3'
 					),
 					'mampara_9' =>array(
 						'activo' => '1',
+						'ventas' => '2'
 					),
 					'mampara_10' =>array(
 						'activo' => '1',
+						'ventas' => '3'
 					),
 					'mampara_11' =>array(
 						'activo' => '0',
@@ -330,6 +365,7 @@ class UsuarioLogin
 					),
 					'mampara_5' =>array(
 						'activo' => '1',
+						'ventas' => '2'
 					),
 					'mampara_6' =>array(
 						'activo' => '2',
@@ -338,36 +374,40 @@ class UsuarioLogin
 				'mamparas_2' => array(
 					'mampara_7' =>array(
 						'activo' => '1',
+						'ventas' => '3'
 					),
 					'mampara_8' =>array(
 						'activo' => '2',
 					),
 					'mampara_9' =>array(
 						'activo' => '1',
+						'ventas' => '0'
 					),
 					'mampara_10' =>array(
 						'activo' => '1',
+						'ventas' => '0'
 					),
 					'mampara_11' =>array(
 						'activo' => '2',
 					),
 					'mampara_12' =>array(
 						'activo' => '1',
+						'ventas' => '0'
 					)
 				)
 			),
 			'Isla_7' => array(
-				'marca' => "Bic",
-				'precio'  => "0.75€",
-				'referencia'  => "552BIC12",
+
 				'num_isla' => '7',
 				'nombre' => 'Navil',
 				'mamparas' =>array(
 					'mampara_1' =>array(
 						'activo' => '1',
+						'ventas' => '2'
 					),
 					'mampara_2' =>array(
 						'activo' => '1',
+						'ventas' => '0'
 					),
 					'mampara_3' =>array(
 						'activo' => '0',
@@ -388,15 +428,19 @@ class UsuarioLogin
 					),
 					'mampara_8' =>array(
 						'activo' => '1',
+						'ventas' => '2'
 					),
 					'mampara_9' =>array(
 						'activo' => '1',
+						'ventas' => '3'
 					),
 					'mampara_10' =>array(
 						'activo' => '1',
+						'ventas' => '1'
 					),
 					'mampara_11' =>array(
 						'activo' => '1',
+						'ventas' => '0'
 					),
 					'mampara_12' =>array(
 						'activo' => '0',
@@ -413,9 +457,11 @@ class UsuarioLogin
 				'mamparas' =>array(
 					'mampara_1' =>array(
 						'activo' => '1',
+						'ventas' => '2'
 					),
 					'mampara_2' =>array(
 						'activo' => '1',
+						'ventas' => '0'
 					),
 					'mampara_3' =>array(
 						'activo' => '0',
@@ -425,23 +471,29 @@ class UsuarioLogin
 					),
 					'mampara_5' =>array(
 						'activo' => '1',
+						'ventas' => '2'
 					),
 					'mampara_6' =>array(
 						'activo' => '1',
+						'ventas' => '1'
 					)
 				),
 				'mamparas_2' => array(
 					'mampara_7' =>array(
 						'activo' => '1',
+						'ventas' => '2'
 					),
 					'mampara_8' =>array(
 						'activo' => '1',
+						'ventas' => '3'
 					),
 					'mampara_9' =>array(
 						'activo' => '1',
+						'ventas' => '0'
 					),
 					'mampara_10' =>array(
 						'activo' => '1',
+						'ventas' => '2'
 					),
 					'mampara_11' =>array(
 						'activo' => '0',
@@ -452,14 +504,13 @@ class UsuarioLogin
 				)
 			),
 			'Isla_9' => array(
-				'marca' => "Bic",
-				'precio'  => "0.75€",
-				'referencia'  => "552BIC12",
+
 				'num_isla' => '9',
 				'nombre' => 'CAB-1005',
 				'mamparas' =>array(
 					'mampara_1' =>array(
 						'activo' => '1',
+						'ventas' => '2'
 					),
 					'mampara_2' =>array(
 						'activo' => '0',
@@ -472,29 +523,35 @@ class UsuarioLogin
 					),
 					'mampara_5' =>array(
 						'activo' => '1',
+						'ventas' => '3'
 					),
 					'mampara_6' =>array(
 						'activo' => '1',
+						'ventas' => '2'
 					)
 				),
 				'mamparas_2' => array(
 					'mampara_7' =>array(
 						'activo' => '1',
+						'ventas' => '0'
 					),
 					'mampara_8' =>array(
 						'activo' => '1',
+						'ventas' => '0'
 					),
 					'mampara_9' =>array(
 						'activo' => '0',
 					),
 					'mampara_10' =>array(
 						'activo' => '1',
+						'ventas' => '2'
 					),
 					'mampara_11' =>array(
 						'activo' => '0',
 					),
 					'mampara_12' =>array(
 						'activo' => '1',
+						'ventas' => '2'
 					)
 				)
 			),
@@ -508,6 +565,7 @@ class UsuarioLogin
 				'mamparas' =>array(
 					'mampara_1' =>array(
 						'activo' => '1',
+						'ventas' => '2'
 					),
 					'mampara_2' =>array(
 						'activo' => '0',
@@ -520,44 +578,52 @@ class UsuarioLogin
 					),
 					'mampara_5' =>array(
 						'activo' => '1',
+						'ventas' => '3'
 					),
 					'mampara_6' =>array(
 						'activo' => '1',
+						'ventas' => '4'
 					)
 				),
 				'mamparas_2' => array(
 					'mampara_7' =>array(
 						'activo' => '1',
+						'ventas' => '2'
 					),
 					'mampara_8' =>array(
 						'activo' => '1',
+						'ventas' => '0'
 					),
 					'mampara_9' =>array(
 						'activo' => '1',
+						'ventas' => '0'
 					),
 					'mampara_10' =>array(
 						'activo' => '1',
+						'ventas' => '1'
 					),
 					'mampara_11' =>array(
 						'activo' => '1',
+						'ventas' => '3'
 					),
 					'mampara_12' =>array(
 						'activo' => '1',
+						'ventas' => '2'
 					)
 				)
 			),
 			'Isla_11' => array(
-				'marca' => "Bic",
-				'precio'  => "0.75€",
-				'referencia'  => "552BIC12",
+
 				'num_isla' => '11',
 				'nombre' => 'Lalo/Rafael',
 				'mamparas' =>array(
 					'mampara_1' =>array(
 						'activo' => '1',
+						'ventas' => '5'
 					),
 					'mampara_2' =>array(
 						'activo' => '1',
+						'ventas' => '2'
 					),
 					'mampara_3' =>array(
 						'activo' => '0',
@@ -567,42 +633,48 @@ class UsuarioLogin
 					),
 					'mampara_5' =>array(
 						'activo' => '1',
+						'ventas' => '0'
 					),
 					'mampara_6' =>array(
 						'activo' => '1',
+						'ventas' => '1'
 					)
 				),
 				'mamparas_2' => array(
 					'mampara_7' =>array(
 						'activo' => '1',
+						'ventas' => '2'
 					),
 					'mampara_8' =>array(
 						'activo' => '1',
+						'ventas' => '1'
 					),
 					'mampara_9' =>array(
 						'activo' => '2',
 					),
 					'mampara_10' =>array(
 						'activo' => '1',
+						'ventas' => '3'
 					),
 					'mampara_11' =>array(
 						'activo' => '1',
+						'ventas' => '1'
 					),
 					'mampara_12' =>array(
 						'activo' => '1',
+						'ventas' => '0'
 					)
 				)
 			),
 			
 			'Isla_12' => array(
-				'marca' => "Bic",
-				'precio'  => "0.75€",
-				'referencia'  => "552BIC12",
+
 				'num_isla' => '12',
 				'nombre' => 'CAB-1007',
 				'mamparas' =>array(
 					'mampara_1' =>array(
 						'activo' => '1',
+						'ventas' => '1'
 					),
 					'mampara_2' =>array(
 						'activo' => '0',
@@ -615,29 +687,37 @@ class UsuarioLogin
 					),
 					'mampara_5' =>array(
 						'activo' => '1',
+						'ventas' => '2'
 					),
 					'mampara_6' =>array(
 						'activo' => '1',
+						'ventas' => '0'
 					)
 				),
 				'mamparas_2' => array(
 					'mampara_7' =>array(
 						'activo' => '1',
+						'ventas' => '2'
 					),
 					'mampara_8' =>array(
 						'activo' => '1',
+						'ventas' => '1'
 					),
 					'mampara_9' =>array(
 						'activo' => '1',
+						'ventas' => '0'
 					),
 					'mampara_10' =>array(
 						'activo' => '1',
+						'ventas' => '0'
 					),
 					'mampara_11' =>array(
 						'activo' => '1',
+						'ventas' => '1'
 					),
 					'mampara_12' =>array(
 						'activo' => '1',
+						'ventas' => '2'
 					)
 				)
 			),
@@ -651,6 +731,7 @@ class UsuarioLogin
 				'mamparas' =>array(
 					'mampara_1' =>array(
 						'activo' => '1',
+						'ventas' => '2'
 					),
 					'mampara_2' =>array(
 						'activo' => '0',
@@ -663,41 +744,48 @@ class UsuarioLogin
 					),
 					'mampara_5' =>array(
 						'activo' => '1',
+						'ventas' => '3'
 					),
 					'mampara_6' =>array(
 						'activo' => '1',
+						'ventas' => '0'
 					)
 				),
 				'mamparas_2' => array(
 					'mampara_7' =>array(
 						'activo' => '1',
+						'ventas' => '2'
 					),
 					'mampara_8' =>array(
 						'activo' => '1',
+						'ventas' => '1'
 					),
 					'mampara_9' =>array(
 						'activo' => '1',
+						'ventas' => '0'
 					),
 					'mampara_10' =>array(
 						'activo' => '1',
+						'ventas' => '0'
 					),
 					'mampara_11' =>array(
 						'activo' => '1',
+						'ventas' => '0'
 					),
 					'mampara_12' =>array(
 						'activo' => '1',
+						'ventas' => '2'
 					)
 				)
 			),
 			'Isla_13' => array(
-				'marca' => "Bic",
-				'precio'  => "0.75€",
-				'referencia'  => "552BIC12",
+
 				'num_isla' => '13',
 				'nombre' => '',
 				'mamparas' =>array(
 					'mampara_1' =>array(
 						'activo' => '1',
+						'ventas' => '2'
 					),
 					'mampara_2' =>array(
 						'activo' => '0',
@@ -710,29 +798,37 @@ class UsuarioLogin
 					),
 					'mampara_5' =>array(
 						'activo' => '1',
+						'ventas' => '0'
 					),
 					'mampara_6' =>array(
 						'activo' => '1',
+						'ventas' => '2'
 					)
 				),
 				'mamparas_2' => array(
 					'mampara_7' =>array(
 						'activo' => '1',
+						'ventas' => '1'
 					),
 					'mampara_8' =>array(
 						'activo' => '1',
+						'ventas' => '2'
 					),
 					'mampara_9' =>array(
 						'activo' => '1',
+						'ventas' => '1'
 					),
 					'mampara_10' =>array(
 						'activo' => '1',
+						'ventas' => '0'
 					),
 					'mampara_11' =>array(
 						'activo' => '1',
+						'ventas' => '0'
 					),
 					'mampara_12' =>array(
 						'activo' => '1',
+						'ventas' => '2'
 					)
 				)
 			),
@@ -746,6 +842,7 @@ class UsuarioLogin
 				'mamparas' =>array(
 					'mampara_1' =>array(
 						'activo' => '1',
+						'ventas' => '1'
 					),
 					'mampara_2' =>array(
 						'activo' => '0',
@@ -758,41 +855,48 @@ class UsuarioLogin
 					),
 					'mampara_5' =>array(
 						'activo' => '1',
+						'ventas' => '2'
 					),
 					'mampara_6' =>array(
 						'activo' => '1',
+						'ventas' => '2'
 					)
 				),
 				'mamparas_2' => array(
 					'mampara_7' =>array(
 						'activo' => '1',
+						'ventas' => '2'
 					),
 					'mampara_8' =>array(
 						'activo' => '1',
+						'ventas' => '0'
 					),
 					'mampara_9' =>array(
 						'activo' => '1',
+						'ventas' => '2'
 					),
 					'mampara_10' =>array(
 						'activo' => '1',
+						'ventas' => '1'
 					),
 					'mampara_11' =>array(
 						'activo' => '1',
+						'ventas' => '0'
 					),
 					'mampara_12' =>array(
 						'activo' => '1',
+						'ventas' => '2'
 					)
 				)
 			),
 			'Isla_15' => array(
-				'marca' => "Bic",
-				'precio'  => "0.75€",
-				'referencia'  => "552BIC12",
+
 				'num_isla' => '15',
 				'nombre' => 'CAB-1019',
 				'mamparas' =>array(
 					'mampara_1' =>array(
 						'activo' => '1',
+						'ventas' => '2'
 					),
 					'mampara_2' =>array(
 						'activo' => '0',
@@ -805,29 +909,37 @@ class UsuarioLogin
 					),
 					'mampara_5' =>array(
 						'activo' => '1',
+						'ventas' => '3'
 					),
 					'mampara_6' =>array(
 						'activo' => '1',
+						'ventas' => '5'
 					)
 				),
 				'mamparas_2' => array(
 					'mampara_7' =>array(
 						'activo' => '1',
+						'ventas' => '0'
 					),
 					'mampara_8' =>array(
 						'activo' => '1',
+						'ventas' => '0'
 					),
 					'mampara_9' =>array(
 						'activo' => '1',
+						'ventas' => '0'
 					),
 					'mampara_10' =>array(
 						'activo' => '1',
+						'ventas' => '2'
 					),
 					'mampara_11' =>array(
 						'activo' => '1',
+						'ventas' => '1'
 					),
 					'mampara_12' =>array(
 						'activo' => '1',
+						'ventas' => '3'
 					)
 				)
 			),
@@ -841,6 +953,7 @@ class UsuarioLogin
 				'mamparas' =>array(
 					'mampara_1' =>array(
 						'activo' => '1',
+						'ventas' => '2'
 					),
 					'mampara_2' =>array(
 						'activo' => '0',
@@ -853,41 +966,48 @@ class UsuarioLogin
 					),
 					'mampara_5' =>array(
 						'activo' => '1',
+						'ventas' => '0'
 					),
 					'mampara_6' =>array(
 						'activo' => '1',
+						'ventas' => '1'
 					)
 				),
 				'mamparas_2' => array(
 					'mampara_7' =>array(
 						'activo' => '1',
+						'ventas' => '0'
 					),
 					'mampara_8' =>array(
 						'activo' => '1',
+						'ventas' => '0'
 					),
 					'mampara_9' =>array(
 						'activo' => '1',
+						'ventas' => '1'
 					),
 					'mampara_10' =>array(
 						'activo' => '1',
+						'ventas' => '2'
 					),
 					'mampara_11' =>array(
 						'activo' => '1',
+						'ventas' => '3'
 					),
 					'mampara_12' =>array(
 						'activo' => '1',
+						'ventas' => '0'
 					)
 				)
 			),
 			'Isla_17' => array(
-				'marca' => "Bic",
-				'precio'  => "0.75€",
-				'referencia'  => "552BIC12",
+
 				'num_isla' => '17',
 				'nombre' => 'CAB-1020',
 				'mamparas' =>array(
 					'mampara_1' =>array(
 						'activo' => '1',
+						'ventas' => '2'
 					),
 					'mampara_2' =>array(
 						'activo' => '0',
@@ -900,29 +1020,37 @@ class UsuarioLogin
 					),
 					'mampara_5' =>array(
 						'activo' => '1',
+						'ventas' => '3'
 					),
 					'mampara_6' =>array(
 						'activo' => '1',
+						'ventas' => '1'
 					)
 				),
 				'mamparas_2' => array(
 					'mampara_7' =>array(
 						'activo' => '1',
+						'ventas' => '1'
 					),
 					'mampara_8' =>array(
 						'activo' => '1',
+						'ventas' => '0'
 					),
 					'mampara_9' =>array(
 						'activo' => '1',
+						'ventas' => '2'
 					),
 					'mampara_10' =>array(
 						'activo' => '1',
+						'ventas' => '0'
 					),
 					'mampara_11' =>array(
 						'activo' => '1',
+						'ventas' => '2'
 					),
 					'mampara_12' =>array(
 						'activo' => '1',
+						'ventas' => '1'
 					)
 				)
 			),
@@ -936,6 +1064,7 @@ class UsuarioLogin
 				'mamparas' =>array(
 					'mampara_1' =>array(
 						'activo' => '1',
+						'ventas' => '2'
 					),
 					'mampara_2' =>array(
 						'activo' => '0',
@@ -948,41 +1077,48 @@ class UsuarioLogin
 					),
 					'mampara_5' =>array(
 						'activo' => '1',
+						'ventas' => '0'
 					),
 					'mampara_6' =>array(
 						'activo' => '1',
+						'ventas' => '1'
 					)
 				),
 				'mamparas_2' => array(
 					'mampara_7' =>array(
 						'activo' => '1',
+						'ventas' => '2'
 					),
 					'mampara_8' =>array(
 						'activo' => '1',
+						'ventas' => '1'
 					),
 					'mampara_9' =>array(
 						'activo' => '1',
+						'ventas' => '0'
 					),
 					'mampara_10' =>array(
 						'activo' => '1',
+						'ventas' => '2'
 					),
 					'mampara_11' =>array(
 						'activo' => '1',
+						'ventas' => '0'
 					),
 					'mampara_12' =>array(
 						'activo' => '1',
+						'ventas' => '2'
 					)
 				)
 			),
 			'Isla_19' => array(
-				'marca' => "Bic",
-				'precio'  => "0.75€",
-				'referencia'  => "552BIC12",
+
 				'num_isla' => '19',
 				'nombre' => 'CAB-1021',
 				'mamparas' =>array(
 					'mampara_1' =>array(
 						'activo' => '1',
+						'ventas' => '1'
 					),
 					'mampara_2' =>array(
 						'activo' => '0',
@@ -995,29 +1131,35 @@ class UsuarioLogin
 					),
 					'mampara_5' =>array(
 						'activo' => '1',
+						'ventas' => '0'
 					),
 					'mampara_6' =>array(
-						'activo' => '0',
+						'activo' => '1',
+						'ventas' => '0'
 					)
 				),
 				'mamparas_2' => array(
 					'mampara_7' =>array(
 						'activo' => '1',
+						'ventas' => '2'
 					),
 					'mampara_8' =>array(
 						'activo' => '0',
 					),
 					'mampara_9' =>array(
 						'activo' => '1',
+						'ventas' => '1'
 					),
 					'mampara_10' =>array(
 						'activo' => '0',
 					),
 					'mampara_11' =>array(
 						'activo' => '1',
+						'ventas' => '2'
 					),
 					'mampara_12' =>array(
 						'activo' => '1',
+						'ventas' => '0'
 					)
 				)
 			),
@@ -1051,33 +1193,38 @@ class UsuarioLogin
 				'mamparas_2' => array(
 					'mampara_7' =>array(
 						'activo' => '1',
+						'ventas' => '0'
 					),
 					'mampara_8' =>array(
 						'activo' => '1',
+						'ventas' => '1'
 					),
 					'mampara_9' =>array(
 						'activo' => '1',
+						'ventas' => '0'
 					),
 					'mampara_10' =>array(
 						'activo' => '1',
+						'ventas' => '2'
 					),
 					'mampara_11' =>array(
 						'activo' => '1',
+						'ventas' => '1'
 					),
 					'mampara_12' =>array(
 						'activo' => '1',
+						'ventas' => '0'
 					)
 				)
 			),
 			'Isla_21' => array(
-				'marca' => "Bic",
-				'precio'  => "0.75€",
-				'referencia'  => "552BIC12",
+
 				'num_isla' => '21',
 				'nombre' => 'CAB-1022',
 				'mamparas' =>array(
 					'mampara_1' =>array(
 						'activo' => '1',
+						'ventas' => '1'
 					),
 					'mampara_2' =>array(
 						'activo' => '0',
@@ -1087,12 +1234,15 @@ class UsuarioLogin
 					),
 					'mampara_4' =>array(
 						'activo' => '1',
+						'ventas' => '0'
 					),
 					'mampara_5' =>array(
 						'activo' => '1',
+						'ventas' => '0'
 					),
 					'mampara_6' =>array(
 						'activo' => '1',
+						'ventas' => '1'
 					)
 				),
 				'mamparas_2' => array(

@@ -325,9 +325,24 @@ header .nav{
 	background: grey;
 }
 
+.colorFuntionDiadema_0{
+	/*Personal PC Funcionales con diadema*/
+	background: red;
+}
+
+.colorFuntionDiadema_1{
+	/*Personal PC Funcionales con diadema*/
+	background: yellow;
+}
+
 .colorFuntionDiadema{
 	/*Personal PC Funcionales con diadema*/
 	background: green;
+}
+
+.colorFuntionDiadema_3{
+	/*Personal PC Funcionales con diadema*/
+	background: gold;
 }
 
 
