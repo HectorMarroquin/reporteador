@@ -333,6 +333,7 @@ header .nav{
 .colorFuntionDiadema_1{
 	/*Personal PC Funcionales con diadema*/
 	background: yellow;
+	color: black;
 }
 
 .colorFuntionDiadema{
@@ -383,6 +384,7 @@ header .nav{
 	}
 	.numero{
 		width: 15%;
+		color: black;
 	}
 	.contenedor{
 		grid-template-columns: 3fr 1fr;

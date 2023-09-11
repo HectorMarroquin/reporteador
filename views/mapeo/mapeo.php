@@ -1241,37 +1241,43 @@ require_once 'views/layout/header.php';
 
 	<div class="contenido-principal">
 		<?php foreach ($iniciados as $key):?>
-			<?php if ($key['num_isla'] == '0') {
-				echo "<div class='parte1__individual parteCalidad' style='visibility: hidden;'> </div>";
-			} ?>
-			<div class="estecontenido">
+
+			<?php if ($key['num_isla'] == '0') :?>
+				<div class='parte1__individual parteCalidad' style='visibility: hidden;'> </div>
+			<?php endif; ?>
+
+
+			<div class=" <?php echo $key['num_isla'] % 2 ? 'contenedor' : 'estecontenido' ?>">
+
+			<?php if ($key['num_isla'] == 0 || $key['num_isla'] == 2 || $key['num_isla'] == 4 || $key['num_isla'] == 6 || $key['num_isla'] == 8 || $key['num_isla'] == 10 || $key['num_isla'] == 12 || $key['num_isla'] == 14 || $key['num_isla'] == 16 || $key['num_isla'] == 18 || $key['num_isla'] == 20 || $key['num_isla'] == 22) : ?>
 				<div class="contenedor3">
 					<i class='bx bxs-user-voice bx-flashing bx-lg' ></i>
 					<img src="<?=base_url?>/assets/img/escritorioder.png" class="img1">
 				</div>
-				
+			<?php endif; ?>
+
 				<div class="contenedor2">
 					<div class="divs div1">
 						<div class="contenido-div">
-						<?php foreach($key['mamparas'] as $mapara_uno): ?>
-							<?php if($mapara_uno['activo'] == '0'){
-								echo '<div class="numero colorinv">234 Val</div>';
-							}else if($mapara_uno['activo'] == '1'){
+							<?php foreach($key['mamparas'] as $mapara_uno): ?>
+								<?php if($mapara_uno['activo'] == '0'){
+									echo '<div class="numero colorinv">'.$mapara_uno['extension'].' Val</div>';
+								}else if($mapara_uno['activo'] == '1'){
+									if ($mapara_uno['ventas'] == '0') {
+										echo '<div class="numero colorFuntionDiadema_0">'.$mapara_uno['extension'].' Val</div>';
+									}else if ($mapara_uno['ventas'] == '1'){
+										echo '<div class="numero colorFuntionDiadema_1">'.$mapara_uno['extension'].' Val</div>';
+									}else if ($mapara_uno['ventas'] == '2'){
+										echo '<div class="numero colorFuntionDiadema">'.$mapara_uno['extension'].' Val</div>';
+									}else if ($mapara_uno['ventas'] >= '3'){
+										echo '<div class="numero colorFuntionDiadema_3">'.$mapara_uno['extension'].' Val</div>';
+									}
 
-								if ($mapara_uno['ventas'] == '0') {
-									echo '<div class="numero colorFuntionDiadema_0">234 Val</div>';
-								}else if ($mapara_uno['ventas'] == '1'){
-									echo '<div class="numero colorFuntionDiadema_1">234 Val</div>';
-								}else if ($mapara_uno['ventas'] == '2'){
-									echo '<div class="numero colorFuntionDiadema">234 Val</div>';
-								}else if ($mapara_uno['ventas'] >= '3'){
-									echo '<div class="numero colorFuntionDiadema_3">234 Val</div>';
-								}
-
-							}else if($mapara_uno['activo'] == '2'){
-								echo '<div class="numero colorvalidacion">234 Val</div>';
-							}?>
-						<?php endforeach; ?>
+								}else if($mapara_uno['activo'] == '2'){
+									echo '<div class="numero colorvalidacion">234 Val</div>';
+								}?>			
+							
+							<?php endforeach; ?>
 						</div>
 					</div>
 					<div class="laptops">
@@ -1299,48 +1305,57 @@ require_once 'views/layout/header.php';
 						<div class="contenido-div">		
 						<?php foreach($key['mamparas_2'] as $mapara_dos): ?>
 							<?php if($mapara_dos['activo'] == '0'){
-								echo '<div class="numero colorinv">234 Val</div>';
+								echo '<div class="numero colorinv">'.$mapara_dos['extension'].' Val</div>';
 							}else if($mapara_dos['activo'] == '1'){
 								if ($mapara_dos['ventas'] == '0') {
-									echo '<div class="numero colorFuntionDiadema_0">234 Val</div>';
+									echo '<div class="numero colorFuntionDiadema_0">'.$mapara_dos['extension'].' Val</div>';
 								}else if ($mapara_dos['ventas'] == '1'){
-									echo '<div class="numero colorFuntionDiadema_1">234 Val</div>';
+									echo '<div class="numero colorFuntionDiadema_1">'.$mapara_dos['extension'].' Val</div>';
 								}else if ($mapara_dos['ventas'] == '2'){
-									echo '<div class="numero colorFuntionDiadema">234 Val</div>';
+									echo '<div class="numero colorFuntionDiadema">'.$mapara_dos['extension'].' Val</div>';
 								}else if ($mapara_dos['ventas'] >= '3'){
-									echo '<div class="numero colorFuntionDiadema_3">234 Val</div>';
+									echo '<div class="numero colorFuntionDiadema_3">'.$mapara_dos['extension'].' Val</div>';
 								}
 
 							}else if($mapara_dos['activo'] == '2'){
-								echo '<div class="numero colorvalidacion">234 Val</div>';
-							}?>			
-	
+								echo '<div class="numero colorvalidacion">'.$mapara_dos['extension'].' Val</div>';
+							}?>		
 						<?php endforeach; ?>
 						</div>
 					</div>
+					
 					<marquee class="div4"><?php echo $key['nombre']; ?></marquee>
 				</div>
+				<?php if ($key['num_isla'] == 1 || $key['num_isla'] == 3 || $key['num_isla'] == 5 || $key['num_isla'] == 7 || $key['num_isla'] == 9 || $key['num_isla'] == 11 || $key['num_isla'] == 13 || $key['num_isla'] == 15 || $key['num_isla'] == 17 || $key['num_isla'] == 19 || $key['num_isla'] == 21) : ?>
+					<div class="contenedor3">
+						<i class='bx bxs-user-voice bx-flashing bx-flip-horizontal bx-lg' ></i>
+						<img src="<?=base_url?>/assets/img/escritorioizq.png" class="img1">
+					</div>
+				<?php endif; ?>	
 			</div>
 
-			<?php if ($key['num_isla'] == '11') {
-			echo " <div class='estecontenido'>
+		<?php if($key['num_isla'] == '11'): ?>
+
+			<div class='estecontenido'>
 					<div class='contenedor3'>
 						<i class='bx bxs-user-voice bx-flashing bx-lg' ></i>
 						<img src='<?=base_url?>/assets/img/escritorioder.png' class='img1'>
 					</div>
 					<div class='contenedor2__coordinador'>
 						<div class='coordinador__coach---sistemas'>
-							<img src='<?=base_url?>/assets/img/mesaeci2.png' class='img2'>
+								<img src='<?=base_url?>/assets/img/mesaeci2.png' class='img2'>
 						<div class='generenteOperaciones'>Gerente de Operaciones</div>
 					</div>
 					<div class='coordinador__coach---sistemas'>
 						<img src='<?=base_url?>/assets/img/sistemas.png' class='img2'>
 						<div class='sistemas'>Sistemas</div>
-						</div>
 					</div>
-				</div> ";
-			} ?>
-		<?php endforeach; ?>
+					</div>
+			</div>
+
+		<?php endif; ?>
+		
+	<?php endforeach; ?>
 		
 	</div>
 	
