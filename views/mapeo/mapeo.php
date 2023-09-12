@@ -1236,9 +1236,6 @@ require_once 'views/layout/header.php';
 
 	</div>
 -->
-	<hr>
-	<hr>
-
 	<div class="contenido-principal">
 		<?php foreach ($iniciados as $key):?>
 
@@ -1336,10 +1333,11 @@ require_once 'views/layout/header.php';
 
 		<?php if($key['num_isla'] == '11'): ?>
 
+
 			<div class='estecontenido'>
-					<div class='contenedor3'>
-						<i class='bx bxs-user-voice bx-flashing bx-lg' ></i>
+					<div class='contenedor4'>
 						<img src='<?=base_url?>/assets/img/escritorioder.png' class='img1'>
+						<div class='gerente'>Coordinacion de operaciones</div>
 					</div>
 					<div class='contenedor2__coordinador'>
 						<div class='coordinador__coach---sistemas'>
@@ -1354,7 +1352,7 @@ require_once 'views/layout/header.php';
 			</div>
 
 		<?php endif; ?>
-		
+
 	<?php endforeach; ?>
 		
 	</div>
