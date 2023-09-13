@@ -1464,11 +1464,52 @@ class UsuarioLogin
 				)
 			)
 	);
+	
+	for ($i=0; $i < 22; $i++) { 
+		$propiedadDinamica = "Isla_" . $i;
+		$mamparas = &$login[$propiedadDinamica]['mamparas'];
+		$mamparas_2 = &$login[$propiedadDinamica]['mamparas_2'];
 
+// ------------------------------------------------------------------------------------------------------------------------------
+		for ($a=1; $a <7 ; $a++) { 
+		$propiedadDinamica2 = "mampara_". $a;
+		$extensionescom = &$mamparas[$propiedadDinamica2]['extension'];
+
+
+		$sql   = "SELECT Extension FROM USUARIO_LOGIN WHERE Extension = $extensionescom AND Fecha ='2023-01-12' AND Estado = 1";
+
+		$simon = $this->db->query($sql);
+
+			foreach ($simon as $key ) {
+				$uno = $key['Extension'];
+				var_dump($mamparas[$propiedadDinamica2]['extension']);
+				$mamparas[$propiedadDinamica2]['extension'] = $uno;
+				var_dump($mamparas[$propiedadDinamica2]['extension']);
+
+			}
+		}
+// ------------------------------------------------------------------------------------------------------------------------------
+		for ($a=7; $a <13 ; $a++) { 
+		$propiedadDinamica2 = "mampara_". $a;
+		$extensionescom = &$mamparas_2[$propiedadDinamica2]['extension'];
+		
+
+		$sql   = "SELECT Extension FROM USUARIO_LOGIN WHERE Extension = $extensionescom AND Fecha ='2023-01-12' AND Estado = 1";
+
+		$simon = $this->db->query($sql);
+
+			foreach ($simon as $key ) {
+				$dos = $key['Extension'];
+				var_dump($mamparas_2[$propiedadDinamica2]['extension']);
+				$mamparas_2[$propiedadDinamica2]['extension'] = $dos;
+				var_dump($mamparas_2[$propiedadDinamica2]['extension']);
+			}
+		}
+// ------------------------------------------------------------------------------------------------------------------------------
+	}
 	return $login;
 
 	}
-
 
 }
 
