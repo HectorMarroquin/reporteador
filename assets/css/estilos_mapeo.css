@@ -349,29 +349,30 @@ header .nav{
 .colorvalidacion{
 	/*Personal de validacion*/
 	background: lightgrey;
+	z-index: 1;
 }
-.colorinv{
+.vacia{
 	/*Personal INV*/
 	background: grey;
 }
 
-.colorFuntionDiadema_0{
+.sinVentas{
 	/*Personal PC Funcionales con diadema*/
 	background: red;
 }
 
-.colorFuntionDiadema_1{
+.unaVenta{
 	/*Personal PC Funcionales con diadema*/
 	background: yellow;
 	color: black;
 }
 
-.colorFuntionDiadema{
+.dosVentas{
 	/*Personal PC Funcionales con diadema*/
 	background: green;
 }
 
-.colorFuntionDiadema_3{
+.masDeTres{
 	/*Personal PC Funcionales con diadema*/
 	background: gold;
 }
