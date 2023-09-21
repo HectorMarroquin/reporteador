@@ -1742,7 +1742,11 @@ class UsuarioLogin
 			INNER JOIN USUARIO_CLIENTE AS UC ON USUARIO_LOGIN.IdUsuario_cliente = UC.Id
 			INNER JOIN PERSONA AS PE ON UC.Nro_nomina = PE.Nro_nomina
 			WHERE Extension = $extensionescom AND Fecha = '2023-01-12'
-			AND USUARIO_LOGIN.Estado =1";
+			AND USUARIO_LOGIN.Estado =1 
+			GROUP BY USUARIO_LOGIN.IdUsuario_cliente
+			ORDER BY USUARIO_LOGIN.Hora DESC";
+
+
 
 
 			$ejecucion = $this->db->query($sql);
@@ -1756,14 +1760,17 @@ class UsuarioLogin
 	
 		    	$mamparas[$propiedadDinamica2]['extension'] = $extension;
 
-		    	$sql2   = "SELECT * FROM CARGA_PORTABILIDAD
-				WHERE Fecha_venta = '2023-01-12'
-				AND UsuarioVenta LIKE  '".$Usuariotelemarketing."' AND Tipificar LIKE '%Acepta Oferta / NIP%' ";
+		    	$sql2   = "SELECT Id as Id , DN as Dn, Fecha as Fecha_venta, IdEstatus_bitacora_validador as IdSubEmovis FROM BITACORA_VALIDACION
+		    	WHERE Fecha = '2023-01-12'
+		    	AND IdUsuario_ejecutivo = $IdUsuariocliente AND IdEstatus_bitacora_validador = 2
+				UNION 
+				SELECT VENTAS_POSPAGO_VAL.Id AS Id ,DN AS Dn,Fecha_capturo AS Fecha_venta, IdEstatusPospago AS IdSubEmovis
+				FROM VENTAS_POSPAGO_VAL
+				WHERE VENTAS_POSPAGO_VAL.Fecha_capturo = '2023-01-12' AND  Usuarioventa LIKE '%".$Usuariotelemarketing."%' AND `IdEstatusPospago` = 2 ";
 
 				// $sql2   = "SELECT * FROM CARGA_PORTABILIDAD
 				// WHERE Fecha_venta = '2023-01-12'
 				// AND UsuarioVenta LIKE 'LCCANOG122' AND Tipificar LIKE '%Acepta Oferta / NIP%' ";
-
 				$ejecucion2 = $this->db->query($sql2);
 
 
@@ -1805,8 +1812,11 @@ class UsuarioLogin
 			INNER JOIN USUARIO_CLIENTE AS UC ON USUARIO_LOGIN.IdUsuario_cliente = UC.Id
 			INNER JOIN PERSONA AS PE ON UC.Nro_nomina = PE.Nro_nomina
 			WHERE Extension = $extensionescom AND Fecha = '2023-01-12'
-			AND USUARIO_LOGIN.Estado =1";
+			AND USUARIO_LOGIN.Estado =1
+			GROUP BY USUARIO_LOGIN.IdUsuario_cliente
+			ORDER BY USUARIO_LOGIN.Hora DESC";
 
+			
 			$ejecucion = $this->db->query($sql);
 
 			if ($ejecucion->num_rows > 0) {
@@ -1817,11 +1827,16 @@ class UsuarioLogin
 		    	
 		    	$mamparas_2[$propiedadDinamica2]['extension'] = $extension;
 
-		    	$sql2   = "SELECT * FROM CARGA_PORTABILIDAD
-		    	WHERE Fecha_venta = '2023-01-12'
-		    	AND UsuarioVenta LIKE  '".$Usuariotelemarketing."' AND Tipificar LIKE '%Acepta Oferta / NIP%' ";
+		    	$sql2   = "SELECT Id as Id , DN as Dn, Fecha as Fecha_venta, IdEstatus_bitacora_validador as IdSubEmovis FROM BITACORA_VALIDACION
+		    	WHERE Fecha = '2023-01-12'
+		    	AND IdUsuario_ejecutivo = $IdUsuariocliente AND IdEstatus_bitacora_validador = 2
+		    	UNION 
+		    	SELECT VENTAS_POSPAGO_VAL.Id AS Id ,DN AS Dn,Fecha_capturo AS Fecha_venta, IdEstatusPospago AS IdSubEmovis
+		    	FROM VENTAS_POSPAGO_VAL
+		    	WHERE VENTAS_POSPAGO_VAL.Fecha_capturo = '2023-01-12' AND  Usuarioventa LIKE '%".$Usuariotelemarketing."%' AND `IdEstatusPospago` = 2 ";
 
 		    	$ejecucion2 = $this->db->query($sql2);
+
 
 		    	if ($ejecucion2->num_rows > 0) {
 		    	    // Obtener la fila de resultados
