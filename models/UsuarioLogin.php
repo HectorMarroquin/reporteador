@@ -1731,23 +1731,23 @@ class UsuarioLogin
 		$mamparas = &$login[$propiedadDinamica]['mamparas'];
 		$mamparas_2 = &$login[$propiedadDinamica]['mamparas_2'];
 
+		$today = date("Y-m-d");
 // ------------------------------------------------------------------------------------------------------------------------------
 		for ($recorrerMampara=1; $recorrerMampara <7 ; $recorrerMampara++) { 
 			$propiedadDinamica2 = "mampara_". $recorrerMampara;
 			$extensionescom = &$mamparas[$propiedadDinamica2]['extension'];
 
+			
 
 			$sql   = "SELECT Extension, IdUsuario_cliente, PE.Nro_nomina, PE.Usuario_telemarketing
 			FROM USUARIO_LOGIN
 			INNER JOIN USUARIO_CLIENTE AS UC ON USUARIO_LOGIN.IdUsuario_cliente = UC.Id
 			INNER JOIN PERSONA AS PE ON UC.Nro_nomina = PE.Nro_nomina
-			WHERE Extension = $extensionescom AND Fecha = '2023-01-12'
+			WHERE Extension = $extensionescom AND Fecha ='".$today."'
 			AND USUARIO_LOGIN.Estado =1 
-			GROUP BY USUARIO_LOGIN.IdUsuario_cliente
-			ORDER BY USUARIO_LOGIN.Hora DESC";
-
-
-
+			GROUP BY USUARIO_LOGIN.Fecha
+			ORDER BY USUARIO_LOGIN.Hora DESC
+			LIMIT 1 ";
 
 			$ejecucion = $this->db->query($sql);
 
@@ -1761,12 +1761,12 @@ class UsuarioLogin
 		    	$mamparas[$propiedadDinamica2]['extension'] = $extension;
 
 		    	$sql2   = "SELECT Id as Id , DN as Dn, Fecha as Fecha_venta, IdEstatus_bitacora_validador as IdSubEmovis FROM BITACORA_VALIDACION
-		    	WHERE Fecha = '2023-01-12'
+		    	WHERE Fecha = '".$today."'
 		    	AND IdUsuario_ejecutivo = $IdUsuariocliente AND IdEstatus_bitacora_validador = 2
 				UNION 
 				SELECT VENTAS_POSPAGO_VAL.Id AS Id ,DN AS Dn,Fecha_capturo AS Fecha_venta, IdEstatusPospago AS IdSubEmovis
 				FROM VENTAS_POSPAGO_VAL
-				WHERE VENTAS_POSPAGO_VAL.Fecha_capturo = '2023-01-12' AND  Usuarioventa LIKE '%".$Usuariotelemarketing."%' AND `IdEstatusPospago` = 2 ";
+				WHERE VENTAS_POSPAGO_VAL.Fecha_capturo = '".$today."' AND  Usuarioventa LIKE '%".$Usuariotelemarketing."%' AND `IdEstatusPospago` = 2 ";
 
 				// $sql2   = "SELECT * FROM CARGA_PORTABILIDAD
 				// WHERE Fecha_venta = '2023-01-12'
@@ -1811,10 +1811,11 @@ class UsuarioLogin
 			FROM USUARIO_LOGIN
 			INNER JOIN USUARIO_CLIENTE AS UC ON USUARIO_LOGIN.IdUsuario_cliente = UC.Id
 			INNER JOIN PERSONA AS PE ON UC.Nro_nomina = PE.Nro_nomina
-			WHERE Extension = $extensionescom AND Fecha = '2023-01-12'
+			WHERE Extension = $extensionescom AND Fecha = '".$today."'
 			AND USUARIO_LOGIN.Estado =1
-			GROUP BY USUARIO_LOGIN.IdUsuario_cliente
-			ORDER BY USUARIO_LOGIN.Hora DESC";
+			GROUP BY USUARIO_LOGIN.Fecha
+			ORDER BY USUARIO_LOGIN.Hora DESC
+			LIMIT 1 ";
 
 			
 			$ejecucion = $this->db->query($sql);
@@ -1828,12 +1829,12 @@ class UsuarioLogin
 		    	$mamparas_2[$propiedadDinamica2]['extension'] = $extension;
 
 		    	$sql2   = "SELECT Id as Id , DN as Dn, Fecha as Fecha_venta, IdEstatus_bitacora_validador as IdSubEmovis FROM BITACORA_VALIDACION
-		    	WHERE Fecha = '2023-01-12'
+		    	WHERE Fecha = '".$today."'
 		    	AND IdUsuario_ejecutivo = $IdUsuariocliente AND IdEstatus_bitacora_validador = 2
 		    	UNION 
 		    	SELECT VENTAS_POSPAGO_VAL.Id AS Id ,DN AS Dn,Fecha_capturo AS Fecha_venta, IdEstatusPospago AS IdSubEmovis
 		    	FROM VENTAS_POSPAGO_VAL
-		    	WHERE VENTAS_POSPAGO_VAL.Fecha_capturo = '2023-01-12' AND  Usuarioventa LIKE '%".$Usuariotelemarketing."%' AND `IdEstatusPospago` = 2 ";
+		    	WHERE VENTAS_POSPAGO_VAL.Fecha_capturo = '".$today."' AND  Usuarioventa LIKE '%".$Usuariotelemarketing."%' AND `IdEstatusPospago` = 2 ";
 
 		    	$ejecucion2 = $this->db->query($sql2);
 
