@@ -13,8 +13,9 @@ class ListaCentro{
 
             $sql = "";
             $coord    = ['237'];
-            $coach    = ['150','16'];
+            $coach    = ['150','16','212','157','42'];
             $externos = ['226'];
+
 
             if(in_array($rol,$admin)){
 
@@ -24,15 +25,18 @@ class ListaCentro{
 
                 $sql = "SELECT Id,Centro,Prefijo FROM LISTA_CENTROS WHERE Comentario = 'ACTIVO' AND Id IN(1) AND Estado = 1";
 
-            }elseif(in_array($rol,$externos) && in_array($idusuario,$sucursales) ){
+            }
+            // elseif(in_array($rol,$externos) && in_array($idusuario,$sucursales) ){
 
-                $sql = "SELECT Id,Centro,Prefijo FROM LISTA_CENTROS WHERE Comentario = 'ACTIVO' AND Estado = 1";
+            //     $sql = "SELECT Id,Centro,Prefijo FROM LISTA_CENTROS WHERE Comentario = 'ACTIVO' AND Estado = 1";
                
-            }else{
+            // }
+            else{
                 
                 $sql = "SELECT Id,Centro,Prefijo FROM LISTA_CENTROS WHERE Comentario = 'ACTIVO' AND IdUsuarioCliente = '".$idusuario."' AND Estado = 1";
             }
 
+      // echo $sql; exit();
             
             $registros = $this->db->query($sql);
 

@@ -30,7 +30,9 @@ class VentasPospago
 
 	public function getAll($fecha_i,$fecha_f,$rol,$admin,$iduserclient){
 
-		if(in_array($rol,$admin) || $rol == "237"){
+		$soloEci = array('193','42','157');
+
+		if(in_array($rol,$admin) || in_array($rol,$soloEci)){
 
 			$sql = "SELECT UC.IdSupervisor as idSuper,UCC.Nombre AS coach, COUNT( UCC.Id ) AS ventas,LC.User_group AS usergroup,LC.Prefijo as prefijo
 					FROM VENTAS_POSPAGO_VAL AS VP
