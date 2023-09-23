@@ -1731,7 +1731,7 @@ class UsuarioLogin
 		$mamparas = &$login[$propiedadDinamica]['mamparas'];
 		$mamparas_2 = &$login[$propiedadDinamica]['mamparas_2'];
 
-		$today = date("2023-09-22");
+		$today = date("Y-m-d");
 // ------------------------------------------------------------------------------------------------------------------------------
 		for ($recorrerMampara=1; $recorrerMampara <7 ; $recorrerMampara++) { 
 			$propiedadDinamica2 = "mampara_". $recorrerMampara;
@@ -1800,7 +1800,7 @@ class UsuarioLogin
 
 		    	$pospago = $ejecucion_pos->fetch_assoc();
 
-		    	$pospago =empty($pospago) ? 0 : intval($pospago["TOTAL"]);
+		    	$pospago =empty($pospago) ? 0 : intval($pospago["TOTAL2"]);
 
 
 				$total = $prepago + $pospago;
@@ -1852,7 +1852,7 @@ class UsuarioLogin
 		    	$row = $ejecucion->fetch_assoc();
 		    	$extension = $row["Extension"];
 		    	$IdUsuariocliente = $row["IdUsuario_cliente"];
-		    	$Usuariotelemarketing = $row["Usuario_telemarketing"];
+		    
 	
 		    	$mamparas_2[$propiedadDinamica2]['extension'] = $extension;
 
@@ -1871,7 +1871,7 @@ class UsuarioLogin
 
 		    	$pospago = $ejecucion_pos->fetch_assoc();
 
-		    	$pospago =empty($pospago) ? 0 : intval($pospago["TOTAL"]);
+		    	$pospago =empty($pospago) ? 0 : intval($pospago["TOTAL2"]);
 
 		    	$total = $prepago + $pospago;
 	
