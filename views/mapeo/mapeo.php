@@ -1262,10 +1262,10 @@ require_once 'views/layout/header.php';
 						<div class="contenido-div">
 						<!-- --------------------------------------------------------------------------------------------------->
 							<?php foreach($key['mamparas'] as $mapara_uno): ?>
-								<div class="numero <?php echo $mapara_uno['color']; ?>"> <?php echo $mapara_uno['extension']; ?> Val</div>
+								<div class="numero <?php echo $mapara_uno['color']; ?>"> <?php echo $mapara_uno['extension']; ?> </div>
 
 								<?php if($mapara_uno['extension'] == '359'): ?>
-									<div class="numero colorvalidacion"> <?php echo $mapara_uno['extension']; ?> Val</div>
+									<div class="numero colorvalidacion"> <?php echo $mapara_uno['extension']; ?> </div>
 								<?php endif; ?>
 
 							<?php endforeach; ?>
@@ -1297,7 +1297,7 @@ require_once 'views/layout/header.php';
 						<div class="contenido-div">		
 						<!-- --------------------------------------------------------------------------------------------------->
 						<?php foreach($key['mamparas_2'] as $mapara_dos): ?>
-							<div class="numero <?php echo $mapara_dos['color']; ?>"> <?php echo $mapara_dos['extension']; ?> Val</div>
+							<div class="numero <?php echo $mapara_dos['color']; ?>"> <?php echo $mapara_dos['extension']; ?> </div>
 						<?php endforeach; ?>
 						<!-- --------------------------------------------------------------------------------------------------->
 						</div>
