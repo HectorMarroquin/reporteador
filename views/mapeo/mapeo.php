@@ -1262,14 +1262,7 @@ require_once 'views/layout/header.php';
 						<div class="contenido-div">
 						<!-- --------------------------------------------------------------------------------------------------->
 							<?php foreach($key['mamparas'] as $mapara_uno): ?>
-
-								<?php $extensionLength = strlen($mapara_uno['extension']); ?>
-								<?php if($extensionLength >= 4): ?>
-									<div class="numero <?php echo $mapara_uno['color']; ?>"> <?php echo $mapara_uno['extension']; ?> Val</div>
-								<?php elseif($extensionLength < 4): ?>
-									<div class="numero <?php echo $mapara_uno['color']; ?>"> <?php echo $mapara_uno['extension']; ?> Val</div>
-								<?php endif; ?>
-
+								<div class="numero <?php echo $mapara_uno['color']; ?>"> <?php echo $mapara_uno['extension']; ?> Val</div>
 
 								<?php if($mapara_uno['extension'] == '359'): ?>
 									<div class="numero colorvalidacion"> <?php echo $mapara_uno['extension']; ?> Val</div>
@@ -1304,12 +1297,7 @@ require_once 'views/layout/header.php';
 						<div class="contenido-div">		
 						<!-- --------------------------------------------------------------------------------------------------->
 						<?php foreach($key['mamparas_2'] as $mapara_dos): ?>
-							<?php $extensionLength = strlen($mapara_dos['extension']); ?>
-							<?php if($extensionLength >= 4): ?>
-								<div class="numero <?php echo $mapara_dos['color']; ?>"> <?php echo $mapara_dos['extension']; ?> Val</div>
-							<?php elseif($extensionLength < 4): ?>
-								<div class="numero <?php echo $mapara_dos['color']; ?>"> <?php echo $mapara_dos['extension']; ?> Val</div>
-							<?php endif; ?>
+							<div class="numero <?php echo $mapara_dos['color']; ?>"> <?php echo $mapara_dos['extension']; ?> Val</div>
 						<?php endforeach; ?>
 						<!-- --------------------------------------------------------------------------------------------------->
 						</div>

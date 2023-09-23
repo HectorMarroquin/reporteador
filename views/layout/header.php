@@ -1,11 +1,16 @@
 <?php 
 
 $rol = $_SESSION['identity']->idgrupo;
+$UsuarioEspecial = $_SESSION['identity']->Nro_nomina;
+
+
 
 $todo  = ['42'];
 $admincor = ['220','227','157','32','193','237','212','12','16'];
 $coach = ['150'];
 $externos = ['226'];
+
+$Especial = ['EMJ','2052'];
 
 ?>
 <!doctype html>
@@ -47,11 +52,10 @@ $externos = ['226'];
           <a class="nav-link" href="<?=base_url?>Home/index">Inicio</a>
         </li>
 
-        <?php if(isset($_SESSION['identity']) && in_array($rol,$todo)) : ?>    
+        <?php if(isset($_SESSION['identity']) && in_array($rol,$todo) ) : ?>    
         <li class="nav-item">
           <a class="nav-link" href="<?=base_url?>VentasAltasUsuarios/index">Altas CM</a>
         </li>
-
         <li class="nav-item">
           <a class="nav-link" href="<?=base_url?>Historico/index" tabindex="-1" aria-disabled="true">Historico</a>
         </li>
@@ -69,9 +73,16 @@ $externos = ['226'];
         <li class="nav-item">
           <a class="nav-link" href="<?=base_url?>Historico/index" tabindex="-1" aria-disabled="true">Historico</a>
         </li>
+     
         <li class="nav-item">
           <a class="nav-link" href="<?=base_url?>VentasAltasUsuarios/index" tabindex="-1" aria-disabled="true">Altas CM</a>
         </li>
+
+        <?php if(isset($_SESSION['identity']) && in_array($UsuarioEspecial,$Especial)): ?>
+        <li class="nav-item">
+          <a class="nav-link" href="<?=base_url?>UsuarioLogin/index" tabindex="-1" aria-disabled="true">Mapeo</a>
+        </li>
+        <?php endif; ?>
 
         <?php elseif(isset($_SESSION['identity']) && in_array($rol,$externos)): ?>
 
