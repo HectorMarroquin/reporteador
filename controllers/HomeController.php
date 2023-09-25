@@ -10,7 +10,7 @@ class HomeController
 
 		$rol          = $_SESSION['identity']->idgrupo;
 		$iduserclient = $_SESSION['identity']->Id;
-		$admin        = ['220','227','32','157','193','12'];
+		$admin        = ['220','227','32','157','193','12','42'];
 
 		$sucursales      = ['22919239','22920642','22921141','22917334'];
 		

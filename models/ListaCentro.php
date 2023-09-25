@@ -13,7 +13,7 @@ class ListaCentro{
 
             $sql = "";
             $coord    = ['237'];
-            $coach    = ['150','16','212','157','42'];
+            $coach    = ['150','16','212','157'];
             $externos = ['226'];
 
 
@@ -36,7 +36,7 @@ class ListaCentro{
                 $sql = "SELECT Id,Centro,Prefijo FROM LISTA_CENTROS WHERE Comentario = 'ACTIVO' AND IdUsuarioCliente = '".$idusuario."' AND Estado = 1";
             }
 
-      // echo $sql; exit();
+      //echo $sql; exit();
             
             $registros = $this->db->query($sql);
 
