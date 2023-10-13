@@ -98,15 +98,19 @@ class HomeController
 				}
 					
 			}
-
 			$nameCentro  = $centro['centro'];
 			$id_cen      = $centro['id'];
-			$ventasPre   = $centro['ventas'];
-			$ventasPreT  += $ventasPre;
 			$ventasPos   = $ventasp->getVentasPosCentro($id_cen,$fecha_i,$fecha_f);
-			$ventasPosT  += $ventasPos;
-			$ventasT     = intval($ventasPre) + intval($ventasPos);
-			$ventasAcum  += $ventasT;
+
+			if($centro['id'] != '26'){
+
+				$ventasPre   = $centro['ventas'];
+				$ventasPreT  += $ventasPre;
+				$ventasPosT  += $ventasPos;
+				$ventasT     = intval($ventasPre) + intval($ventasPos);
+				$ventasAcum  += $ventasT;
+			}
+
 			$asistenciaT += $asistencia;
 			$factor      = Utils::getPromedio($ventasT,$asistencia);
 			$factorT     = Utils::getPromedio($ventasAcum,$asistenciaT);

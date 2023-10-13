@@ -1,6 +1,5 @@
 <?php
 require_once 'views/layout/header.php';
-require_once 'helpers/permisos.php'
 ?>
 
 <?php //Usuarios

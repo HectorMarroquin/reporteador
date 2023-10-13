@@ -8,7 +8,6 @@ class Utils
 	public function __construct(){
 
 		$this->db = Database::connect();
-		$this->dbv = Database::connectvicidial();
 	}
 
 	public static function deleteSession($name){

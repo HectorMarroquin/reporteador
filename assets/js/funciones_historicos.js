@@ -76,7 +76,7 @@
                                  "<td>" + centro.totales + "</td>" +
                                  "<td>" + centro.porcentaje + "%" + "</td>" +
                                  "<td>" + centro.asistencia + "</td>" +
-                                 "<td>" + centro.factor + "%" + "</td>" +
+                                 "<td>" + centro.factor  + "</td>" +
                                  "</tr>";
                              $("#tableReporteCentro").append(fila);
                          });
