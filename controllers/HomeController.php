@@ -79,6 +79,9 @@ class HomeController
 		$asistenciaT = 0;
 		$factorT     = 0;
 
+		$ventasAcumx  = 0;
+		$asistenciaTx = 0;
+
 		$valor = count($centros);
 		$arrCentrox = Utils::crearArrCentros($valor);
 
@@ -98,22 +101,35 @@ class HomeController
 				}
 					
 			}
-			$nameCentro  = $centro['centro'];
-			$id_cen      = $centro['id'];
-			$ventasPos   = $ventasp->getVentasPosCentro($id_cen,$fecha_i,$fecha_f);
 
 			if($centro['id'] != '26'){
 
-				$ventasPre   = $centro['ventas'];
-				$ventasPreT  += $ventasPre;
-				$ventasPosT  += $ventasPos;
-				$ventasT     = intval($ventasPre) + intval($ventasPos);
-				$ventasAcum  += $ventasT;
+
+				$id_cenx      = $centro['id'];
+				$ventasPosx   = $ventasp->getVentasPosCentro($id_cenx,$fecha_i,$fecha_f);
+				$ventasPrex   = $centro['ventas'];
+				$ventasTx     = intval($ventasPrex) + intval($ventasPosx);
+				$ventasAcumx  += $ventasTx;
+				$asistenciaTx += $asistencia;
+
 			}
 
+
+
+			$nameCentro  = $centro['centro'];
+			$id_cen      = $centro['id'];
+			$ventasPos   = $ventasp->getVentasPosCentro($id_cen,$fecha_i,$fecha_f);
+			$ventasPre   = $centro['ventas'];
+			$ventasPreT  += $ventasPre;
+			$ventasPosT  += $ventasPos;
+			$ventasT     = intval($ventasPre) + intval($ventasPos);
+			$ventasAcum  += $ventasT;
 			$asistenciaT += $asistencia;
 			$factor      = Utils::getPromedio($ventasT,$asistencia);
-			$factorT     = Utils::getPromedio($ventasAcum,$asistenciaT);
+
+			$factorT     = Utils::getPromedio($ventasAcumx,$asistenciaTx);
+
+
 			$porcentaje  = Utils::getPromedio($ventasPos,$ventasT);
 			$porcentajeT = Utils::getPromedio($ventasPosT,$ventasAcum);
 		

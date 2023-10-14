@@ -27,7 +27,7 @@ class HistoricoController
 		$fecha_i = $_POST['date1'];
 		$fecha_f = $_POST['date2'];
 
-		$admin        = ['220','227','157','32','12','237','42'];
+		$admin        = ['220','227','157','32','12','237','42','212'];
 		$rol          = $_SESSION['identity']->idgrupo;
 		$iduserclient = $_SESSION['identity']->Id;
 		$sucursales      = ['22919239','22920642','22921141','22917334'];
