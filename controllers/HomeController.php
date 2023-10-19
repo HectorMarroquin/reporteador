@@ -17,8 +17,8 @@ class HomeController
 		$fecha_i = date('Y-m-d');
 		$fecha_f = date('Y-m-d');
 
-		//$fecha_i = "2023-08-30";
-		//$fecha_f = "2023-08-30";
+		//$fecha_i = "2023-10-18";
+		//$fecha_f = "2023-10-18";
 
 		Utils::checkSession();
 
@@ -102,7 +102,7 @@ class HomeController
 					
 			}
 
-			if($centro['id'] != '26'){
+			if($centro['id'] != '26' && $centro['id'] != '27'){
 
 
 				$id_cenx      = $centro['id'];
