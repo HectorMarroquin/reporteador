@@ -68,7 +68,6 @@ class BitacoraValidacion
 
 			while ($centro = $centros->fetch_object()) {
 
-
 				$registros[$centro->id] = array(
 					'iduser'  =>$centro->iduser,
 					'centro'  =>$centro->centro,

@@ -71,6 +71,7 @@ class HomeController
 		$arreglo = array();
 		$ventasp = new VentasPospago();
 		$utils = new Utils();
+		$centrosParther = array('26','27','28','29','30');
 
 		$ventasPreT  = 0;
 		$ventasPosT  = 0;
@@ -102,8 +103,7 @@ class HomeController
 					
 			}
 
-			if($centro['id'] != '26' && $centro['id'] != '27'){
-
+			if(!in_array($centro['id'],$centrosParther)){
 
 				$id_cenx      = $centro['id'];
 				$ventasPosx   = $ventasp->getVentasPosCentro($id_cenx,$fecha_i,$fecha_f);
@@ -111,11 +111,10 @@ class HomeController
 				$ventasTx     = intval($ventasPrex) + intval($ventasPosx);
 				$ventasAcumx  += $ventasTx;
 				$asistenciaTx += $asistencia;
-
+				
 			}
-
-
-
+			
+	
 			$nameCentro  = $centro['centro'];
 			$id_cen      = $centro['id'];
 			$ventasPos   = $ventasp->getVentasPosCentro($id_cen,$fecha_i,$fecha_f);
