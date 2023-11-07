@@ -82,10 +82,6 @@ class HomeController
 
 		$ventasAcumx  = 0;
 		$asistenciaTx = 0;
-		$ventasPosTx  = 0;
-
-		$ventasTxz    = 0;
-		$ventasPosxz  = 0;
 
 		$valor = count($centros);
 		$arrCentrox = Utils::crearArrCentros($valor);
@@ -115,16 +111,7 @@ class HomeController
 				$ventasTx     = intval($ventasPrex) + intval($ventasPosx);
 				$ventasAcumx  += $ventasTx;
 				$asistenciaTx += $asistencia;
-				$ventasPosTx  += $ventasPosx;
 				
-			}
-
-			if($centro['id'] == '29'){
-
-				$id_cenxz      = $centro['id'];
-				$ventasPosxz   = $ventasp->getVentasPosCentro($id_cenxz,$fecha_i,$fecha_f);
-				$ventasPrexz   = $centro['ventas'];
-				$ventasTxz    = intval($ventasPosxz) + intval($ventasPrexz);
 			}
 			
 	
@@ -139,10 +126,11 @@ class HomeController
 			$asistenciaT += $asistencia;
 			$factor      = Utils::getPromedio($ventasT,$asistencia);
 
-			$factorT     = Utils::getPromedio($ventasAcumx,$asistenciaTx);// FACTOR VA AQUI ARA QUE NO SUBE VENTAS $ventasTxz
-			$porcentaje  = Utils::getPromedio($ventasPos,$ventasT);
-			
+			$factorT     = Utils::getPromedio($ventasAcumx,$asistenciaTx);
 
+
+			$porcentaje  = Utils::getPromedio($ventasPos,$ventasT);
+			$porcentajeT = Utils::getPromedio($ventasPosT,$ventasAcum);
 		
 			
 			$arreglo[] = array(
@@ -159,13 +147,6 @@ class HomeController
 
 
 		}
-		// ESTO SE PUSO AQUI POR ESTRATEGIA PARASUMAR LAS VENTAS EXTRAS DE SOLO PAR
-		$ventasAcumx += $ventasTxz;
-		$ventasPosTx += $ventasPosxz;
-		$porcentajeT = Utils::getPromedio($ventasPosTx,$ventasAcumx);
-
-
-
 		$arreglo[] = array(
 							'centro'    =>"TOTAL",
                             'prefijo'   =>"TOTAL",
