@@ -25,7 +25,7 @@ class UsuarioLogin
 	$login=array(
 		'Isla_0' => array(
 				'num_isla' => '0',
-				'nombre' => 'CAB-1012',
+				'nombre' => 'CAB-1012 Cecilia',
 				'Extensiones' => '234-245',
 				'mamparas' =>array(
 					'mampara_1' =>array(
@@ -104,7 +104,7 @@ class UsuarioLogin
 			'Isla_1' => array(
 
 				'num_isla' => '1',
-				'nombre' => 'CAB-1013',
+				'nombre' => 'CAB-1013 Daniel',
 				'Extensiones' => '101-112',
 				'mamparas' =>array(
 					'mampara_1' =>array(
@@ -253,7 +253,7 @@ class UsuarioLogin
 			'Isla_3' => array(
 
 				'num_isla' => '3',
-				'nombre' => 'CAB-1015',
+				'nombre' => 'CAB-1015 Alejandro',
 				'Extensiones' => '113-124',
 				'mamparas' =>array(
 					'mampara_1' =>array(
@@ -411,7 +411,7 @@ class UsuarioLogin
 			'Isla_5' => array(
 
 				'num_isla' => '5',
-				'nombre' => 'CAB-1017',
+				'nombre' => 'CAB-1017 Cautiño',
 				'Extensiones' => '125-136',
 				'mamparas' =>array(
 					'mampara_1' =>array(
@@ -872,7 +872,7 @@ class UsuarioLogin
 			'Isla_11' => array(
 
 				'num_isla' => '11',
-				'nombre' => 'CAB-1001',
+				'nombre' => 'CAB-1001 Navil',
 				'Extensiones' => '161-172',
 				'mamparas' =>array(
 					'mampara_1' =>array(
@@ -1030,7 +1030,7 @@ class UsuarioLogin
 			
 			'Isla_13' => array(
 				'num_isla' => '14',
-				'nombre' => 'CAB-1003',
+				'nombre' => 'CAB-1003 Dante',
 				'Extensiones' => '306-317',
 				'mamparas' =>array(
 					'mampara_1' =>array(
@@ -1109,7 +1109,7 @@ class UsuarioLogin
 			
 			'Isla_14' => array(
 				'num_isla' => '15',
-				'nombre' => 'CAB-1004',
+				'nombre' => 'CAB-1004 Rafael',
 				'Extensiones' => '185-196',
 				'mamparas' =>array(
 					'mampara_1' =>array(
@@ -1266,7 +1266,7 @@ class UsuarioLogin
 			
 			'Isla_16' => array(
 				'num_isla' => '17',
-				'nombre' => 'CAB-1006',
+				'nombre' => 'CAB-1006 Mariana',
 				'Extensiones' => '197-208',
 				'mamparas' =>array(
 					'mampara_1' =>array(
@@ -1423,7 +1423,7 @@ class UsuarioLogin
 			
 			'Isla_18' => array(
 				'num_isla' => '19',
-				'nombre' => 'CAB-1008',
+				'nombre' => 'CAB-1008 Jessica',
 				'Extensiones' => '209-220',
 				'mamparas' =>array(
 					'mampara_1' =>array(

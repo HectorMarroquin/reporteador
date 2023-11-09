@@ -197,3 +197,7 @@ require_once 'views/layout/header.php';
 	
 </body>
 </html>
+
+<?php
+require_once 'views/layout/footer.php';
+?>
