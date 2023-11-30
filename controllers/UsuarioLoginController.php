@@ -19,6 +19,8 @@ class UsuarioLoginController
 
 		$iniciados = $inicio->consulta_general();
 
+		$couches = $inicio->usuariosCoaches();
+
 
 		require_once 'views/mapeo/mapeo.php';
 	

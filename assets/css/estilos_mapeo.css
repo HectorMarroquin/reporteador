@@ -273,6 +273,70 @@ header .nav{
 	background: gold;
 }
 
+.borderMat{
+	border: 1px #FCAA47; solid;
+	box-shadow: inset 0 0 0 3px #FCAA47;
+}
+.borderVes{
+	border: 1px #FCAA47 solid;
+	box-shadow: inset 0 0 0 3px #FCAA47;
+}
+
+#parte_black{
+	position: absolute;
+	top: 3.5rem;
+	background: linear-gradient(60deg,rgba(0, 0, 0, .5),rgba(0, 0, 0, .5),rgba(0, 0, 0, .5));
+	width: 10%;
+	height: 109vh;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#contenedor-modal{
+	background: rgba(202, 220, 223, 0.8);
+	border: 3px black solid;
+	width: 35%;
+	height: 15rem;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-around;
+}
+#cerrar{
+	background: skyblue;
+	border-radius: 50%;
+	width: 2.8rem;
+	height: 2.8rem;
+	border: 1px solid black;
+
+	font-size: .7rem;
+	font-weight: bolder;
+}
+
+#cerrar:hover{
+	background: black;
+	color: white;
+	border: 1px solid white;
+
+}
+
+.formulario-nombre{
+	height: 8rem;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-around;
+
+
+}
+#nombre{
+	width: 90%;
+}
+
 /* Estilos para dispositivos móviles */
 @media screen and (max-width: 768px) {
 
@@ -313,6 +377,7 @@ header .nav{
     grid-template-columns: repeat(12, 1fr);
     grid-gap: 15px;
     margin: 3px auto;
+    margin-top: 2.2rem;
     /*max-width: 1290px;*/
     /* align-items: center; */
     /* justify-content: center; */
@@ -324,6 +389,21 @@ header .nav{
 
 	.contenido-principal {
 		width: 5rem;
+	}
+
+	#parte_black{
+		height: 95vh;
+	}
+
+	#contenedor-modal{
+		width: 90%;
+	}
+
+	#nombre{
+		width: 80%;
+	}
+	#nuevo_nombre{
+		width: 80%;
 	}
 
 }
