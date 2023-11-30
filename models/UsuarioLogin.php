@@ -22,10 +22,12 @@ class UsuarioLogin
 
 	public function consulta_general(){
 
-	$sqlNombre = "SELECT UC.Nombre
+	$sqlNombre = "SELECT PP.Nombre
 	FROM `ESTATUS_CABECERA` AS ec
-	LEFT JOIN USUARIO_CLIENTE AS UC ON UC.Id = ec.IdUsuario_cliente";
+	LEFT JOIN USUARIO_CLIENTE AS UC ON UC.Id = ec.IdUsuario_cliente
+	LEFT JOIN PERSONA AS PP  ON UC.Nro_nomina = PP.Nro_nomina";
 	$ejecucionNombre = $this->db->query($sqlNombre);
+
 	$Nombres = array();
 
 	foreach ($ejecucionNombre as $key) {
@@ -2243,7 +2245,7 @@ class UsuarioLogin
 	public function usuariosCoaches(){
 		$sql   = "SELECT *
 		FROM USUARIO_CLIENTE
-		WHERE IdGrupo_sistema = 150 
+		WHERE (IdGrupo_sistema = 150 OR IdGrupo_sistema = 157 OR IdGrupo_sistema = 233) 
 		AND Estado =1";
 
 		$ejecucion = $this->db->query($sql);
@@ -2257,8 +2259,3 @@ class UsuarioLogin
 
 ?>
 
-<!-- SELECT *
-FROM CARGA_PORTABILIDAD
-WHERE Fecha_venta = '2023-01-12'
-AND UsuarioVenta LIKE 'LCCGASD822'
-AND Tipificar LIKE '%Acepta Oferta / NIP%' -->

@@ -363,12 +363,30 @@ header .nav{
 	}
 	.cajas p{
 		width: 100%;
-		letter-spacing: 7px;
+		letter-spacing: 20px;
 	}
 
 	.cajap{
 		width: 50%;
 		margin: 0 0 0 42px;
+	}
+	.col-9{
+		display:flex;	
+		justify-content: center;
+		align-items: center;
+		overflow: auto;
+
+	}
+
+	.col-9 p{
+		font-size: .45rem;
+		width: 97%;
+		overflow: auto;
+	}
+
+	.gereope{
+		font-size: .4rem;
+		overflow: auto;
 	}
 
 	.contenedor {

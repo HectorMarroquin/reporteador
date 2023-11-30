@@ -19,7 +19,7 @@ $sesionGrupo = $_SESSION['identity']->idgrupo;
                  <!-- Contenido CAB12 -->
                  <?php if ($key['num_isla'] >= '12') : ?>
                  	<div class="col-9" onclick="abrir('<?php echo $key['nombre'];?>,<?php echo $key['num_isla'];?>')">
-                 	  <p><?php echo $key['nombre']; ?></p>
+                 	  <p class="isla_nombre"><?php echo $key['nombre']; ?></p>
                  	</div>
                  <?php endif; ?>
 
@@ -41,7 +41,7 @@ $sesionGrupo = $_SESSION['identity']->idgrupo;
 
                  <?php if ($key['num_isla'] < '12') : ?>
                  	<div class="col-9" onclick="abrir('<?php echo $key['nombre']; ?>,<?php echo $key['num_isla'];?>')">
-                 	  <p><?php echo $key['nombre']; ?></p>
+                 	  <p class="isla_nombre"><?php echo $key['nombre']; ?></p>
                  	</div>
                  <?php endif; ?>
  
