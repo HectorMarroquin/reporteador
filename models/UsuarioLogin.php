@@ -2012,8 +2012,10 @@ class UsuarioLogin
 
 			$cambio_nom = $login[$propiedadDinamica]['num_isla'];
 
+			$hoy = date('Y-m-d');
+
 			if($num_isla == $cambio_nom){
-				$sqlCambioCoach = "UPDATE ESTATUS_CABECERA SET IdUsuario_cliente = $nuevo_nombre WHERE Id = $num_isla";
+				$sqlCambioCoach = "UPDATE ESTATUS_CABECERA SET IdUsuario_cliente = $nuevo_nombre, Fecha = '".$hoy."' WHERE Id = $num_isla";
 
 				$ejecucionCambio = $this->db->query($sqlCambioCoach);
 
