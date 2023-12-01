@@ -33,7 +33,7 @@ function abrir(nombre) {
 	let Mode = document.getElementById('Mod');
 	Mode.style.transitionProperty = "width";
 	Mode.style.transitionDuration = "1s";
-	Mode.style.width = "60%"
+	Mode.style.width = "60%";
 
 	// Setear valores en campos ocultos
 	let valor = document.getElementById('nombre');
@@ -48,25 +48,25 @@ function cerrar() {
 	let modal = document.getElementById('parte_black');
 	modal.style.transitionProperty = "width";
 	modal.style.transitionDuration = "1s";
-	modal.style.width = "1%"
+	modal.style.width = "1%";
 
 	let nombre = document.getElementById('nombre');
 	nombre.style.transitionProperty = "width";
 	nombre.style.transitionDuration = "1s";
-	nombre.style.width = "1%"
+	nombre.style.width = "1%";
 
 	let nuevo_nombre = document.getElementById('nuevo_nombre');
 	nuevo_nombre.style.transitionProperty = "width";
 	nuevo_nombre.style.transitionDuration = "1s";
-	nuevo_nombre.style.width = "1%"
+	nuevo_nombre.style.width = "1%";
 
 	let Mode = document.getElementById('Mod');
 	Mode.style.transitionProperty = "width";
 	Mode.style.transitionDuration = "1s";
-	Mode.style.width = "1%"
+	Mode.style.width = "1%";
 
 
 	setTimeout(() => {
 	  modal.style.visibility = 'hidden';
-	}, 800);
+	}, 500);
 }

@@ -114,9 +114,10 @@ $sesionGrupo = $_SESSION['identity']->idgrupo;
                     <option value="<?php echo $couch["Id"];?>"><?php echo $couch["Nombre"]; ?></option>
                 <?php endforeach; ?>
             </select>		    
-            <?php if ($sesionGrupo == '42' || $sesionGrupo == '40' || $sesionGrupo == '212'):?>
+            <?php if ( $sesionGrupo == '40' || $sesionGrupo == '212' || $sesionGrupo == '32'):?>
 		    <input type="submit" name="modificar_nombre" value="Modificar Nombre" id="Mod">
             <?php endif; ?>
+            <input type="hidden" name="modificar_nombre" value="Modificar Nombre" id="Mod">
 		</form>
         
 	</div>
