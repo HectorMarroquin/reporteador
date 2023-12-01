@@ -99,6 +99,7 @@ $sesionGrupo = $_SESSION['identity']->idgrupo;
 	
 </body>
 <!-- style="display:none;" -->
+<?php if ( $sesionGrupo == '40' ||$sesionGrupo == '42' || $sesionGrupo == '212' || $sesionGrupo == '32'):?>
 <div id="parte_black" style="visibility:hidden;" >
 
 	<div id="contenedor-modal">
@@ -114,15 +115,16 @@ $sesionGrupo = $_SESSION['identity']->idgrupo;
                     <option value="<?php echo $couch["Id"];?>"><?php echo $couch["Nombre"]; ?></option>
                 <?php endforeach; ?>
             </select>		    
-            <?php if ( $sesionGrupo == '40' || $sesionGrupo == '212' || $sesionGrupo == '32'):?>
+            
 		    <input type="submit" name="modificar_nombre" value="Modificar Nombre" id="Mod">
-            <?php endif; ?>
+
             <input type="hidden" name="modificar_nombre" value="Modificar Nombre" id="Mod">
 		</form>
         
 	</div>
 
 </div>
+<?php endif; ?>
 
 </html>
 
