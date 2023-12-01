@@ -22,10 +22,9 @@ class UsuarioLogin
 
 	public function consulta_general(){
 
-	$sqlNombre = "SELECT PP.Nombre
+	$sqlNombre = "SELECT UC.Nombre
 	FROM `ESTATUS_CABECERA` AS ec
-	LEFT JOIN USUARIO_CLIENTE AS UC ON UC.Id = ec.IdUsuario_cliente
-	LEFT JOIN PERSONA AS PP  ON UC.Nro_nomina = PP.Nro_nomina";
+	LEFT JOIN USUARIO_CLIENTE AS UC ON UC.Id = ec.IdUsuario_cliente";
 	$ejecucionNombre = $this->db->query($sqlNombre);
 
 	$Nombres = array();
