@@ -362,7 +362,8 @@ header .nav{
 .nombre__info{
 	font-size: 10px;
 	text-align: center;
-	font-weight: bolder;
+	font-weight: bolder; 
+	margin-top: 5px;
 }
 
 .contenedor__ventas{
@@ -370,11 +371,12 @@ header .nav{
 	display: flex;
 	flex-direction: column;
 	overflow-y: scroll;
+	overflow-x: hidden;
 
 }
 .contenedor__ventas::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
+  width: 2px;
+  height: 2px;
 }
 .contenedor__ventas::-webkit-scrollbar-thumb {
   background: gray; 
@@ -526,11 +528,11 @@ header .nav{
 		overflow: auto;
 	}
 	.nombre__info::-webkit-scrollbar {
-	  width: 5px;
-	  height: 5px;
+	  width: 2px;
+	  height: 2px;
 	}
 	.nombre__info::-webkit-scrollbar-thumb {
-	  background: gray; 
+	  background: transparent; 
 	  border-radius: 10px;
 	}
 

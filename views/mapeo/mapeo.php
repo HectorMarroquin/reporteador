@@ -74,7 +74,7 @@ $sesionGrupo = $_SESSION['identity']->idgrupo;
              	    <!-- Contenido VACIO -->
                     <div class="total">
 
-                        <div class="col-91">
+                        <div class="col-91 mov-auto">
                             <p class="nombre__info">INFORMACION DE VENTAS</p>
                         </div>
                         <div class="contenedor__ventas">
