@@ -72,20 +72,65 @@ $sesionGrupo = $_SESSION['identity']->idgrupo;
              <?php if($key['num_isla'] == '11'): ?>
              	<div class="contenido-principal">
              	    <!-- Contenido VACIO -->
-             	    <div class="col-91">
-             	        <p></p>
+                    <div class="total">
+
+                        <div class="col-91">
+                            <p class="nombre__info">INFORMACION DE VENTAS</p>
+                        </div>
+                        <div class="contenedor__ventas">
+                            <div class="ventas">
+                                <div class="circulo1"></div>
+                                <p class="descripcion">0 ventas</p>
+                            </div>
+                            <div class="ventas">
+                                <div class="circulo2"></div>
+                                <p class="descripcion">1 venta</p>
+                            </div>
+                            <div class="ventas">
+                                <div class="circulo3"></div>
+                                <p class="descripcion">2 ventas</p>
+                            </div>
+                            <div class="ventas">
+                                <div class="circulo4"></div>
+                                <p class="descripcion">3 o mas ventas</p>
+                            </div>
+                        </div>
+
+                        <div class="col-91 mov-auto">
+                            <p class="nombre__info">INFORMACION DEL TURNO</p>
+                        </div>
+                        <div class="contenedor__ventas">
+                            <div class="ventas1">
+                                <div class="ventas">
+                                    <div class="contorno_matutino"></div>
+                                    <p class="descripcion">Turno Matutino</p>
+                                </div>
+                                <div class="ventas">
+                                    <div class="contorno_vespertino"></div>
+                                    <p class="descripcion">Turno Vespertino</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+<!--              	    <div class="col-91">
+                        <p></p>
              	    </div>
-             	    <div class="col-2_1">
-             	        <div class="contenido-div">
-             	            
-             	        </div>
-             	    </div>
-             	    
-             	    <div class="col-3_1">
-             	        <div class="contenido-div2">                 
-             	            
-             	        </div>
-             	    </div>
+             	    <div class="informacion">
+                    <div class="informacion__contenedor">
+                        <div class="circulo"></div>
+                        <p style="font-size: 10px;">Nuestro ejecutivo inicio sesion o lleva 0 ventas</p>
+                    </div> 
+                    <div class="informacion__contenedor">
+
+                        <p style="font-size: 10px;">Nuestro ejecutivo lleva 1 venta</p>
+                    </div> 
+                    <div class="informacion__contenedor">
+                        <p style="font-size: 10px;">Nuestro ejecutivo lleva 2 ventas</p>
+                    </div>  
+                    <div class="informacion__contenedor">
+                        <p style="font-size: 10px;">Nuestro ejecutivo lleva 3 o mas ventas</p>
+                    </div> 
+             	    </div> -->
              	</div>
 
              <?php endif; ?>

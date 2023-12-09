@@ -575,38 +575,38 @@ class UsuarioLogin
 				'Extensiones' => '270-281',
 				'mamparas' =>array(
 					'mampara_1' =>array(
-						'extension' => '0311',
+						'extension' => '0306',
 						'activo' => '0',
 						'color' => '',
 						'turno' => ''
 					),
 					'mampara_2' =>array(
-						'extension' => '0310',
+						'extension' => '0307',
 						'activo' => '0',
 						'color' => '',
 						'turno' => ''
 					),
 					'mampara_3' =>array(
-						'extension' => '0309',
-						'activo' => '0',
-						'color' => '',
-						'turno' => ''
-					),
-					'mampara_4' =>array(
 						'extension' => '0308',
 						'activo' => '0',
 						'color' => '',
 						'turno' => ''
 					),
+					'mampara_4' =>array(
+						'extension' => '0309',
+						'activo' => '0',
+						'color' => '',
+						'turno' => ''
+					),
 					'mampara_5' =>array(
-						'extension' => '0307',
+						'extension' => '0310',
 						'activo' => '1',
 						'ventas' => '2',
 						'color' => '',
 						'turno' => ''
 					),
 					'mampara_6' =>array(
-						'extension' => '0306',
+						'extension' => '0311',
 						'activo' => '2',
 						'color' => '',
 						'turno' => ''
@@ -614,40 +614,40 @@ class UsuarioLogin
 				),
 				'mamparas_2' => array(
 					'mampara_7' =>array(
-						'extension' => '0317',
+						'extension' => '0312',
 						'activo' => '1',
 						'ventas' => '3',
 						'color' => '',
 						'turno' => ''
 					),
 					'mampara_8' =>array(
-						'extension' => '0316',
+						'extension' => '0313',
 						'activo' => '2',
 						'color' => '',
 						'turno' => ''
 					),
 					'mampara_9' =>array(
-						'extension' => '0315',
-						'activo' => '1',
-						'ventas' => '0',
-						'color' => '',
-						'turno' => ''
-					),
-					'mampara_10' =>array(
 						'extension' => '0314',
 						'activo' => '1',
 						'ventas' => '0',
 						'color' => '',
 						'turno' => ''
 					),
+					'mampara_10' =>array(
+						'extension' => '0315',
+						'activo' => '1',
+						'ventas' => '0',
+						'color' => '',
+						'turno' => ''
+					),
 					'mampara_11' =>array(
-						'extension' => '0313',
+						'extension' => '0316',
 						'activo' => '2',
 						'color' => '',
 						'turno' => ''
 					),
 					'mampara_12' =>array(
-						'extension' => '0312',
+						'extension' => '0317',
 						'activo' => '1',
 						'ventas' => '0',
 						'color' => '',
@@ -662,39 +662,39 @@ class UsuarioLogin
 				'Extensiones' => '137-148',
 				'mamparas' =>array(
 					'mampara_1' =>array(
-						'extension' => '0323',
+						'extension' => '0318',
 						'activo' => '1',
 						'ventas' => '2',
 						'color' => '',
 						'turno' => ''
 					),
 					'mampara_2' =>array(
-						'extension' => '0322',
+						'extension' => '0319',
 						'activo' => '1',
 						'ventas' => '0',
 						'color' => '',
 						'turno' => ''
 					),
 					'mampara_3' =>array(
-						'extension' => '0321',
-						'activo' => '0',
-						'color' => '',
-						'turno' => ''
-					),
-					'mampara_4' =>array(
 						'extension' => '0320',
 						'activo' => '0',
 						'color' => '',
 						'turno' => ''
 					),
+					'mampara_4' =>array(
+						'extension' => '0321',
+						'activo' => '0',
+						'color' => '',
+						'turno' => ''
+					),
 					'mampara_5' =>array(
-						'extension' => '0319',
+						'extension' => '0322',
 						'activo' => '0',
 						'color' => '',
 						'turno' => ''
 					),
 					'mampara_6' =>array(
-						'extension' => '0318',
+						'extension' => '0323',
 						'activo' => '0',
 						'color' => '',
 						'turno' => ''
@@ -702,41 +702,41 @@ class UsuarioLogin
 				),
 				'mamparas_2' => array(
 					'mampara_7' =>array(
-						'extension' => '0329',
+						'extension' => '0324',
 						'activo' => '2',
 						'color' => '',
 						'turno' => ''
 					),
 					'mampara_8' =>array(
-						'extension' => '0328',
+						'extension' => '0325',
 						'activo' => '1',
 						'ventas' => '2',
 						'color' => '',
 						'turno' => ''
 					),
 					'mampara_9' =>array(
-						'extension' => '0327',
+						'extension' => '0326',
 						'activo' => '1',
 						'ventas' => '3',
 						'color' => '',
 						'turno' => ''
 					),
 					'mampara_10' =>array(
-						'extension' => '0326',
+						'extension' => '0327',
 						'activo' => '1',
 						'ventas' => '1',
 						'color' => '',
 						'turno' => ''
 					),
 					'mampara_11' =>array(
-						'extension' => '0325',
+						'extension' => '0328',
 						'activo' => '1',
 						'ventas' => '0',
 						'color' => '',
 						'turno' => ''
 					),
 					'mampara_12' =>array(
-						'extension' => '0324',
+						'extension' => '0329',
 						'activo' => '0',
 						'color' => '',
 						'turno' => ''
@@ -750,40 +750,40 @@ class UsuarioLogin
 				'Extensiones' => '282-293',
 				'mamparas' =>array(
 					'mampara_1' =>array(
-						'extension' => '0335',
+						'extension' => '0330',
 						'activo' => '1',
 						'ventas' => '2',
 						'color' => '',
 						'turno' => ''
 					),
 					'mampara_2' =>array(
-						'extension' => '0334',
+						'extension' => '0331',
 						'activo' => '1',
 						'ventas' => '0',
 						'color' => '',
 						'turno' => ''
 					),
 					'mampara_3' =>array(
-						'extension' => '0333',
-						'activo' => '0',
-						'color' => '',
-						'turno' => ''
-					),
-					'mampara_4' =>array(
 						'extension' => '0332',
 						'activo' => '0',
 						'color' => '',
 						'turno' => ''
 					),
+					'mampara_4' =>array(
+						'extension' => '0333',
+						'activo' => '0',
+						'color' => '',
+						'turno' => ''
+					),
 					'mampara_5' =>array(
-						'extension' => '0331',
+						'extension' => '0334',
 						'activo' => '1',
 						'ventas' => '2',
 						'color' => '',
 						'turno' => ''
 					),
 					'mampara_6' =>array(
-						'extension' => '0330',
+						'extension' => '0335',
 						'activo' => '1',
 						'ventas' => '1',
 						'color' => '',
@@ -792,41 +792,41 @@ class UsuarioLogin
 				),
 				'mamparas_2' => array(
 					'mampara_7' =>array(
-						'extension' => '0341',
+						'extension' => '0336',
 						'activo' => '1',
 						'ventas' => '2',
 						'color' => '',
 						'turno' => ''
 					),
 					'mampara_8' =>array(
-						'extension' => '0340',
+						'extension' => '0337',
 						'activo' => '1',
 						'ventas' => '3',
 						'color' => '',
 						'turno' => ''
 					),
 					'mampara_9' =>array(
-						'extension' => '0339',
+						'extension' => '0338',
 						'activo' => '1',
 						'ventas' => '0',
 						'color' => '',
 						'turno' => ''
 					),
 					'mampara_10' =>array(
-						'extension' => '0338',
+						'extension' => '0339',
 						'activo' => '1',
 						'ventas' => '2',
 						'color' => '',
 						'turno' => ''
 					),
 					'mampara_11' =>array(
-						'extension' => '0337',
+						'extension' => '0340',
 						'activo' => '0',
 						'color' => '',
 						'turno' => ''
 					),
 					'mampara_12' =>array(
-						'extension' => '0336',
+						'extension' => '0341',
 						'activo' => '0',
 						'color' => '',
 						'turno' => ''
@@ -839,39 +839,39 @@ class UsuarioLogin
 				'Extensiones' => '149-160',
 				'mamparas' =>array(
 					'mampara_1' =>array(
-						'extension' => '0347',
+						'extension' => '0342',
 						'activo' => '1',
 						'ventas' => '2',
 						'color' => '',
 						'turno' => ''
 					),
 					'mampara_2' =>array(
-						'extension' => '0346',
+						'extension' => '0343',
 						'activo' => '0',
 						'color' => '',
 						'turno' => ''
 					),
 					'mampara_3' =>array(
-						'extension' => '0345',
-						'activo' => '2',
-						'color' => '',
-						'turno' => ''
-					),
-					'mampara_4' =>array(
 						'extension' => '0344',
 						'activo' => '2',
 						'color' => '',
 						'turno' => ''
 					),
+					'mampara_4' =>array(
+						'extension' => '0345',
+						'activo' => '2',
+						'color' => '',
+						'turno' => ''
+					),
 					'mampara_5' =>array(
-						'extension' => '0343',
+						'extension' => '0346',
 						'activo' => '1',
 						'ventas' => '3',
 						'color' => '',
 						'turno' => ''
 					),
 					'mampara_6' =>array(
-						'extension' => '0342',
+						'extension' => '0347',
 						'activo' => '1',
 						'ventas' => '2',
 						'color' => '',
@@ -880,40 +880,40 @@ class UsuarioLogin
 				),
 				'mamparas_2' => array(
 					'mampara_7' =>array(
-						'extension' => '0353',
+						'extension' => '0348',
 						'activo' => '1',
 						'ventas' => '0',
 						'color' => '',
 						'turno' => ''
 					),
 					'mampara_8' =>array(
-						'extension' => '0352',
+						'extension' => '0349',
 						'activo' => '1',
 						'ventas' => '0',
 						'color' => '',
 						'turno' => ''
 					),
 					'mampara_9' =>array(
-						'extension' => '0351',
+						'extension' => '0350',
 						'activo' => '0',
 						'color' => '',
 						'turno' => ''
 					),
 					'mampara_10' =>array(
-						'extension' => '0350',
+						'extension' => '0351',
 						'activo' => '1',
 						'ventas' => '2',
 						'color' => '',
 						'turno' => ''
 					),
 					'mampara_11' =>array(
-						'extension' => '0349',
+						'extension' => '0352',
 						'activo' => '0',
 						'color' => '',
 						'turno' => ''
 					),
 					'mampara_12' =>array(
-						'extension' => '0348',
+						'extension' => '0353',
 						'activo' => '1',
 						'ventas' => '2',
 						'color' => '',
@@ -928,39 +928,39 @@ class UsuarioLogin
 				'Extensiones' => '294-305',
 				'mamparas' =>array(
 					'mampara_1' =>array(
-						'extension' => '0359',
+						'extension' => '0354',
 						'activo' => '1',
 						'ventas' => '2',
 						'color' => '',
 						'turno' => ''
 					),
 					'mampara_2' =>array(
-						'extension' => '0358',
+						'extension' => '0355',
 						'activo' => '0',
 						'color' => '',
 						'turno' => ''
 					),
 					'mampara_3' =>array(
-						'extension' => '0357',
-						'activo' => '0',
-						'color' => '',
-						'turno' => ''
-					),
-					'mampara_4' =>array(
 						'extension' => '0356',
 						'activo' => '0',
 						'color' => '',
 						'turno' => ''
 					),
+					'mampara_4' =>array(
+						'extension' => '0357',
+						'activo' => '0',
+						'color' => '',
+						'turno' => ''
+					),
 					'mampara_5' =>array(
-						'extension' => '0355',
+						'extension' => '0358',
 						'activo' => '1',
 						'ventas' => '3',
 						'color' => '',
 						'turno' => ''
 					),
 					'mampara_6' =>array(
-						'extension' => '0354',
+						'extension' => '0359',
 						'activo' => '1',
 						'ventas' => '4',
 						'color' => '',
@@ -969,42 +969,42 @@ class UsuarioLogin
 				),
 				'mamparas_2' => array(
 					'mampara_7' =>array(
-						'extension' => '0365',
+						'extension' => '0360',
 						'activo' => '1',
 						'ventas' => '2',
 						'color' => '',
 						'turno' => ''
 					),
 					'mampara_8' =>array(
-						'extension' => '0364',
+						'extension' => '0361',
 						'activo' => '1',
 						'ventas' => '0',
 						'color' => '',
 						'turno' => ''
 					),
 					'mampara_9' =>array(
-						'extension' => '0363',
+						'extension' => '0362',
 						'activo' => '1',
 						'ventas' => '0',
 						'color' => '',
 						'turno' => ''
 					),
 					'mampara_10' =>array(
-						'extension' => '0362',
+						'extension' => '0363',
 						'activo' => '1',
 						'ventas' => '1',
 						'color' => '',
 						'turno' => ''
 					),
 					'mampara_11' =>array(
-						'extension' => '0361',
+						'extension' => '0364',
 						'activo' => '1',
 						'ventas' => '3',
 						'color' => '',
 						'turno' => ''
 					),
 					'mampara_12' =>array(
-						'extension' => '0360',
+						'extension' => '0365',
 						'activo' => '1',
 						'ventas' => '2',
 						'color' => '',

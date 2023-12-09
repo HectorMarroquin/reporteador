@@ -351,6 +351,90 @@ header .nav{
 	width: 90%;
 }
 
+.total{
+	width: 100%;
+	height: 18rem;
+
+	display: flex;
+	flex-direction: column;
+}
+
+.nombre__info{
+	font-size: 10px;
+	text-align: center;
+	font-weight: bolder;
+}
+
+.contenedor__ventas{
+	height: 40%;
+	display: flex;
+	flex-direction: column;
+	overflow-y: scroll;
+
+}
+.contenedor__ventas::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+.contenedor__ventas::-webkit-scrollbar-thumb {
+  background: gray; 
+  border-radius: 10px;
+}
+
+.ventas{
+	height: 3rem;
+	margin-top: 10px;
+
+	display: grid;
+	place-items: center;
+
+}
+.circulo1{
+	width: 12px;
+	height: 12px;
+	background: red;
+	border-radius: 50%;
+}
+.circulo2{
+	width: 12px;
+	height: 12px;
+	background: yellow;
+	border-radius: 50%;
+}
+.circulo3{
+	width: 12px;
+	height: 12px;
+	background: green;
+	border-radius: 50%;
+}
+.circulo4{
+	width: 12px;
+	height: 12px;
+	background: gold;
+	border-radius: 50%;
+}
+.descripcion{
+	margin-left: 5px;
+	font-size: .7rem;
+	font-weight: bolder;
+}
+
+.contorno_matutino{
+	width: 18px;
+	height: 18px;
+	background: white;
+	border-radius: 50%;
+	border: 1px #3DA7FF solid;
+	box-shadow: inset 0 0 0 2px #3DA7FF ;
+}
+.contorno_vespertino{
+	width: 18px;
+	height: 18px;
+	background: white;
+	border-radius: 50%;
+	border: 1px #FCAA47 solid;
+	box-shadow: inset 0 0 0 2px #FCAA47;
+}
 /* Estilos para dispositivos móviles */
 @media screen and (max-width: 768px) {
 
@@ -436,6 +520,18 @@ header .nav{
 	}
 	#nuevo_nombre{
 		width: 80%;
+	}
+
+	.nombre__info{
+		overflow: auto;
+	}
+	.nombre__info::-webkit-scrollbar {
+	  width: 5px;
+	  height: 5px;
+	}
+	.nombre__info::-webkit-scrollbar-thumb {
+	  background: gray; 
+	  border-radius: 10px;
 	}
 
 }
