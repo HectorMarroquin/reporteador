@@ -155,9 +155,13 @@ header .nav{
 .col-9 {
   width: 100%;
   height: 2rem;
-  /*background: purple;*/
+
   background-image: linear-gradient(to top, #6a85b6 0%, #bac8e0 100%);
   border-radius: 0 0 8px 8px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .col-9_1{
@@ -170,7 +174,7 @@ header .nav{
 }
 .col-91{
 	width: 100%;
-  	height: 2rem;
+  height: 2rem;
 	background-image: linear-gradient(to top, #cfd9df66 0%, #cee0eb);
 	border-radius: 8px 8px 0px 0px;
 }
@@ -245,8 +249,18 @@ header .nav{
 	border-radius: 3px;
 	height: 35px;
 	display: flex;
-    justify-content: center;
-    align-items: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.isla_nombre{
+		font-size: 10px;
+	  color: #fff;
+	  margin: 0 10px;
+	  padding: 5px;
+	  font-weight: 600;
+	  text-align: center;
+
 }
 .vacia{
 	/*Personal INV*/
@@ -273,6 +287,156 @@ header .nav{
 	background: gold;
 }
 
+.borderMat{
+	border: 1px #3DA7FF solid;
+	box-shadow: inset 0 0 0 2px #3DA7FF ;
+}
+.borderVes{
+	border: 1px #FCAA47 solid;
+	box-shadow: inset 0 0 0 2px #FCAA47;
+}
+
+#parte_black{
+	position: absolute;
+	top: 3.5rem;
+	background: linear-gradient(60deg,rgba(0, 0, 0, .5),rgba(0, 0, 0, .5),rgba(0, 0, 0, .5));
+	width: 10%;
+	height: 109vh;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#contenedor-modal{
+	background: rgba(202, 220, 223, 0.8);
+	border: 3px black solid;
+	width: 35%;
+	height: 15rem;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-around;
+}
+#cerrar{
+	background: skyblue;
+	border-radius: 50%;
+	width: 2.8rem;
+	height: 2.8rem;
+	border: 1px solid black;
+
+	font-size: .7rem;
+	font-weight: bolder;
+}
+
+#cerrar:hover{
+	background: black;
+	color: white;
+	border: 1px solid white;
+
+}
+
+.formulario-nombre{
+	height: 8rem;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-around;
+
+
+}
+#nombre{
+	width: 90%;
+}
+
+.total{
+	width: 100%;
+	height: 18rem;
+
+	display: flex;
+	flex-direction: column;
+}
+
+.nombre__info{
+	font-size: 10px;
+	text-align: center;
+	font-weight: bolder; 
+	margin-top: 5px;
+}
+
+.contenedor__ventas{
+	height: 40%;
+	display: flex;
+	flex-direction: column;
+	overflow-y: scroll;
+	overflow-x: hidden;
+
+}
+.contenedor__ventas::-webkit-scrollbar {
+  width: 2px;
+  height: 2px;
+}
+.contenedor__ventas::-webkit-scrollbar-thumb {
+  background: gray; 
+  border-radius: 10px;
+}
+
+.ventas{
+	height: 3rem;
+	margin-top: 10px;
+
+	display: grid;
+	place-items: center;
+
+}
+.circulo1{
+	width: 12px;
+	height: 12px;
+	background: red;
+	border-radius: 50%;
+}
+.circulo2{
+	width: 12px;
+	height: 12px;
+	background: yellow;
+	border-radius: 50%;
+}
+.circulo3{
+	width: 12px;
+	height: 12px;
+	background: green;
+	border-radius: 50%;
+}
+.circulo4{
+	width: 12px;
+	height: 12px;
+	background: gold;
+	border-radius: 50%;
+}
+.descripcion{
+	margin-left: 5px;
+	font-size: .7rem;
+	font-weight: bolder;
+}
+
+.contorno_matutino{
+	width: 18px;
+	height: 18px;
+	background: white;
+	border-radius: 50%;
+	border: 1px #3DA7FF solid;
+	box-shadow: inset 0 0 0 2px #3DA7FF ;
+}
+.contorno_vespertino{
+	width: 18px;
+	height: 18px;
+	background: white;
+	border-radius: 50%;
+	border: 1px #FCAA47 solid;
+	box-shadow: inset 0 0 0 2px #FCAA47;
+}
 /* Estilos para dispositivos móviles */
 @media screen and (max-width: 768px) {
 
@@ -299,12 +463,30 @@ header .nav{
 	}
 	.cajas p{
 		width: 100%;
-		letter-spacing: 7px;
+		letter-spacing: 20px;
 	}
 
 	.cajap{
 		width: 50%;
 		margin: 0 0 0 42px;
+	}
+	.col-9{
+		display:flex;	
+		justify-content: center;
+		align-items: center;
+		overflow: auto;
+
+	}
+
+	.col-9 p{
+		font-size: .45rem;
+		width: 97%;
+		overflow: auto;
+	}
+
+	.gereope{
+		font-size: .4rem;
+		overflow: auto;
 	}
 
 	.contenedor {
@@ -313,6 +495,7 @@ header .nav{
     grid-template-columns: repeat(12, 1fr);
     grid-gap: 15px;
     margin: 3px auto;
+    margin-top: 2.2rem;
     /*max-width: 1290px;*/
     /* align-items: center; */
     /* justify-content: center; */
@@ -324,6 +507,33 @@ header .nav{
 
 	.contenido-principal {
 		width: 5rem;
+	}
+
+	#parte_black{
+		height: 95vh;
+	}
+
+	#contenedor-modal{
+		width: 90%;
+	}
+
+	#nombre{
+		width: 80%;
+	}
+	#nuevo_nombre{
+		width: 80%;
+	}
+
+	.nombre__info{
+		overflow: auto;
+	}
+	.nombre__info::-webkit-scrollbar {
+	  width: 2px;
+	  height: 2px;
+	}
+	.nombre__info::-webkit-scrollbar-thumb {
+	  background: transparent; 
+	  border-radius: 10px;
 	}
 
 }
